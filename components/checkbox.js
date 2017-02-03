@@ -15,7 +15,10 @@ export default class Checkbox extends React.Component {
         }
     }
     componentDidMount() {
-
+        this.setState({
+            onColor: (t.props.onColor == null) ? '#2196F3' : t.props.onColor,
+            offColor: (t.props.offColor == null) ? '#9E9E9E' : t.props.offColor
+        });
     }
     /*
     events
@@ -35,8 +38,8 @@ export default class Checkbox extends React.Component {
             this.checked = true;
         }
     }
+
     render() {
-        var children = (this.props.children == null) ? <div ref="icon" className="check-icon"></div> : this.props.children;
         return (
             <div ref="checkbox" style={this.props.style} onClick={this.onClick} className="checkbox">
                 <div ref="border" className="border"></div>
