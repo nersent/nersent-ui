@@ -26,17 +26,17 @@ export default class Checkbox extends React.Component {
     */
     onClick() {
         var t = this;
-        if (this.checked) {
+        if (!this.checked) {
             TweenMax.to(this.refs.border, 0.15, {css:{borderWidth: this.refs.checkbox.offsetWidth / 2, borderColor: this.state.onColor}, onComplete: function() {
                 t.refs.icon.classList.remove('hide');
                 t.refs.icon.classList.add('cover-animation');
             }});
-            this.checked = false;
+            this.checked = true;
         } else {
             this.refs.icon.classList.remove('cover-animation');
             this.refs.icon.classList.add('hide');
             TweenMax.to(this.refs.border, 0.15, {css:{borderWidth: 2, borderColor: this.state.offColor}});
-            this.checked = true;
+            this.checked = false;
         }
     }
 
