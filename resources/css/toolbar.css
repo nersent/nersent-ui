@@ -1,0 +1,64 @@
+.toolbar {
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background-color:red;
+    position: relative;
+}
+
+.no-select {
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+.toolbar > .left-icon {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-size: contain;
+    float: left;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.left-icon:nth-child(1) {
+    margin-left: 16px;
+}
+
+.toolbar > .right-icon {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-size: contain;
+    float: right;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 16px;
+    margin-left: 16px;
+}
+
+.right-icon:nth-child(1) {
+    margin-right: 16px;
+}
+
+.toolbar > .title {
+    float: left;
+    font-size: 20px;
+    margin-left: 32px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.white {
+    -webkit-filter: invert(100%);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+}
