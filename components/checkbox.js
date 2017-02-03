@@ -15,6 +15,7 @@ export default class Checkbox extends React.Component {
         }
     }
     componentDidMount() {
+        var t = this;
         this.setState({
             onColor: (t.props.onColor == null) ? '#2196F3' : t.props.onColor,
             offColor: (t.props.offColor == null) ? '#9E9E9E' : t.props.offColor
