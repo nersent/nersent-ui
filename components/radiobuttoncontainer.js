@@ -14,7 +14,7 @@ export default class RadioButtonContainer extends React.Component {
 
     componentDidMount() {
         this.uncheckOthers();
-        this.radiobuttons[0].select(false);
+        this.radiobuttons[0].select();
     }
 
     /*

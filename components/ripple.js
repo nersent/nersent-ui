@@ -1,12 +1,18 @@
 var Ripple = class Ripple {
-    static createRipple(element, css, options = {x: 0, y: 0, scale: 15, time: 0.4, scaleY: null}) {
+    static createRipple(element, css, options = {x: 0, y: 0, scale: 15, time: 0.4, scaleY: null}, rootElement = "") {
         var rippleElement = document.createElement("span");
         rippleElement.className = 'ripple-effect';
         element.appendChild(rippleElement);
         rippleElement.css({left: options.x + 'px', top: options.y + 'px'});
         rippleElement.css(css);
         rippleElement.options = options;
-        rippleElement.element = element;
+        console.log(rootElement);
+        if (rootElement != "") {
+            rippleElement.element = rootElement;
+        }
+        else {
+            rippleElement.element = element;
+        }
         return rippleElement;
     }
     static makeRipple(rippleElement) {
@@ -40,6 +46,7 @@ var Ripple = class Ripple {
                 }
             });
         }
+
         rippleElement.element.addEventListener('mouseout', removeRipple);
         rippleElement.element.addEventListener('mouseup', removeRipple);
     }

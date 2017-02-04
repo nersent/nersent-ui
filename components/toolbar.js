@@ -4,7 +4,7 @@ import React from 'react';
 export default class Toolbar extends React.Component {
     constructor() {
         super();
-        
+
         //binds
 
         //global properties
