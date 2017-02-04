@@ -9,11 +9,13 @@ export default class RadioButton extends React.Component {
         this.onClick = this.onClick.bind(this);
         this.unselect = this.unselect.bind(this);
         this.select = this.select.bind(this);
+        this.onMouseDown = this.onMouseDown.bind(this);
         //global properties
         this.state = {
             onColor: '#2196F3',
             offColor: '#757575'
         }
+        this.selected = false;
     }
 
     componentDidMount() {
@@ -27,28 +29,36 @@ export default class RadioButton extends React.Component {
     }
 
     onClick() {
-        this.props.getParent().uncheckOthers(this);
+        this.props.getParent().uncheckOthers();
         this.select();
     }
+    onMouseDown() {
+        if (!this.selected) {
+            var ripple = Ripple.createRipple(this.refs.radiobutton, null, createRippleCenter(this.refs.radiobutton));
+            Ripple.makeRipple(ripple);
+        }
+    }
 
-    unselect(makeRipple = true) {
+    unselect() {
         TweenMax.to(this.refs.circle, 0.1, {css:{borderColor: this.state.offColor}});
         TweenMax.to(this.refs.border, 0.1, {css:{borderColor: this.state.offColor}});
         this.refs.circle.classList.remove('scaleUp');
         this.refs.circle.classList.add('scaleDown');
+        this.selected = false;
     }
 
-    select(makeRipple = true) {
+    select() {
         TweenMax.to(this.refs.circle, 0.1, {css:{borderColor: this.state.onColor}});
         TweenMax.to(this.refs.border, 0.1, {css:{borderColor: this.state.onColor}});
         this.refs.circle.classList.remove('scaleDown');
         this.refs.circle.classList.add('scaleUp');
+        this.selected = true;
     }
 
     render() {
         return (
-            <div className="rb-root" onClick={this.onClick}>
-                <div className="radiobutton" style={this.props.style}>
+            <div className="rb-root">
+                <div ref="radiobutton" onClick={this.onClick} onMouseDown={this.onMouseDown} className="radiobutton" style={this.props.style}>
                     <div ref="border" className="border">
                         <div ref="circle" className="circle">
                         </div>
