@@ -11,15 +11,18 @@ export default class Checkbox extends React.Component {
         this.checked = false;
         this.state = {
             onColor: '#2196F3',
-            offColor: '#9E9E9E'
+            offColor: '#757575'
         }
     }
     componentDidMount() {
         var t = this;
         this.setState({
             onColor: (t.props.onColor == null) ? '#2196F3' : t.props.onColor,
-            offColor: (t.props.offColor == null) ? '#9E9E9E' : t.props.offColor
+            offColor: (t.props.offColor == null) ? '#757575' : t.props.offColor
         });
+        this.refs.icon.classList.remove('cover-animation');
+        this.refs.icon.classList.add('hide');
+        TweenMax.set(this.refs.border, {css:{borderColor: this.state.offColor}});
     }
     /*
     events
@@ -42,9 +45,14 @@ export default class Checkbox extends React.Component {
 
     render() {
         return (
-            <div ref="checkbox" style={this.props.style} onClick={this.onClick} className="checkbox">
-                <div ref="border" className="border"></div>
-                <div ref="icon" className="check-icon"></div>
+            <div className="cb-root">
+                <div ref="checkbox" style={this.props.style} onClick={this.onClick} className="checkbox">
+                    <div ref="border" className="border"></div>
+                    <div ref="icon" className="check-icon"></div>
+                </div>
+                <div className="text">
+                    {this.props.children}
+                </div>
             </div>
         );
     }
