@@ -6,7 +6,6 @@ var Ripple = class Ripple {
         rippleElement.css({left: options.x + 'px', top: options.y + 'px'});
         rippleElement.css(css);
         rippleElement.options = options;
-        console.log(rootElement);
         if (rootElement != "") {
             rippleElement.element = rootElement;
         }
@@ -34,8 +33,7 @@ var Ripple = class Ripple {
 
         TweenMax.to(rippleElement, time, {
             width: animateSize,
-            height: animateSize,
-            ease: Power4.easeOut
+            height: animateSize
         });
         function removeRipple() {
             TweenMax.to(rippleElement, 0.4, {
@@ -51,8 +49,66 @@ var Ripple = class Ripple {
         rippleElement.element.addEventListener('mouseup', removeRipple);
     }
 };
-function createRippleCenter(item, scale = 15, time = 0.7) {
+function createRippleCenter(item, scale = 15, time = 0.4) {
     return {x: item.clientWidth / 2, y: item.clientHeight / 2, scale: scale, time: time}
+}
+function mousePositionElement(e) {
+	var mousePosDoc = mousePositionDocument(e);
+	var target = mouseTarget(e);
+	var targetPos = findPos(target);
+	var posx = mousePosDoc.x - targetPos.left;
+	var posy = mousePosDoc.y - targetPos.top;
+	return {
+		x : posx,
+		y : posy
+	};
+}
+function mouseTarget(e) {
+	var targ;
+	if (!e) var e = window.event;
+	if (e.target) targ = e.target;
+	else if (e.srcElement) targ = e.srcElement;
+	if (targ.nodeType == 3)
+		targ = targ.parentNode;
+	return targ;
+}
+function findPos(obj) {
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+		do {
+			curleft += obj.offsetLeft;
+			curtop += obj.offsetTop;
+		} while (obj = obj.offsetParent);
+	}
+	return {
+		left : curleft,
+		top : curtop
+	};
+}
+function mousePositionDocument(e) {
+	var posx = 0;
+	var posy = 0;
+	if (!e) {
+		var e = window.event;
+	}
+	if (e.pageX || e.pageY) {
+		posx = e.pageX;
+		posy = e.pageY;
+	}
+	else if (e.clientX || e.clientY) {
+		posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+		posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+	}
+	return {
+		x : posx,
+		y : posy
+	};
+}
+function createRippleMouse(item, e, time = 1) {
+    var pos = mousePositionElement(e);
+    var relX = pos.x;
+    var relY = pos.y;
+    return {x: relX, y: relY, scale: item.clientWidth, time: time, scaleY: item.clientHeight}
 }
 Element.prototype.css = function (data, value = null) {
     if (typeof(data) === 'object') {

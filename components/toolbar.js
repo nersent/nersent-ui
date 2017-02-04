@@ -4,9 +4,9 @@ import React from 'react';
 export default class Toolbar extends React.Component {
     constructor() {
         super();
-
         //binds
-
+        this.setBackgroundColor = this.setBackgroundColor.bind(this);
+        
         //global properties
 
         this.state = {
@@ -54,6 +54,14 @@ export default class Toolbar extends React.Component {
                 }
             }
         }
+    }
+
+    /*
+    * sets background color
+    * bg - String
+    */
+    setBackgroundColor(bg) {
+        this.setState({backgroundColor: bg});
     }
 
     render() {
