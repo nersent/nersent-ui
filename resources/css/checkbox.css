@@ -2,6 +2,7 @@
     width: 18px;
     height: 18px;
     position: relative;
+    -webkit-font-smoothing: antialiased;
 }
 
 .checkbox > .border {

@@ -47,7 +47,7 @@
 .toolbar > .title {
     float: left;
     font-size: 20px;
-    margin-left: 32px;
+    margin-left: 20px;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
