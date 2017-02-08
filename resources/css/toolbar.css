@@ -11,37 +11,38 @@
     cursor: default;
 }
 
-.toolbar > .left-icon {
-    width: 24px;
-    height: 24px;
-    background-position: center;
-    background-size: contain;
+.left {
     float: left;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     margin-left: 16px;
     margin-right: 16px;
 }
 
-.left-icon:nth-child(1) {
-    margin-left: 16px;
-}
-
-.toolbar > .right-icon {
+.toolbar-icon {
     width: 24px;
     height: 24px;
-    background-position: center;
-    background-size: contain;
-    float: right;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.toolbar-image {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: contain;
+}
+
+.left:nth-child(1) {
+    margin-left: 16px;
+}
+
+.right {
+    float: right;
     margin-right: 16px;
     margin-left: 16px;
 }
 
-.right-icon:nth-child(1) {
+.right:nth-child(1) {
     margin-right: 16px;
 }
 

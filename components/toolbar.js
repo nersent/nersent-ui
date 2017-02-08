@@ -6,13 +6,15 @@ export default class Toolbar extends React.Component {
         super();
         //binds
         this.setBackgroundColor = this.setBackgroundColor.bind(this);
-        
+
         //global properties
 
         this.state = {
             height: 56,
             backgroundColor: '#2196F3',
-            expandable: false
+            expandable: false,
+            title: '',
+            color: '#fff'
         }
     }
 
@@ -25,7 +27,9 @@ export default class Toolbar extends React.Component {
         this.setState({
             height: (t.props.height == null) ? 56 : t.props.height,
             backgroundColor: (t.props.backgroundColor == null) ? '#2196F3' : t.props.backgroundColor,
-            expandable: (t.props.expandable == null) ? false : t.props.expandable
+            expandable: (t.props.expandable == null) ? false : t.props.expandable,
+            title: (t.props.title == null) ? '' : t.props.title,
+            color: (t.props.color == null) ? '#fff' : t.props.color
         });
 
         if (this.props.expandable) {
@@ -68,6 +72,7 @@ export default class Toolbar extends React.Component {
         return (
             <div ref="toolbar" className="toolbar no-select" style={{height: this.state.height, backgroundColor: this.state.backgroundColor}}>
                 {this.props.children}
+                <div style={{color: this.state.color}} className="title">{this.state.title}</div>
             </div>
         );
     }
