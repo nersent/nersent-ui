@@ -35,7 +35,7 @@ export default class MaterialButton extends React.Component {
         return (
             <div>
                 <div style={this.props.style} className={(this.state.type == 0) ? "shadow" : ""}>
-                    <div ref="button" onMouseDown={this.onMouseDown} className="button no-select pointer ripple shadow">
+                    <div ref="button" onMouseDown={this.onMouseDown} className="button no-select pointer ripple">
                         {this.props.children}
                     </div>
                 </div>

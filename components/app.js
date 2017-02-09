@@ -16,9 +16,9 @@ export default class App extends React.Component {
         return (
             <div>
                 <Toolbar title="Tytuł">
-                    <ToolbarIcon inverted={true} rippleColor='#fff' image={'app/resources/img/menu.png'}></ToolbarIcon>
-                    <ToolbarIcon inverted={true} rippleColor='#fff' position={"right"} image={'app/resources/img/menu.png'}></ToolbarIcon>
-                    <ToolbarItem position="right"><MaterialButton rippleColor='#fff' type={1} style={{color: '#fff', position: 'relative', top: '11px'}}>SIEMA</MaterialButton></ToolbarItem>
+                    <ToolbarIcon inverted={true} rippleColor='#fff' image='app/resources/img/menu.png'></ToolbarIcon>
+                    <ToolbarIcon inverted={true} rippleColor='#fff' position="right" image='app/resources/img/menu.png'></ToolbarIcon>
+                    <ToolbarItem position="right"><MaterialButton rippleColor='#fff' type={1} style={{color: '#fff'}}>SIEMA</MaterialButton></ToolbarItem>
                 </Toolbar>
 
             </div>

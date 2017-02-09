@@ -16,6 +16,12 @@
     cursor: pointer;
 }
 
+.toolbar-item {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .left {
     float: left;
     margin-left: 16px;
@@ -69,4 +75,5 @@ body {
     padding: 0;
     font-family: 'Roboto';
     background-color: #f5f5f5;
+    -webkit-font-smoothing: subpixel-antialiased;
 }

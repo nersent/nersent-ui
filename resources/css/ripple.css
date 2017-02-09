@@ -2,13 +2,15 @@
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
-    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
     user-select: none;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .ripple-icon {
     user-select: none;
-    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .ripple-effect {
@@ -21,5 +23,6 @@
     padding: 0;
     margin: 0;
     opacity: 0.3;
-    transform: translate3d(-50%, -50%, 0);
+    -webkit-transform: translate3d(-50.1%, -50.1%, 0);
+    -webkit-font-smoothing: subpixel-antialiased;
 }
