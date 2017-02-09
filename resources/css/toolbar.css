@@ -11,6 +11,11 @@
     cursor: default;
 }
 
+.pointer {
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+
 .left {
     float: left;
     margin-left: 16px;
