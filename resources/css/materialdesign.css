@@ -4,6 +4,7 @@
 @import url("ripple.css");
 @import url("switch.css");
 @import url("toolbar.css");
+@import url("card.css");
 @font-face {
     font-family: Roboto;
     src: url('../fonts/Roboto.ttf');
