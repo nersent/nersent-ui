@@ -11,7 +11,8 @@ export default class MaterialButton extends React.Component {
         //global properties
         this.state = {
             type: 0,
-            rippleColor: '#444'
+            rippleColor: '#444',
+            backgroundColor: 'transparent'
         }
     }
     componentDidMount() {
@@ -22,7 +23,10 @@ export default class MaterialButton extends React.Component {
                 : t.props.type,
             rippleColor: (t.props.rippleColor == null)
                 ? '#444'
-                : t.props.rippleColor
+                : t.props.rippleColor,
+            backgroundColor: (t.props.backgroundColor == null)
+                ? 'transparent'
+                : t.props.backgroundColor
         });
     }
     onMouseDown(e) {
@@ -33,10 +37,12 @@ export default class MaterialButton extends React.Component {
     }
     render() {
         return (
-            <div>
-                <div style={this.props.style} className={(this.state.type == 0) ? "shadow" : ""}>
-                    <div ref="button" onMouseDown={this.onMouseDown} className="button no-select pointer ripple">
-                        {this.props.children}
+            <div style={this.props.style}>
+                <div style={(this.state.type == 0) ? {padding: 8} : {}}>
+                    <div className={(this.state.type == 0) ? "shadow" : ""}>
+                        <div ref="button" style={{backgroundColor: this.state.backgroundColor}} onMouseDown={this.onMouseDown} className="button no-select pointer ripple">
+                            {this.props.children}
+                        </div>
                     </div>
                 </div>
             </div>

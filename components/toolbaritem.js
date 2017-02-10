@@ -8,15 +8,13 @@ export default class ToolbarItem extends React.Component {
 
         //global properties
         this.state = {
-            position: 'left',
-            inverted: false
+            position: 'left'
         }
     }
     componentDidMount() {
         var t = this;
         this.setState({
-            position: (t.props.position == null) ? 'left' : t.props.position,
-            inverted: (t.props.inverted == null) ? false : t.props.inverted
+            position: (t.props.position == null) ? 'left' : t.props.position
         });
     }
     render() {
