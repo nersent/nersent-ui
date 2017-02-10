@@ -1,19 +1,9 @@
 .toolbar {
     width: 100%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    background-color:red;
+    background-color:#fff;
     position: relative;
     transition: 0.3s background;
-}
-
-.no-select {
-    -webkit-user-select: none;
-    cursor: default;
-}
-
-.pointer {
-    -webkit-user-select: none;
-    cursor: pointer;
 }
 
 .toolbar-item {
@@ -22,18 +12,23 @@
     transform: translateY(-50%);
 }
 
-.left {
+.toolbar-left {
     float: left;
     margin-left: 4px;
     margin-right: 4px;
 }
 
+.toolbar-content {
+    margin-left: 4px;
+    width: calc(100% - 8px);
+    position: relative;
+    top: 0;
+    height: 100%;
+}
+
 .toolbar-icon {
     width: 40px;
     height: 40px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 .toolbar-image {
@@ -44,29 +39,13 @@
     background-repeat: no-repeat;
 }
 
-.right {
+.toolbar-right {
     float: right;
     margin-right: 4px;
     margin-left: 4px;
 }
 
-.toolbar > .title {
-    float: left;
+.toolbar-title {
     font-size: 20px;
     margin-left: 20px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.white {
-    -webkit-filter: invert(100%);
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto';
-    background-color: #f5f5f5;
-    -webkit-font-smoothing: subpixel-antialiased;
 }

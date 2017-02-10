@@ -7,21 +7,28 @@ export default class ToolbarItem extends React.Component {
         //binds
 
         //global properties
-        this.state = {
-            position: 'left'
-        }
     }
     componentDidMount() {
-        var t = this;
-        this.setState({
-            position: (t.props.position == null) ? 'left' : t.props.position
-        });
     }
     render() {
+        var isLeftOrRight = ((this.props.position == 'left') ? 'toolbar-left' : 'toolbar-right'),
+            isInverted = ((this.props.inverted == false) ? '' : 'inverted'),
+            className = isLeftOrRight + " toolbar-item " + isInverted;
         return (
-            <div style={this.props.style} className={(this.state.position == 'left') ? 'toolbar-item left' : 'toolbar-item right'}>
+            <div className={className} style={
+                {
+                    color: this.props.color,
+                    opacity: this.props.opacity
+                }}>
                 {this.props.children}
             </div>
         );
     }
 }
+
+ToolbarItem.defaultProps = {
+    position: 'left',
+    color: '#000',
+    opacity: 0.9,
+    inverted: false
+};

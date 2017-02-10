@@ -7,33 +7,33 @@ export default class ToolbarIcon extends React.Component {
         //binds
         this.onMouseDown = this.onMouseDown.bind(this);
         //global properties
-        this.state = {
-            position: 'left',
-            image: '',
-            inverted: false,
-            rippleColor: '#444'
-        }
+
     }
-    componentDidMount() {
-        var t = this;
-        this.setState({
-            position: (t.props.position == null) ? 'left' : t.props.position,
-            inverted: (t.props.inverted == null) ? false : t.props.inverted,
-            image: (t.props.image == null) ? '' : t.props.image,
-            rippleColor: (t.props.rippleColor == null) ? '#444' : t.props.rippleColor
-        });
-    }
+    componentDidMount() {}
     onMouseDown() {
-        var ripple = Ripple.createRipple(this.refs.root, {
-            backgroundColor: this.state.rippleColor
-        }, createRippleCenter(this.refs.root, 14));
+        var ripple = Ripple.createRipple(this.refs.toolbarIcon, {
+            backgroundColor: this.props.rippleColor
+        }, createRippleCenter(this.refs.toolbarIcon, 14));
         Ripple.makeRipple(ripple);
     }
     render() {
+        var iconClassName = ((this.props.position == 'left') ? 'toolbar-left' : 'toolbar-right') + " toolbar-item toolbar-icon",
+            imageClassName = ((this.props.inverted) ? 'inverted' : '') + " toolbar-image";
+
         return (
-            <div ref="root" onMouseDown={this.onMouseDown} style={this.props.style} className={(this.state.position == 'left') ? 'toolbar-icon pointer left' : 'toolbar-icon pointer right'}>
-                <div className={(this.state.inverted) ? 'toolbar-image white' : 'toolbar-image'} style={{backgroundImage: 'url(' + this.state.image + ')'}}></div>
+            <div ref="toolbarIcon" onMouseDown={this.onMouseDown} className={iconClassName}>
+                <div className={imageClassName} style={{
+                    backgroundImage: 'url(' + this.props.image + ')',
+                    opacity: this.props.opacity
+                }}></div>
             </div>
         );
     }
 }
+
+ToolbarIcon.defaultProps = {
+    inverted: false,
+    position: 'left',
+    rippleColor: '#212121',
+    opacity: 0.7
+};

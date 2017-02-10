@@ -19,3 +19,21 @@
     font-family: Roboto-Light;
     src: url('../fonts/Roboto-Light.ttf');
 }
+
+.no-select {
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+.pointer {
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+.invert {
+    -webkit-filter: invert(100%);
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
