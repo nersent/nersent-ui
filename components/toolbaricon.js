@@ -17,7 +17,7 @@ export default class ToolbarIcon extends React.Component {
         Ripple.makeRipple(ripple);
     }
     render() {
-        var iconClassName = ((this.props.position == 'left') ? 'toolbar-left' : 'toolbar-right') + " toolbar-item toolbar-icon",
+        var iconClassName = ((this.props.position == 'left') ? 'toolbar-left' : 'toolbar-right') + " toolbar-item toolbar-icon pointer",
             imageClassName = ((this.props.inverted) ? 'inverted' : '') + " toolbar-image";
 
         return (
