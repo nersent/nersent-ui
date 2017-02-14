@@ -32,8 +32,3 @@
 .invert {
     -webkit-filter: invert(100%);
 }
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-}

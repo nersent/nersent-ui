@@ -1,5 +1,6 @@
 'use babel';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {TweenMax, CSSPlugin, Power4} from 'gsap';
 
 export default class Checkbox extends React.Component {
@@ -8,58 +9,83 @@ export default class Checkbox extends React.Component {
         //binds
         this.onClick = this.onClick.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
+        this.check = this.check.bind(this);
+        this.unCheck = this.unCheck.bind(this);
         //global properties
-        this.checked = false;
-        this.state = {
-            onColor: '#2196F3',
-            offColor: '#757575'
-        }
+
     }
     componentDidMount() {
+        this.checked = this.props.checked;
+        if (this.props.checked) {
+            this.unCheck();
+        } else {
+            this.check();
+        }
+        if (this.props.onCheckedChanged != null) {
+            ReactDOM.findDOMNode(this).addEventListener('checked-changed', this.props.onCheckedChanged);
+        }
+    }
+    componentWillUnmount() {
+        if (this.props.onCheckedChanged != null) {
+            ReactDOM.findDOMNode(this).removeEventListener('checked-changed', this.props.onCheckedChanged);
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.onCheckedChanged != null && nextProps.onCheckedChanged != this.props.onCheckedChanged) {
+            if (this.props.onCheckedChanged != null) {
+                ReactDOM.findDOMNode(this).removeEventListener('checked-changed', this.props.onCheckedChanged);
+            }
+            ReactDOM.findDOMNode(this).addEventListener('checked-changed', nextProps.onCheckedChanged);
+        }
+    }
+    check(userInteraction = false) {
         var t = this;
-        this.setState({
-            onColor: (t.props.onColor == null)
-                ? '#2196F3'
-                : t.props.onColor,
-            offColor: (t.props.offColor == null)
-                ? '#757575'
-                : t.props.offColor
-        });
-        this.refs.icon.classList.remove('cover-animation');
-        this.refs.icon.classList.add('hide');
-        TweenMax.set(this.refs.border, {
+        TweenMax.to(this.refs.border, 0.15, {
             css: {
-                borderColor: this.state.offColor
+                borderWidth: this.refs.checkbox.offsetWidth / 2,
+                borderColor: this.props.onColor
+            },
+            onComplete: function() {
+                t.refs.icon.classList.remove('hide');
+                t.refs.icon.classList.add('cover-animation');
             }
         });
+
+        var evt = document.createEvent('Event');
+        evt.initEvent('checked-changed', true, true);
+        evt.checked = true;
+        evt.userInteraction = userInteraction;
+        ReactDOM.findDOMNode(this).dispatchEvent(evt);
+
+        this.checked = true;
+    }
+    unCheck(userInteraction = false) {
+        var t = this;
+        this.refs.icon.classList.remove('cover-animation');
+        this.refs.icon.classList.add('hide');
+        TweenMax.to(this.refs.border, 0.15, {
+            css: {
+                borderWidth: 2,
+                borderColor: this.props.offColor
+            }
+        });
+
+        var evt = document.createEvent('Event');
+        evt.initEvent('checked-changed', true, true);
+        evt.checked = false;
+        evt.userInteraction = userInteraction;
+        ReactDOM.findDOMNode(this).dispatchEvent(evt);
+
+        this.checked = false;
     }
     /*
     events
     */
     onClick() {
-        var t = this;
         if (!this.checked) {
-            TweenMax.to(this.refs.border, 0.15, {
-                css: {
-                    borderWidth: this.refs.checkbox.offsetWidth / 2,
-                    borderColor: this.state.onColor
-                },
-                onComplete: function() {
-                    t.refs.icon.classList.remove('hide');
-                    t.refs.icon.classList.add('cover-animation');
-                }
-            });
-            this.checked = true;
+            this.check(true);
         } else {
-            this.refs.icon.classList.remove('cover-animation');
-            this.refs.icon.classList.add('hide');
-            TweenMax.to(this.refs.border, 0.15, {
-                css: {
-                    borderWidth: 2,
-                    borderColor: this.state.offColor
-                }
-            });
-            this.checked = false;
+            this.unCheck(true);
         }
     }
     onMouseDown() {
@@ -71,10 +97,10 @@ export default class Checkbox extends React.Component {
 
     render() {
         return (
-            <div className="cb-root">
+            <div className={((this.props.className == null) ? "" : this.props.className) + " cb-root"} style={this.props.style}>
                 <div onMouseDown={this.onMouseDown} ref="checkbox" style={this.props.style} onClick={this.onClick} className="checkbox ripple-icon">
                     <div ref="border" className="border"></div>
-                    <div ref="icon" className="check-icon"></div>
+                    <div ref="icon" className="check-icon hide"></div>
                 </div>
                 <div className="text">
                     {this.props.children}
@@ -83,3 +109,9 @@ export default class Checkbox extends React.Component {
         );
     }
 }
+
+Checkbox.defaultProps = {
+    onColor: '#2196F3',
+    offColor: '#757575',
+    checked: 'false'
+};

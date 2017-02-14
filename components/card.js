@@ -21,9 +21,9 @@ export default class Card extends React.Component {
             <div style={{backgroundColor: this.props.headerLineColor}} className="card-header-line"></div>
         </div>;
         return (
-            <div style={this.props.style}>
-                <div className="card-shadow">
-                    <div className="card" style={{backgroundColor: this.props.backgroundColor, color: this.props.color}}>
+            <div className={this.props.className} style={this.props.style}>
+                <div className="card-shadow" style={{backgroundColor: this.props.backgroundColor}}>
+                    <div className="card" style={{color: this.props.color}}>
                         {canDisplayHeader}
                         <div className="card-content">
                             {this.props.children}

@@ -18,7 +18,7 @@ export default class ToolbarIcon extends React.Component {
     }
     render() {
         var iconClassName = ((this.props.position == 'left') ? 'toolbar-left' : 'toolbar-right') + " toolbar-item toolbar-icon pointer",
-            imageClassName = ((this.props.inverted) ? 'inverted' : '') + " toolbar-image";
+            imageClassName = ((this.props.inverted) ? 'invert' : '') + " toolbar-image";
 
         return (
             <div ref="toolbarIcon" onMouseDown={this.onMouseDown} className={iconClassName}>

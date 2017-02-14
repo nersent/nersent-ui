@@ -14,8 +14,10 @@ export default class Toolbar extends React.Component {
     }
 
     render() {
+        this.props.style.height = this.props.height;
+        this.props.style.backgroundColor = this.props.backgroundColor;
         return (
-            <div ref="toolbar" className="toolbar no-select" style={{height: this.props.height, backgroundColor: this.props.backgroundColor}}>
+            <div ref="toolbar" className="toolbar no-select" style={this.props.style}>
                 <div className="toolbar-content">
                     {this.props.children}
                 </div>
