@@ -5,6 +5,7 @@
 @import url("switch.css");
 @import url("toolbar.css");
 @import url("card.css");
+@import url("snackbar.css");
 @font-face {
     font-family: Roboto;
     src: url('../fonts/Roboto.ttf');
@@ -13,6 +14,11 @@
 @font-face {
     font-family: Roboto-Medium;
     src: url('../fonts/Roboto-Medium.ttf');
+}
+
+@font-face {
+    font-family: Roboto-Regular;
+    src: url('../fonts/Roboto-Regular.ttf');
 }
 
 @font-face {
