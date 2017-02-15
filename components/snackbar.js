@@ -113,7 +113,7 @@ export default class Snackbar extends React.Component {
 
 Snackbar.defaultProps = {
     hideTime: 4000,
-    position: 'left',
+    position: 'center',
     marginLeft: "0px",
     marginRight: "0px",
     marginBottom: "0px",
