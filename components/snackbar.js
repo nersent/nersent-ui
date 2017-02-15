@@ -11,15 +11,18 @@ export default class Snackbar extends React.Component {
         this.onClick = this.onClick.bind(this);
         this.show = this.show.bind(this);
         this.hide = this.hide.bind(this);
+        this.setPosition = this.setPosition.bind(this);
         //global properties
         this.state = {
-            flatbutton: 'none'
+            flatbutton: 'none',
+            position: 'center'
         }
     }
     componentDidMount() {
         if (this.props.flatButton) {
             this.setState({flatbutton: 'block'});
         }
+        this.setPosition(this.props.position);
     }
     getFlatButton() {
         return this.refs.flatbutton;
@@ -35,7 +38,7 @@ export default class Snackbar extends React.Component {
         this.refs.snackbar.style.display = 'block';
         TweenMax.to(this.refs.snackbar, 0.3, {
             css: {
-                bottom: 0
+                bottom: t.props.marginBottom
             }
         });
         var _animationdelay = setInterval(function() {
@@ -71,6 +74,25 @@ export default class Snackbar extends React.Component {
             }
         });
     }
+    setPosition(position) {
+        var t = this;
+        switch(position) {
+            case 'left':
+                t.refs.snackbar.style.margin = 0;
+                t.refs.snackbar.style.left = t.props.marginLeft;
+                t.setState({position: 'left'});
+                break;
+            case 'right':
+                t.refs.snackbar.style.margin = 0;
+                t.refs.snackbar.style.right = t.props.marginRight;
+                t.setState({position: 'right'});
+                break;
+            default:
+                t.refs.snackbar.style.margin = "0 auto";
+                t.refs.snackbar.style.left = 0;
+                t.refs.snackbar.style.right = 0;
+        }
+    }
     render() {
         return (
             <div style={this.props.style}>
@@ -91,6 +113,10 @@ export default class Snackbar extends React.Component {
 
 Snackbar.defaultProps = {
     hideTime: 4000,
+    position: 'left',
+    marginLeft: "0px",
+    marginRight: "0px",
+    marginBottom: "0px",
     backgroundColor: '#323232',
     opacity: 1,
     textColor: "#fff",

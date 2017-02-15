@@ -3,9 +3,6 @@
     max-width: 568px;
     position: fixed;
     bottom: -200px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
     border-radius: 2px;
     background-color: #323232;
     display: none;
