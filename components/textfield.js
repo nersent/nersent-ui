@@ -2,13 +2,14 @@
 import React from 'react';
 import {TweenMax, CSSPlugin} from 'gsap';
 
-export default class Switch extends React.Component {
+export default class TextField extends React.Component {
     constructor() {
         super();
         //binds
         this._keypress = this._keypress.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onFocusOut = this.onFocusOut.bind(this);
+        this.onHintClick = this.onHintClick.bind(this);
         this.getText = this.getText.bind(this);
         //global properties
         this.state = {
@@ -21,13 +22,14 @@ export default class Switch extends React.Component {
     _keypress(e) {
     }
     onFocus(e) {
+        var t = this;
         if (this.refs.input.value.length < 1) {
             TweenMax.to(this.refs.hint, 0.15, {
                 css: {
-                    fontSize: 14,
-                    top: -8,
-                    color: "#03a9f4",
-                    opacity: 1
+                    fontSize: this.props.focusedHintFontSize,
+                    top: this.props.focusedHintMarginTop,
+                    color: this.props.focusedHintColor,
+                    opacity: this.props.focusedHintOpacity
                 }
             });
             TweenMax.to(this.refs.focus_divider, 0.15, {
@@ -35,16 +37,22 @@ export default class Switch extends React.Component {
                     width: '100%'
                 }
             });
+            this.setState({active: true});
+            var _t = {};
+            if(t.props.onFocus && _t.toString.call(t.props.onFocus) === '[object Function]') {
+                t.props.onFocus();
+            }
         }
     }
     onFocusOut(e) {
+        var t = this;
         if (this.refs.input.value.length < 1) {
             TweenMax.to(this.refs.hint, 0.2, {
                 css: {
-                    fontSize: 18,
-                    top: 11,
-                    color: "#444",
-                    opacity: 0.4
+                    fontSize: this.props.hintFontSize,
+                    top: this.props.hintMarginTop,
+                    color: this.props.hintColor,
+                    opacity: this.props.hintOpacity
                 }
             });
             TweenMax.to(this.refs.focus_divider, 0.15, {
@@ -52,7 +60,16 @@ export default class Switch extends React.Component {
                     width: '0%'
                 }
             });
+            this.setState({active: false});
+            var _t = {};
+            if(t.props.onFocusOut && _t.toString.call(t.props.onFocusOut) === '[object Function]') {
+                t.props.onFocusOut();
+            }
         }
+    }
+    onHintClick(e) {
+        this.refs.input.focus();
+        this.onFocus();
     }
     getText() {
         return this.refs.input.value;
@@ -60,14 +77,28 @@ export default class Switch extends React.Component {
     render() {
         return (
             <div className="material-textfield" style={this.props.style}>
-                <input ref="input" onClick={this.onFocus} onBlur={this.onFocusOut}></input>
-                <div className="hint" ref="hint">Hello world!</div>
+                <input ref="input" onClick={this.onFocus} onBlur={this.onFocusOut} style={{fontSize: this.props.fontSize, color: this.props.color, paddingBottom: this.props.inputPaddingBottom}}></input>
+                <div className="hint" ref="hint" style={{fontSize: this.props.hintFontSize, color: this.props.hintColor, opacity: this.props.hintOpacity, top: this.props.hintMarginTop}} onClick={this.onHintClick}>Hello world!</div>
                 <div className="divider" ref="divider"></div>
                 <div className="focus_divider" ref="focus_divider"></div>
             </div>
         );
     }
 }
+
+TextField.defaultProps = {
+    fontSize: 18,
+    color: "#444",
+    inputPaddingBottom: 6,
+    hintFontSize: 18,
+    hintOpacity: 0.4,
+    hintColor: "#444",
+    hintMarginTop: 0,
+    focusedHintFontSize: 14,
+    focusedHintOpacity: 1,
+    focusedHintColor: "#03a9f4",
+    focusedHintMarginTop: -18
+};
 /*
     this.refs.textarea.style.height = "auto";
     this.refs.textarea.style.height = this.refs.textarea.scrollHeight + "px";

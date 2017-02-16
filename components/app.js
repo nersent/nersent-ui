@@ -47,7 +47,8 @@ export default class App extends React.Component {
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </Card>
                 <br></br>
-                <TextField style={{left: 0, right: 0, margin: '0 auto'}}></TextField>
+                <br></br>
+                <TextField fontSize={32} focusedHintMarginTop={-18} hintFontSize={32} style={{left: 0, right: 0, margin: '0 auto'}}></TextField>
                 <br></br>
                 <Snackbar ref="snackbar" flatButton={true} flatButtonText={"RETRY"} onFlatButtonClick={this._snackbar}>
                     Connection timed out. Showing limited messages.
