@@ -28,14 +28,19 @@
 }
 
 .no-select {
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
-    cursor: default;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .pointer {
     -webkit-user-select: none;
     cursor: pointer;
 }
+
 .invert {
     -webkit-filter: invert(100%);
 }
