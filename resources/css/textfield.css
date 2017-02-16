@@ -73,9 +73,21 @@
 
 .material-textfield .counter {
     position: absolute;
-    bottom: -24px;
+    margin-top: 8px;
     right: 0;
     color: #000;
     opacity: 0.4;
     font-size: 14px;
+}
+
+.material-textfield .error-message {
+    width: 80%;
+    position: absolute;
+    margin-top: 6px;
+    padding-right: 49px;
+    left: 0;
+    color: #d50000;
+    font-size: 14px;
+    opacity: 0;
+    display: none;
 }

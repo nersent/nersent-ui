@@ -27,7 +27,7 @@ export default class App extends React.Component {
 
     }
     _snackbar() {
-        console.log("XDDDDD co");
+        this.refs.textfield.setText("porn");
     }
 
     render() {
@@ -48,7 +48,7 @@ export default class App extends React.Component {
                 </Card>
                 <br></br>
                 <br></br>
-                <TextField fontSize={32} focusedHintMarginTop={-18} hintFontSize={32} style={{left: 0, right: 0, margin: '0 auto'}} hintText="aha"></TextField>
+                <TextField ref="textfield" style={{left: 0, right: 0, margin: '0 auto'}} ></TextField>
                 <br></br>
                 <Snackbar ref="snackbar" flatButton={true} flatButtonText={"RETRY"} onFlatButtonClick={this._snackbar}>
                     Connection timed out. Showing limited messages.

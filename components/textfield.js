@@ -8,6 +8,7 @@ export default class TextField extends React.Component {
         //binds
         this.onKeyUp = this.onKeyUp.bind(this);
         this.characterControler = this.characterControler.bind(this); //unity ( ͡° ͜ʖ ͡°)
+        this.setError = this.setError.bind(this);
         this.isError = this.isError.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onFocusOut = this.onFocusOut.bind(this);
@@ -22,7 +23,7 @@ export default class TextField extends React.Component {
         }
     }
     componentDidMount() {
-        if (this.props.characterControler) {
+        if (this.props.counter) {
             this.setState({counter: 'block'});
         }
     }
@@ -30,55 +31,94 @@ export default class TextField extends React.Component {
         this.characterControler();
     }
     characterControler() {
-        if (this.props.characterControler) {
+        if (this.props.counter) {
             var _length = this.refs.input.value.length;
             this.setState({length: _length});
             if (_length > this.props.maxLength) {
-                TweenMax.to(this.refs.hint, 0.1, {
+                this.setError(true);
+            } else if (this.state.error) {
+                this.setError(false);
+            }
+        }
+    }
+    setError(er) {
+        var t = this;
+        if (er) {
+            if (!this.state.error) {
+                var _t = {};
+                if(t.props.onError && _t.toString.call(t.props.onError) === '[object Function]') {
+                    t.props.onError();
+                }
+            }
+            TweenMax.to(this.refs.hint, 0.1, {
+                css: {
+                    color: this.props.errorColor
+                }
+            });
+            TweenMax.to(this.refs.focus_divider, 0.1, {
+                css: {
+                    backgroundColor: this.props.errorColor
+                }
+            });
+            TweenMax.to(this.refs.counter, 0.1, {
+                css: {
+                    color: this.props.errorColor,
+                    opacity: 1
+                }
+            });
+            TweenMax.to(this.refs.input, 0.1, {
+                css: {
+                    color: this.props.errorColor
+                }
+            });
+            if (this.props.errorMessage.length > 0) {
+                this.refs.error_message.style.display = 'block';
+                TweenMax.to(this.refs.error_message, 0.1, {
                     css: {
-                        color: this.props.errorColor
-                    }
-                });
-                TweenMax.to(this.refs.focus_divider, 0.1, {
-                    css: {
-                        backgroundColor: this.props.errorColor
-                    }
-                });
-                TweenMax.to(this.refs.counter, 0.1, {
-                    css: {
-                        color: this.props.errorColor,
                         opacity: 1
                     }
                 });
-                TweenMax.to(this.refs.input, 0.1, {
+            }
+            this.setState({error: true});
+        } else {
+            if (this.state.error) {
+                var _t = {};
+                if(t.props.onEndError && _t.toString.call(t.props.onEndError) === '[object Function]') {
+                    t.props.onEndError();
+                }
+            }
+            TweenMax.to(this.refs.hint, 0.1, {
+                css: {
+                    color: this.props.focusedHintColor
+                }
+            });
+            TweenMax.to(this.refs.focus_divider, 0.1, {
+                css: {
+                    backgroundColor: this.props.focusedDividerColor
+                }
+            });
+            TweenMax.to(this.refs.counter, 0.1, {
+                css: {
+                    color: this.props.counterColor,
+                    opacity: this.props.counterOpacity
+                }
+            });
+            TweenMax.to(this.refs.input, 0.1, {
+                css: {
+                    color: this.props.focusedHintColor
+                }
+            });
+            if (this.props.errorMessage.length > 0) {
+                TweenMax.to(this.refs.error_message, 0.1, {
                     css: {
-                        color: this.props.errorColor
-                    }
-                });
-                this.setState({error: true});
-            } else if (this.state.error) {
-                TweenMax.to(this.refs.hint, 0.1, {
-                    css: {
-                        color: this.props.focusedHintColor
-                    }
-                });
-                TweenMax.to(this.refs.focus_divider, 0.1, {
-                    css: {
-                        backgroundColor: this.props.focusedDividerColor
-                    }
-                });
-                TweenMax.to(this.refs.counter, 0.1, {
-                    css: {
-                        color: this.props.counterColor,
-                        opacity: this.props.counterOpacity
-                    }
-                });
-                TweenMax.to(this.refs.input, 0.1, {
-                    css: {
-                        color: this.props.focusedHintColor
+                        opacity: 0
+                    },
+                    onComplete: function() {
+                        t.refs.error_message.style.display = 'none';
                     }
                 });
             }
+            this.setState({error: false});
         }
     }
     onFocus(e) {
@@ -133,6 +173,11 @@ export default class TextField extends React.Component {
         this.refs.input.focus();
         this.onFocus();
     }
+    setText(text) {
+        if (text.length > 0 && !this.state.active)
+            this.onFocus();
+        this.refs.input.value = text;
+    }
     getText() {
         return this.refs.input.value;
     }
@@ -146,8 +191,11 @@ export default class TextField extends React.Component {
                 <div className="hint no-select" ref="hint" style={{fontSize: this.props.hintFontSize, color: this.props.hintColor, opacity: this.props.hintOpacity, top: this.props.hintMarginTop}} onClick={this.onHintClick}>{this.props.hintText}</div>
                 <div className="divider no-select" ref="divider" style={{backgroundColor: this.props.dividerColor, opacity: this.props.dividerOpacity, height: this.props.dividerHeight}}></div>
                 <div className="focus_divider no-select" ref="focus_divider" style={{backgroundColor: this.props.focusedDividerColor, height: this.props.focusedDividerHeight, bottom: -0.5 * (this.props.focusedDividerHeight - this.props.dividerHeight)}}></div>
-                <div className="counter no-select" ref="counter" style={{display: this.state.counter, color: this.props.counterColor, opacity: this.props.counterOpacity, fontSize: this.props.counterFontSize, bottom: this.props.counterMarginBottom}}>
+                <div className="counter no-select" ref="counter" style={{display: this.state.counter, color: this.props.counterColor, opacity: this.props.counterOpacity, fontSize: this.props.counterFontSize}}>
                     {this.state.length} / {this.props.maxLength}
+                </div>
+                <div className="error-message no-select" ref="error_message" style={{color: this.props.errorColor}}>
+                    {this.props.errorMessage}
                 </div>
             </div>
         );
@@ -160,7 +208,8 @@ TextField.defaultProps = {
     hintText: "",
     maxLength: 100,
     errorColor: "#d50000",
-    characterControler: false,
+    counter: false,
+    errorMessage: "",
     inputPaddingBottom: 6,
     hintFontSize: 18,
     hintOpacity: 0.4,
@@ -182,7 +231,6 @@ TextField.defaultProps = {
     counterColor: "#000",
     counterOpacity: 0.4,
     counterFontSize: 14,
-    counterMarginBottom: -24
 };
 /*
     this.refs.textarea.style.height = "auto";
