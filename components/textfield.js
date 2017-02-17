@@ -185,12 +185,13 @@ export default class TextField extends React.Component {
         return this.state.error;
     }
     render() {
+        var focus_divider_height = -0.5 * (this.props.focusedDividerHeight - this.props.dividerHeight);
         return (
             <div className="material-textfield" style={this.props.style}>
                 <input ref="input" onClick={this.onFocus} onBlur={this.onFocusOut} style={{fontSize: this.props.fontSize, textShadow: '0px 0px 0px ' + this.props.color,color: this.props.focusedHintColor, paddingBottom: this.props.inputPaddingBottom}} onKeyUp={this.onKeyUp}></input>
                 <div className="hint no-select" ref="hint" style={{fontSize: this.props.hintFontSize, color: this.props.hintColor, opacity: this.props.hintOpacity, top: this.props.hintMarginTop}} onClick={this.onHintClick}>{this.props.hintText}</div>
                 <div className="divider no-select" ref="divider" style={{backgroundColor: this.props.dividerColor, opacity: this.props.dividerOpacity, height: this.props.dividerHeight}}></div>
-                <div className="focus_divider no-select" ref="focus_divider" style={{backgroundColor: this.props.focusedDividerColor, height: this.props.focusedDividerHeight, bottom: -0.5 * (this.props.focusedDividerHeight - this.props.dividerHeight)}}></div>
+                <div className="focus_divider no-select" ref="focus_divider" style={{backgroundColor: this.props.focusedDividerColor, height: this.props.focusedDividerHeight, bottom: focus_divider_height}}></div>
                 <div className="counter no-select" ref="counter" style={{display: this.state.counter, color: this.props.counterColor, opacity: this.props.counterOpacity, fontSize: this.props.counterFontSize}}>
                     {this.state.length} / {this.props.maxLength}
                 </div>
