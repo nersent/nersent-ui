@@ -13,6 +13,8 @@ import Snackbar from './snackbar.js';
 import TextField from './textfield.js';
 import Dialog from './dialog.js';
 import DialogActionButton from './dialogactionbutton.js';
+import Menu from './menu.js';
+import MenuItem from './menuitem.js';
 
 import {CSSPlugin, TweenMax} from 'gsap';
 
@@ -39,6 +41,14 @@ export default class App extends React.Component {
                     <ToolbarIcon image="app/resources/img/menu.png"></ToolbarIcon>
                     <ToolbarTitle>Title</ToolbarTitle>
                     <ToolbarIcon position="right" image="app/resources/img/menu.png"></ToolbarIcon>
+                    <Menu>
+                        <MenuItem>
+
+                        </MenuItem>
+                        <MenuItem>
+
+                        </MenuItem>
+                    </Menu>
                     <ToolbarItem position="right">
                         <FlatButton onFlatButtonClick={() => this.refs.snackbar.show()} textOpacity={0.9} rippleColor="#000" color="#000">
                             BUTTON
