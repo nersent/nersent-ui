@@ -1,20 +1,16 @@
 'use babel';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Toolbar from './toolbar.js';
-import ToolbarIcon from './toolbaricon.js';
-import ToolbarItem from './toolbaritem.js';
-import ToolbarTitle from './toolbartitle.js';
+import {Toolbar, ToolbarIcon, ToolbarItem, ToolbarTitle} from './toolbar.js';
 
 import FlatButton from './flatbutton.js';
+import RaisedButton from './raisedbutton.js';
 import Checkbox from './checkbox.js';
 import Card from './card.js';
 import Snackbar from './snackbar.js';
 import TextField from './textfield.js';
-import Dialog from './dialog.js';
-import DialogActionButton from './dialogactionbutton.js';
-import Menu from './menu.js';
-import MenuItem from './menuitem.js';
+import {Dialog, DialogContent, DialogTitle, DialogActions, DialogActionButton} from './dialog.js';
+import {Menu, MenuItem} from './menu.js';
 
 import {CSSPlugin, TweenMax} from 'gsap';
 
@@ -22,16 +18,23 @@ export default class App extends React.Component {
     constructor() {
         super();
         //binds
-        this._snackbar = this._snackbar.bind(this);
+        this.error = this.error.bind(this);
         //global properties
-
+        this.iserror = true;
     }
 
     componentDidMount() {
 
     }
-    _snackbar() {
-        this.refs.textfield.setText("XDD Co");
+
+    error() {
+        if (this.iserror) {
+            this.refs.textfield.setError(false);
+            this.iserror = false;
+        } else {
+            this.refs.textfield.setError(true, 'Error message');
+            this.iserror = true;
+        }
     }
 
     render() {
@@ -60,50 +63,57 @@ export default class App extends React.Component {
                 </Card>
                 <br></br>
                 <br></br>
-                <TextField ref="textfield" hintText="XDDD Co" counter={true} maxLength={10} onError={() => console.log("XDDD")} style={{left: 0, right: 0, margin: '0 auto'}} ></TextField>
+                <TextField onError={()=> console.log("error")} ref="textfield" hint="XDDD Co" counter={true} style={{left: 0, right: 0, margin: '0 auto'}}></TextField>
+                <RaisedButton onClick={this.error} rippleColor="#000" color="#000" style={{left: '50%', position: 'absolute', top: '50%', transform: 'translate(-50%, -50%)'}} backgroundColor="#03A9F4">
+                    CALL ERROR
+                </RaisedButton>
                 <br></br>
-                <FlatButton onFlatButtonClick={() => this.refs.dialog_1.show()} rippleColor="#fff" color="#fff" backgroundColor="#ff0000" style={{width: 101}}>
+                <RaisedButton onClick={() => this.refs.dialog_1.show()} rippleColor="#000" color="#000" style={{marginLeft: 16}} backgroundColor="#03A9F4">
                     DIALOG 1
-                </FlatButton>
+                </RaisedButton>
                 <br></br>
-                <FlatButton onFlatButtonClick={() => this.refs.dialog_2.show()} rippleColor="#fff" color="#fff" backgroundColor="#ff0000" style={{width: 101}}>
+                <RaisedButton onClick={() => this.refs.dialog_2.show()} rippleColor="#000" color="#000" style={{marginLeft: 16}} backgroundColor="#03A9F4">
                     DIALOG 2
-                </FlatButton>
+                </RaisedButton>
                 <br></br>
-                <Snackbar ref="snackbar" flatButton={true} flatButtonText={"RETRY"} onFlatButtonClick={this._snackbar}>
-                    Connection timed out. Showing limited messages.
+                <Snackbar ref="snackbar" flatButton={true} flatButtonText={"WOAH!"} onFlatButtonClick={this._snackbar}>
+                    Successfully created snackbar :)
                 </Snackbar>
                 <Dialog ref="dialog_1">
-                    <title>
-                        Worth to know ( ͡° ͜ʖ ͡°)
-                    </title>
-                    <content>
-                        <span className="no-select">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    </content>
-                    <actions>
-                        <li className="no-select ripple" ref="dialog_1_ok" onMouseDown={(e) => this.refs.dialog_1.ripple(this.refs.dialog_1_ok, "#009688", e)}>OK</li>
-                        <li className="no-select ripple" ref="dialog_1_cancel" onMouseDown={(e) => this.refs.dialog_1.ripple(this.refs.dialog_1_cancel, "#009688", e)} onClick={() => this.refs.dialog_1.hide()}>CANCEL</li>
-                    </actions>
+                    <DialogTitle>
+                        Header
+                    </DialogTitle>
+                    <DialogContent>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </DialogContent>
+                    <DialogActions actionsList={true}>
+                        <DialogActionButton>
+                            ACTION BUTTON 1
+                        </DialogActionButton>
+                        <DialogActionButton>
+                            ACTION BUTTON 2
+                        </DialogActionButton>
+                    </DialogActions>
                 </Dialog>
-                <Dialog ref="dialog_2" actionsList={true}>
-                    <title>
-                        Are you batman?
-                    </title>
-                    <content>
-                        <img src="https://media.giphy.com/media/EQnSR0DaGzeEg/giphy.gif" className="no-select" style={{pointerEvent: 'none', width: "100%"}}></img>
-                    </content>
-                    <actions>
-                        <DialogActionButton>MUUU</DialogActionButton>
-                        <DialogActionButton>USH ASH ĄSH</DialogActionButton>
-                    </actions>
+                <Dialog ref="dialog_2">
+                    <DialogTitle>
+                        Header
+                    </DialogTitle>
+                    <DialogContent>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </DialogContent>
+                    <DialogActions actionsList={false}>
+                        <DialogActionButton>
+                            CANCEL
+                        </DialogActionButton>
+                        <DialogActionButton>
+                            OK
+                        </DialogActionButton>
+                    </DialogActions>
                 </Dialog>
             </div>
         );
     }
 }
-/*
-<li className="no-select ripple" ref="dialog_2_ok" onMouseDown={(e) => this.refs.dialog_2.ripple(this.refs.dialog_2_ok, "#009688", e)}>BATMAN IS ONLY ONE AND I AM BATMAN</li>
-<li className="no-select ripple" ref="dialog_2_cancel" onMouseDown={(e) => this.refs.dialog_2.ripple(this.refs.dialog_2_cancel, "#009688", e)} onClick={() => this.refs.dialog_2.hide()}>AHA CO</li>
-*/
 
 ReactDOM.render(<App/>, document.getElementById('app'));

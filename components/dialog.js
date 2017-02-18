@@ -1,6 +1,7 @@
 'use babel';
 import React from 'react';
 import {TweenMax, CSSPlugin} from 'gsap';
+import FlatButton from './flatbutton.js';
 
 export default class Dialog extends React.Component {
     constructor() {
@@ -10,15 +11,11 @@ export default class Dialog extends React.Component {
         this.show = this.show.bind(this);
         this.hide = this.hide.bind(this);
         //global properties
-        this.state = {
-            active: false
-        }
+        this.active = false;
     }
 
     componentDidMount() {
-        if (this.props.actionsList) {
-            this.refs.actions_list.className += " dialog-list";
-        }
+
     }
     ripple(element, color, e) {
         var ripple = Ripple.createRipple(element, {
@@ -27,8 +24,7 @@ export default class Dialog extends React.Component {
         Ripple.makeRipple(ripple);
     }
     show() {
-        var t = this;
-        if (!this.state.active) {
+        if (!this.active) {
             this.refs.dark.style.display = 'block';
             TweenMax.to(this.refs.dark, this.props.showAnimationTime, {
                 css: {
@@ -42,12 +38,12 @@ export default class Dialog extends React.Component {
                     marginTop: 0
                 }
             });
-            this.setState({active: true});
+            this.active = true;
         }
     }
     hide() {
         var t = this;
-        if (this.state.active) {
+        if (this.active) {
             TweenMax.to(this.refs.dark, this.props.hideAnimationTime, {
                 css: {
                     opacity: 0
@@ -60,45 +56,107 @@ export default class Dialog extends React.Component {
             TweenMax.to(this.refs.dialog, this.props.hideAnimationTime, {
                 css: {
                     opacity: 0,
-                    marginTop: "-100%"
+                    marginTop: "-60px"
                 },
                 onComplete: function() {
                     t.refs.dialog.style.display = 'none';
                 }
             });
-            this.setState({active: false});
+            this.active = false;
         }
     }
     render() {
-        var _title, _content, _actions;
-        React.Children.forEach(this.props.children, function (child) {
-            if (child.type == "title") {
-                _title = child.props.children;
-            } else if (child.type == "content") {
-                _content = child.props.children;
-            } else if (child.type == "actions") {
-                _actions = child.props.children
-            }
-        });
         return (
             <div>
                 <div className="dialog-dark" ref="dark" onClick={this.hide}></div>
                 <div className="dialog" ref="dialog">
-                    <div className="dialog-title no-select" ref="title">{_title}</div>
-                    <div className="dialog-content" ref="content">
-                        {_content}
-                    </div>
-                    <div className="dialog-actions" ref="actions_list">
-                        {_actions}
-                        <div className="clear-both"></div>
-                    </div>
+                    {this.props.children}
                 </div>
             </div>
         );
     }
 }
 
-Dialog.defaultProps = {
-    showAnimationTime: 0.4,
-    hideAnimationTime: 0.3
+class DialogContent extends React.Component {
+    constructor() {
+        super();
+    }
+    componentDidMount() {
+
+    }
+    render() {
+        return (
+            <div className="dialog-content dialog-padding">
+                {this.props.children}
+            </div>
+        );
+    }
+}
+
+class DialogTitle extends React.Component {
+    constructor() {
+        super();
+    }
+    componentDidMount() {
+
+    }
+    render() {
+        return (
+            <div className="dialog-title dialog-padding no-select">
+                {this.props.children}
+            </div>
+        );
+    }
+}
+
+class DialogActions extends React.Component {
+    constructor() {
+        super();
+    }
+    componentDidMount() {
+
+    }
+    render() {
+        var isActionsList = (this.props.actionsList == false) ? " dialog-padding" : " dialog-actions-list";
+        return (
+            <div className={"dialog-actions" + isActionsList} ref="actions_list">
+                {this.props.children}
+            </div>
+        );
+    }
+}
+
+class DialogActionButton extends React.Component {
+    constructor() {
+        super();
+        //binds
+
+        //global properties
+    }
+
+    componentDidMount() {
+
+    }
+    render() {
+        return (
+            <FlatButton className="dialog-action-button" color={this.props.color} backgroundColor={this.props.backgroundColor} rippleColor={this.props.rippleColor}>{this.props.children}</FlatButton>
+        );
+    }
+}
+
+DialogActionButton.defaultProps = {
+    color: '#03A9F4',
+    backgroundColor: 'transparent',
+    rippleColor: '#03A9F4'
 };
+
+Dialog.defaultProps = {
+    showAnimationTime: 0.3,
+    hideAnimationTime: 0.2
+};
+
+DialogActions.defaultProps = {
+    actionsList: false
+}
+
+export {Dialog, DialogContent, DialogActions, DialogTitle, DialogActionButton};

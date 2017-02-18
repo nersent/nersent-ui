@@ -1,88 +1,64 @@
 .dialog {
+    background-color: white;
+    padding-bottom: 0;
+    border-radius: 3px;
+    z-index: 9999;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     max-width: 500px;
-    min-height: 200px;
-    position: fixed;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    margin-top: -100%;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 2px;
-    background-color: #fafafa;
-    font-family: 'Roboto-Regular';
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    z-index: 100;
     opacity: 0;
     display: none;
+    margin-top: -60px;
 }
 
 .dialog-dark {
-    width: 100%;
-    height: 100%;
     position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #000;
-    opacity: 0; /*0.7*/
+    margin: 0;
+    padding: 0;
+    z-index: 999;
+    opacity: 0;
+    top: 0; bottom: 0; left: 0; right: 0;
     display: none;
-    z-index: 99;
+    background-color: black;
 }
 
-.dialog .dialog-title {
-    width: 100%;
+.dialog-title {
     color: #212121;
     font-size: 20px;
     font-family: 'Roboto-Medium';
-    padding: 24px;
-    padding-bottom: 20px;
+    margin-top: 24px;
 }
-
-.dialog .dialog-content {
-    padding-left: 24px;
-    padding-right: 24px;
-    font-family: 'Roboto';
+.dialog-padding {
+    margin-left: 24px;
+    margin-right: 24px;
+}
+.dialog-content {
     font-size: 16px;
     color: #444;
     max-height: 300px;
     overflow: auto;
+    margin-top: 16px;
 }
-
-.dialog .dialog-content::-webkit-scrollbar {
-    display: none;
-}
-
-.dialog .dialog-actions {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    margin-top: 24px;
-    padding-bottom: 8px;
-    position: relative;
-}
-
-.dialog .dialog-actions .dialog-action-button {
-    text-align: center;
-    min-width: 64px;
-    padding: 8px;
-    padding-top:8.5px;
-    padding-bottom:8.5px;
-    margin-right: 8px;
+.dialog-actions {
     float: right;
-    border-radius: 2px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: 'Roboto-Medium';
-    color: #009688;
+    margin-bottom: 16px;
+    margin-top: 24px;
+    width: 100%;
 }
 
-.dialog .dialog-list .dialog-action-button {
-    text-align: right;
+.dialog-actions-list .dialog-action-button {
+    clear: right;
     width: 100%;
-    margin-right: 0px;
-    padding-top: 14.5px;
-    padding-bottom: 14.5px;
-    padding-right: 16px;
+    text-align: right;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 24px;
+    padding-left: 24px;
+}
+.dialog-action-button {
+     float: right;
+     font-family: 'Roboto-Medium';
 }

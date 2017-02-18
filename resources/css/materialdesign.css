@@ -46,7 +46,3 @@
 .invert {
     -webkit-filter: invert(100%);
 }
-
-.clear-both {
-    clear:both;
-}

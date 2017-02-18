@@ -22,7 +22,7 @@ export default class RaisedButton extends React.Component {
     render() {
         return (
             <div style={this.props.style}>
-                <div className="material-button-shadow pointer" onMouseDown={this.onMouseDown} style={{opacity: this.props.opacity}}>
+                <div className="material-button-shadow pointer" onClick={this.props.onClick} onMouseDown={this.onMouseDown} style={{opacity: this.props.opacity}}>
                     <div ref="button" className="material-button ripple" style={{backgroundColor: this.props.backgroundColor}}>
                         <div style={{color: this.props.color, opacity: this.props.textOpacity}}>
                             {this.props.children}

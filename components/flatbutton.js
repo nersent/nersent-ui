@@ -7,7 +7,6 @@ export default class FlatButton extends React.Component {
         super();
         //binds
         this.onMouseDown = this.onMouseDown.bind(this);
-        this._onClick = this._onClick.bind(this);
 
         //global properties
     }
@@ -20,17 +19,11 @@ export default class FlatButton extends React.Component {
         }, createRippleMouse(this.refs.button, e));
         Ripple.makeRipple(ripple);
     }
-    _onClick() {
-        var _t = {};
-        if(this.props.onFlatButtonClick && _t.toString.call(this.props.onFlatButtonClick) === '[object Function]') {
-            this.props.onFlatButtonClick();
-        }
-    }
     render() {
         return (
-            <div onClick={() => this._onClick()} style={this.props.style}>
-                <div className="pointer" onMouseDown={this.onMouseDown} style={{opacity: this.props.opacity}}>
-                    <div ref="button" className="material-button ripple" style={{backgroundColor: this.props.backgroundColor}}>
+            <div style={this.props.style}>
+                <div className="pointer" onClick={this.props.onClick} onMouseDown={this.onMouseDown} style={{opacity: this.props.opacity}}>
+                    <div ref="button" className={"material-button ripple " + this.props.className} style={{backgroundColor: this.props.backgroundColor}}>
                         <div style={{color: this.props.color, opacity: this.props.textOpacity}}>
                             {this.props.children}
                         </div>
