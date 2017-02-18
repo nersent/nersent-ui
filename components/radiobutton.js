@@ -25,7 +25,6 @@ export default class RadioButton extends React.Component {
             onColor: (t.props.onColor == null) ? '#2196F3' : t.props.onColor,
             offColor: (t.props.offColor == null) ? '#757575' : t.props.offColor
         });
-
     }
 
     onClick() {
@@ -71,3 +70,51 @@ export default class RadioButton extends React.Component {
         );
     }
 }
+
+class RadioButtonContainer extends React.Component {
+    constructor() {
+        super();
+        //binds
+        this.getRadioButtonContainer = this.getRadioButtonContainer.bind(this);
+        this.uncheckOthers = this.uncheckOthers.bind(this);
+
+        //global properties
+        this.radiobuttons = [];
+    }
+
+    componentDidMount() {
+        this.uncheckOthers();
+        this.radiobuttons[0].select();
+    }
+
+    /*
+    * returns this
+    */
+    getRadioButtonContainer() {
+        return this;
+    }
+
+    /*
+    * unchecks other radiobuttons
+    */
+    uncheckOthers() {
+        for (var i = 0; i < this.radiobuttons.length; i++) {
+            this.radiobuttons[i].unselect(false);
+        }
+    }
+
+    render() {
+        var childrenWithProps = React.Children.map(this.props.children,
+            (child) => React.cloneElement(child, {
+                getParent: this.getRadioButtonContainer
+            })
+        );
+        return (
+            <div>
+                {childrenWithProps}
+            </div>
+        );
+    }
+}
+
+export {RadioButton, RadioButtonContainer};
