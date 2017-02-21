@@ -77,7 +77,7 @@ export default class App extends React.Component {
                     DIALOG 1
                 </RaisedButton>
                 <br></br>
-                <RaisedButton onClick={() => this.refs.dbar.setValue(20, 5)} rippleColor="#000" color="#000" style={{marginLeft: 16}} backgroundColor="#03A9F4">
+                <RaisedButton onClick={() => this.refs.dbar.start()} rippleColor="#000" color="#000" style={{marginLeft: 16}} backgroundColor="#03A9F4">
                     DIALOG 2
                 </RaisedButton>
                 <br></br>
@@ -117,7 +117,7 @@ export default class App extends React.Component {
                     </DialogActions>
                 </Dialog>
                 <br></br>
-                <ProgressBarDeterminate ref="dbar" style={{left: 0, right: 0, margin: '0 auto', width: 500}}></ProgressBarDeterminate>
+                <ProgressBarInDeterminate ref="dbar" style={{left: 0, right: 0, margin: '0 auto', width: 500}}></ProgressBarInDeterminate>
             </div>
         );
     }
