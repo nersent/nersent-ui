@@ -11,6 +11,7 @@ import Snackbar from './snackbar.js';
 import TextField from './textfield.js';
 import {Dialog, DialogContent, DialogTitle, DialogActions, DialogActionButton} from './dialog.js';
 import {Menu, MenuItem} from './menu.js';
+import {ProgressBarDeterminate, ProgressBarInDeterminate} from './progress.js';
 
 import {CSSPlugin, TweenMax} from 'gsap';
 
@@ -76,7 +77,7 @@ export default class App extends React.Component {
                     DIALOG 1
                 </RaisedButton>
                 <br></br>
-                <RaisedButton onClick={() => this.refs.dialog_2.show()} rippleColor="#000" color="#000" style={{marginLeft: 16}} backgroundColor="#03A9F4">
+                <RaisedButton onClick={() => this.refs.dbar.setValue(20, 5)} rippleColor="#000" color="#000" style={{marginLeft: 16}} backgroundColor="#03A9F4">
                     DIALOG 2
                 </RaisedButton>
                 <br></br>
@@ -115,6 +116,8 @@ export default class App extends React.Component {
                         </DialogActionButton>
                     </DialogActions>
                 </Dialog>
+                <br></br>
+                <ProgressBarDeterminate ref="dbar" style={{left: 0, right: 0, margin: '0 auto', width: 500}}></ProgressBarDeterminate>
             </div>
         );
     }
