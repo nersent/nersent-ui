@@ -46,14 +46,18 @@ export default class App extends React.Component {
                     <ToolbarIcon position="right" image="app/resources/img/menu.png"></ToolbarIcon>
                     <Menu>
                         <MenuItem>
-
+                            <header>
+                            Test
+                            </header>
                         </MenuItem>
                         <MenuItem>
-
+                            <header>
+                            XD
+                            </header>
                         </MenuItem>
                     </Menu>
                     <ToolbarItem position="right">
-                        <FlatButton onFlatButtonClick={() => this.refs.snackbar.show()} textOpacity={0.9} rippleColor="#000" color="#000">
+                        <FlatButton onClick={() => this.refs.snackbar.show()} textOpacity={0.9} rippleColor="#000" color="#000">
                             BUTTON
                         </FlatButton>
                     </ToolbarItem>

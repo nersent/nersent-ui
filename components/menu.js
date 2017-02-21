@@ -25,12 +25,16 @@ export default class Menu extends React.Component {
     }
     render() {
         return (
-            <div className="menu">
+            <div className="menu" style={this.props.style}>
                 {this.props.children}
             </div>
         );
     }
 }
+
+Menu.defaultProps = {
+
+};
 
 class MenuItem extends React.Component {
     constructor() {
@@ -47,41 +51,37 @@ class MenuItem extends React.Component {
     }
     ripple(e) {
         var ripple = Ripple.createRipple(this.refs.header, {
-            backgroundColor: "#444"
+            backgroundColor: this.props.rippleColor
         }, createRippleMouse(this.refs.header, e));
         Ripple.makeRipple(ripple);
     }
     onMouseEnter(e) {
-        TweenMax.to(this.refs.item, 0.3, {
+        TweenMax.to(this.refs.header, 0.3, {
             css: {
-                backgroundColor: "#e4e4e4"
+                backgroundColor: this.props.hoverColor
             }
         });
     }
     onMouseLeave(e) {
-        TweenMax.to(this.refs.item, 0.3, {
+        TweenMax.to(this.refs.header, 0.3, {
             css: {
-                backgroundColor: "#fff"
+                backgroundColor: this.props.backgroundColor
             }
         });
     }
     render() {
-        var _header, _submenu;
+        var _header;
         React.Children.forEach(this.props.children, function (child) {
             if (child.type == "header") {
                 _header = child.props.children;
-            } else if (child.type == "menu") {
-                _submenu = child.props.children;
+            } else if (child.type == "submenu") {
+
             }
-            console.log(child.type);
         });
         return (
-            <div className="menu-item" ref="item" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onMouseDown={this.ripple}>
-                <div className="header ripple no-select" ref="header">
+            <div className="menu-item" ref="item">
+                <div className="header ripple no-select" ref="header" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onMouseDown={this.ripple} style={{backgroundColor: this.props.backgroundColor, color: this.props.fontColor}}>
                     {_header}
-                </div>
-                <div className="submenu" ref="submenu">
-                    {_submenu}
                 </div>
             </div>
         );
@@ -89,13 +89,10 @@ class MenuItem extends React.Component {
 }
 
 MenuItem.defaultProps = {
-
-};
-
-
-Menu.defaultProps = {
-    showAnimationTime: 0.4,
-    hideAnimationTime: 0.3
+    backgroundColor: "#fff",
+    hoverColor: "#e4e4e4",
+    fontColor: "#444",
+    rippleColor: '#444',
 };
 
 export {Menu, MenuItem};
