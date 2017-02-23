@@ -11,7 +11,7 @@ import Snackbar from './snackbar.js';
 import TextField from './textfield.js';
 import {Dialog, DialogContent, DialogTitle, DialogActions, DialogActionButton} from './dialog.js';
 import {Menu, MenuItem} from './menu.js';
-import {ProgressBarDeterminate, ProgressBarInDeterminate} from './progress.js';
+import {ProgressBarDeterminate, ProgressBarInDeterminate, DeterminatePreloader} from './progress.js';
 
 import {CSSPlugin, TweenMax} from 'gsap';
 
@@ -118,6 +118,8 @@ export default class App extends React.Component {
                 </Dialog>
                 <br></br>
                 <ProgressBarInDeterminate ref="dbar" style={{left: 0, right: 0, margin: '0 auto', width: 500}}></ProgressBarInDeterminate>
+                <br></br>
+                <DeterminatePreloader style={{width: 32, height: 32}}></DeterminatePreloader>
             </div>
         );
     }

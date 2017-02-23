@@ -11,9 +11,7 @@ export default class ProgressBarDeterminate extends React.Component {
         //global properties
     }
 
-    componentDidMount() {
-
-    }
+    componentDidMount() {}
 
     setPercent(per) {
         if (per != undefined && per != null) {
@@ -36,8 +34,12 @@ export default class ProgressBarDeterminate extends React.Component {
     render() {
         return (
             <div style={this.props.style}>
-                <div className="progress-determinate" ref="progress" style={{backgroundColor: this.props.backgroundColor}}>
-                    <div className="divider" ref="divider" style={{backgroundColor: this.props.barColor}}></div>
+                <div className="progress-determinate" ref="progress" style={{
+                    backgroundColor: this.props.backgroundColor
+                }}>
+                    <div className="divider" ref="divider" style={{
+                        backgroundColor: this.props.barColor
+                    }}></div>
                 </div>
             </div>
         );
@@ -63,9 +65,7 @@ class ProgressBarInDeterminate extends React.Component {
         }
     }
 
-    componentDidMount() {
-
-    }
+    componentDidMount() {}
 
     start() {
         this.setState({animate: true});
@@ -106,9 +106,15 @@ class ProgressBarInDeterminate extends React.Component {
     render() {
         return (
             <div style={this.props.style}>
-                <div className="progress-indeterminate" ref="progress" style={{backgroundColor: this.props.backgroundColor}}>
-                    <div className="divider" ref="divider" style={{backgroundColor: this.props.barColor}}></div>
-                    <div className="divider-fast" ref="divider_fast" style={{backgroundColor: this.props.barColor}}></div>
+                <div className="progress-indeterminate" ref="progress" style={{
+                    backgroundColor: this.props.backgroundColor
+                }}>
+                    <div className="divider" ref="divider" style={{
+                        backgroundColor: this.props.barColor
+                    }}></div>
+                    <div className="divider-fast" ref="divider_fast" style={{
+                        backgroundColor: this.props.barColor
+                    }}></div>
                 </div>
             </div>
         );
@@ -120,4 +126,30 @@ ProgressBarInDeterminate.defaultProps = {
     dividerColor: "#03a9f4"
 };
 
-export {ProgressBarDeterminate, ProgressBarInDeterminate};
+class DeterminatePreloader extends React.Component {
+    constructor() {
+        super();
+        //binds
+
+        //global properties
+    }
+
+    componentDidMount() {}
+
+    render() {
+        return (
+            <div style={this.props.style}>
+                <svg className="progress-circular-determinate" viewBox="25 25 50 50">
+                    <circle className="path" ref="path" style={{stroke: this.props.strokeColor, strokeWidth: this.props.strokeWidth}} cx="50" cy="50" r="20" fill="none" strokeMiterlimit="10"/>
+                </svg>
+            </div>
+        );
+    }
+}
+
+DeterminatePreloader.defaultProps = {
+    strokeColor: "#03a9f4",
+    strokeWidth: 5
+};
+
+export {ProgressBarDeterminate, ProgressBarInDeterminate, DeterminatePreloader};
