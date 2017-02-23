@@ -78,19 +78,20 @@ class ProgressBarInDeterminate extends React.Component {
         this.refs.divider_fast.style.left = "-100%";
     }
 
-    // TODO: easing functions
     animate() {
         var t = this;
         if (this.state.animate) {
-            TweenMax.to(this.refs.divider, 1, {
+            TweenMax.to(this.refs.divider, 2, {
                 css: {
                     left: '100%'
                 },
+                ease: Power1.easeInOut,
                 onComplete: function() {
-                    TweenMax.to(t.refs.divider_fast, 0.8, {
+                    TweenMax.to(t.refs.divider_fast, 1.5, {
                         css: {
                             left: '100%'
                         },
+                        ease: Power2.easeInOut,
                         onComplete: function() {
                             t.refs.divider.style.left = "-100%";
                             t.refs.divider_fast.style.left = "-100%";
