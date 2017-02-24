@@ -15,6 +15,11 @@ export default class ProgressBarDeterminate extends React.Component {
 
     setPercent(per) {
         if (per != undefined && per != null) {
+            if (per > 100) {
+                per = 100;
+            } else if (per < 1) {
+                per = 0;
+            }
             per = per + '%';
             TweenMax.to(this.refs.divider, this.props.animationTime, {
                 css: {
@@ -34,7 +39,7 @@ export default class ProgressBarDeterminate extends React.Component {
     render() {
         return (
             <div style={this.props.style}>
-                <div className="progress-determinate" ref="progress" style={{
+                <div className="progressbar-determinate" ref="progress" style={{
                     backgroundColor: this.props.backgroundColor
                 }}>
                     <div className="divider" ref="divider" style={{
@@ -56,57 +61,41 @@ class ProgressBarInDeterminate extends React.Component {
     constructor() {
         super();
         //binds
-        this.start = this.start.bind(this);
-        this.stop = this.stop.bind(this);
         this.animate = this.animate.bind(this);
         //global properties
-        this.state = {
-            animate: false
-        }
     }
 
-    componentDidMount() {}
-
-    start() {
-        this.setState({animate: true});
+    componentDidMount() {
         this.animate();
-    }
-
-    stop() {
-        this.setState({animate: false});
-        this.refs.divider.style.left = "-100%";
-        this.refs.divider_fast.style.left = "-100%";
     }
 
     animate() {
         var t = this;
-        if (this.state.animate) {
-            TweenMax.to(this.refs.divider, 2, {
+    /*    TweenMax.to(this.refs.divider, 4, {
+            css: {
+                left: '100%'
+            },
+            ease: Power4.easeIn,
+            onComplete: function() {
+            TweenMax.to(t.refs.divider_fast, 4, {
                 css: {
                     left: '100%'
                 },
-                ease: Power1.easeInOut,
+                ease: Power2.easeInOut,
                 onComplete: function() {
-                    TweenMax.to(t.refs.divider_fast, 1.5, {
-                        css: {
-                            left: '100%'
-                        },
-                        ease: Power2.easeInOut,
-                        onComplete: function() {
-                            t.refs.divider.style.left = "-100%";
-                            t.refs.divider_fast.style.left = "-100%";
-                            t.animate();
-                        }
-                    });
+                    t.refs.divider.style.left = "-100%";
+                    t.refs.divider_fast.style.left = "-100%";
+                    t.animate();
                 }
             });
-        }
+            }
+        });*/
     }
 
     render() {
         return (
             <div style={this.props.style}>
-                <div className="progress-indeterminate" ref="progress" style={{
+                <div className="progressbar-indeterminate" ref="progress" style={{
                     backgroundColor: this.props.backgroundColor
                 }}>
                     <div className="divider" ref="divider" style={{
@@ -126,7 +115,7 @@ ProgressBarInDeterminate.defaultProps = {
     dividerColor: "#03a9f4"
 };
 
-class DeterminatePreloader extends React.Component {
+class PreloaderDeterminate extends React.Component {
     constructor() {
         super();
         //binds
@@ -139,7 +128,7 @@ class DeterminatePreloader extends React.Component {
     render() {
         return (
             <div style={this.props.style}>
-                <svg className="progress-circular-determinate" viewBox="25 25 50 50">
+                <svg className="preloader-determinate" viewBox="25 25 50 50">
                     <circle className="path" ref="path" style={{stroke: this.props.strokeColor, strokeWidth: this.props.strokeWidth}} cx="50" cy="50" r="20" fill="none" strokeMiterlimit="10"/>
                 </svg>
             </div>
@@ -147,9 +136,66 @@ class DeterminatePreloader extends React.Component {
     }
 }
 
-DeterminatePreloader.defaultProps = {
+PreloaderDeterminate.defaultProps = {
     strokeColor: "#03a9f4",
     strokeWidth: 5
 };
 
-export {ProgressBarDeterminate, ProgressBarInDeterminate, DeterminatePreloader};
+class PreloaderInDeterminate extends React.Component {
+    constructor() {
+        super();
+        //binds
+        this.setPercent = this.setPercent.bind(this);
+        this.setValue = this.setValue.bind(this);
+        //global properties
+    }
+
+    componentDidMount() {}
+
+    setPercent(per) {
+        if (per != undefined && per != null) {
+            if (per > 100) {
+                per = 100;
+            } else if (per < 1) {
+                per = 0;
+            }
+            var stroke = (this.props.maxDash * per) / 100;
+            TweenMax.to(this.refs.path, this.props.animationTime, {
+                css: {
+                    strokeDasharray: stroke
+                },
+                ease: this.props.ease,
+                onComplete: function() {
+
+                }
+            });
+        }
+    }
+
+    setValue(max, i) {
+        if (max != undefined && max != null && i != undefined && i != null) {
+            var per = (i * 100) / max;
+            this.setPercent(per);
+        }
+    }
+
+    render() {
+        return (
+            <div style={this.props.style}>
+                <svg className="preloader-indeterminate" viewBox="25 25 50 50">
+                    <circle className="path" ref="path" style={{stroke: this.props.strokeColor, strokeWidth: this.props.strokeWidth}} cx="50" cy="50" r="20" fill="none" strokeMiterlimit="10"/>
+                </svg>
+            </div>
+        );
+    }
+}
+
+PreloaderInDeterminate.defaultProps = {
+    strokeColor: "#03a9f4",
+    strokeWidth: 5,
+    maxDash: 125,
+    animationTime: 1,
+    ease: Power2.easeInOut
+};
+
+export {ProgressBarDeterminate, ProgressBarInDeterminate, PreloaderDeterminate, PreloaderInDeterminate};

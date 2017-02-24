@@ -1,4 +1,4 @@
-.progress-determinate {
+.progressbar-determinate {
     width: 500px;
     height: 5px;
     border-radius: 2px;
@@ -6,13 +6,13 @@
     position: relative;
     overflow: hidden;
 }
-.progress-determinate .divider {
+.progressbar-determinate .divider {
     width: 0%;
     height: 100%;
     background-color: #03a9f4;
 }
 
-.progress-indeterminate {
+.progressbar-indeterminate {
     width: 500px;
     height: 5px;
     border-radius: 2px;
@@ -20,14 +20,14 @@
     position: relative;
     overflow: hidden;
 }
-.progress-indeterminate .divider {
+.progressbar-indeterminate .divider {
     width: 50%;
     height: 100%;
     background-color: #03a9f4;
     position: absolute;
     left: -100%;
 }
-.progress-indeterminate .divider-fast {
+.progressbar-indeterminate .divider-fast {
     width: 50%;
     height: 100%;
     background-color: #03a9f4;
@@ -36,7 +36,7 @@
 }
 
 
-.progress-circular-determinate {
+.preloader-determinate {
     -webkit-animation: rotate 2s linear infinite;
     animation: rotate 2s linear infinite;
     height: 100%;
@@ -45,7 +45,7 @@
     width: 100%;
 }
 
-.progress-circular-determinate .path {
+.preloader-determinate .path {
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
     -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
@@ -95,4 +95,17 @@
         stroke-dasharray: 89, 200;
         stroke-dashoffset: -124px;
     }
+}
+
+.preloader-indeterminate {
+    height: 100%;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    width: 100%;
+    transform: rotate(270deg);
+}
+
+.preloader-indeterminate .path {
+    stroke-dasharray: 0, 200;
+    stroke-dashoffset: 0;
 }
