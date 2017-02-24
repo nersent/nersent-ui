@@ -71,25 +71,27 @@ class ProgressBarInDeterminate extends React.Component {
 
     animate() {
         var t = this;
-    /*    TweenMax.to(this.refs.divider, 4, {
+        TweenMax.to(this.refs.divider, 2, {
             css: {
                 left: '100%'
             },
-            ease: Power4.easeIn,
+            ease: Sine.easeIn,
             onComplete: function() {
-            TweenMax.to(t.refs.divider_fast, 4, {
-                css: {
-                    left: '100%'
-                },
-                ease: Power2.easeInOut,
-                onComplete: function() {
-                    t.refs.divider.style.left = "-100%";
-                    t.refs.divider_fast.style.left = "-100%";
-                    t.animate();
-                }
-            });
+                TweenMax.to(t.refs.divider_fast, 1.5, {
+                    css: {
+                        left: '100%',
+                        width: '10%'
+                    },
+                    ease: Sine.easeInOut,
+                    onComplete: function() {
+                        t.refs.divider.style.left = "-40%";
+                        t.refs.divider_fast.style.left = "-80%";
+                        t.refs.divider_fast.style.width = "80%";
+                        t.animate();
+                    }
+                });
             }
-        });*/
+        });
     }
 
     render() {
