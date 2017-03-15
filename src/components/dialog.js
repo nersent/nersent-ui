@@ -1,29 +1,19 @@
 'use babel';
 import React from 'react';
 import {TweenMax, CSSPlugin} from 'gsap';
-import FlatButton from './flatbutton.js';
+import {FlatButton} from './buttons.js';
 
 export default class Dialog extends React.Component {
     constructor() {
         super();
-        //binds
-        this.ripple = this.ripple.bind(this);
-        this.show = this.show.bind(this);
-        this.hide = this.hide.bind(this);
         //global properties
         this.active = false;
     }
 
-    componentDidMount() {
-
-    }
-    ripple(element, color, e) {
-        var ripple = Ripple.createRipple(element, {
-            backgroundColor: color
-        }, createRippleMouse(element, e));
-        Ripple.makeRipple(ripple);
-    }
-    show() {
+    /*
+    * shows the dialog
+    */
+    show = () => {
         if (!this.active) {
             this.refs.dark.style.display = 'block';
             TweenMax.to(this.refs.dark, this.props.showAnimationTime, {
@@ -41,7 +31,11 @@ export default class Dialog extends React.Component {
             this.active = true;
         }
     }
-    hide() {
+
+    /*
+    * hides the dialog
+    */
+    hide = () => {
         var t = this;
         if (this.active) {
             TweenMax.to(this.refs.dark, this.props.hideAnimationTime, {
@@ -65,6 +59,7 @@ export default class Dialog extends React.Component {
             this.active = false;
         }
     }
+
     render() {
         return (
             <div>
@@ -81,9 +76,7 @@ class DialogContent extends React.Component {
     constructor() {
         super();
     }
-    componentDidMount() {
 
-    }
     render() {
         return (
             <div className="dialog-content dialog-padding">
@@ -97,9 +90,7 @@ class DialogTitle extends React.Component {
     constructor() {
         super();
     }
-    componentDidMount() {
 
-    }
     render() {
         return (
             <div className="dialog-title dialog-padding no-select">
@@ -113,9 +104,7 @@ class DialogActions extends React.Component {
     constructor() {
         super();
     }
-    componentDidMount() {
 
-    }
     render() {
         var isActionsList = (this.props.actionsList == false) ? " dialog-padding" : " dialog-actions-list";
         return (
@@ -129,14 +118,8 @@ class DialogActions extends React.Component {
 class DialogActionButton extends React.Component {
     constructor() {
         super();
-        //binds
-
-        //global properties
     }
 
-    componentDidMount() {
-
-    }
     render() {
         return (
             <FlatButton className="dialog-action-button" color={this.props.color} backgroundColor={this.props.backgroundColor} rippleColor={this.props.rippleColor}>{this.props.children}</FlatButton>

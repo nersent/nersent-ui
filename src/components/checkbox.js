@@ -6,13 +6,6 @@ import {TweenMax, CSSPlugin, Power4} from 'gsap';
 export default class Checkbox extends React.Component {
     constructor() {
         super();
-        //binds
-        this.onClick = this.onClick.bind(this);
-        this.onMouseDown = this.onMouseDown.bind(this);
-        this.check = this.check.bind(this);
-        this.unCheck = this.unCheck.bind(this);
-        //global properties
-
     }
     componentDidMount() {
         this.checked = this.props.checked;
@@ -21,23 +14,12 @@ export default class Checkbox extends React.Component {
         } else {
             this.check();
         }
-        if (this.props.onCheckedChanged != null) {
-            ReactDOM.findDOMNode(this).addEventListener('checked-changed', this.props.onCheckedChanged);
-        }
+        ReactDOM.findDOMNode(this).addEventListener('checked-changed', this.props.onCheckedChanged);
     }
-    componentWillUnmount() {
-        if (this.props.onCheckedChanged != null) {
-            ReactDOM.findDOMNode(this).removeEventListener('checked-changed', this.props.onCheckedChanged);
-        }
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.onCheckedChanged != null && nextProps.onCheckedChanged != this.props.onCheckedChanged) {
-            if (this.props.onCheckedChanged != null) {
-                ReactDOM.findDOMNode(this).removeEventListener('checked-changed', this.props.onCheckedChanged);
-            }
-            ReactDOM.findDOMNode(this).addEventListener('checked-changed', nextProps.onCheckedChanged);
-        }
-    }
+    /*
+    * checks the checkbox and raises checked-changed event
+    * @param1 {Boolean} userInteraction
+    */
     check(userInteraction = false) {
         var t = this;
         TweenMax.to(this.refs.border, 0.15, {
@@ -59,7 +41,11 @@ export default class Checkbox extends React.Component {
 
         this.checked = true;
     }
-    unCheck(userInteraction = false) {
+    /*
+    * unchecks the checkbox and raises checked-changed event
+    * @param1 {Boolean} userInteraction
+    */
+    uncheck(userInteraction = false) {
         var t = this;
         this.refs.icon.classList.remove('cover-animation');
         this.refs.icon.classList.add('hide');
@@ -81,14 +67,14 @@ export default class Checkbox extends React.Component {
     /*
     events
     */
-    onClick() {
+    onClick = () => {
         if (!this.checked) {
             this.check(true);
         } else {
-            this.unCheck(true);
+            this.uncheck(true);
         }
     }
-    onMouseDown() {
+    onMouseDown = () => {
         var ripple = Ripple.createRipple(this.refs.checkbox, {
             backgroundColor: this.refs.border.style['border-color']
         }, createRippleCenter(this.refs.checkbox));

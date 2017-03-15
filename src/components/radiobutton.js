@@ -5,39 +5,31 @@ import {TweenMax, CSSPlugin} from 'gsap';
 export default class RadioButton extends React.Component {
     constructor() {
         super();
-        //binds
-        this.onClick = this.onClick.bind(this);
-        this.unselect = this.unselect.bind(this);
-        this.select = this.select.bind(this);
-        this.onMouseDown = this.onMouseDown.bind(this);
         //global properties
-        this.state = {
-            onColor: '#2196F3',
-            offColor: '#757575'
-        }
         this.selected = false;
     }
 
     componentDidMount() {
-        var t = this;
         this.props.getParent().radiobuttons.push(this);
-        this.setState({
-            onColor: (t.props.onColor == null) ? '#2196F3' : t.props.onColor,
-            offColor: (t.props.offColor == null) ? '#757575' : t.props.offColor
-        });
     }
 
-    onClick() {
+    /*
+    events
+    */
+    onClick = () => {
         this.props.getParent().uncheckOthers();
         this.select();
     }
-    onMouseDown() {
+    onMouseDown = () => {
         if (!this.selected) {
             var ripple = Ripple.createRipple(this.refs.radiobutton, null, createRippleCenter(this.refs.radiobutton));
             Ripple.makeRipple(ripple);
         }
     }
 
+    /*
+    * unselects the radiobutton
+    */
     unselect() {
         TweenMax.to(this.refs.circle, 0.1, {css:{borderColor: this.state.offColor}});
         TweenMax.to(this.refs.border, 0.1, {css:{borderColor: this.state.offColor}});
@@ -46,7 +38,10 @@ export default class RadioButton extends React.Component {
         this.selected = false;
     }
 
-    select() {
+    /*
+    * checks the radiobutton
+    */
+    select = () => {
         TweenMax.to(this.refs.circle, 0.1, {css:{borderColor: this.state.onColor}});
         TweenMax.to(this.refs.border, 0.1, {css:{borderColor: this.state.onColor}});
         this.refs.circle.classList.remove('scaleDown');
@@ -74,10 +69,6 @@ export default class RadioButton extends React.Component {
 class RadioButtonContainer extends React.Component {
     constructor() {
         super();
-        //binds
-        this.getRadioButtonContainer = this.getRadioButtonContainer.bind(this);
-        this.uncheckOthers = this.uncheckOthers.bind(this);
-
         //global properties
         this.radiobuttons = [];
     }
@@ -88,16 +79,17 @@ class RadioButtonContainer extends React.Component {
     }
 
     /*
-    * returns this
+    * gets radio button container
+    * @return {RadioButtonContainer}
     */
-    getRadioButtonContainer() {
+    getRadioButtonContainer = () => {
         return this;
     }
 
     /*
     * unchecks other radiobuttons
     */
-    uncheckOthers() {
+    uncheckOthers = () => {
         for (var i = 0; i < this.radiobuttons.length; i++) {
             this.radiobuttons[i].unselect(false);
         }
@@ -116,5 +108,10 @@ class RadioButtonContainer extends React.Component {
         );
     }
 }
+
+FlatButton.defaultProps = {
+    onColor: '#03A9F4',
+    offColor: '#757575'
+};
 
 export {RadioButton, RadioButtonContainer};

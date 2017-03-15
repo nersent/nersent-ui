@@ -6,12 +6,6 @@ import {TweenMax, CSSPlugin} from 'gsap';
 export default class TextField extends React.Component {
     constructor() {
         super();
-        //binds
-        this.focus = this.focus.bind(this);
-        this.unFocus = this.unFocus.bind(this);
-        this.setError = this.setError.bind(this);
-        this.lengthController = this.lengthController.bind(this);
-
         //global properties
         this.state = {
             length: 0,
@@ -22,26 +16,13 @@ export default class TextField extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.onError != null) {
-            ReactDOM.findDOMNode(this).removeEventListener('error', this.props.onError);
-        }
+        ReactDOM.findDOMNode(this).addEventListener('error', this.props.onError);
     }
 
-    componentWillUnmount() {
-        if (this.props.onError != null) {
-            ReactDOM.findDOMNode(this).removeEventListener('error', this.props.onError);
-        }
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.onError != null && nextProps.onError != this.props.onError) {
-            if (this.props.onError != null) {
-                ReactDOM.findDOMNode(this).removeEventListener('error', this.props.onError);
-            }
-            ReactDOM.findDOMNode(this).addEventListener('error', nextProps.onError);
-        }
-    }
-
-    lengthController() {
+    /*
+    * controls the length of text in input
+    */
+    lengthController = () => {
         if (this.props.counter) {
             var _length = this.refs.input.value.length;
             this.setState({length: _length});
@@ -53,7 +34,12 @@ export default class TextField extends React.Component {
         }
     }
 
-    setError(iserror, msg = "") {
+    /*
+    * sets error
+    * @param1 {Boolean} iserror
+    * @param2 {String} msg (optional)
+    */
+    setError = (iserror, msg = "") => {
         var t = this;
         if (iserror) {
            this.setState(()=> {
@@ -138,7 +124,10 @@ export default class TextField extends React.Component {
         this.isError = iserror;
     }
 
-    focus() {
+    /*
+    * focuses the input
+    */
+    focus = () => {
         if (this.refs.input.value.length < 1) {
             TweenMax.to(this.refs.hint, 0.2, {
                 css: {
@@ -169,7 +158,10 @@ export default class TextField extends React.Component {
         }
     }
 
-    unFocus() {
+    /*
+    * unfocuses the input
+    */
+    unfocus = () => {
         if (this.refs.input.value.length < 1) {
             TweenMax.to(this.refs.hint, 0.2, {
                 css: {
@@ -192,7 +184,7 @@ export default class TextField extends React.Component {
         var displayCounter = (this.props.counter == false) ? 'none' : 'block';
         return (
             <div onClick={this.props.onClick} className="material-textfield" style={this.props.style}>
-                <input ref="input" onClick={this.focus} onBlur={this.unFocus} style={{fontSize: this.props.fontSize, textShadow: '0px 0px 0px ' + this.props.color, color: this.props.focusedHintColor}} onInput={this.lengthController}></input>
+                <input ref="input" onClick={this.focus} onBlur={this.unfocus} style={{fontSize: this.props.fontSize, textShadow: '0px 0px 0px ' + this.props.color, color: this.props.focusedHintColor}} onInput={this.lengthController}></input>
                 <div className="hint no-select" ref="hint" style={{fontSize: this.props.hintFontSize, color: this.props.hintColor, opacity: this.props.hintOpacity, top: 0}} onClick={()=>{this.focus(); this.refs.input.focus();}}>{this.props.hint}</div>
                 <div className="divider no-select" ref="divider" style={{backgroundColor: this.props.dividerColor, opacity: this.props.dividerOpacity, height: 1}}></div>
                 <div className="focus_divider no-select" ref="focus_divider" style={{backgroundColor: this.props.focusedDividerColor, height: 3, bottom: -1}}></div>

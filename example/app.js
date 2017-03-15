@@ -1,34 +1,26 @@
 'use babel';
+
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Toolbar, ToolbarIcon, ToolbarItem, ToolbarTitle} from './toolbar.js';
 
-import FlatButton from './flatbutton.js';
-import RaisedButton from './raisedbutton.js';
-import Checkbox from './checkbox.js';
-import Card from './card.js';
-import Snackbar from './snackbar.js';
-import TextField from './textfield.js';
-import {Dialog, DialogContent, DialogTitle, DialogActions, DialogActionButton} from './dialog.js';
-import {Menu, MenuItem} from './menu.js';
-import {ProgressBarDeterminate, ProgressBarInDeterminate, PreloaderDeterminate, PreloaderInDeterminate} from './progress.js';
-
-import {CSSPlugin, TweenMax} from 'gsap';
+import {Dialog, DialogContent, DialogTitle, DialogActions, DialogActionButton} from '../src/components/dialog.js';
+import {Toolbar, ToolbarIcon, ToolbarItem, ToolbarTitle} from '../src/components/toolbar.js';
+import {Snackbar, SnackbarBody, SnackbarAction} from '../src/components/snackbar.js';
+import {FlatButton, RaisedButton} from '../src/components/buttons.js';
+import {Menu, MenuItem} from '../src/components/menu.js';
+import TextField from '../src/components/textfield.js';
+import Checkbox from '../src/components/checkbox.js';
+import Card from '../src/components/card.js';
 
 export default class App extends React.Component {
     constructor() {
         super();
-        //binds
-        this.error = this.error.bind(this);
         //global properties
         this.iserror = true;
     }
-
-    componentDidMount() {
-
-    }
-
-    error() {
+    /*
+    * toggles textfield error
+    */
+    error = () => {
         if (this.iserror) {
             this.refs.textfield.setError(false);
             this.iserror = false;
@@ -42,19 +34,15 @@ export default class App extends React.Component {
         return (
             <div>
                 <Toolbar ref="toolbar">
-                    <ToolbarIcon image="app/resources/img/menu.png"></ToolbarIcon>
+                    <ToolbarIcon image="../src/resources/img/menu.png"></ToolbarIcon>
                     <ToolbarTitle>Title</ToolbarTitle>
-                    <ToolbarIcon position="right" image="app/resources/img/menu.png"></ToolbarIcon>
+                    <ToolbarIcon position="right" image="../src/resources/img/menu.png"></ToolbarIcon>
                     <Menu>
                         <MenuItem>
-                            <header>
-                            Test
-                            </header>
+
                         </MenuItem>
                         <MenuItem>
-                            <header>
-                            XD
-                            </header>
+
                         </MenuItem>
                     </Menu>
                     <ToolbarItem position="right">
@@ -68,7 +56,7 @@ export default class App extends React.Component {
                 </Card>
                 <br></br>
                 <br></br>
-                <TextField onError={()=> console.log("error")} ref="textfield" hint="XDDD Co" counter={true} style={{left: 0, right: 0, margin: '0 auto'}}></TextField>
+                <TextField onError={()=> console.log("error")} ref="textfield" hint="Hint" counter={true} style={{left: 0, right: 0, margin: '0 auto'}}></TextField>
                 <RaisedButton onClick={this.error} rippleColor="#000" color="#000" style={{left: '50%', position: 'absolute', top: '50%', transform: 'translate(-50%, -50%)'}} backgroundColor="#03A9F4">
                     CALL ERROR
                 </RaisedButton>
@@ -77,12 +65,17 @@ export default class App extends React.Component {
                     DIALOG 1
                 </RaisedButton>
                 <br></br>
-                <RaisedButton onClick={() => this.refs.preloader.setPercent(100)} rippleColor="#000" color="#000" style={{marginLeft: 16}} backgroundColor="#03A9F4">
+                <RaisedButton onClick={() => this.refs.dialog_2.show()} rippleColor="#000" color="#000" style={{marginLeft: 16}} backgroundColor="#03A9F4">
                     DIALOG 2
                 </RaisedButton>
                 <br></br>
-                <Snackbar ref="snackbar" flatButton={true} flatButtonText={"WOAH!"} onFlatButtonClick={this._snackbar}>
-                    Successfully created snackbar :)
+                <Snackbar ref="snackbar">
+                    <SnackbarBody>
+                        Successfully created snackbar :)
+                    </SnackbarBody>
+                    <SnackbarAction>
+                        OK
+                    </SnackbarAction>
                 </Snackbar>
                 <Dialog ref="dialog_1">
                     <DialogTitle>
@@ -116,13 +109,7 @@ export default class App extends React.Component {
                         </DialogActionButton>
                     </DialogActions>
                 </Dialog>
-                <br></br>
-                <ProgressBarInDeterminate ref="dbar" style={{left: 0, right: 0, margin: '0 auto', width: 500}}></ProgressBarInDeterminate>
-                <br></br>
-                <PreloaderInDeterminate ref="preloader" style={{width: 32, height: 32}}></PreloaderInDeterminate>
             </div>
         );
     }
 }
-
-ReactDOM.render(<App/>, document.getElementById('app'));

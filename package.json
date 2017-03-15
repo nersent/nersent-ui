@@ -1,0 +1,26 @@
+{
+  "name": "material-react",
+  "version": "0.0.1",
+  "description": "Material design framework for React",
+  "repository": "Nersent/material-react",
+  "scripts": {
+    "watch": "webpack && webpack-dev-server --hot --inline --port 8282"
+  },
+  "author": "Nersent",
+  "license": "MIT",
+  "devDependencies": {
+      "babel-core": "latest",
+      "babel-loader": "latest",
+      "babel-plugin-transform-class-properties": "latest",
+      "babel-preset-stage-0": "latest",
+      "webpack": "latest",
+      "webpack-dev-server": "latest"
+  },
+  "dependencies": {
+    "gsap": "latest",
+    "babel-preset-es2015": "latest",
+    "babel-preset-react": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}

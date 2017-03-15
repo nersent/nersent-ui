@@ -4,14 +4,8 @@ import React from 'react';
 export default class Card extends React.Component {
     constructor() {
         super();
-        //binds
-
-        //global properties
-
     }
-    componentDidMount() {
 
-    }
     render() {
         var canDisplayHeader = (this.props.header == "") ? '' :
         <div style={{backgroundColor: this.props.headerBackgroundColor}} className="card-header">

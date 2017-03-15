@@ -4,13 +4,6 @@ import React from 'react';
 export default class Toolbar extends React.Component {
     constructor() {
         super();
-        //binds
-
-        //global properties
-    }
-
-    componentDidMount() {
-
     }
 
     render() {
@@ -35,18 +28,18 @@ export default class Toolbar extends React.Component {
 class ToolbarIcon extends React.Component {
     constructor() {
         super();
-        //binds
-        this.onMouseDown = this.onMouseDown.bind(this);
-        //global properties
-
     }
-    componentDidMount() {}
-    onMouseDown() {
+
+    /*
+    events
+    */
+    onMouseDown = () => {
         var ripple = Ripple.createRipple(this.refs.toolbarIcon, {
             backgroundColor: this.props.rippleColor
         }, createRippleCenter(this.refs.toolbarIcon, 14));
         Ripple.makeRipple(ripple);
     }
+
     render() {
         var iconClassName = ((this.props.position == 'left') ? 'toolbar-left' : 'toolbar-right') + " toolbar-item toolbar-icon pointer",
             imageClassName = ((this.props.inverted) ? 'invert' : '') + " toolbar-image";
@@ -65,12 +58,8 @@ class ToolbarIcon extends React.Component {
 class ToolbarItem extends React.Component {
     constructor() {
         super();
-        //binds
+    }
 
-        //global properties
-    }
-    componentDidMount() {
-    }
     render() {
         var isLeftOrRight = ((this.props.position == 'left') ? 'toolbar-left' : 'toolbar-right'),
             isInverted = ((this.props.inverted == false) ? '' : 'inverted'),
@@ -90,12 +79,8 @@ class ToolbarItem extends React.Component {
 class ToolbarTitle extends React.Component {
     constructor() {
         super();
-        //binds
-
-        //global properties
-
     }
-    componentDidMount() {}
+
     render() {
         return (
             <div className='toolbar-title toolbar-left toolbar-item' style={{
@@ -116,7 +101,7 @@ ToolbarTitle.defaultProps = {
     fontSize: 20,
     fontFamily: 'Roboto',
     opacity: 0.8,
-    fontWeight: 'bold'
+    fontWeight: '500'
 };
 
 ToolbarItem.defaultProps = {
