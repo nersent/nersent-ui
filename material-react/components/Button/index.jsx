@@ -13,7 +13,10 @@ export default class Button extends React.Component {
       ripple,
       className,
       shadow,
-      children
+      children,
+      onClick,
+      onMouseEnter,
+      onMouseLeave
     } = this.props
 
     const foregroundColor = Foreground.get(foreground)
@@ -26,8 +29,14 @@ export default class Button extends React.Component {
     const shadowClass = !shadow ? 'no-shadow' : ''
     const rootClass = ClassManager.get('material-button', [className, shadowClass])
 
+    const events = {
+      onClick: onClick,
+      onMouseEnter: onMouseEnter,
+      onMouseLeave: onMouseLeave
+    }
+
     return (
-      <div className={rootClass} style={style}>
+      <div className={rootClass} style={style} {...events}>
         {children}
         <Ripple color={foregroundColor} options={ripple} />
       </div>
