@@ -43,3 +43,9 @@ export default class Button extends React.Component {
     )
   }
 }
+
+Button.defaultProps = {
+  background: '#3F51B5',
+  foreground: true,
+  shadow: true
+}
