@@ -60,7 +60,7 @@ export default class Ripple extends React.Component {
       }
 
       if (e.type === 'touchstart') {
-        const touch = e.touches[e.touches.length - 1]
+        const touch = e.touches[0]
 
         pos = {
           x: touch.pageX,
@@ -100,7 +100,10 @@ export default class Ripple extends React.Component {
     } = this.props
 
     const isEventTouch = (e.type === 'touchstart')
-    if (isEventTouch && !touchSupport) return
+    if (isEventTouch && !touchSupport || e.touches.length > 1) return
+
+    if (isEventTouch) this.isTouch = true
+    else if (this.isTouch) return
 
     // Scales
     const scaleX = center ? scale : this.parent.clientWidth
@@ -135,6 +138,7 @@ export default class Ripple extends React.Component {
       setTimeout(() => {
         if (element.parentNode != null) {
           element.parentNode.removeChild(element)
+          this.isTouch = false
         }
       }, time * 1000)
     }

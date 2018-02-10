@@ -16,7 +16,7 @@ let config = {
   },
 
   output: {
-    path: join(__dirname, 'build'),
+    path: join(__dirname, 'example/public/build'),
     filename: '[name].bundle.js'
   },
 
