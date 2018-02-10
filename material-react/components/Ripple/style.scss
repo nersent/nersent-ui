@@ -4,19 +4,19 @@
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
-.ripple {
+.material-ripple {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
   @extend %ripple-basics;
 }
 
-.ripple-icon {
+.material-ripple-icon {
   user-select: none;
   @extend %ripple-basics;
 }
 
-.ripple-effect {
+.material-ripple-effect {
   width: 0px;
   height: 0px;
   padding: 0;

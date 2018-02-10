@@ -1,7 +1,7 @@
 # material-react
 Material design framework written in React.
 
-**NOTE**: The framework is currently rewritten
+**NOTE**: The framework is currently in progress
 
 # Starting
 If you want to see how it looks, you can see the demo by running:

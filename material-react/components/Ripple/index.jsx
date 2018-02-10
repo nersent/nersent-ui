@@ -17,7 +17,7 @@ export default class Ripple extends React.Component {
     // Get the parent
     this.parent = ReactDOM.findDOMNode(this).parentNode
     // Add ripple class
-    this.parent.classList.add(!center ? 'ripple' : 'ripple-icon')
+    this.parent.classList.add(!center ? 'material-ripple' : 'material-ripple-icon')
     // Add events to the parent
     this.parent.addEventListener('mousedown', this.makeRipple)
     // If support touch
@@ -113,7 +113,7 @@ export default class Ripple extends React.Component {
     const position = this.getPosition(center, offsetX, e)
     // Create DOM element
     const element = document.createElement('span')
-    element.className = 'ripple-effect'
+    element.className = 'material-ripple-effect'
     // Set css
     this.css(element, {
       left: position.x,

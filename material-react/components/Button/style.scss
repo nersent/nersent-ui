@@ -1,0 +1,12 @@
+.material-button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: inline-block;
+  border-radius: 2px;
+  margin: 64px;
+  @include Button;
+  @include cursor-pointer;
+  @include shadow(1);
+}

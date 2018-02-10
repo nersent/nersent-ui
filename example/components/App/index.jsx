@@ -1,14 +1,12 @@
 import React from 'react'
 
-import Ripple from '../../../material-react/components/Ripple'
+import Button from '../../../material-react/components/Button'
 
 export default class App extends React.Component {
   render () {
     return (
       <div className='app-container'>
-        <div className='test'>
-          <Ripple color='#00ff00' />
-        </div>
+        <Button background='#3F51B5' foreground={true} />
       </div>
     )
   }
