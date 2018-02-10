@@ -96,7 +96,8 @@ export default class Ripple extends React.Component {
       opacity,
       time,
       scale,
-      touchSupport
+      touchSupport,
+      color
     } = this.props
 
     const isEventTouch = (e.type === 'touchstart')
@@ -118,7 +119,8 @@ export default class Ripple extends React.Component {
       left: position.x,
       top: position.y,
       transition: `${time}s ease-out width, ${time}s ease-out height, ${time}s opacity`,
-      opacity: opacity
+      opacity: opacity,
+      backgroundColor: color
     })
     // Append the element to parent
     this.parent.appendChild(element)
@@ -164,5 +166,6 @@ Ripple.defaultProps = {
   scale: 14,
   time: 0.6,
   opacity: 0.2,
-  touchSupport: true
+  touchSupport: true,
+  color: '#000'
 }

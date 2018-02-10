@@ -7,7 +7,7 @@ export default class App extends React.Component {
     return (
       <div className='app-container'>
         <div className='test'>
-          <Ripple />
+          <Ripple color='#00ff00' />
         </div>
       </div>
     )
