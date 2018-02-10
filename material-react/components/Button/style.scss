@@ -11,4 +11,8 @@
   @include Button;
   @include cursor-pointer;
   @include shadow(1);
+
+  &.no-shadow {
+    box-shadow: unset;
+  }
 }

@@ -6,7 +6,7 @@ export default class App extends React.Component {
   render () {
     return (
       <div className='app-container'>
-        <Button background='#3F51B5' foreground={true}>
+        <Button  background='transparent' foreground='#3F51B5' shadow={false}>
           button
         </Button>
       </div>
