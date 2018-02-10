@@ -1,13 +1,14 @@
 import React from 'react'
 
-import Test from '../../../material-react/components/Test'
+import Ripple from '../../../material-react/components/Ripple'
 
 export default class App extends React.Component {
   render () {
     return (
       <div className='app-container'>
-        Example
-        <Test />
+        <div className='test'>
+          <Ripple />
+        </div>
       </div>
     )
   }
