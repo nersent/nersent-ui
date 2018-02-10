@@ -12,10 +12,10 @@ export default class Ripple extends React.Component {
     const {
       center,
       touchSupport,
-      autoRipple
+      auto
     } = this.props
 
-    if (autoRipple) {
+    if (auto) {
       // Get the parent
       this.parent = ReactDOM.findDOMNode(this).parentNode
       // Add ripple class
@@ -93,6 +93,13 @@ export default class Ripple extends React.Component {
    * @param {Object} event data
    */
   makeRipple = (e) => {
+    const options = this.props.options
+    const props = Object.assign({}, this.props)
+
+    if (options != null && typeof options === 'object') {
+      Object.assign(props, options)
+    }
+
     const {
       center,
       offsetX,
@@ -101,7 +108,7 @@ export default class Ripple extends React.Component {
       scale,
       touchSupport,
       color
-    } = this.props
+    } = props
 
     const isEventTouch = (e.type === 'touchstart')
     if (isEventTouch && !touchSupport || isEventTouch && e.touches.length > 1) return
@@ -175,5 +182,5 @@ Ripple.defaultProps = {
   opacity: 0.2,
   touchSupport: true,
   color: '#000',
-  autoRipple: true
+  auto: true
 }

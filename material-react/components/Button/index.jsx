@@ -1,22 +1,27 @@
 import React from 'react'
 
+import Ripple from '../Ripple'
 import Foreground from '../../utils/foreground'
 
 export default class Button extends React.Component {
   render () {
     const {
       background,
-      foreground
+      foreground,
+      ripple
     } = this.props
+
+    const foregroundColor = Foreground.get(foreground)
 
     const style = {
       backgroundColor: background,
-      color: Foreground.get(foreground)
+      color: foregroundColor
     }
 
     return (
       <div className='material-button' style={style}>
-        button
+        {this.props.children}
+        <Ripple color={foregroundColor} options={ripple} />
       </div>
     )
   }
