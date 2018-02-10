@@ -3,4 +3,5 @@ html, body {
   padding: 0;
   background-color: #F5F5F5;
   overflow: hidden;
+  @include Body1;
 }

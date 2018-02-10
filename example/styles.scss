@@ -1,3 +1,10 @@
-@import './material-react/components/Test/style.scss';
+// Defaults
+@import '../material-react/sass/defaults.scss';
+// Fonts
+@import '../material-react/sass/imports/fonts.scss';
+// All mixins
+@import '../material-react/sass/all-mixins.scss';
+// Components
+@import '../material-react/components/Test/style.scss';
 
 @import './components/App/style.scss';
