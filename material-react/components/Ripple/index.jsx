@@ -100,7 +100,7 @@ export default class Ripple extends React.Component {
     } = this.props
 
     const isEventTouch = (e.type === 'touchstart')
-    if (isEventTouch && !touchSupport || e.touches.length > 1) return
+    if (isEventTouch && !touchSupport || isEventTouch && e.touches.length > 1) return
 
     if (isEventTouch) this.isTouch = true
     else if (this.isTouch) return
