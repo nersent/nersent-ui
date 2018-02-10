@@ -4,16 +4,24 @@
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
-.material-ripple {
+@mixin ripple () {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
   @extend %ripple-basics;
 }
 
-.material-ripple-icon {
+@mixin ripple-icon () {
   user-select: none;
   @extend %ripple-basics;
+}
+
+.material-ripple {
+  @include ripple;
+}
+
+.material-ripple-icon {
+  @include ripple-icon;
 }
 
 .material-ripple-effect {

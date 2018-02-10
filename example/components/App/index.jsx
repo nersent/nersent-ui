@@ -1,14 +1,18 @@
 import React from 'react'
 
-import Button from '../../../material-react/components/Button'
+import RaisedButton from '../../../material-react/components/RaisedButton'
 
 export default class App extends React.Component {
   render () {
+    const onClick = () => {
+      console.log('Click!')      
+    }
+
     return (
       <div className='app-container'>
-        <Button>
+        <RaisedButton background='#2196F3' foreground={true} darkTheme={true} onClick={onClick}>
           button
-        </Button>
+        </RaisedButton>
       </div>
     )
   }

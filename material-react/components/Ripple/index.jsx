@@ -12,14 +12,19 @@ export default class Ripple extends React.Component {
     const {
       center,
       touchSupport,
-      auto
+      autoRipple,
+      autoClass
     } = this.props
 
-    if (auto) {
-      // Get the parent
-      this.parent = ReactDOM.findDOMNode(this).parentNode
+    // Get the parent
+    this.parent = ReactDOM.findDOMNode(this).parentNode
+
+    if (autoClass) {
       // Add ripple class
       this.parent.classList.add(!center ? 'material-ripple' : 'material-ripple-icon')
+    }
+
+    if (autoRipple) {
       // Add events to the parent
       this.parent.addEventListener('mousedown', this.makeRipple)
       // If support touch
@@ -182,5 +187,6 @@ Ripple.defaultProps = {
   opacity: 0.2,
   touchSupport: true,
   color: '#000',
-  auto: true
+  autoRipple: true,
+  autoClass: true
 }
