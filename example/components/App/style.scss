@@ -6,9 +6,11 @@ html, body {
   @include Body1;
 }
 
-.test {
-  width: 200px;
-  height: 200px;
-  border: 1px solid rgba(0,0,0,0.79);
-  margin: 64px;
+.app-container {
+  padding-top: 64px;
+  padding-left: 32px;
+
+  .material-button {
+    margin-left: 32px;
+  }
 }
