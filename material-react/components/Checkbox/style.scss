@@ -10,6 +10,26 @@
     font-size: 15px;
     color: rgba(0,0,0,$primary-opacity-light);
   }
+
+  &.dark-theme {
+    .checkbox-icon {
+      -webkit-filter: invert(0%);
+    }
+
+    .text {
+      color: rgba(255,255,255, $primary-opacity-dark) !important;
+    }
+  }
+
+  &.disabled {
+    .text {
+      color: rgba(0,0,0,$disabled-text-dark);
+    }
+
+    &, .material-checkbox {
+      cursor: default;
+    }
+  }
 }
 
 .material-checkbox {
@@ -18,7 +38,6 @@
   min-width: 18px !important;
   position: relative;
   cursor: pointer;
-  @include cursor-pointer;
   @include ripple-icon;
   transition: 0.2s transform ease-out;
 
@@ -26,7 +45,7 @@
     width: 100%;
     height: 100%;
     border-width: 2px;
-    border-color: #757575;
+    border-color: rgba(0,0,0,0.54);
     border-style: solid;
     border-radius: 3px;
     box-sizing: border-box;

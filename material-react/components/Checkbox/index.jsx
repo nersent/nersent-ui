@@ -45,20 +45,24 @@ export default class Checkbox extends React.Component {
           this.setState({ borderWidth: false })
 
           setTimeout(() => {
-            this.setState({
-              iconAnimation: false,
-              iconScale: false
-            })
+            this.setState({ iconAnimation: false })
+
+            setTimeout(() => {
+              this.setState({ iconScale: false })
+            }, 100)
           }, 100)
         }, 200)
       }, 100)
     }
   }
 
+  onClick = () => {
+    if (!this.props.disabled) this.check()
+  }
+
   render () {
     const {
       color,
-      offColor,
       ripple,
       className,
       disabled,
@@ -75,33 +79,45 @@ export default class Checkbox extends React.Component {
 
     const checked = this.state.checked
 
+    let offColor = !darkTheme ? 'rgba(0,0,0,0.54)' : 'rgba(255,255,255,0.70)'
+    if (disabled) offColor = !darkTheme ? 'rgba(0,0,0,0.26)' : 'rgba(255,255,255,0.30)'
+
     const borderStyle = {
       borderWidth: borderWidth ? this.refs.checkbox.offsetWidth / 2 : 2,
-      borderColor: borderColor ? color : offColor
+      borderColor: borderColor && !disabled ? color : offColor
     }
 
     const rippleColor = checked ? color : offColor
 
     const iconStyle = {
-      transform: `scale(${!iconScale ? 1 : 0.1})`
+      transform: `scale(${!iconScale ? 1 : 0})`
     }
 
     const style = {
       transform: `scale(${borderWidth && !iconAnimation || !borderColor && iconAnimation ? 0.9 : 1})`
     }
 
-    const rootClass = ClassManager.get('material-checkbox-container', [className])
+    const rootClass = ClassManager.get('material-checkbox-container', [
+      className,
+      darkTheme ? 'dark-theme' : '',
+      disabled ? 'disabled' : ''
+    ])
+
     const checkboxClass = ClassManager.get('material-checkbox', [
       checked ? 'checked' : '',
       iconAnimation ? 'icon-animation' : ''
     ])
 
     return (
-      <div className={rootClass} ref='root' onClick={() => { this.check() }}>
+      <div className={rootClass} ref='root' onClick={this.onClick}>
         <div className={checkboxClass} ref='checkbox' style={style}>
           <div className='checkbox-border' style={borderStyle} />
           <div className='checkbox-icon' style={iconStyle} />
-          <Ripple color={rippleColor} center={true} eventElement={() => { return this.refs.root }} />
+          <Ripple
+            autoRipple={!disabled}
+            color={rippleColor}
+            center={true}
+            eventElement={() => { return this.refs.root }} />
         </div>
         {children != null && (
           <div className='text'>
@@ -115,7 +131,6 @@ export default class Checkbox extends React.Component {
 
 Checkbox.defaultProps = {
   color: '#3F51B5',
-  offColor: '#757575',
   disabled: false,
   darkTheme: false,
   checked: false
