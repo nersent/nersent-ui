@@ -40,7 +40,7 @@
   }
 
   &.raised {
-    transition: 0.25s box-shadow;
+    transition: 0.25s box-shadow, 0.25s background-color, 0.25s color;
     @include shadow(1);
 
     &:not(.dark-theme).disabled {

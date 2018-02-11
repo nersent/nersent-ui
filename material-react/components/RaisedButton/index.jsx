@@ -2,13 +2,24 @@ import React from 'react'
 
 import Ripple from '../Ripple'
 
-import { getForeground } from '../../utils/foreground'
+import Colors from '../../utils/colors'
 import ClassManager from '../../utils/class'
 
 export default class RaisedButton extends React.Component {
+  componentWillMount () {
+    this.foreground = Colors.getForegroundColor(this.props.color)
+  }
+
+  // Avoid unnecessary operations
+  componentWillReceiveProps (nextProps) {
+    if (this.props.color !== nextProps.color) {
+      this.foreground = Colors.getForegroundColor(nextProps.color)
+    }
+  }
+
   render () {
     const {
-      background,
+      color,
       foreground,
       ripple,
       className,
@@ -20,11 +31,9 @@ export default class RaisedButton extends React.Component {
       onMouseLeave
     } = this.props
 
-    const foregroundColor = getForeground(foreground)
-
     const style = {
-      backgroundColor: background,
-      color: foregroundColor
+      backgroundColor: color,
+      color: this.foreground
     }
 
     const events = {
@@ -35,7 +44,7 @@ export default class RaisedButton extends React.Component {
 
     const rootClass = ClassManager.get('material-button raised', [
       className,
-      foregroundColor,
+      this.foreground,
       disabled ? 'disabled' : '',
       darkTheme ? 'dark-theme' : ''
     ])
@@ -44,15 +53,14 @@ export default class RaisedButton extends React.Component {
       <div className={rootClass} style={style} {...events}>
         {children}
         <div className='over-shade' />
-        <Ripple autoClass={false} autoRipple={!disabled} color={foregroundColor} options={ripple} />
+        <Ripple autoClass={false} autoRipple={!disabled} color={this.foreground} options={ripple} />
       </div>
     )
   }
 }
 
 RaisedButton.defaultProps = {
-  background: '#E0E0E0',
-  foreground: false,
+  color: '#E0E0E0',
   disabled: false,
   darkTheme: false
 }
