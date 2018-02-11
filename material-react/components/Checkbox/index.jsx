@@ -81,7 +81,7 @@ export default class Checkbox extends React.Component {
     }
 
     const style = {
-      transform: `scale(${borderWidth && !checked || !borderColor && checked ? 0.9 : 1})`
+      transform: `scale(${borderWidth && !iconAnimation || !borderColor && iconAnimation ? 0.9 : 1})`
     }
 
     const rootClass = ClassManager.get('material-checkbox-container', [className])
