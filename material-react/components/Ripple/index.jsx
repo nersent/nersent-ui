@@ -183,7 +183,7 @@ Ripple.defaultProps = {
   center: false,
   offsetX: 0,
   scale: 14,
-  time: 0.6,
+  time: 0.4,
   opacity: 0.2,
   touchSupport: true,
   color: '#000',

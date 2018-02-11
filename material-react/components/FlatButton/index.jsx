@@ -38,7 +38,7 @@ export default class FlatButton extends React.Component {
       <div className={rootClass} style={style} {...events}>
         {children}
         <div className='over-shade' />
-        <Ripple autoClass={false} autoRipple={!disabled} color={color} options={ripple} />
+        <Ripple autoClass={false} autoRipple={!disabled} color={color} time={0.6} options={ripple} />
       </div>
     )
   }

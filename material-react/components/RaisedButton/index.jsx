@@ -53,7 +53,7 @@ export default class RaisedButton extends React.Component {
       <div className={rootClass} style={style} {...events}>
         {children}
         <div className='over-shade' />
-        <Ripple autoClass={false} autoRipple={!disabled} color={this.foreground} options={ripple} />
+        <Ripple autoClass={false} autoRipple={!disabled} color={this.foreground} time={0.6} options={ripple} />
       </div>
     )
   }
