@@ -1,6 +1,6 @@
 .material-checkbox {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   min-width: 18px !important;
   position: relative;
   -webkit-font-smoothing: antialiased;
@@ -34,7 +34,7 @@
     -webkit-font-smoothing: antialiased;
     transform: scale(1) translateZ(0);
     transition: 0.2s clip-path ease-out, 0.1s transform ease-out;
-    @include image-center(16px, auto);
+    @include image-center(20px, auto);
     @include invert-colors;
   }
 
