@@ -9,29 +9,37 @@ export default class Ripple extends React.Component {
   }
 
   componentDidMount () {
-    const {
-      center,
-      touchSupport,
-      autoRipple,
-      autoClass
-    } = this.props
+    setTimeout(() => {
+      const {
+        center,
+        touchSupport,
+        autoRipple,
+        autoClass,
+        eventElement
+      } = this.props
 
-    // Get the parent
-    this.parent = ReactDOM.findDOMNode(this).parentNode
+      this.parent = ReactDOM.findDOMNode(this).parentNode      
 
-    if (autoClass) {
-      // Add ripple class
-      this.parent.classList.add(!center ? 'material-ripple' : 'material-ripple-icon')
-    }
-
-    if (autoRipple) {
-      // Add events to the parent
-      this.parent.addEventListener('mousedown', this.makeRipple)
-      // If support touch
-      if (touchSupport) {
-        this.parent.addEventListener('touchstart', this.makeRipple)
+      if (typeof eventElement === 'function') {
+        this.eventElement = eventElement()
+      } else {
+        this.eventElement = this.parent
       }
-    }
+
+      if (autoClass) {
+        // Add ripple class
+        this.parent.classList.add(!center ? 'material-ripple' : 'material-ripple-icon')
+      }
+
+      if (autoRipple) {
+        // Add events to the parent
+        this.eventElement.addEventListener('mousedown', this.makeRipple)
+        // If support touch
+        if (touchSupport) {
+          this.eventElement.addEventListener('touchstart', this.makeRipple)
+        }
+      }
+    })
   }
 
   /**
@@ -157,18 +165,18 @@ export default class Ripple extends React.Component {
           element.parentNode.removeChild(element)
           this.isTouch = false
 
-          window.removeEventListener('mouseup', remove)
-          window.removeEventListener('mouseleave', remove)
-          this.parent.addEventListener('touchend', remove)
+          this.eventElement.removeEventListener('mouseup', remove)
+          this.eventElement.removeEventListener('mouseleave', remove)
+          this.eventElement.addEventListener('touchend', remove)
         }
       }, time * 1000)
     }
     // Add events to remove the ripple
     if (!isEventTouch) {
-      this.parent.addEventListener('mouseup', remove)
-      this.parent.addEventListener('mouseleave', remove)
+      this.eventElement.addEventListener('mouseup', remove)
+      this.eventElement.addEventListener('mouseleave', remove)
     } else {
-      this.parent.addEventListener('touchend', remove)
+      this.eventElement.addEventListener('touchend', remove)
     }
   }
 

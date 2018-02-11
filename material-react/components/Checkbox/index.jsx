@@ -5,56 +5,43 @@ import Ripple from '../Ripple'
 import ClassManager from '../../utils/class'
 
 export default class Checkbox extends React.Component {
-  constructor () {
+  constructor() {
     super()
 
     this.state = {
       checked: false,
       borderColor: false,
       borderWidth: false,
-      scale: false
+      iconScale: false,
+      iconAnimation: false
     }
   }
 
-  check (flag = !this.state.checked) {
+  check(flag = !this.state.checked) {
     const onCheck = this.props.onCheck
     if (typeof onCheck === 'function') onCheck(flag, this)
 
+    this.setState({ borderColor: flag, checked: flag })
+
     if (flag) {
-      this.setState({
-        borderColor: true
-      })
-
       setTimeout(() => {
-        this.setState({
-          borderWidth: true
-        })
+        this.setState({ borderWidth: true })
 
         setTimeout(() => {
-          this.setState({
-            checked: true
-          })
+          this.setState({ iconAnimation: true })
         }, 200)
-      }, 100) 
+      }, 100)
     } else {
-      this.setState({
-        borderColor: false
-      })
-
       setTimeout(() => {
-        this.setState({
-          scale: true
-        })
+        this.setState({ iconScale: true })
 
         setTimeout(() => {
-          this.setState({
-            borderWidth: false
-          })
+          this.setState({ borderWidth: false })
 
           setTimeout(() => {
             this.setState({
-              checked: false,
-              scale: false
+              iconAnimation: false,
+              iconScale: false
             })
           }, 100)
         }, 200)
@@ -62,43 +49,59 @@ export default class Checkbox extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const {
       color,
       offColor,
       ripple,
       className,
       disabled,
-      darkTheme
+      darkTheme,
+      children
     } = this.props
+
+    const {
+      borderWidth,
+      borderColor,
+      iconScale,
+      iconAnimation
+    } = this.state
 
     const checked = this.state.checked
 
     const borderStyle = {
-      borderWidth: !this.state.borderWidth ? 2 : this.root.offsetWidth / 2,
-      borderColor: this.state.borderColor ? color : offColor
+      borderWidth: borderWidth ? this.refs.checkbox.offsetWidth / 2 : 2,
+      borderColor: borderColor ? color : offColor
     }
 
     const rippleColor = checked ? color : offColor
 
-    const rootClass = ClassManager.get('material-checkbox', [
-      className,
-      checked ? 'checked' : ''
-    ])
-
     const iconStyle = {
-      transform: `scale(${!this.state.scale ? 1 : 0.1})`
+      transform: `scale(${!iconScale ? 1 : 0.1})`
     }
 
     const style = {
-      transform: `scale(${this.state.borderWidth && !checked || !this.state.borderColor && checked ? 0.9 : 1})`
+      transform: `scale(${borderWidth && !checked || !borderColor && checked ? 0.9 : 1})`
     }
 
+    const rootClass = ClassManager.get('material-checkbox-container', [className])
+    const checkboxClass = ClassManager.get('material-checkbox', [
+      checked ? 'checked' : '',
+      iconAnimation ? 'icon-animation' : ''
+    ])
+
     return (
-      <div className={rootClass} ref={(r) => this.root = r} style={style} onClick={() => { this.check() }}>
-        <div className='checkbox-border' style={borderStyle} />
-        <div className='checkbox-icon' style={iconStyle} />
-        <Ripple color={rippleColor} center={true} />
+      <div className={rootClass} ref='root' onClick={() => { this.check() }}>
+        <div className={checkboxClass} ref='checkbox' style={style}>
+          <div className='checkbox-border' style={borderStyle} />
+          <div className='checkbox-icon' style={iconStyle} />
+          <Ripple color={rippleColor} center={true} eventElement={() => { return this.refs.root }} />
+        </div>
+        {children != null && (
+          <div className='text'>
+            {children}
+          </div>
+        )}
       </div>
     )
   }

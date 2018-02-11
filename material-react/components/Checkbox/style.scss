@@ -1,15 +1,24 @@
+.material-checkbox-container {
+  padding: 8px;
+  display: inline-flex;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+  @include cursor-pointer;
+
+  & .text {
+    margin-left: 8px;
+    font-size: 15px;
+  }
+}
+
 .material-checkbox {
   width: 20px;
   height: 20px;
   min-width: 18px !important;
   position: relative;
-  -webkit-font-smoothing: antialiased;
   cursor: pointer;
   @include cursor-pointer;
   @include ripple-icon;
-  -webkit-transform: translateZ(0);
--webkit-backface-visibility: hidden;
--webkit-perspective: 1000;
   transition: 0.2s transform ease-out;
 
   .checkbox-border {
@@ -38,7 +47,7 @@
     @include invert-colors;
   }
 
-  &.checked {
+  &.icon-animation {
     .checkbox-icon {
       clip-path: inset(0 0 0 0);
     }
