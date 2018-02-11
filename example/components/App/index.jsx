@@ -10,7 +10,7 @@ export default class App extends React.Component {
 
     return (
       <div className='app-container'>
-        <Checkbox onCheck={onCheck} >
+        <Checkbox onCheck={onCheck} checked={true} >
           Text
         </Checkbox>
       </div>

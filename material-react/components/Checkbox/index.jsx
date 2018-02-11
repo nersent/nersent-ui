@@ -5,7 +5,7 @@ import Ripple from '../Ripple'
 import ClassManager from '../../utils/class'
 
 export default class Checkbox extends React.Component {
-  constructor() {
+  constructor () {
     super()
 
     this.state = {
@@ -17,9 +17,15 @@ export default class Checkbox extends React.Component {
     }
   }
 
-  check(flag = !this.state.checked) {
+  componentDidMount () {
+    const checked = this.props.checked
+
+    if (checked) this.check(true, true)
+  }
+
+  check (flag = !this.state.checked, fromProps = false) {
     const onCheck = this.props.onCheck
-    if (typeof onCheck === 'function') onCheck(flag, this)
+    if (typeof onCheck === 'function') onCheck(flag, this, fromProps)
 
     this.setState({ borderColor: flag, checked: flag })
 
@@ -49,7 +55,7 @@ export default class Checkbox extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const {
       color,
       offColor,
@@ -111,5 +117,6 @@ Checkbox.defaultProps = {
   color: '#3F51B5',
   offColor: '#757575',
   disabled: false,
-  darkTheme: false
+  darkTheme: false,
+  checked: false
 }
