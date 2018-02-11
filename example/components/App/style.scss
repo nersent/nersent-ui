@@ -13,4 +13,16 @@ html, body {
   height: 100%;
   padding-top: 64px;
   padding-left: 64px;
+
+  .material-button {
+    margin-left: 16px;
+
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+
+  .material-checkbox-container {
+    margin-top: 16px;
+  }
 }

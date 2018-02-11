@@ -15,6 +15,8 @@ export default class Checkbox extends React.Component {
       iconScale: false,
       iconAnimation: false
     }
+
+    this.isAnimating = false
   }
 
   componentDidMount () {
@@ -24,6 +26,10 @@ export default class Checkbox extends React.Component {
   }
 
   check (flag = !this.state.checked, fromProps = false) {
+    if (this.isAnimating) return
+
+    this.isAnimating = true
+
     const onCheck = this.props.onCheck
     if (typeof onCheck === 'function') onCheck(flag, this, fromProps)
 
@@ -35,6 +41,8 @@ export default class Checkbox extends React.Component {
 
         setTimeout(() => {
           this.setState({ iconAnimation: true })
+
+          this.isAnimating = false
         }, 200)
       }, 100)
     } else {
@@ -49,6 +57,8 @@ export default class Checkbox extends React.Component {
 
             setTimeout(() => {
               this.setState({ iconScale: false })
+
+              this.isAnimating = false
             }, 100)
           }, 100)
         }, 200)
