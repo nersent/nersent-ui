@@ -45,7 +45,7 @@ export default class FlatButton extends React.Component {
 }
 
 FlatButton.defaultProps = {
-  color: '#3F51B5',
+  color: '#2196F3',
   disabled: false,
   darkTheme: false
 }

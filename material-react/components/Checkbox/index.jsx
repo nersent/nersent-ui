@@ -26,7 +26,7 @@ export default class Checkbox extends React.Component {
   }
 
   check (flag = !this.state.checked, fromProps = false) {
-    if (this.isAnimating) return
+    if (this.isAnimating || this.state.checked === flag) return
 
     this.isAnimating = true
 
@@ -140,7 +140,7 @@ export default class Checkbox extends React.Component {
 }
 
 Checkbox.defaultProps = {
-  color: '#3F51B5',
+  color: '#2196F3',
   disabled: false,
   darkTheme: false,
   checked: false

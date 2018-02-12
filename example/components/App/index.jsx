@@ -5,6 +5,9 @@ import FlatButton from '../../../material-react/components/FlatButton'
 
 import Checkbox from '../../../material-react/components/Checkbox'
 
+import RadioButton from '../../../material-react/components/RadioButton'
+import RadioButtonsContainer from '../../../material-react/components/RadioButtonsContainer'
+
 export default class App extends React.Component {
   render () {
     const onCheck = (flag, item) => {
@@ -13,16 +16,21 @@ export default class App extends React.Component {
 
     return (
       <div className='app-container'>
-        <RaisedButton>
-          raised button
-        </RaisedButton>
-        <FlatButton>
-          flat button
-        </FlatButton>
-        <br />
-        <Checkbox onCheck={onCheck}>
-          Checkbox
-        </Checkbox>
+        <div style={{ display: 'none' }}>
+          <RaisedButton>
+            raised button
+          </RaisedButton>
+          <FlatButton>
+            flat button
+          </FlatButton>
+          <br />
+          <Checkbox onCheck={onCheck} />
+        </div>
+        <RadioButtonsContainer>
+          <RadioButton toggled>First item</RadioButton>
+          <RadioButton>Second item</RadioButton>
+          <RadioButton>Third item</RadioButton>
+        </RadioButtonsContainer>
       </div>
     )
   }
