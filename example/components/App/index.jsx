@@ -16,7 +16,7 @@ export default class App extends React.Component {
 
     return (
       <div className='app-container'>
-        <div style={{ display: 'none' }}>
+        <div>
           <RaisedButton>
             raised button
           </RaisedButton>
@@ -24,13 +24,16 @@ export default class App extends React.Component {
             flat button
           </FlatButton>
           <br />
+          <br />
           <Checkbox onCheck={onCheck} />
+          <br />
+          <br />
+          <RadioButtonsContainer>
+            <RadioButton toggled>First item</RadioButton>
+            <RadioButton>Second item</RadioButton>
+            <RadioButton>Third item</RadioButton>
+          </RadioButtonsContainer>
         </div>
-        <RadioButtonsContainer>
-          <RadioButton toggled>First item</RadioButton>
-          <RadioButton>Second item</RadioButton>
-          <RadioButton>Third item</RadioButton>
-        </RadioButtonsContainer>
       </div>
     )
   }
