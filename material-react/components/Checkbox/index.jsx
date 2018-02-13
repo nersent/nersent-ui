@@ -97,9 +97,7 @@ export default class Checkbox extends React.Component {
       transform: `scale(${!iconScale ? 1 : 0})`
     }
 
-    const style = {
-      transform: `scale(${borderWidth && !iconAnimation || !checked && iconAnimation ? 0.9 : 1})`
-    }
+    const scaleAnimation = borderWidth && !iconAnimation || !checked && iconAnimation
 
     const rootClass = ClassManager.get('material-checkbox-container', [
       className,
@@ -109,12 +107,13 @@ export default class Checkbox extends React.Component {
 
     const checkboxClass = ClassManager.get('material-checkbox', [
       checked ? 'checked' : '',
-      iconAnimation ? 'icon-animation' : ''
+      iconAnimation ? 'icon-animation' : '',
+      scaleAnimation ? 'scale' : ''
     ])
 
     return (
       <div className={rootClass} ref='root' onClick={this.onClick}>
-        <div className={checkboxClass} ref='checkbox' style={style}>
+        <div className={checkboxClass} ref='checkbox'>
           <div className='checkbox-border' style={borderStyle} />
           <div className='checkbox-icon' style={iconStyle} />
           <Ripple
@@ -135,12 +134,6 @@ export default class Checkbox extends React.Component {
 
 Checkbox.defaultProps = {
   color: '#2196F3',
-  colors: {
-    offLight: 'rgba(0,0,0,0.54)',
-    offDark: 'rgba(255,255,255,0.70)',
-    disabledLight: 'rgba(0,0,0,0.26)',
-    disabledDark: 'rgba(255,255,255,0.30)'
-  },
   disabled: false,
   darkTheme: false,
   checked: false
