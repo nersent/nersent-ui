@@ -6,6 +6,7 @@ export default class Ripple extends React.Component {
     super()
 
     this.isTouch = false
+    this.color = ''
   }
 
   componentDidMount () {
@@ -15,7 +16,8 @@ export default class Ripple extends React.Component {
         touchSupport,
         autoRipple,
         autoClass,
-        eventElement
+        eventElement,
+        beforeAddingEvents
       } = this.props
 
       this.parent = ReactDOM.findDOMNode(this).parentNode      
@@ -120,7 +122,8 @@ export default class Ripple extends React.Component {
       time,
       scale,
       touchSupport,
-      color
+      color,
+      onClickColor
     } = props
 
     const isEventTouch = (e.type === 'touchstart')
@@ -141,7 +144,7 @@ export default class Ripple extends React.Component {
     this.css(element, {
       left: position.x,
       top: position.y,
-      transition: `${time}s ease-out width, ${time}s ease-out height, ${time}s opacity`,
+      transition: `${time}s ease-out width, ${time}s ease-out height, ${time}s opacity, 0.2s background-color`,
       opacity: opacity,
       backgroundColor: color
     })
@@ -156,21 +159,38 @@ export default class Ripple extends React.Component {
         height: animateSize + 'px'
       })
     }, 1)
+
+    let onClick
+
+    if (onClickColor != null && onClickColor !== false) {
+      onClick = () => {
+        element.style.backgroundColor = onClickColor
+      }
+  
+      this.eventElement.addEventListener('click', onClick)
+    }
+
     // Removes the ripple
     const remove = (e) => {
-      element.style.opacity = '0'
+      setTimeout(() => {
+        element.style.opacity = '0'
+      }, 150)
       // Wait until animation
       setTimeout(() => {
         if (element.parentNode != null) {
           element.parentNode.removeChild(element)
+
           this.isTouch = false
 
           this.eventElement.removeEventListener('mouseup', remove)
           this.eventElement.removeEventListener('mouseleave', remove)
-          this.eventElement.addEventListener('touchend', remove)
+          this.eventElement.removeEventListener('touchend', remove)
+
+          if (onClick != null) this.eventElement.removeEventListener('click', onClick)
         }
-      }, time * 1000)
+      }, time * 1000 + 150)
     }
+
     // Add events to remove the ripple
     if (!isEventTouch) {
       this.eventElement.addEventListener('mouseup', remove)
@@ -195,6 +215,7 @@ Ripple.defaultProps = {
   opacity: 0.2,
   touchSupport: true,
   color: '#000',
+  onClickColor: false,
   autoRipple: true,
   autoClass: true
 }

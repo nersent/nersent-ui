@@ -13,10 +13,9 @@ export default class Checkbox extends React.Component {
       checked: false,
       borderWidth: false,
       iconScale: false,
-      iconAnimation: false
+      iconAnimation: false,
+      isAnimation: false
     }
-
-    this.isAnimating = false
   }
 
   componentDidMount () {
@@ -25,47 +24,47 @@ export default class Checkbox extends React.Component {
     if (checked) this.check(true, true)
   }
 
+  onClick = () => {
+    if (!this.props.disabled) this.check()
+  }
+
   check (flag = !this.state.checked, fromProps = false) {
     if (this.isAnimating || this.state.checked === flag) return
-
-    this.isAnimating = true
 
     const onCheck = this.props.onCheck
     if (typeof onCheck === 'function') onCheck(flag, this, fromProps)
 
-    this.setState({ checked: flag })
+    this.setState({checked: flag, isAnimation: true})
 
     if (flag) {
       setTimeout(() => {
-        this.setState({ borderWidth: true })
+        this.setState({borderWidth: true})
 
         setTimeout(() => {
-          this.setState({ iconAnimation: true })
-
-          this.isAnimating = false
+          this.setState({
+            iconAnimation: true,
+            isAnimation: false
+          })
         }, 200)
       }, 100)
     } else {
-      this.setState({ iconScale: true })
+      this.setState({iconScale: true})
 
       setTimeout(() => {
-        this.setState({ borderWidth: false })
+        this.setState({borderWidth: false})
 
         setTimeout(() => {
-          this.setState({ iconAnimation: false })
+          this.setState({iconAnimation: false})
 
           setTimeout(() => {
-            this.setState({ iconScale: false })
-
-            this.isAnimating = false
+            this.setState({
+              iconScale: false,
+              isAnimation: false
+            })
           }, 100)
         }, 100)
       }, 160)
     }
-  }
-
-  onClick = () => {
-    if (!this.props.disabled) this.check()
   }
 
   render () {
@@ -113,12 +112,15 @@ export default class Checkbox extends React.Component {
 
     return (
       <div className={rootClass} ref='root' onClick={this.onClick}>
-        <div className={checkboxClass} ref='checkbox'>
-          <div className='checkbox-border' style={borderStyle} />
-          <div className='checkbox-icon' style={iconStyle} />
+        <div>
+          <div className={checkboxClass} ref='checkbox'>
+            <div className='checkbox-border' style={borderStyle} />
+            <div className='checkbox-icon' style={iconStyle} />
+          </div>
           <Ripple
             autoRipple={!disabled}
-            color={componentColor.ripple}
+            color={componentColor.component}
+            onClickColor={componentColor.ripple}
             center={true}
             eventElement={() => { return this.refs.root }} />
         </div>

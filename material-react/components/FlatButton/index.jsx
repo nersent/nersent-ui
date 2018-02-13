@@ -34,11 +34,15 @@ export default class FlatButton extends React.Component {
       darkTheme ? 'dark-theme' : ''
     ])
 
+    const overShadeStyle = {
+      backgroundColor: color
+    }
+
     return (
       <div className={rootClass} style={style} {...events}>
         {children}
-        <div className='over-shade' />
-        <Ripple autoClass={false} autoRipple={!disabled} color={color} time={0.6} options={ripple} />
+        <div className='over-shade' style={overShadeStyle} />
+        <Ripple autoClass={false} autoRipple={!disabled} color={color} time={1} options={ripple} />
       </div>
     )
   }

@@ -15,7 +15,7 @@ export default class RadioButton extends React.Component {
       fullBorderSize: false,
       circleVisible: false,
       fullCircleSize: true,
-      animation: false
+      isAnimation: false
     }
   }
 
@@ -26,7 +26,7 @@ export default class RadioButton extends React.Component {
   }
 
   toggle = (flag = !this.state.toggled) => {
-    this.setState({toggled: flag, animation: true})
+    this.setState({toggled: flag, isAnimation: true})
 
     if (flag) {
       this.setState({fullBorderSize: true})
@@ -37,7 +37,7 @@ export default class RadioButton extends React.Component {
           circleVisible: true,
           fullBorderSize: false,
           fullCircleSize: false,
-          animation: false
+          isAnimation: false
         })
       }, 300)
     } else {
@@ -55,7 +55,7 @@ export default class RadioButton extends React.Component {
           setTimeout(() => {
             this.setState({
               fullBorderSize: false,
-              animation: false
+              isAnimation: false
             })
           })
         })
@@ -77,13 +77,13 @@ export default class RadioButton extends React.Component {
       borderAnimations,
       circleVisible,
       fullCircleSize,
-      animation
+      isAnimation
     } = this.state
 
     const radioButtonClass = ClassManager.get('material-radio-button', [
       toggled ? 'toggled' : '',
       !borderAnimations ? 'no-border-animations' : '',
-      animation ? 'scale' : ''
+      isAnimation ? 'scale' : ''
     ])
 
     const componentColor = ComponentColor.get(color, toggled, darkTheme, disabled, true)
@@ -103,20 +103,24 @@ export default class RadioButton extends React.Component {
     }
 
     return (
-      <div className='material-radio-button-container' ref='root' onClick={this.onClick}>
-        <div className={radioButtonClass} ref='radioButton'>
-          <div className='border' style={borderStyle}>
+      <div className='material-radio-button-container' ref='root' onClick={this.onClick}> 
+        <div>
+          <div className={radioButtonClass} ref='radioButton'>
+            <div className='border' style={borderStyle} />
+            <div className='circle' style={circleStyle} />
+          </div>
           <Ripple
             autoRipple={!disabled}
-            color={componentColor.ripple}
+            color={componentColor.component}
+            onClickColor={componentColor.ripple}
             center={true}
             eventElement={() => { return this.refs.root }} />
+        </div>
+        {children != null && (
+          <div className='text'>
+            {children}
           </div>
-          <div className='circle' style={circleStyle} />
-        </div>
-        <div className='text'>
-          {children}
-        </div>
+        )}
       </div>
     )
   }

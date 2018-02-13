@@ -9,7 +9,7 @@ html, body {
 }
 
 .app-container {
-  width: 100%;
+  width: calc(100% - 64px);
   height: 100%;
   padding-top: 64px;
   padding-left: 64px;
