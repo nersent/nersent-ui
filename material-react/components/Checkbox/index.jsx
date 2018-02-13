@@ -90,7 +90,7 @@ export default class Checkbox extends React.Component {
 
         this.timeouts.push(setTimeout(() => {
           this.setState({
-            borderWidth: this.refs.checkbox.offsetWidth / 2 - 2
+            borderWidth: this.refs.checkbox.offsetWidth / 2 - 1
           })
         }, 150))
   
