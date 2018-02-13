@@ -3,6 +3,7 @@ import React from 'react'
 import Ripple from '../Ripple'
 
 import ClassManager from '../../utils/class'
+import ComponentColor from '../../utils/component-color'
 
 export default class Checkbox extends React.Component {
   constructor () {
@@ -10,7 +11,6 @@ export default class Checkbox extends React.Component {
 
     this.state = {
       checked: false,
-      borderColor: false,
       borderWidth: false,
       iconScale: false,
       iconAnimation: false
@@ -33,7 +33,7 @@ export default class Checkbox extends React.Component {
     const onCheck = this.props.onCheck
     if (typeof onCheck === 'function') onCheck(flag, this, fromProps)
 
-    this.setState({ borderColor: flag, checked: flag })
+    this.setState({ checked: flag })
 
     if (flag) {
       setTimeout(() => {
@@ -79,30 +79,26 @@ export default class Checkbox extends React.Component {
     } = this.props
 
     const {
+      checked,
       borderWidth,
       borderColor,
       iconScale,
       iconAnimation
     } = this.state
 
-    const checked = this.state.checked
-
-    let offColor = !darkTheme ? 'rgba(0,0,0,0.54)' : 'rgba(255,255,255,0.70)'
-    if (disabled) offColor = !darkTheme ? 'rgba(0,0,0,0.26)' : 'rgba(255,255,255,0.30)'
+    const componentColor = ComponentColor.get(color, checked, darkTheme, disabled, true)
 
     const borderStyle = {
       borderWidth: borderWidth ? this.refs.checkbox.offsetWidth / 2 : 2,
-      borderColor: borderColor && !disabled ? color : offColor
+      borderColor: componentColor.component
     }
-
-    const rippleColor = checked ? color : offColor
 
     const iconStyle = {
       transform: `scale(${!iconScale ? 1 : 0})`
     }
 
     const style = {
-      transform: `scale(${borderWidth && !iconAnimation || !borderColor && iconAnimation ? 0.9 : 1})`
+      transform: `scale(${borderWidth && !iconAnimation || !checked && iconAnimation ? 0.9 : 1})`
     }
 
     const rootClass = ClassManager.get('material-checkbox-container', [
@@ -123,7 +119,7 @@ export default class Checkbox extends React.Component {
           <div className='checkbox-icon' style={iconStyle} />
           <Ripple
             autoRipple={!disabled}
-            color={rippleColor}
+            color={componentColor.ripple}
             center={true}
             eventElement={() => { return this.refs.root }} />
         </div>
@@ -139,6 +135,12 @@ export default class Checkbox extends React.Component {
 
 Checkbox.defaultProps = {
   color: '#2196F3',
+  colors: {
+    offLight: 'rgba(0,0,0,0.54)',
+    offDark: 'rgba(255,255,255,0.70)',
+    disabledLight: 'rgba(0,0,0,0.26)',
+    disabledDark: 'rgba(255,255,255,0.30)'
+  },
   disabled: false,
   darkTheme: false,
   checked: false

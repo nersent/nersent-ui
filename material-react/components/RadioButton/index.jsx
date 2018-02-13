@@ -3,6 +3,7 @@ import React from 'react'
 import Ripple from '../Ripple'
 
 import ClassManager from '../../utils/class'
+import ComponentColor from '../../utils/component-color'
 
 export default class RadioButton extends React.Component {
   constructor () {
@@ -10,6 +11,7 @@ export default class RadioButton extends React.Component {
 
     this.state = {
       toggled: false,
+      borderAnimations: true,
       fullBorderSize: false,
       circleVisible: false,
       fullCircleSize: true
@@ -30,31 +32,35 @@ export default class RadioButton extends React.Component {
 
       setTimeout(() => {
         this.setState({
+          borderAnimations: false,
           circleVisible: true,
           fullBorderSize: false,
           fullCircleSize: false
         })
-      }, 200)
+      }, 300)
     } else {
       this.setState({fullCircleSize: true})
 
       setTimeout(() => {
-        this.setState({fullBorderSize: true})
+        this.setState({
+          circleVisible: false,
+          fullBorderSize: true
+        })
 
         setTimeout(() => {
-          this.setState({
-            circleVisible: false,
-            fullBorderSize: false
+          this.setState({borderAnimations: true})
+
+          setTimeout(() => {
+            this.setState({fullBorderSize: false})
           })
-        }, 100)
-      }, 150)
+        })
+      }, 200)
     }
   }
 
   render () {
     const {
       color,
-      colors,
       darkTheme,
       disabled,
       children,
@@ -63,34 +69,30 @@ export default class RadioButton extends React.Component {
     const {
       toggled,
       fullBorderSize,
+      borderAnimations,
       circleVisible,
       fullCircleSize
     } = this.state
 
     const radioButtonClass = ClassManager.get('radio-button', [
-      toggled ? 'toggled' : ''
+      toggled ? 'toggled' : '',
+      !borderAnimations ? 'no-border-animations' : ''
     ])
 
-    const radioButtonColors = {
-      offColor: !darkTheme ? colors.offLight : colors.offDark,
-      disabled: !darkTheme ? colors.disabledLight : colors.disabledDark,
-    }
-
-    let radioButtonColor = toggled ? color : radioButtonColors.offColor
-    if (disabled) radioButtonColor = radioButtonColors.disabled
+    const componentColor = ComponentColor.get(color, toggled, darkTheme, disabled, true)
 
     const borderStyle = {
       borderWidth: fullBorderSize ? this.refs.radioButton.offsetWidth / 2 : 2,
-      borderColor: radioButtonColor
+      borderColor: componentColor.component
     }
 
-    const circleSize = fullCircleSize ? '100%' : 10
+    const circleSize = fullCircleSize ? 16 : 10
 
     const circleStyle = {
       visibility: circleVisible ? 'visible' : 'hidden',
       width: circleSize,
       height: circleSize,
-      backgroundColor: radioButtonColor
+      backgroundColor: componentColor.component
     }
 
     return (
@@ -99,7 +101,7 @@ export default class RadioButton extends React.Component {
           <div className='border' style={borderStyle}>
           <Ripple
             autoRipple={!disabled}
-            color={radioButtonColor}
+            color={componentColor.ripple}
             center={true}
             eventElement={() => { return this.refs.root }} />
           </div>
@@ -115,12 +117,6 @@ export default class RadioButton extends React.Component {
 
 RadioButton.defaultProps = {
   color: "#2196F3",
-  colors: {
-    offLight: '#707070',
-    offDark: '#c2c2c2',
-    disabledLight: '#b6b6b6',
-    disabledDark: '#717171'
-  },
   disabled: false,
   darkTheme: false,
   toggled: false
