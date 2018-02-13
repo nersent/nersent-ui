@@ -46,23 +46,21 @@ export default class Checkbox extends React.Component {
         }, 200)
       }, 100)
     } else {
+      this.setState({ iconScale: true })
+
       setTimeout(() => {
-        this.setState({ iconScale: true })
+        this.setState({ borderWidth: false })
 
         setTimeout(() => {
-          this.setState({ borderWidth: false })
+          this.setState({ iconAnimation: false })
 
           setTimeout(() => {
-            this.setState({ iconAnimation: false })
+            this.setState({ iconScale: false })
 
-            setTimeout(() => {
-              this.setState({ iconScale: false })
-
-              this.isAnimating = false
-            }, 100)
+            this.isAnimating = false
           }, 100)
-        }, 200)
-      }, 100)
+        }, 100)
+      }, 160)
     }
   }
 

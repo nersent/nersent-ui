@@ -49,7 +49,7 @@
     border-style: solid;
     border-radius: 3px;
     box-sizing: border-box;
-    transition: 0.1s border-color, 0.15s border-width ease-out;
+    transition: 0.1s border-color, 0.2s border-width ease-out;
   }
   
   .checkbox-icon {
@@ -62,7 +62,7 @@
     clip-path: inset(100% 50% 0 50%);
     -webkit-font-smoothing: antialiased;
     transform: scale(1) translateZ(0);
-    transition: 0.2s clip-path ease-out, 0.1s transform ease-out;
+    transition: 0.3s clip-path ease-out, 0.1s transform ease-out;
     @include image-center(20px, auto);
     @include invert-colors;
   }
