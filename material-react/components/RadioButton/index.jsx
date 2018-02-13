@@ -14,7 +14,8 @@ export default class RadioButton extends React.Component {
       borderAnimations: true,
       fullBorderSize: false,
       circleVisible: false,
-      fullCircleSize: true
+      fullCircleSize: true,
+      animation: false
     }
   }
 
@@ -25,7 +26,7 @@ export default class RadioButton extends React.Component {
   }
 
   toggle = (flag = !this.state.toggled) => {
-    this.setState({toggled: flag})
+    this.setState({toggled: flag, animation: true})
 
     if (flag) {
       this.setState({fullBorderSize: true})
@@ -35,7 +36,8 @@ export default class RadioButton extends React.Component {
           borderAnimations: false,
           circleVisible: true,
           fullBorderSize: false,
-          fullCircleSize: false
+          fullCircleSize: false,
+          animation: false
         })
       }, 300)
     } else {
@@ -51,7 +53,10 @@ export default class RadioButton extends React.Component {
           this.setState({borderAnimations: true})
 
           setTimeout(() => {
-            this.setState({fullBorderSize: false})
+            this.setState({
+              fullBorderSize: false,
+              animation: false
+            })
           })
         })
       }, 200)
@@ -71,12 +76,14 @@ export default class RadioButton extends React.Component {
       fullBorderSize,
       borderAnimations,
       circleVisible,
-      fullCircleSize
+      fullCircleSize,
+      animation
     } = this.state
 
-    const radioButtonClass = ClassManager.get('radio-button', [
+    const radioButtonClass = ClassManager.get('material-radio-button', [
       toggled ? 'toggled' : '',
-      !borderAnimations ? 'no-border-animations' : ''
+      !borderAnimations ? 'no-border-animations' : '',
+      animation ? 'scale' : ''
     ])
 
     const componentColor = ComponentColor.get(color, toggled, darkTheme, disabled, true)

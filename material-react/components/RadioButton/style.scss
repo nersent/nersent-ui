@@ -11,10 +11,15 @@
     @include Body1;
   }
 
-  .radio-button {
+  .material-radio-button {
     width: 20px;
     height: 20px;
     position: relative;
+    transition: 0.2s transform ease-out;
+
+    &.scale {
+      transform: scale(0.9);
+    }
   
     .border {
       width: 100%;
