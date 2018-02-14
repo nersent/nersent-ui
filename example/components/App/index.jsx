@@ -18,7 +18,7 @@ export default class App extends React.Component {
 
     return (
       <div className='app-container'>
-        <div style={{display: 'none'}}>
+        <div style={{display:'none'}}>
           <RaisedButton>
             raised button
           </RaisedButton>
@@ -38,7 +38,9 @@ export default class App extends React.Component {
             <RadioButton>Third item</RadioButton>
           </RadioButtonsContainer>
         </div>
-        <Switch toggled />
+        <Switch>
+          Aha
+        </Switch>
       </div>
     )
   }

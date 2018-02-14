@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Ripple from '../Ripple'
+
 import ClassManager from '../../utils/class'
 import ComponentColor from '../../utils/component-color'
 
@@ -8,13 +10,10 @@ export default class Switch extends React.Component {
     super()
 
     this.state = {
-      thumbLeft: -11,
+      thumbLeft: -10,
       toggled: false,
-      scaleThumb: false,
       isAnimation: false
     }
-
-    this.toggled = false
   }
 
   componentDidMount () {
@@ -28,7 +27,7 @@ export default class Switch extends React.Component {
   }
 
   onClick = (e) => {
-    this.toggle()
+    if (!this.props.disabled) this.toggle()
   }
 
   toggle (flag = !this.state.toggled, fromProps = false) {
@@ -39,32 +38,15 @@ export default class Switch extends React.Component {
 
     this.setState({
       toggled: flag,
-      scaleThumb: true,
       isAnimation: true,
       thumbLeft: flag ? this.track.offsetWidth - this.thumb.offsetWidth / 2 : -this.thumb.offsetWidth / 2
     })
     
     setTimeout(() => {
-      this.setState({
-        scaleThumb: false,
-        isAnimation: false
-      })
-    }, 100)
+      this.setState({isAnimation: false})
+    }, 150)
 
     this.toggled = flag
-
-    this.triggerEvent()
-  }
-
-  triggerEvent () {
-    const onToggle = this.props.onToggle
-
-    const e = {
-      switch: this,
-      toggled: this.toggled
-    }
-
-    if (typeof onToggle === 'function') onToggle(e)
   }
 
   render () {
@@ -77,46 +59,75 @@ export default class Switch extends React.Component {
       children
     } = this.props
 
-    const {
-      thumbLeft,
-      toggled,
-      scaleThumb
-    } = this.state
+    const toggled = this.track != null && this.state.thumbLeft >= this.track.offsetWidth / 2
 
-    const colorCondition = this.track != null && thumbLeft >= this.track.offsetWidth / 2
+    const trackColor = ComponentColor.get(color, toggled, darkTheme, disabled, true, {
+      offLight: 'rgba(0,0,0,0.38)',
+      offDark: 'rgba(255,255,255,0.30)',
+      disabledLight: 'rgba(0,0,0,0.12)',
+      disabledDark: 'rgba(255,255,255,0.10)'
+    })
+
+    const thumbColor = ComponentColor.get(color, toggled, darkTheme, disabled, false, {
+      offLight: '#FAFAFA',
+      offDark: '#BDBDBD',
+      disabledLight: '#BDBDBD',
+      disabledDark: '#424242'
+    })
 
     const trackStyle = {
-      backgroundColor: colorCondition ? color : '#000',
-      opacity: toggled ? 0.5 : 0.38
+      backgroundColor: trackColor.component,
+      opacity: toggled ? 0.5 : 1
     }
 
-    const thumbSize = !scaleThumb ? 22 : 18
+    const thumbSize = !this.state.isAnimation ? 20 : 18
 
     const thumbStyle = {
-      left: thumbLeft,
-      backgroundColor: colorCondition ? color : '#FAFAFA',
-      width: thumbSize,
-      height: thumbSize
+      backgroundColor: thumbColor,
+      transform: `scale(${!this.state.isAnimation ? 1 : 0.9 })`
     }
 
-    const switchClass = ClassManager.get('material-switch', [
+    const thumbContainerStyle = {
+      left: this.state.thumbLeft
+    }
+
+    const rootClass = ClassManager.get('material-switch-container', [
       className,
       darkTheme ? 'dark-theme' : '',
       disabled ? 'disabled' : '',
+      children != null ? 'has-text' : ''
+    ])
+
+    const switchClass = ClassManager.get('material-switch', [
       toggled ? 'toggled' : ''
     ])
 
     return (
-      <div className={switchClass} onClick={this.onClick}>
-        <div className='track' ref={(r) => this.track = r} style={trackStyle} />
-        <div className='thumb' ref={(r) => this.thumb = r} style={thumbStyle} />
+      <div className={rootClass} onClick={this.onClick} ref='root'>
+        {children != null && (
+          <div className='text'>
+            {children}
+          </div>
+        )}
+        <div className={switchClass}>
+          <div className='track' ref={(r) => this.track = r} style={trackStyle} />
+          <div className='thumb-container' style={thumbContainerStyle}>
+            <div className='thumb' ref={(r) => this.thumb = r} style={thumbStyle} />
+            <Ripple
+              autoRipple={!disabled}
+              color={trackColor.component}
+              onClickColor={trackColor.ripple}
+              center={true}
+              eventElement={() => { return this.refs.root }} />
+          </div>
+        </div>
       </div>
     )
   }
 }
-
+          
 Switch.defaultProps = {
-  color: '#009688',
+  color: '#2196F3',
   disabled: false,
   darkTheme: false,
   toggled: false

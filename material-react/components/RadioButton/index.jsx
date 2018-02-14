@@ -86,11 +86,11 @@ export default class RadioButton extends React.Component {
       isAnimation ? 'scale' : ''
     ])
 
-    const componentColor = ComponentColor.get(color, toggled, darkTheme, disabled, true)
+    const componentColors = ComponentColor.get(color, toggled, darkTheme, disabled, true)
 
     const borderStyle = {
       borderWidth: fullBorderSize ? this.refs.radioButton.offsetWidth / 2 : 2,
-      borderColor: componentColor.component
+      borderColor: componentColors.component
     }
 
     const circleSize = fullCircleSize ? 16 : 10
@@ -99,7 +99,7 @@ export default class RadioButton extends React.Component {
       visibility: circleVisible ? 'visible' : 'hidden',
       width: circleSize,
       height: circleSize,
-      backgroundColor: componentColor.component
+      backgroundColor: componentColors.component
     }
 
     return (
@@ -111,8 +111,8 @@ export default class RadioButton extends React.Component {
           </div>
           <Ripple
             autoRipple={!disabled}
-            color={componentColor.component}
-            onClickColor={componentColor.ripple}
+            color={componentColors.component}
+            onClickColor={componentColors.ripple}
             center={true}
             eventElement={() => { return this.refs.root }} />
         </div>

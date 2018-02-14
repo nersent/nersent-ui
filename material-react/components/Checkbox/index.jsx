@@ -127,11 +127,11 @@ export default class Checkbox extends React.Component {
       checkboxIconTransition
     } = this.state
 
-    const componentColor = ComponentColor.get(color, checked, darkTheme, disabled, true)
+    const componentColors = ComponentColor.get(color, checked, darkTheme, disabled, true)
 
     const borderStyle = {
       borderWidth: borderWidth,
-      borderColor: componentColor.component,
+      borderColor: componentColors.component,
       transition: checkboxBorderTransition
     }
 
@@ -161,8 +161,8 @@ export default class Checkbox extends React.Component {
           </div>
           <Ripple
             autoRipple={!disabled}
-            color={componentColor.component}
-            onClickColor={componentColor.ripple}
+            color={componentColors.component}
+            onClickColor={componentColors.ripple}
             center={true}
             eventElement={() => { return this.refs.root }} />
         </div>
