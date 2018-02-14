@@ -51,10 +51,10 @@ export default class App extends React.Component {
           </Checkbox>
           <br />
           <br />
-          <RadioButtonsContainer>
-            <RadioButton darkTheme={darkTheme} toggled>First item</RadioButton>
-            <RadioButton darkTheme={darkTheme}>Second item</RadioButton>
-            <RadioButton darkTheme={darkTheme}>Third item</RadioButton>
+          <RadioButtonsContainer darkTheme={darkTheme}>
+            <RadioButton toggled>First item</RadioButton>
+            <RadioButton>Second item</RadioButton>
+            <RadioButton>Third item</RadioButton>
           </RadioButtonsContainer>
         </div>
       </div>

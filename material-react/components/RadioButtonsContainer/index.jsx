@@ -45,7 +45,10 @@ export default class RadioButtonsContainer extends React.Component {
       <div className='radio-buttons-container'>
         {
           React.Children.map(this.props.children, child => {
-            return React.cloneElement(child, {onClick: this.onClick, ref: (r) => { this.radioButtons.push(r) }})
+            return React.cloneElement(child, {
+              onClick: this.onClick, ref: (r) => { this.radioButtons.push(r)},
+              darkTheme: this.props.darkTheme
+            })
           })
         }
       </div>
