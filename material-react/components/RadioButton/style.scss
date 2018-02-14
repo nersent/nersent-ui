@@ -11,6 +11,10 @@
     @include Body1;
   }
 
+  &.dark-theme .text {
+    color: #fff;
+  }
+
   .material-radio-button {
     width: 20px;
     height: 20px;

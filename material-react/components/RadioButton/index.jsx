@@ -66,6 +66,7 @@ export default class RadioButton extends React.Component {
   render () {
     const {
       color,
+      className,
       darkTheme,
       disabled,
       children,
@@ -79,12 +80,6 @@ export default class RadioButton extends React.Component {
       fullCircleSize,
       isAnimation
     } = this.state
-
-    const radioButtonClass = ClassManager.get('material-radio-button', [
-      toggled ? 'toggled' : '',
-      !borderAnimations ? 'no-border-animations' : '',
-      isAnimation ? 'scale' : ''
-    ])
 
     const componentColors = ComponentColor.get(color, toggled, darkTheme, disabled, true)
 
@@ -102,8 +97,20 @@ export default class RadioButton extends React.Component {
       backgroundColor: componentColors.component
     }
 
+    const rootClass = ClassManager.get('material-radio-button-container', [
+      className,
+      darkTheme ? 'dark-theme' : '',
+      disabled ? 'disabled' : ''
+    ])
+
+    const radioButtonClass = ClassManager.get('material-radio-button', [
+      toggled ? 'toggled' : '',
+      !borderAnimations ? 'no-border-animations' : '',
+      isAnimation ? 'scale' : ''
+    ])
+
     return (
-      <div className='material-radio-button-container' ref='root' onClick={this.onClick}> 
+      <div className={rootClass} ref='root' onClick={this.onClick}> 
         <div>
           <div className={radioButtonClass} ref='radioButton'>
             <div className='border' style={borderStyle} />
