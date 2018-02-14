@@ -24,7 +24,9 @@ export default class App extends React.Component {
         </FlatButton>
         <br />
         <br />
-        <Checkbox onCheck={onCheck} />
+        <Checkbox onCheck={onCheck}>
+          Text
+        </Checkbox>
         <br />
         <br />
         <RadioButtonsContainer>
