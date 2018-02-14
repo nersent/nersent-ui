@@ -11,36 +11,52 @@ import RadioButtonsContainer from '../../../material-react/components/RadioButto
 import Switch from '../../../material-react/components/Switch'
 
 export default class App extends React.Component {
+  constructor () {
+    super()
+
+    this.state = {
+      darkTheme: false
+    }
+  }
+
+  onSwitchToggle = (flag) => {
+    this.setState({darkTheme: flag})
+  }
+
   render () {
-    const onCheck = (flag, item) => {
-      console.log(flag, item)
+    const darkTheme = this.state.darkTheme
+
+    const appContainerStyle = {
+      backgroundColor: !darkTheme ? '#FAFAFA' : '#333'
     }
 
     return (
-      <div className='app-container'>
-        <div style={{display:'none'}}>
-          <RaisedButton>
+      <div className='app-container' style={appContainerStyle}>
+        <div>
+          <Switch onToggle={this.onSwitchToggle} darkTheme={darkTheme}>
+            Dark Theme
+          </Switch>
+          <br />
+          <br />
+          <RaisedButton darkTheme={darkTheme}>
             raised button
           </RaisedButton>
-          <FlatButton>
+          <FlatButton darkTheme={darkTheme}>
             flat button
           </FlatButton>
           <br />
           <br />
-          <Checkbox onCheck={onCheck}>
+          <Checkbox darkTheme={darkTheme}>
             Text
           </Checkbox>
           <br />
           <br />
           <RadioButtonsContainer>
-            <RadioButton toggled>First item</RadioButton>
-            <RadioButton>Second item</RadioButton>
-            <RadioButton>Third item</RadioButton>
+            <RadioButton darkTheme={darkTheme} toggled>First item</RadioButton>
+            <RadioButton darkTheme={darkTheme}>Second item</RadioButton>
+            <RadioButton darkTheme={darkTheme}>Third item</RadioButton>
           </RadioButtonsContainer>
         </div>
-        <Switch>
-          Aha
-        </Switch>
       </div>
     )
   }

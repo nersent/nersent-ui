@@ -10,9 +10,10 @@ html, body {
 
 .app-container {
   width: calc(100% - 64px);
-  height: 100%;
+  height: calc(100vh - 64px);
   padding-top: 64px;
   padding-left: 64px;
+  transition: 0.2s background-color;
 
   .material-button {
     margin-left: 16px;

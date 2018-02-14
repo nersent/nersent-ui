@@ -34,7 +34,7 @@ export default class Switch extends React.Component {
     if (this.state.isAnimation) return
 
     const onToggle = this.props.onToggle
-    if (typeof onToggle === 'function') onCheck(flag, this, fromProps)
+    if (typeof onToggle === 'function') onToggle(flag, this, fromProps)
 
     this.setState({
       toggled: flag,
