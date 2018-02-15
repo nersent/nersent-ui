@@ -10,6 +10,8 @@ import RadioButtonsContainer from '../../../material-react/components/RadioButto
 
 import Switch from '../../../material-react/components/Switch'
 
+import TextField from '../../../material-react/components/TextField'
+
 export default class App extends React.Component {
   constructor () {
     super()
@@ -30,9 +32,12 @@ export default class App extends React.Component {
       backgroundColor: !darkTheme ? '#FAFAFA' : '#333'
     }
 
+    const hideDemo = true
+
     return (
       <div className='app-container' style={appContainerStyle}>
-        <div>
+        {!hideDemo && (
+          <div>
           <Switch onToggle={this.onSwitchToggle} darkTheme={darkTheme}>
             Dark Theme
           </Switch>
@@ -57,6 +62,8 @@ export default class App extends React.Component {
             <RadioButton>Third item</RadioButton>
           </RadioButtonsContainer>
         </div>
+        )}
+        <TextField label='Label' />
       </div>
     )
   }

@@ -104,11 +104,11 @@ export default class Switch extends React.Component {
 
     return (
       <div className={rootClass} onClick={this.onClick} ref='root'>
-        {children != null && (
+        {children != null &&
           <div className='text'>
             {children}
           </div>
-        )}
+        }
         <div className={switchClass}>
           <div className='track' ref={(r) => this.track = r} style={trackStyle} />
           <div className='thumb-container' style={thumbContainerStyle}>

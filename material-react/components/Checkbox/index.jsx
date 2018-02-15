@@ -166,11 +166,11 @@ export default class Checkbox extends React.Component {
             center={true}
             eventElement={() => { return this.refs.root }} />
         </div>
-        {children != null && (
+        {children != null &&
           <div className='text'>
             {children}
           </div>
-        )}
+        }
       </div>
     )
   }
