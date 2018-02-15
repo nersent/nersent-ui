@@ -34,6 +34,14 @@ export default class App extends React.Component {
 
     const hideDemo = true
 
+    const validate = (input) => {
+      const inputValue = input.getValue().toLowerCase()
+      const isNersent = inputValue === 'nersent'
+
+      if (isNersent || inputValue.length === 0) return
+      else return 'Text must be "nersent"'
+    }
+
     return (
       <div className='app-container' style={appContainerStyle}>
         {!hideDemo && (
@@ -63,7 +71,7 @@ export default class App extends React.Component {
           </RadioButtonsContainer>
         </div>
         )}
-        <TextField label='Label' />
+        <TextField label='Label' validate={validate} />
       </div>
     )
   }
