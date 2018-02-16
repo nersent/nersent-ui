@@ -18,4 +18,4 @@ cd material-react
 npm install
 npm run watch
 ```
-and then you can open [`example/public/index.html`](example/public) in your browser.
+and then you can open [`http://localhost:8080/example/public`](example/public) in your browser.
