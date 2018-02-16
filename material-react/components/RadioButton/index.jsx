@@ -17,6 +17,8 @@ export default class RadioButton extends React.Component {
       fullCircleSize: true,
       isAnimation: false
     }
+
+    this.timeouts = []
   }
 
   onClick = () => {
@@ -31,7 +33,13 @@ export default class RadioButton extends React.Component {
     if (flag) {
       this.setState({fullBorderSize: true})
 
-      setTimeout(() => {
+      for (var i = 0; i < this.timeouts.length; i++) {
+        clearTimeout(this.timeouts[i])
+      }
+
+      this.timeouts = []
+
+      this.timeouts.push(setTimeout(() => {
         this.setState({
           borderAnimations: false,
           circleVisible: true,
@@ -39,27 +47,33 @@ export default class RadioButton extends React.Component {
           fullCircleSize: false,
           isAnimation: false
         })
-      }, 300)
+      }, 300))
     } else {
       this.setState({fullCircleSize: true})
 
-      setTimeout(() => {
-        this.setState({
+      for (var i = 0; i < this.timeouts.length; i++) {
+        clearTimeout(this.timeouts[i])
+      }
+
+      this.timeouts = []
+
+      this.timeouts.push(setTimeout(() => {
+        this.timeouts.push(this.setState({
           circleVisible: false,
           fullBorderSize: true
-        })
+        }))
 
-        setTimeout(() => {
+        this.timeouts.push(setTimeout(() => {
           this.setState({borderAnimations: true})
 
-          setTimeout(() => {
+          this.timeouts.push(setTimeout(() => {
             this.setState({
               fullBorderSize: false,
               isAnimation: false
             })
-          })
-        })
-      }, 200)
+          }))
+        }))
+      }, 200))
     }
   }
 
@@ -88,7 +102,7 @@ export default class RadioButton extends React.Component {
       borderColor: componentColors.component
     }
 
-    const circleSize = fullCircleSize ? 16 : 10
+    const circleSize = fullCircleSize ? 14 : 9
 
     const circleStyle = {
       visibility: circleVisible ? 'visible' : 'hidden',

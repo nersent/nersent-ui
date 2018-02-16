@@ -57,6 +57,8 @@ export default class Checkbox extends React.Component {
         clearTimeout(this.timeouts[i])
       }
 
+      this.timeouts = []
+
       setTimeout(() => {
         this.setState({
           checkboxIconTransition: '1s clip-path cubic-bezier(0.19, 1, 0.22, 1)',
@@ -87,6 +89,8 @@ export default class Checkbox extends React.Component {
         for (var i = 0; i < this.timeouts.length; i++) {
           clearTimeout(this.timeouts[i])
         }
+
+        this.timeouts = []
 
         this.timeouts.push(setTimeout(() => {
           this.setState({
