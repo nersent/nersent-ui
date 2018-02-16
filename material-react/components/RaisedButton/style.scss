@@ -4,8 +4,8 @@
   padding-bottom: 10px;
   padding-left: 16px;
   padding-right: 16px;
-  display: inline-block;
   border-radius: 2px;
+  display: table;
   text-align: center;
   @include Button;
   @include cursor-pointer;

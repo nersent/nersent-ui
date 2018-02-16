@@ -16,14 +16,6 @@ html, body {
   transition: 0.2s background-color;
 
   .material-button {
-    margin-left: 8px;
-
-    &:first-child {
-      margin-left: 0px;
-    }
-  }
-
-  .material-checkbox-container {
-    //margin-top: 16px;
+    margin-top: 8px;
   }
 }

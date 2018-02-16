@@ -1,6 +1,6 @@
 .material-switch-container {
   padding: 8px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   -webkit-font-smoothing: antialiased;
   @include cursor-pointer;

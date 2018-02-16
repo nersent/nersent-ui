@@ -49,21 +49,18 @@ export default class App extends React.Component {
           <Switch onToggle={this.onSwitchToggle} darkTheme={darkTheme}>
             Dark Theme
           </Switch>
-          <br />
-          <br />
+          <Switch darkTheme={darkTheme}>
+            Test
+          </Switch>
           <RaisedButton darkTheme={darkTheme}>
             raised button
           </RaisedButton>
           <FlatButton darkTheme={darkTheme}>
             flat button
           </FlatButton>
-          <br />
-          <br />
           <Checkbox darkTheme={darkTheme}>
             Text
           </Checkbox>
-          <br />
-          <br />
           <RadioButtonsContainer darkTheme={darkTheme}>
             <RadioButton toggled>First item</RadioButton>
             <RadioButton>Second item</RadioButton>
