@@ -15,9 +15,11 @@ export default class Checkbox extends React.Component {
       iconScale: false,
       iconAnimation: false,
       isAnimation: false,
-      checkboxBorderTransition: '0.1s border-color',
-      checkboxIconTransition: '2s clip-path cubic-bezier(0.19, 1, 0.22, 1), 1s transform cubic-bezier(0.19, 1, 0.22, 1)'
+      checkboxBorderTransition: 'none',
+      checkboxIconTransition: 'none'
     }
+
+    this.easing = 'cubic-bezier(0.19, 1, 0.22, 1)'
 
     this.timeouts = []
   }
@@ -48,7 +50,7 @@ export default class Checkbox extends React.Component {
       this.setState({
         borderWidth: this.refs.checkbox.offsetWidth / 2, 
         scaleAnimation: true,
-        checkboxBorderTransition: '0.1s border-color, 0.2s border-width cubic-bezier(0.19, 1, 0.22, 1)',
+        checkboxBorderTransition: '0.1s border-color, 0.2s border-width ' + this.easing,
         checkboxIconTransition: 'none',
         iconAnimation: false
       })
@@ -61,7 +63,7 @@ export default class Checkbox extends React.Component {
 
       setTimeout(() => {
         this.setState({
-          checkboxIconTransition: '1s clip-path cubic-bezier(0.19, 1, 0.22, 1)',
+          checkboxIconTransition: '1s clip-path ' + this.easing,
           iconScale: false
         })
 
@@ -79,8 +81,8 @@ export default class Checkbox extends React.Component {
       this.setState({
         scaleAnimation: true, 
         iconScale: false, 
-        checkboxBorderTransition: '0.1s border-color, 0.4s border-width cubic-bezier(0.19, 1, 0.22, 1)',
-        checkboxIconTransition: '1s transform cubic-bezier(0.19, 1, 0.22, 1)'
+        checkboxBorderTransition: '0.1s border-color, 0.4s border-width ' + this.easing,
+        checkboxIconTransition: '1s transform ' + this.easing
       })
 
       setTimeout(() => {
