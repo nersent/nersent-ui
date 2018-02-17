@@ -32,7 +32,7 @@ export default class App extends React.Component {
       backgroundColor: !darkTheme ? '#FAFAFA' : '#333'
     }
 
-    const hideDemo = false
+    const hideDemo = true
 
     const validate = (input) => {
       const inputValue = input.getValue().toLowerCase()
