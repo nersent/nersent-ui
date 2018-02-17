@@ -1,6 +1,6 @@
 {
   "name": "nersent-ui",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Material design framework for React",
   "repository": "Nersent/nersent-ui",
   "main": "build/index.js",
