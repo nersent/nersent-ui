@@ -16,7 +16,8 @@ let config = {
 
   devServer: {
     contentBase: './',
-    publicPath: 'http://localhost:8080/build/'
+    publicPath: 'http://localhost:8080/build/',
+    hot: true
   },
 
   output: {
