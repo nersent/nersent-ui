@@ -6,7 +6,8 @@
   "scripts": {
     "watch": "npm run build:dev && webpack-dev-server --progress --colors --hot --inline --port 8080",
     "build:dev": "rimraf build && webpack",
-    "build:production": "rimraf build && cross-env NODE_ENV=production webpack --progress --define process.env.NODE_ENV=production"
+    "build:production": "rimraf build && webpack --progress --define process.env.NODE_ENV=production",
+    "prepublish": "npm run build:production"
   },
   "author": "Nersent",
   "license": "MIT",
@@ -18,7 +19,6 @@
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
-    "cross-env": "5.1.1",
     "css-loader": "0.28.7",
     "node-sass": "4.7.2",
     "react": "16.2.0",

@@ -5,7 +5,7 @@ const UglifyJSWebpackPlugin = require('uglifyjs-webpack-plugin')
 const productionDevtool = 'cheap-module-source-map'
 const developmentDevtool = 'cheap-module-eval-source-map'
 
-const include = [join(__dirname, 'example'), join(__dirname, 'material-react')]
+const include = [join(__dirname, 'src')]
 
 let config = {
   devtool: (process.env.NODE_ENV === 'production') ? productionDevtool : developmentDevtool,
@@ -16,7 +16,7 @@ let config = {
   },
 
   output: {
-    path: join(__dirname, 'example/public/build'),
+    path: join(__dirname, 'build'),
     filename: '[name].bundle.js'
   },
 
@@ -88,8 +88,6 @@ if (process.env.NODE_ENV === 'production') {
 
 let appConfig = {
   target: 'web',
-  devtool: (process.env.NODE_ENV === 'production') ? productionDevtool : developmentDevtool,
-
   entry: {
     example: './example/bootstrap.jsx'
   }
