@@ -17,7 +17,7 @@ let config = {
 
   output: {
     path: join(__dirname, 'build'),
-    filename: '[name].bundle.js'
+    filename: 'index.js'
   },
 
   module: {
@@ -89,7 +89,7 @@ if (process.env.NODE_ENV === 'production') {
 let appConfig = {
   target: 'web',
   entry: {
-    example: './example/bootstrap.jsx'
+    example: './src/bootstrap.jsx'
   }
 }
 
