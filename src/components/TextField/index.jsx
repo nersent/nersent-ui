@@ -79,6 +79,10 @@ export default class TextField extends React.Component {
       this.validate()
     }
   }
+  
+  onKeyPress = (e) => {
+    if (e.key === 'Enter') this.validate()
+  }
 
   getComponentColorsAndTransparency () {
     if (this.props.disabled) {
@@ -169,6 +173,7 @@ export default class TextField extends React.Component {
           spellCheck={false}
           style={inputStyle}
           onKeyUp={this.onKeyUp}
+          onKeyPress={this.onKeyPress}
           ref={(r) => this.input = r} />
         <div className='line' />
         <div className='focus-line' style={focusLineStyle} />
