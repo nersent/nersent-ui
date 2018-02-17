@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './style.scss'
+
 import Ripple from '../Ripple'
 
 import ClassManager from '../../utils/class'

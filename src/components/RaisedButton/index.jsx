@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './style.scss'
+
 import Ripple from '../Ripple'
 
 import Colors from '../../utils/colors'
@@ -53,7 +55,7 @@ export default class RaisedButton extends React.Component {
       <div className={rootClass} style={style} {...events}>
         {children}
         <div className='over-shade' />
-        <Ripple autoClass={false} autoRipple={!disabled} color={this.foreground} time={1} options={ripple} />
+        <Ripple autoClass={false} autoRipple={!disabled} color={this.foreground} time={0.8} options={ripple} />
       </div>
     )
   }

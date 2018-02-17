@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './style.scss'
+
 import Ripple from '../Ripple'
 
 import ClassManager from '../../utils/class'
@@ -42,7 +44,7 @@ export default class FlatButton extends React.Component {
       <div className={rootClass} style={style} {...events}>
         {children}
         <div className='over-shade' style={overShadeStyle} />
-        <Ripple autoClass={false} autoRipple={!disabled} color={color} time={1} options={ripple} />
+        <Ripple autoClass={false} autoRipple={!disabled} color={color} time={0.8} options={ripple} />
       </div>
     )
   }

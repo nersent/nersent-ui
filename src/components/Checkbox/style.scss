@@ -1,3 +1,9 @@
+@import '../../sass/transparency.scss';
+@import '../../sass/mixins/cursors.scss';
+@import '../../sass/mixins/ripple.scss';
+@import '../../sass/mixins/images.scss';
+@import '../../sass/mixins/icons.scss';
+
 .material-checkbox-container {
   padding: 8px;
   display: flex;
@@ -61,7 +67,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url('../images/Controls/check.svg');
+    background-image: url('../../images/Controls/check.svg');
     clip-path: inset(100% 50% 0 50%);
     -webkit-font-smoothing: antialiased;
     transform: scale(1) translateZ(0);

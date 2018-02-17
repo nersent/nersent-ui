@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './style.scss'
+
 import RadioButton from '../RadioButton'
 
 export default class RadioButtonsContainer extends React.Component {

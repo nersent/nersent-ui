@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import './style.scss'
+
 export default class Ripple extends React.Component {
   constructor () {
     super()

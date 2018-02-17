@@ -11,7 +11,7 @@ let config = {
   devtool: (process.env.NODE_ENV === 'production') ? productionDevtool : developmentDevtool,
 
   entry: {
-    index: './src/bootstrap.jsx'
+    index: './src/index.jsx'
   },
 
   devServer: {
@@ -22,7 +22,7 @@ let config = {
 
   output: {
     path: join(__dirname, 'build'),
-    filename: 'index.js',
+    filename: '[name].js',
     libraryTarget: 'commonjs2'
   },
 
@@ -36,15 +36,9 @@ let config = {
           {
             loader: 'style-loader'
           }, {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
+            loader: 'css-loader'
           }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
+            loader: 'sass-loader'
           }
         ]
       }, {

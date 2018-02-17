@@ -1,4 +1,48 @@
+@import '../../sass/transparency.scss';
+@import '../../sass/mixins/cursors.scss';
+@import '../../sass/mixins/ripple.scss';
+@import '../../sass/mixins/typography.scss';
+
 .material-button {
+  min-width: 88px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 2px;
+  display: table;
+  text-align: center;
+  @include Button;
+  @include cursor-pointer;
+  @include ripple;
+
+  &.white {
+    color: #fff;
+  }
+
+  .over-shade {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0;
+    transition: 0.25s opacity;
+    z-index: -2;
+  }
+
+  &:not(.disabled):hover {
+    .over-shade {
+      opacity: 0.08;
+    }
+  }
+
+  &.disabled {
+    box-shadow: unset !important;
+    cursor: default;
+  }
+
   &.flat {
     &:not(.dark-theme).disabled {
       color: rgba(0,0,0,$disabled-text-light) !important;
