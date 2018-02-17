@@ -7,7 +7,7 @@
   "scripts": {
     "watch": "npm run build:dev",
     "build:dev": "webpack --watch",
-    "build:production": "webpack --progress --define process.env.NODE_ENV='production'",
+    "build:production": "cross-env NODE_ENV=production webpack --progress --define process.env.NODE_ENV='production'",
     "prepublish": "npm run build:production"
   },
   "author": "Nersent",
@@ -29,6 +29,7 @@
     "uglifyjs-webpack-plugin": "1.1.4",
     "url-loader": "0.6.2",
     "webpack": "3.10.0",
-    "webpack-dev-server": "2.9.7"
+    "webpack-dev-server": "2.9.7",
+    "cross-env": "5.1.3"
   }
 }
