@@ -23,7 +23,7 @@ let config = {
   output: {
     path: join(__dirname, 'build'),
     filename: 'index.js',
-    libraryTarget: 'var'
+    libraryTarget: 'commonjs2'
   },
 
   module: {
