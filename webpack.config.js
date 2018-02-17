@@ -10,6 +10,10 @@ const include = [join(__dirname, 'src')]
 let config = {
   devtool: (process.env.NODE_ENV === 'production') ? productionDevtool : developmentDevtool,
 
+  entry: {
+    index: './src/bootstrap.jsx'
+  },
+
   devServer: {
     contentBase: './',
     publicPath: 'http://localhost:8080/build/'
@@ -17,7 +21,8 @@ let config = {
 
   output: {
     path: join(__dirname, 'build'),
-    filename: 'index.js'
+    filename: 'index.js',
+    libraryTarget: 'commonjs2'
   },
 
   module: {
@@ -86,13 +91,4 @@ if (process.env.NODE_ENV === 'production') {
   }))
 }
 
-let appConfig = {
-  target: 'web',
-  entry: {
-    example: './src/bootstrap.jsx'
-  }
-}
-
-appConfig = Object.assign(appConfig, config)
-
-module.exports = [appConfig]
+module.exports = [config]

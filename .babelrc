@@ -3,7 +3,8 @@
     ["env",{
       "targets": {
         "browser": "last 2 versions"
-      }
+      },
+      "modules": "commonjs"
     }],
     "react"
   ],
