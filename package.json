@@ -7,7 +7,7 @@
   "scripts": {
     "watch": "npm run build:dev && webpack-dev-server --progress --colors --hot --inline --port 8080",
     "build:dev": "webpack",
-    "build:production": "webpack --progress --define process.env.NODE_ENV=production",
+    "build:production": "webpack --progress --define process.env.NODE_ENV='production'",
     "prepublish": "npm run build:production"
   },
   "author": "Nersent",
