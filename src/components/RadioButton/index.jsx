@@ -100,7 +100,7 @@ export default class RadioButton extends React.Component {
     const componentColors = ComponentColor.get(color, toggled, darkTheme, disabled, true)
 
     const borderStyle = {
-      borderWidth: fullBorderSize ? this.refs.radioButton.offsetWidth / 2 : 2,
+      borderWidth: fullBorderSize ? this.radioButton.offsetWidth / 2 : 2,
       borderColor: componentColors.component
     }
 
@@ -126,9 +126,9 @@ export default class RadioButton extends React.Component {
     ])
 
     return (
-      <div className={rootClass} ref='root' onClick={this.onClick}> 
+      <div className={rootClass} ref={(r) => this.root = r} onClick={this.onClick}> 
         <div>
-          <div className={radioButtonClass} ref='radioButton'>
+          <div className={radioButtonClass} ref={(r) => this.radioButton = r}>
             <div className='border' style={borderStyle} />
             <div className='circle' style={circleStyle} />
           </div>
@@ -137,7 +137,7 @@ export default class RadioButton extends React.Component {
             color={componentColors.component}
             onClickColor={componentColors.ripple}
             center={true}
-            eventElement={() => { return this.refs.root }} />
+            eventElement={() => { return this.root }} />
         </div>
         {children != null &&
           <div className='text'>

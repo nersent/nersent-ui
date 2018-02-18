@@ -3,6 +3,7 @@
 @import '../../sass/mixins/ripple.scss';
 @import '../../sass/mixins/images.scss';
 @import '../../sass/mixins/icons.scss';
+@import '../../sass/mixins/typography.scss';
 
 .material-checkbox-container {
   padding: 8px;
@@ -15,6 +16,7 @@
     margin-left: 16px;
     font-size: 15px;
     color: rgba(0,0,0,$primary-opacity-light);
+    @include Body1;
   }
 
   &.dark-theme {
@@ -72,7 +74,7 @@
     -webkit-font-smoothing: antialiased;
     transform: scale(1) translateZ(0);
     transition: 2s clip-path cubic-bezier(0.19, 1, 0.22, 1), 1s transform cubic-bezier(0.19, 1, 0.22, 1);
-    @include image-center(18px, auto);
+    @include image-center(22px, auto);
     @include invert-colors;
   }
 

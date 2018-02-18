@@ -4,12 +4,14 @@ import './style.scss'
 
 import Ripple from '../Ripple'
 
+import Colors from '../../utils/colors'
 import ClassManager from '../../utils/class'
 
-export default class FlatButton extends React.Component {
+export default class Button extends React.Component {
   render () {
     const {
       color,
+      backgroundColor,
       ripple,
       className,
       children,
@@ -17,10 +19,12 @@ export default class FlatButton extends React.Component {
       darkTheme,
       onClick,
       onMouseEnter,
-      onMouseLeave
+      onMouseLeave,
+      raised
     } = this.props
 
     const style = {
+      backgroundColor: backgroundColor,
       color: color
     }
 
@@ -30,14 +34,14 @@ export default class FlatButton extends React.Component {
       onMouseLeave: onMouseLeave
     }
 
-    const rootClass = ClassManager.get('material-button flat', [
+    const rootClass = ClassManager.get((raised) ? 'button raised' : 'button flat', [
       className,
       disabled ? 'disabled' : '',
       darkTheme ? 'dark-theme' : ''
     ])
 
     const overShadeStyle = {
-      backgroundColor: color
+      backgroundColor: (raised) ? '#000' : color
     }
 
     return (
@@ -50,8 +54,10 @@ export default class FlatButton extends React.Component {
   }
 }
 
-FlatButton.defaultProps = {
-  color: '#2196F3',
+Button.defaultProps = {
+  color: '#000',
+  backgroundColor: 'transparent',
   disabled: false,
-  darkTheme: false
+  darkTheme: false,
+  raised: false
 }

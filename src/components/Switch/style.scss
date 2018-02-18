@@ -2,6 +2,7 @@
 @import '../../sass/transparency.scss';
 @import '../../sass/mixins/shadows.scss';
 @import '../../sass/mixins/positioning.scss';
+@import '../../sass/mixins/typography.scss';
 
 .material-switch-container {
   padding: 8px;
@@ -13,6 +14,7 @@
   & .text {
     font-size: 15px;
     color: rgba(0,0,0,$primary-opacity-light);
+    @include Body1;
   }
 
   &.has-text .material-switch {
@@ -25,7 +27,7 @@
 }
 
 .material-switch {
-  width: 26px;
+  width: 24px;
   height: 14px;
   position: relative;
 

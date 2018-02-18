@@ -14,9 +14,8 @@ export default class Checkbox extends React.Component {
     this.state = {
       checked: false,
       borderWidth: false,
-      iconScale: false,
-      iconAnimation: false,
-      isAnimation: false,
+      iconScaleAnimation: false,
+      iconPathAnimation: false,
       checkboxBorderTransition: 'none',
       checkboxIconTransition: 'none'
     }
@@ -42,19 +41,15 @@ export default class Checkbox extends React.Component {
     const onCheck = this.props.onCheck
     if (typeof onCheck === 'function') onCheck(flag, this, fromProps)
 
-    this.setState({
-      checked: flag, 
-      isAnimation: true, 
-      
-    })
+    this.setState({checked: flag})
 
     if (flag) {
       this.setState({
-        borderWidth: this.refs.checkbox.offsetWidth / 2, 
+        borderWidth: this.checkbox.offsetWidth / 2, 
         scaleAnimation: true,
         checkboxBorderTransition: '0.1s border-color, 0.2s border-width ' + this.easing,
         checkboxIconTransition: 'none',
-        iconAnimation: false
+        iconPathAnimation: false
       })
 
       for (var i = 0; i < this.timeouts.length; i++) {
@@ -66,12 +61,12 @@ export default class Checkbox extends React.Component {
       setTimeout(() => {
         this.setState({
           checkboxIconTransition: '1s clip-path ' + this.easing,
-          iconScale: false
+          iconScaleAnimation: false
         })
 
         this.timeouts.push(setTimeout(() => {
           this.setState({
-            iconAnimation: true
+            iconPathAnimation: true
           })
         }, 150))
   
@@ -82,13 +77,13 @@ export default class Checkbox extends React.Component {
     } else {
       this.setState({
         scaleAnimation: true, 
-        iconScale: false, 
+        iconScaleAnimation: false, 
         checkboxBorderTransition: '0.1s border-color, 0.4s border-width ' + this.easing,
         checkboxIconTransition: '1s transform ' + this.easing
       })
 
       setTimeout(() => {
-        this.setState({iconScale: true})
+        this.setState({iconScaleAnimation: true})
 
         for (var i = 0; i < this.timeouts.length; i++) {
           clearTimeout(this.timeouts[i])
@@ -98,7 +93,7 @@ export default class Checkbox extends React.Component {
 
         this.timeouts.push(setTimeout(() => {
           this.setState({
-            borderWidth: this.refs.checkbox.offsetWidth / 2 - 1
+            borderWidth: this.checkbox.offsetWidth / 2 - 1
           })
         }, 150))
   
@@ -129,10 +124,11 @@ export default class Checkbox extends React.Component {
       checked,
       borderWidth,
       borderColor,
-      iconScale,
-      iconAnimation,
+      iconScaleAnimation,
+      iconPathAnimation,
       checkboxBorderTransition,
-      checkboxIconTransition
+      checkboxIconTransition,
+      scaleAnimation
     } = this.state
 
     const componentColors = ComponentColor.get(color, checked, darkTheme, disabled, true)
@@ -144,7 +140,7 @@ export default class Checkbox extends React.Component {
     }
 
     const iconStyle = {
-      transform: `scale(${!iconScale ? 1 : 0})`,
+      transform: `scale(${!iconScaleAnimation ? 1 : 0})`,
       transition: checkboxIconTransition
     }
 
@@ -156,14 +152,14 @@ export default class Checkbox extends React.Component {
 
     const checkboxClass = ClassManager.get('material-checkbox', [
       checked ? 'checked' : '',
-      iconAnimation ? 'icon-animation' : '',
-      this.state.scaleAnimation ? 'scale' : ''
+      iconPathAnimation ? 'icon-animation' : '',
+      scaleAnimation ? 'scale' : ''
     ])
 
     return (
-      <div className={rootClass} ref='root' onClick={this.onClick}>
+      <div className={rootClass} ref={(r) => this.root = r} onClick={this.onClick}>
         <div>
-          <div className={checkboxClass} ref='checkbox'>
+          <div className={checkboxClass} ref={(r) => this.checkbox = r}>
             <div className='checkbox-border' style={borderStyle} />
             <div className='checkbox-icon' style={iconStyle} />
           </div>
@@ -172,7 +168,7 @@ export default class Checkbox extends React.Component {
             color={componentColors.component}
             onClickColor={componentColors.ripple}
             center={true}
-            eventElement={() => { return this.refs.root }} />
+            eventElement={() => { return this.root }} />
         </div>
         {children != null &&
           <div className='text'>

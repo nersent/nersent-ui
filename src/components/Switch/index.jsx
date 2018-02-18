@@ -105,7 +105,7 @@ export default class Switch extends React.Component {
     ])
 
     return (
-      <div className={rootClass} onClick={this.onClick} ref='root'>
+      <div className={rootClass} onClick={this.onClick} ref={(r) => this.root = r}>
         {children != null &&
           <div className='text'>
             {children}
@@ -120,7 +120,7 @@ export default class Switch extends React.Component {
               color={trackColor.component}
               onClickColor={trackColor.ripple}
               center={true}
-              eventElement={() => { return this.refs.root }} />
+              eventElement={() => { return this.root }} />
           </div>
         </div>
       </div>

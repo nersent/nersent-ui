@@ -67,7 +67,10 @@ let config = {
 
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      'react': join(__dirname, 'node_modules', 'react')
+    }
   }
 }
 

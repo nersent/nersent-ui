@@ -212,7 +212,7 @@ export default class Ripple extends React.Component {
 Ripple.defaultProps = {
   center: false,
   offsetX: 0,
-  scale: 16,
+  scale: 14,
   time: 0.4,
   opacity: 0.2,
   touchSupport: true,

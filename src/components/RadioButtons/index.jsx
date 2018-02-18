@@ -4,7 +4,7 @@ import './style.scss'
 
 import RadioButton from '../RadioButton'
 
-export default class RadioButtonsContainer extends React.Component {
+export default class RadioButtons extends React.Component {
   constructor () {
     super()
 
@@ -44,7 +44,7 @@ export default class RadioButtonsContainer extends React.Component {
     this.radioButtons = []
 
     return (
-      <div className='radio-buttons-container'>
+      <div className='radio-buttons'>
         {
           React.Children.map(this.props.children, child => {
             return React.cloneElement(child, {
