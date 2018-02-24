@@ -1,62 +1,50 @@
-const { join } = require('path')
-const webpack = require('webpack')
-const UglifyJSWebpackPlugin = require('uglifyjs-webpack-plugin')
+const { join } = require("path");
+const webpack = require("webpack");
+const UglifyJSWebpackPlugin = require("uglifyjs-webpack-plugin");
 
-const productionDevtool = 'source-map'
-const developmentDevtool = 'eval-source-map'
+const productionDevtool = "source-map";
+const developmentDevtool = "eval-source-map";
 
-const include = [join(__dirname, 'src')]
+const include = [join(__dirname, "src")];
+const exclude = /node_modules/;
 
-let config = {
-  devtool: (process.env.NODE_ENV === 'production') ? productionDevtool : developmentDevtool,
+const config = {
+  target: "web",
 
   entry: {
-    index: './src/index.jsx'
+    index: "./src/index"
   },
 
-  devServer: {
-    contentBase: './',
-    publicPath: 'http://localhost:8080/build/',
-    hot: true
-  },
+  devtool:
+    process.env.NODE_ENV === "production"
+      ? productionDevtool
+      : developmentDevtool,
 
   output: {
-    path: join(__dirname, 'build'),
-    filename: '[name].js',
-    libraryTarget: 'commonjs2'
+    path: join(__dirname, "build"),
+    filename: "[name].js",
+    libraryTarget: "commonjs2"
   },
 
   module: {
     rules: [
       {
-        test: /\.(scss)$/,
-        include: include,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'style-loader'
-          }, {
-            loader: 'css-loader'
-          }, {
-            loader: 'sass-loader'
-          }
-        ]
-      }, {
         test: /\.(png|gif|jpg|woff2|tff|svg)$/,
-        include: include,
-        exclude: /node_modules/,
+        include,
+        exclude,
         use: [
           {
-            loader: 'url-loader'
+            loader: "url-loader"
           }
         ]
-      }, {
-        test: /\.(jsx|js)$/,
-        include: include,
-        exclude: /node_modules/,
+      },
+      {
+        test: /\.(tsx|ts)$/,
+        include,
+        exclude,
         use: [
           {
-            loader: 'babel-loader'
+            loader: "ts-loader"
           }
         ]
       }
@@ -66,27 +54,26 @@ let config = {
   plugins: [],
 
   resolve: {
-    modules: ['node_modules'],
-    extensions: ['.js', '.jsx'],
-    alias: {
-      'react': join(__dirname, 'node_modules', 'react')
-    }
+    modules: ["node_modules"],
+    extensions: [".js", ".tsx", ".ts"]
   }
-}
+};
 
-if (process.env.NODE_ENV === 'production') {
-  config.plugins.push(new UglifyJSWebpackPlugin({
-    uglifyOptions: {
-      output: {
-        comments: false
+if (process.env.NODE_ENV === "production") {
+  config.plugins.push(
+    new UglifyJSWebpackPlugin({
+      uglifyOptions: {
+        output: {
+          comments: false
+        }
       }
-    }
-  }))
-  config.plugins.push(new webpack.DefinePlugin({
-    'process.env': {
-      'NODE_ENV': JSON.stringify('production')
-    }
-  }))
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    })
+  );
 }
 
-module.exports = [config]
+module.exports = [config];

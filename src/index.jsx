@@ -1,7 +1,0 @@
-export { default as Checkbox } from './components/Checkbox'
-export { default as TextField } from './components/TextField'
-export { default as Switch } from './components/Switch'
-export { default as Ripple } from './components/Ripple'
-export { default as RadioButtons } from './components/RadioButtons'
-export { default as RadioButton } from './components/RadioButton'
-export { default as Button } from './components/Button'
