@@ -3,7 +3,7 @@ import React from "react";
 import colors from "../../defaults/colors";
 
 import Theme from "../../enums/theme";
-
+import Ripples from "../Ripples";
 import Border from "./Border";
 import Container from "./Container";
 import Icon from "./Icon";
@@ -50,6 +50,15 @@ export default class Checkbox extends React.Component<IProps, IState> {
   private checkbox: HTMLDivElement;
   private timeouts = [];
   private easing = "cubic-bezier(0.19, 1, 0.22, 1)";
+  private ripples: Ripples;
+
+  /*public onMouseDown = ({ pageX, pageY }) => {
+    this.ripples.makeRipple(pageX, pageY);
+  }
+
+  public onMouseLeave = () => {
+    this.ripples.removeRipples();
+  }*/
 
   public onClick = () => {
     if (this.props.disabled) { return; }
@@ -152,26 +161,34 @@ export default class Checkbox extends React.Component<IProps, IState> {
       iconTransition,
     } = this.state;
 
+    const events = {
+      onClick: this.onClick,
+      /*onMouseDown: this.onMouseDown,
+      onMouseLeave: this.onMouseLeave,*/
+    };
+
     return (
-      <Container className={className} style={style} onClick={this.onClick}>
-        <StyledCheckbox
-          innerRef={r => (this.checkbox = r)}
-          scaleAnimation={scaleAnimation}
-        >
-          <Border
-            checked={checked}
-            color={color}
-            borderWidth={borderWidth}
-            disabled={disabled}
-            theme={theme}
-            transition={borderTransition}
-          />
-          <Icon
-            pathAnimation={iconPathAnimation}
-            scaleAnimation={iconScaleAnimation}
-            transition={iconTransition}
-          />
-        </StyledCheckbox>
+      <Container className={className} style={style} onClick={this.onClick} {...events}>
+        <div>
+          <StyledCheckbox
+            innerRef={r => (this.checkbox = r)}
+            scaleAnimation={scaleAnimation}
+          >
+            <Border
+              checked={checked}
+              color={color}
+              borderWidth={borderWidth}
+              disabled={disabled}
+              theme={theme}
+              transition={borderTransition}
+            />
+            <Icon
+              pathAnimation={iconPathAnimation}
+              scaleAnimation={iconScaleAnimation}
+              transition={iconTransition}
+            />
+          </StyledCheckbox>
+        </div>
         {children != null &&
           <Text disabled={disabled} theme={theme}>
             {children}

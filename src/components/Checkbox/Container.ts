@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import UserSelections from "../../mixins/user-selection";
+import Cursors from "../../mixins/cursors";
 
 const Container = styled.div`
   margin: 64px;
@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   -webkit-font-smoothing: antialiased;
-  ${UserSelections.noUserSelect()}
+  ${Cursors.pointer()}
 `;
 
 export default Container;
