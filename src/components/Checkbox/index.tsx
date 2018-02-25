@@ -204,7 +204,13 @@ export default class Checkbox extends React.Component<IProps, IState> {
                 theme={theme}
               />
             </StyledCheckbox>
-            <Ripples icon ref={r => (this.ripples = r)} color="#000" parentWidth={18} parentHeight={18} />
+            <Ripples
+              icon
+              ref={r => (this.ripples = r)}
+              color="#000"
+              parentWidth={18}
+              parentHeight={18}
+              initialOpacity={0.1} />
           </div>
           {children != null &&
             <Text disabled={disabled} theme={theme}>

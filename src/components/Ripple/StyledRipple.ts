@@ -11,7 +11,6 @@ interface IProps {
   opacity: number;
   rippleTime: number;
   fadeOutTime: number;
-  icon: boolean;
 }
 
 const getHighestSize = ({ height, width }) => {

@@ -116,7 +116,14 @@ export default class Ripples extends React.Component<IProps, IState> {
   public render() {
     const { ripples, color } = this.state;
 
-    const { fadeOutTime, initialOpacity, rippleTime, icon, parentWidth, parentHeight } = this.props;
+    const {
+      fadeOutTime,
+      initialOpacity,
+      rippleTime,
+      icon,
+      parentWidth,
+      parentHeight,
+    } = this.props;
 
     const component = (
       <StyledRipples innerRef={r => (this.ripples = r)}>
@@ -134,7 +141,6 @@ export default class Ripples extends React.Component<IProps, IState> {
               initialOpacity={initialOpacity}
               color={color}
               isRemoving={isRemoving}
-              icon={icon}
               x={x}
               y={y}
               id={id}
