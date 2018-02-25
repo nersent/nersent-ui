@@ -12,6 +12,7 @@ interface IProps {
   borderWidth: number;
   disabled: boolean;
   theme: Theme;
+  transition: string;
 }
 
 const Border = withProps<IProps>()(styled.div)`
@@ -22,7 +23,7 @@ const Border = withProps<IProps>()(styled.div)`
   border-style: solid;
   border-radius: 3px;
   box-sizing: border-box;
-  transition: 0.1s border-color, 0.4s border-width cubic-bezier(0.19, 1, 0.22, 1);
+  transition: ${props => props.transition};
 `;
 
 export default Border;

@@ -8,9 +8,9 @@ import icons from "../../mixins/icons";
 import images from "../../mixins/images";
 
 interface IProps {
-  transform: string;
   transition: string;
-  iconPathAnimation: boolean;
+  pathAnimation: boolean;
+  scaleAnimation: boolean;
 }
 
 const Icon = withProps<IProps>()(styled.div)`
@@ -20,9 +20,9 @@ const Icon = withProps<IProps>()(styled.div)`
   top: 0;
   left: 0;
   background-image: url(${checkIcon});
-  clip-path: inset(${props => props.iconPathAnimation ? "0 0 0 0" : "100% 50% 0 50%"});
+  clip-path: inset(${props => props.pathAnimation ? "0 0 0 0" : "100% 50% 0 50%"});
   -webkit-font-smoothing: antialiased;
-  transform: ${props => props.transform};
+  transform: scale(${props => !props.scaleAnimation ? 1 : 0});
   transition: ${props => props.transition};
   ${images.center("22px", "auto")}
   ${icons.invertColors()}
