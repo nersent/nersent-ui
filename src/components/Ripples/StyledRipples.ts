@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 import { withProps } from "../../utils/with-props";
 
-interface IProps {}
-
-const StyledRipples = withProps<IProps>()(styled.div)`
+const StyledRipples = withProps<{}>()(styled.div)`
   position: absolute;
   width: 100%;
   height: 100%;

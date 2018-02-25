@@ -29,10 +29,8 @@ const StyledButton = withProps<IProps>()(styled.div)`
   position: relative;
   padding: 0 16px 0 16px;
   text-transform: uppercase;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  float: left;
-  clear: both;
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   pointer-events: ${props => (props.disabled ? "none" : "auto")};
   color: ${props => (props.disabled ? "#000" : props.color)};
@@ -46,7 +44,6 @@ const StyledButton = withProps<IProps>()(styled.div)`
   ${userSelection.noTapHighlight()}
   overflow: hidden;
   transition: 0.2s box-shadow;
-
 
   &:hover {
     ${props => (props.raised ? shadows.shadow(buttons.hoveredElevation) : "")};

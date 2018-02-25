@@ -52,14 +52,6 @@ export default class Checkbox extends React.Component<IProps, IState> {
   private easing = "cubic-bezier(0.19, 1, 0.22, 1)";
   private ripples: Ripples;
 
-  /*public onMouseDown = ({ pageX, pageY }) => {
-    this.ripples.makeRipple(pageX, pageY);
-  }
-
-  public onMouseLeave = () => {
-    this.ripples.removeRipples();
-  }*/
-
   public onClick = () => {
     if (this.props.disabled) { return; }
 
@@ -69,8 +61,10 @@ export default class Checkbox extends React.Component<IProps, IState> {
   public check(flag: boolean, fromProps = false) {
     if (this.isAnimating || this.state.checked === flag) { return; }
 
-    const onCheck = this.props.onCheck;
-    if (typeof onCheck === "function") { onCheck(flag, this, fromProps); }
+    const { onCheck } = this.props;
+    if (typeof onCheck === "function") {
+      onCheck(flag, this, fromProps);
+    }
 
     this.setState({checked: flag});
 
@@ -83,8 +77,8 @@ export default class Checkbox extends React.Component<IProps, IState> {
         iconPathAnimation: false,
       });
 
-      for (const t of this.timeouts) {
-        clearTimeout(t);
+      for (const timeout of this.timeouts) {
+        clearTimeout(timeout);
       }
 
       this.timeouts = [];
@@ -116,8 +110,8 @@ export default class Checkbox extends React.Component<IProps, IState> {
       setTimeout(() => {
         this.setState({iconScaleAnimation: true});
 
-        for (const t of this.timeouts) {
-          clearTimeout(t);
+        for (const timeout of this.timeouts) {
+          clearTimeout(timeout);
         }
 
         this.timeouts = [];
@@ -163,39 +157,39 @@ export default class Checkbox extends React.Component<IProps, IState> {
 
     const events = {
       onClick: this.onClick,
-      /*onMouseDown: this.onMouseDown,
-      onMouseLeave: this.onMouseLeave,*/
     };
 
     return (
-      <Container className={className} style={style} onClick={this.onClick} {...events}>
-        <div>
-          <StyledCheckbox
-            innerRef={r => (this.checkbox = r)}
-            scaleAnimation={scaleAnimation}
-          >
-            <Border
-              checked={checked}
-              color={color}
-              borderWidth={borderWidth}
-              disabled={disabled}
-              theme={theme}
-              transition={borderTransition}
-            />
-            <Icon
-              pathAnimation={iconPathAnimation}
-              scaleAnimation={iconScaleAnimation}
-              transition={iconTransition}
-              theme={theme}
-            />
-          </StyledCheckbox>
-        </div>
-        {children != null &&
-          <Text disabled={disabled} theme={theme}>
-            {children}
-          </Text>
-        }
-      </Container>
+      <div className={className} style={style}>
+        <Container onClick={this.onClick} {...events}>
+          <div>
+            <StyledCheckbox
+              innerRef={r => (this.checkbox = r)}
+              scaleAnimation={scaleAnimation}
+            >
+              <Border
+                checked={checked}
+                color={color}
+                borderWidth={borderWidth}
+                disabled={disabled}
+                theme={theme}
+                transition={borderTransition}
+              />
+              <Icon
+                pathAnimation={iconPathAnimation}
+                scaleAnimation={iconScaleAnimation}
+                transition={iconTransition}
+                theme={theme}
+              />
+            </StyledCheckbox>
+          </div>
+          {children != null &&
+            <Text disabled={disabled} theme={theme}>
+              {children}
+            </Text>
+          }
+        </Container>
+      </div>
     );
   }
 }

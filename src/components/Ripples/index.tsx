@@ -37,7 +37,7 @@ export default class Ripples extends React.Component<IProps, IState> {
     fadeOutTime: 0.6,
     initialOpacity: 0.3,
     color: "#000",
-    rippleTime: 1.5,
+    rippleTime: 1.2,
   };
 
   public state: IState = {
