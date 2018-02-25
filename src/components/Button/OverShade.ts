@@ -11,6 +11,7 @@ const OverShade = styled.div`
   background-color: ${props => props.color};
   opacity: 0;
   transition: 0.25s opacity;
+  z-index: 2;
 
   &:hover {
     opacity: ${props => transparency[props.theme].button.focused};

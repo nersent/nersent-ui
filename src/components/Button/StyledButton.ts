@@ -1,5 +1,6 @@
-import React from "react";
-import styled, { StyledFunction } from "styled-components";
+import styled from "styled-components";
+
+import { withProps } from "../../utils/with-props";
 
 import buttons from "../../defaults/buttons";
 import transparency from "../../defaults/transparency";
@@ -21,12 +22,10 @@ interface IProps {
   raised: boolean;
   color: string;
   backgroundColor: string;
+  dialog: boolean;
 }
 
-const div: StyledFunction<IProps & React.HTMLProps<HTMLDivElement>> =
-  styled.div;
-
-const StyledButton = div`
+const StyledButton = withProps<IProps>()(styled.div)`
   position: relative;
   padding: 0 16px 0 16px;
   text-transform: uppercase;
@@ -41,7 +40,7 @@ const StyledButton = div`
   ${props =>
     props.raised && !props.disabled ? shadows.shadow(buttons.elevation) : ""};
   border-radius: ${buttons.cornerRadius}px;
-  min-width: ${buttons.minWidth}px;
+  min-width: ${props => (props.dialog ? 0 : buttons.minWidth)}px;
   height: ${buttons.height}px;
   ${userSelection.noUserSelect()}
   overflow: hidden;
