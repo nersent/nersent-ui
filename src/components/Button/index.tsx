@@ -33,7 +33,11 @@ export default class Button extends React.Component<IProps, {}> {
 
   public onMouseDown = e => {
     this.ripples.makeRipple(e);
-  };
+  }
+
+  public onMouseLeave = e => {
+    this.ripples.handleRippleRemove();
+  }
 
   public render() {
     let { color } = this.props;
@@ -55,6 +59,7 @@ export default class Button extends React.Component<IProps, {}> {
 
     const events = {
       onMouseDown: this.onMouseDown,
+      onMouseLeave: this.onMouseLeave,
     };
 
     return (

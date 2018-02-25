@@ -9,15 +9,17 @@ interface IProps {
   style?: {};
   center?: boolean;
   scale?: number;
-  time?: number;
-  opacity?: number;
+  fadeOutTime?: number;
+  rippleTime?: number;
+  initialOpacity?: number;
   color?: string;
 }
 
 interface IRipple {
-  color: string;
   x: number;
   y: number;
+  id: number;
+  isRemoving: boolean;
 }
 
 interface IState {
@@ -27,46 +29,65 @@ interface IState {
 let nextRippleId = -1;
 
 export default class Ripples extends React.Component<IProps, IState> {
-  public static defaultProps = {
+  public static defaultProps: IProps = {
     center: false,
     scale: 16,
-    time: 0.8,
-    opacity: 0.6,
-    touchSupport: true,
+    fadeOutTime: 0.6,
+    initialOpacity: 0.3,
     color: "#000",
+    rippleTime: 0.6,
   };
 
-  public state = {
+  public state: IState = {
     ripples: [],
   };
 
   private ripples: HTMLDivElement;
 
+  public componentDidMount() {
+    window.addEventListener("mouseup", () => {
+      this.handleRippleRemove();
+    });
+  }
+
   public makeRipple(e: Event) {
-    const { color, opacity } = this.props;
+    const { color, initialOpacity } = this.props;
+
+    const newRipple: IRipple = {
+      ...this.getPosition(false, 0, e),
+      id: nextRippleId++,
+      isRemoving: false,
+    };
 
     this.setState({
       ripples: [
         ...this.state.ripples,
-        {
-          color,
-          opacity,
-          ...this.getPosition(false, 0, e),
-          id: nextRippleId++,
-        },
+        newRipple,
       ],
     });
   }
 
   public removeRipple = (id: number) => {
     const index = this.state.ripples.indexOf(
-      this.state.ripples.filter(ripple => ripple.id === id)[0]
+      this.state.ripples.filter(ripple => ripple.id === id)[0],
     );
 
     this.setState({
       ripples: [
         ...this.state.ripples.slice(0, index),
         ...this.state.ripples.slice(index + 1),
+      ],
+    });
+  }
+
+  public handleRippleRemove = () => {
+    this.setState({
+      ripples: [
+        ...this.state.ripples.map((ripple: IRipple) => {
+          const newRipple: IRipple = { ...ripple };
+          newRipple.isRemoving = true;
+          return newRipple;
+        }),
       ],
     });
   }
@@ -93,13 +114,13 @@ export default class Ripples extends React.Component<IProps, IState> {
       }
 
       return {
-        x: pos.x - this.ripples.getBoundingClientRect().left + "px",
-        y: pos.y - this.ripples.getBoundingClientRect().top + "px",
+        x: pos.x - this.ripples.getBoundingClientRect().left,
+        y: pos.y - this.ripples.getBoundingClientRect().top,
       };
     } else {
       return {
-        x: 50 + offsetX + "%",
-        y: "50%",
+        x: 50 + offsetX,
+        y: 50,
       };
     }
   }
@@ -107,21 +128,28 @@ export default class Ripples extends React.Component<IProps, IState> {
   public render() {
     const { ripples } = this.state;
 
-    const { time, opacity } = this.props;
+    const { fadeOutTime, initialOpacity, color, rippleTime }: IProps = this.props;
 
     return (
       <StyledRipples innerRef={r => (this.ripples = r)}>
-        {ripples.map(ripple => {
+        {ripples.map((ripple: IRipple) => {
           const { offsetHeight, offsetWidth } = this.ripples;
+          const { id, x, y, isRemoving } = ripple;
 
           return (
             <Ripple
               height={offsetHeight}
               width={offsetWidth}
-              time={time}
+              fadeOutTime={fadeOutTime}
+              rippleTime={rippleTime}
               removeRipple={this.removeRipple}
-              {...ripple}
-              key={ripple.id}
+              initialOpacity={initialOpacity}
+              color={color}
+              isRemoving={isRemoving}
+              x={x}
+              y={y}
+              id={id}
+              key={id}
             />
           );
         })}

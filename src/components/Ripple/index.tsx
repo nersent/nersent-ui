@@ -7,12 +7,14 @@ interface IProps {
   height: number;
   width: number;
   color: string;
-  opacity: number;
-  time: number;
+  initialOpacity: number;
+  fadeOutTime: number;
+  rippleTime: number;
   x: number;
   y: number;
   removeRipple: (ripple) => void;
   id: number;
+  isRemoving: boolean;
 }
 
 interface IRipple {
@@ -32,13 +34,13 @@ export default class Ripple extends React.Component<IProps, IState> {
     opacity: 1,
   };
 
-  timeouts = [];
+  public timeouts = [];
 
-  componentDidMount() {
-    const { height, width, time, removeRipple, id, opacity } = this.props;
+  public componentDidMount() {
+    const { height, width, initialOpacity } = this.props;
 
     this.setState({
-      opacity,
+      opacity: initialOpacity,
     });
 
     this.timeouts.push(
@@ -47,31 +49,38 @@ export default class Ripple extends React.Component<IProps, IState> {
           width,
           height,
         });
-      }, 1)
+      }),
     );
+  }
+
+  public remove() {
+    const { removeRipple, id, fadeOutTime } = this.props;
 
     this.timeouts.push(
       setTimeout(() => {
         this.setState({
           opacity: 0,
         });
-      }, 100)
-    );
-
-    this.timeouts.push(
-      setTimeout(() => {
-        removeRipple(id);
-      }, time * 1000)
+        this.timeouts.push(
+          setTimeout(() => {
+            removeRipple(id);
+          }, fadeOutTime * 1000),
+        );
+      }, 100),
     );
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this.timeouts.forEach(clearTimeout);
   }
 
   public render() {
     const { height, width, opacity } = this.state;
-    const { color, time, x, y } = this.props;
+    const { color, x, y, isRemoving, rippleTime, fadeOutTime } = this.props;
+
+    if (isRemoving) {
+      this.remove();
+    }
 
     return (
       <StyledRipple
@@ -79,6 +88,8 @@ export default class Ripple extends React.Component<IProps, IState> {
         width={width}
         color={color}
         opacity={opacity}
+        rippleTime={rippleTime}
+        fadeOutTime={fadeOutTime}
         x={x}
         y={y}
       />

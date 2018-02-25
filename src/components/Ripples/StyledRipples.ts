@@ -10,6 +10,8 @@ const StyledRipples = withProps<IProps>()(styled.div)`
   height: 100%;
   left: 0;
   top: 0;
+  overflow: hidden;
+  pointer-events: none;
 `;
 
 export default StyledRipples;
