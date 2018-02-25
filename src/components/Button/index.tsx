@@ -129,23 +129,26 @@ export default class Button extends React.Component<IProps, {}> {
     };
 
     return (
-      <StyledButton
-        className={className}
-        style={style}
-        raised={raised}
-        color={color}
-        disabled={disabled}
-        backgroundColor={backgroundColor}
-        theme={theme}
-        dialog={dialog}
-        {...events}
-      >
-        <Text disabled={disabled} theme={theme}>
-          {children}
-        </Text>
-        <OverShade theme={theme} color={color} />
-        <Ripples ref={r => (this.ripples = r)} color={color} />
-      </StyledButton>
+      <div>
+        <StyledButton
+          className={className}
+          style={style}
+          raised={raised}
+          color={color}
+          disabled={disabled}
+          backgroundColor={backgroundColor}
+          theme={theme}
+          dialog={dialog}
+          {...events}
+        >
+          <Text disabled={disabled} theme={theme}>
+            {children}
+          </Text>
+          <OverShade theme={theme} color={color} />
+          <Ripples ref={r => (this.ripples = r)} color={color} />
+        </StyledButton>
+        <div style={{clear: "both"}} />
+      </div>
     );
   }
 }

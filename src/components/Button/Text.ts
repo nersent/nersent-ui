@@ -23,7 +23,7 @@ const Text = div`
       ? transparency[props.theme].button.text.disabled
       : transparency[props.theme].text.primary};
   ${typography.button()};
-  ${positioning.center(Align.CenterHorizontal)}
+  ${positioning.center(Align.CenterBoth)}
 `;
 
 export default Text;

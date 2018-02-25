@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const Text = withProps<IProps>()(styled.div)`
-  margin-left: 16px;
+  margin-left: 8px;
   font-size: 15px;
   color: ${props => componentForeground(props.disabled, props.theme)};
   ${typography.body2()}

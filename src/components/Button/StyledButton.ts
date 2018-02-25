@@ -29,14 +29,13 @@ const StyledButton = withProps<IProps>()(styled.div)`
   position: relative;
   padding: 0 16px 0 16px;
   text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
+  float: left;
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   pointer-events: ${props => (props.disabled ? "none" : "auto")};
   color: ${props => (props.disabled ? "#000" : props.color)};
   background-color: ${props => getBackgroundColor(props)};
-  ${props =>
-    props.raised && !props.disabled ? shadows.shadow(buttons.elevation) : ""};
+  box-shadow: ${props =>
+    props.raised && !props.disabled ? shadows[buttons.elevation] : "none"};
   border-radius: ${buttons.cornerRadius}px;
   min-width: ${props => (props.dialog ? 0 : buttons.minWidth)}px;
   height: ${buttons.height}px;
@@ -46,7 +45,11 @@ const StyledButton = withProps<IProps>()(styled.div)`
   transition: 0.2s box-shadow;
 
   &:hover {
-    ${props => (props.raised ? shadows.shadow(buttons.hoveredElevation) : "")};
+    box-shadow: ${props => (props.raised ? shadows[buttons.hoveredElevation] : "none")};
+  }
+
+  &:active {
+    box-shadow: ${props => (props.raised ? shadows[buttons.pressedElevation] : "none")};
   }
 `;
 
