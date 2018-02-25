@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import Ripple from "../Ripple";
+import IconRipple from "./IconRipple";
 import StyledRipples from "./StyledRipples";
 
 interface IProps {
@@ -13,6 +14,9 @@ interface IProps {
   rippleTime?: number;
   initialOpacity?: number;
   color?: string;
+  icon?: boolean;
+  parentHeight?: number;
+  parentWidth?: number;
 }
 
 interface IRipple {
@@ -20,12 +24,11 @@ interface IRipple {
   y: number;
   id: number;
   isRemoving: boolean;
-  color: string;
-  unit: string;
 }
 
 interface IState {
   ripples: IRipple[];
+  color: string;
 }
 
 let nextRippleId = -1;
@@ -38,10 +41,12 @@ export default class Ripples extends React.Component<IProps, IState> {
     initialOpacity: 0.2,
     color: "#000",
     rippleTime: 1.2,
+    icon: false,
   };
 
   public state: IState = {
     ripples: [],
+    color: this.props.color,
   };
 
   private ripples: HTMLDivElement;
@@ -57,10 +62,9 @@ export default class Ripples extends React.Component<IProps, IState> {
     const { color, initialOpacity } = this.props;
 
     const newRipple: IRipple = {
-      ...this.getRipplePosition(false, 0, mouseX, mouseY),
+      ...this.getRipplePosition(0, mouseX, mouseY),
       id: nextRippleId++,
       isRemoving: false,
-      color,
     };
 
     this.currentRipple = newRipple;
@@ -98,36 +102,27 @@ export default class Ripples extends React.Component<IProps, IState> {
     });
   }
 
-  public changeRippleColor = (newColor: string, id: number = this.currentRipple.id) => {
-    this.changeRippleProperty(id, "color", newColor);
+  public changeRippleColor = (newColor: string) => {
+    this.setState({color: newColor});
   }
 
-  public getRipplePosition(center: boolean, offsetX = 0, x = 0, y = 0) {
-    if (!center) {
-      return {
-        x: x - this.ripples.getBoundingClientRect().left,
-        y: y - this.ripples.getBoundingClientRect().top,
-        unit: "px",
-      };
-    } else {
-      return {
-        x: 50 + offsetX,
-        y: 50,
-        unit: "%",
-      };
-    }
+  public getRipplePosition(offsetX = 0, x = 0, y = 0) {
+    return {
+      x: x - this.ripples.getBoundingClientRect().left,
+      y: y - this.ripples.getBoundingClientRect().top,
+    };
   }
 
   public render() {
-    const { ripples } = this.state;
+    const { ripples, color } = this.state;
 
-    const { fadeOutTime, initialOpacity, rippleTime }: IProps = this.props;
+    const { fadeOutTime, initialOpacity, rippleTime, icon, parentWidth, parentHeight } = this.props;
 
-    return (
+    const component = (
       <StyledRipples innerRef={r => (this.ripples = r)}>
         {ripples.map((ripple: IRipple) => {
           const { offsetHeight, offsetWidth } = this.ripples;
-          const { id, x, y, isRemoving, color, unit } = ripple;
+          const { id, x, y, isRemoving } = ripple;
 
           return (
             <Ripple
@@ -139,7 +134,7 @@ export default class Ripples extends React.Component<IProps, IState> {
               initialOpacity={initialOpacity}
               color={color}
               isRemoving={isRemoving}
-              unit={unit}
+              icon={icon}
               x={x}
               y={y}
               id={id}
@@ -149,6 +144,10 @@ export default class Ripples extends React.Component<IProps, IState> {
         })}
       </StyledRipples>
     );
+
+    return icon
+        && <IconRipple width={parentWidth} height={parentHeight} color={color}>{component}</IconRipple>
+        || component;
   }
 
   private changeRippleProperty = (id: number, property: string, newValue: any) => {

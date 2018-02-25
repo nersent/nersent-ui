@@ -11,23 +11,23 @@ interface IProps {
   opacity: number;
   rippleTime: number;
   fadeOutTime: number;
-  unit: string;
+  icon: boolean;
 }
 
-const getSize = ({ height, width }) => {
+const getHighestSize = ({ height, width }) => {
   return Math.max(width, height);
 };
 
-const getWidth = ({ x, width }) => {
-  if (width === 0) {
+const getSize = (x, size) => {
+  if (size === 0) {
     return 0;
   }
 
-  if (x > width / 2) {
+  if (x > size / 2) {
     return 2 * x + 10;
   }
 
-  return 2 * width - 2 * x + 10;
+  return 2 * size - 2 * x + 10;
 };
 
 const easing = "cubic-bezier(0.19, 1, 0.22, 1)";
@@ -36,15 +36,30 @@ const StyledRipple = withProps<IProps>()(styled.div)`
   position: absolute;
   background-color: ${props => props.color};
   border-radius: 50%;
-  left: ${props => props.x + props.unit};
-  top: ${props => props.y + props.unit};
+  ${props => {
+    let x = props.x;
+    if (props.x > props.width) {
+      x = props.width;
+    }
+
+    const width = getSize(x, getHighestSize(props));
+    const height = getSize(props.y, getHighestSize(props));
+
+    const size = getHighestSize({ height, width });
+
+    return `
+      left: ${x}px;
+      top: ${props.y}px;
+      height: ${size}px;
+      width: ${size}px;
+    `;
+  }};
   transform: translate3d(-50.1%, -50.1%, 0);
-  height: ${props => getWidth(props)}px;
-  width: ${props => getWidth(props)}px;
   opacity: ${props => props.opacity};
   transition: ${props => props.rippleTime}s width ${easing},
     ${props => props.rippleTime}s height ${easing},
-    ${props => props.fadeOutTime}s opacity;
+    ${props => props.fadeOutTime}s opacity,
+    0.3s background-color;
   overflow: hidden;
   pointer-events: none;
 `;
