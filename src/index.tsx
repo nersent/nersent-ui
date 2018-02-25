@@ -5,6 +5,15 @@ const robotoMedium = require("./fonts/Roboto-Medium.woff2");
 const robotoRegular = require("./fonts/Roboto-Regular.woff2");
 
 injectGlobal`
+  html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #FAFAFA;
+    font-size: 15px;
+  }
+
   @font-face {
     font-family: 'Roboto';
     font-style: normal;
@@ -27,6 +36,7 @@ injectGlobal`
   }
 `;
 
-export { default as Button } from "./components/Button";
-
 export { default as colors } from "./defaults/colors";
+
+export { default as Button } from "./components/Button";
+export { default as Checkbox } from "./components/Checkbox";

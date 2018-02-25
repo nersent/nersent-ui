@@ -13,6 +13,11 @@ export default {
         disabled: 0.26,
       },
     },
+    selectionControls: {
+      on: 1,
+      off: 0.54,
+      disabled: 0.26,
+    },
     dividers: 0.12,
     icons: {
       active: 1,
@@ -32,6 +37,11 @@ export default {
       text: {
         disabled: 0.3,
       },
+    },
+    selectionControls: {
+      on: 1,
+      off: 0.70,
+      disabled: 0.30,
     },
     dividers: 0.12,
     icons: {
