@@ -186,6 +186,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
               pathAnimation={iconPathAnimation}
               scaleAnimation={iconScaleAnimation}
               transition={iconTransition}
+              theme={theme}
             />
           </StyledCheckbox>
         </div>
