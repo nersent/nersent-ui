@@ -42,7 +42,7 @@ const StyledButton = withProps<IProps>()(styled.div)`
   ${userSelection.noUserSelect()}
   ${userSelection.noTapHighlight()}
   overflow: hidden;
-  transition: 0.2s box-shadow;
+  transition: 0.3s box-shadow;
 
   &:hover {
     box-shadow: ${props => (props.raised ? shadows[buttons.hoveredElevation] : "none")};

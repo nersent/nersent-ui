@@ -160,8 +160,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
     };
 
     return (
-      <div className={className} style={style}>
-        <Container onClick={this.onClick} {...events}>
+        <Container className={className} style={style} onClick={this.onClick} {...events}>
           <div>
             <StyledCheckbox
               innerRef={r => (this.checkbox = r)}
@@ -189,7 +188,6 @@ export default class Checkbox extends React.Component<IProps, IState> {
             </Text>
           }
         </Container>
-      </div>
     );
   }
 }

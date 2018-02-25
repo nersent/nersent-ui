@@ -7,7 +7,7 @@ export default {
     },
     button: {
       pressed: 0.4,
-      focused: 0.12,
+      focused: 0.08,
       disabled: 0.12,
       text: {
         disabled: 0.26,
@@ -32,7 +32,7 @@ export default {
     },
     button: {
       pressed: 0.25,
-      focused: 0.12,
+      focused: 0.08,
       disabled: 0.12,
       text: {
         disabled: 0.3,

@@ -44,7 +44,7 @@ export default class Button extends React.Component<IProps, {}> {
 
   private ripples: Ripples;
 
-  public onTouchStart = (e) => {
+  public onTouchStart = e => {
     const { onTouchStart } = this.props;
 
     if (typeof onTouchStart === "function") {
@@ -52,7 +52,7 @@ export default class Button extends React.Component<IProps, {}> {
     }
   }
 
-  public onTouchEnd = (e) => {
+  public onTouchEnd = e => {
     const { onTouchEnd } = this.props;
 
     if (typeof onTouchEnd === "function") {
@@ -60,7 +60,7 @@ export default class Button extends React.Component<IProps, {}> {
     }
   }
 
-  public onMouseDown = (e) => {
+  public onMouseDown = e => {
     const { onMouseDown, ripple, customRippleBehavior } = this.props;
     const { pageX, pageY } = e;
 
@@ -73,7 +73,7 @@ export default class Button extends React.Component<IProps, {}> {
     }
   }
 
-  public onMouseEnter = (e) => {
+  public onMouseEnter = e => {
     const { onMouseEnter } = this.props;
 
     if (typeof onMouseEnter === "function") {
@@ -81,7 +81,7 @@ export default class Button extends React.Component<IProps, {}> {
     }
   }
 
-  public onMouseLeave = (e) => {
+  public onMouseLeave = e => {
     const { onMouseLeave, ripple, customRippleBehavior } = this.props;
 
     if (ripple && !customRippleBehavior) {
@@ -93,7 +93,7 @@ export default class Button extends React.Component<IProps, {}> {
     }
   }
 
-  public onClick = (e) => {
+  public onClick = e => {
     const { onClick } = this.props;
 
     if (typeof onClick === "function") {
@@ -147,7 +147,7 @@ export default class Button extends React.Component<IProps, {}> {
           <OverShade theme={theme} color={color} />
           <Ripples ref={r => (this.ripples = r)} color={color} />
         </StyledButton>
-        <div style={{clear: "both"}} />
+        <div style={{ clear: "both" }} />
       </div>
     );
   }
