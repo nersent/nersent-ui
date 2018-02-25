@@ -4,6 +4,8 @@ import { withProps } from "../../utils/with-props";
 
 const checkIcon = require("../../images/Controls/check.svg");
 
+import Theme from "../../enums/theme";
+
 import icons from "../../mixins/icons";
 import images from "../../mixins/images";
 
@@ -11,6 +13,7 @@ interface IProps {
   transition: string;
   pathAnimation: boolean;
   scaleAnimation: boolean;
+  theme: Theme;
 }
 
 const Icon = withProps<IProps>()(styled.div)`
@@ -25,7 +28,7 @@ const Icon = withProps<IProps>()(styled.div)`
   transform: scale(${props => !props.scaleAnimation ? 1 : 0});
   transition: ${props => props.transition};
   ${images.center("22px", "auto")}
-  ${icons.invertColors()}
+  ${props => props.theme === Theme.Light ? icons.invertColors() : ""}
 `;
 
 export default Icon;
