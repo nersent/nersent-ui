@@ -11,6 +11,7 @@ interface IProps {
   opacity: number;
   rippleTime: number;
   fadeOutTime: number;
+  unit: string;
 }
 
 const getSize = ({ height, width }) => {
@@ -33,8 +34,8 @@ const StyledRipple = withProps<IProps>()(styled.div)`
   position: absolute;
   background-color: ${props => props.color};
   border-radius: 50%;
-  left: ${props => props.x}px;
-  top: ${props => props.y}px;
+  left: ${props => props.x + props.unit};
+  top: ${props => props.y + props.unit};
   transform: translate3d(-50.1%, -50.1%, 0);
   height: ${props => getWidth(props)}px;
   width: ${props => getWidth(props)}px;
