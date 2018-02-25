@@ -43,8 +43,10 @@ const StyledButton = withProps<IProps>()(styled.div)`
   min-width: ${props => (props.dialog ? 0 : buttons.minWidth)}px;
   height: ${buttons.height}px;
   ${userSelection.noUserSelect()}
+  ${userSelection.noTapHighlight()}
   overflow: hidden;
   transition: 0.2s box-shadow;
+
 
   &:hover {
     ${props => (props.raised ? shadows.shadow(buttons.hoveredElevation) : "")};

@@ -24,11 +24,13 @@ const getWidth = ({ x, width }) => {
   }
 
   if (x > width / 2) {
-    return  width + width - (width - x) + 10;
+    return 2 * x + 10;
   }
 
-  return width + width - x + 10;
+  return 2 * width - 2 * x + 10;
 };
+
+const easing = "cubic-bezier(0.19, 1, 0.22, 1)";
 
 const StyledRipple = withProps<IProps>()(styled.div)`
   position: absolute;
@@ -40,8 +42,8 @@ const StyledRipple = withProps<IProps>()(styled.div)`
   height: ${props => getWidth(props)}px;
   width: ${props => getWidth(props)}px;
   opacity: ${props => props.opacity};
-  transition: ${props => props.rippleTime}s width,
-    ${props => props.rippleTime}s height,
+  transition: ${props => props.rippleTime}s width ${easing},
+    ${props => props.rippleTime}s height ${easing},
     ${props => props.fadeOutTime}s opacity;
   overflow: hidden;
   pointer-events: none;
