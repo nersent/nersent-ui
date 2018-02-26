@@ -210,6 +210,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
               color="#000"
               parentWidth={18}
               parentHeight={18}
+              rippleTime={0.7}
               initialOpacity={0.1} />
           </div>
           {children != null &&

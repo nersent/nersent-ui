@@ -17,19 +17,19 @@ const getHighestSize = ({ height, width }) => {
   return Math.max(width, height);
 };
 
-const getSize = (x, size) => {
+const getSize = (x, size, y = 0, height = 0) => {
   if (size === 0) {
     return 0;
   }
 
   if (x > size / 2) {
-    return 2 * x + 10;
+    return 2 * x + Math.abs(y - height / 2);
   }
 
-  return 2 * size - 2 * x + 10;
+  return 2 * size - 2 * x + Math.abs(y - height / 2);
 };
 
-const easing = "cubic-bezier(0.19, 1, 0.22, 1)";
+const easing = "cubic-bezier(0.215, 0.61, 0.355, 1)";
 
 const StyledRipple = withProps<IProps>()(styled.div)`
   position: absolute;
@@ -41,8 +41,8 @@ const StyledRipple = withProps<IProps>()(styled.div)`
       x = props.width;
     }
 
-    const width = getSize(x, getHighestSize(props));
-    const height = getSize(props.y, getHighestSize(props));
+    const width = getSize(x, getHighestSize(props), props.y, props.height);
+    const height = getSize(props.y, getHighestSize(props), props.x, props.width);
 
     const size = getHighestSize({ height, width });
 
