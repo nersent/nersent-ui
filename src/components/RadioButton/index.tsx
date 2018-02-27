@@ -18,7 +18,8 @@ interface IProps {
   disabled?: boolean;
   color?: string;
   theme?: Theme;
-  onToggle?: (flag: boolean, component?: any, fromProps?: boolean) => void;
+  onClick?: (e: object, component?: RadioButton) => void;
+  toggled?: boolean;
 }
 
 interface IState {
@@ -48,8 +49,10 @@ export default class RadioButton extends React.Component<IProps, IState> {
   private timeouts = [];
   private radioButton: HTMLDivElement;
 
-  public onClick = () => {
-    this.toggle();
+  public onClick = (e) => {
+    const onClick = this.props.onClick;
+
+    if (typeof onClick === "function") { onClick(e, this); }
   }
 
   public toggle = (flag = !this.state.toggled) => {
