@@ -1,16 +1,24 @@
 import styled from "styled-components";
 
+import { withProps } from "../../utils/with-props";
+
 import Align from "../../enums/align";
 import Positioning from "../../mixins/positioning";
 
-const Border = styled.div`
-  width: 100%;
-  height: 100%;
+interface IProps {
+  size: number;
+  visible: boolean;
+  color: string;
+}
+
+const Border = withProps<IProps>()(styled.div)`
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
   position: absolute;
   position: relative;
   border-radius: 100%;
-  background-color: #2196F3;
-  visibility: hidden;
+  background-color: ${props => props.color};
+  visibility: ${props => props.visible ? "visible" : "hidden"};
   transition: 0.1s background-color, 0.2s width ease-out, 0.2s height ease-out;
   ${Positioning.center(Align.CenterBoth)}
 `;

@@ -1,17 +1,25 @@
 import styled from "styled-components";
 
-const Border = styled.div`
+import { withProps } from "../../utils/with-props";
+
+interface IProps {
+  borderWidth: number;
+  animations: boolean;
+  color: string;
+}
+
+const Border = withProps<IProps>()(styled.div)`
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
   border-radius: 50%;
-  border-width: 2px;
+  border-width: ${props => props.borderWidth}px;
   border-style: solid;
-  border-color: rgba(0,0,0,0.54);
+  border-color: ${props => props.color};
   box-sizing: border-box;
-  transition: 0.1s border-color, 0.3s border-width ease-out;
+  transition: ${props => props.animations ? "0.1s border-color, 0.3s border-width ease-out" : ""};
 `;
 
 export default Border;
