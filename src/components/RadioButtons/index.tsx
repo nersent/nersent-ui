@@ -11,6 +11,7 @@ interface IProps {
   style?: {};
   theme?: Theme;
   disabled?: boolean;
+  color?: string;
   onToggle?: (index: number, radioButton?: RadioButton, component?: RadioButtons, fromProps?: boolean) => void;
 }
 
@@ -58,6 +59,7 @@ export default class RadioButtons extends React.Component<IProps, {}> {
       style,
       children,
       theme,
+      color,
       disabled,
     } = this.props;
 
