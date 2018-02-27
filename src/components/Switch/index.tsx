@@ -40,7 +40,7 @@ export default class Switch extends React.Component<IProps, IState> {
   private thumb: HTMLDivElement;
 
   public onClick = (e) => {
-    this.toggle(!this.state.toggled);
+    if (!this.props.disabled) { this.toggle(!this.state.toggled); }
   }
 
   public toggle(flag: boolean) {
@@ -75,11 +75,13 @@ export default class Switch extends React.Component<IProps, IState> {
           <Track
             innerRef={r => (this.track = r)}
             toggled={toggled}
+            disabled={disabled}
             color={color} />
           <ThumbContainer toggled={toggled} left={thumbLeft}>
             <Thumb
               innerRef={r => (this.thumb = r)}
               toggled={toggled}
+              disabled={disabled}
               color={color} />
           </ThumbContainer>
         </StyledSwitch>
