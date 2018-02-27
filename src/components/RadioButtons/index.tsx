@@ -2,16 +2,24 @@ import React from "react";
 
 import colors from "../../defaults/colors";
 
+import Theme from "../../enums/theme";
 import RadioButton from "../RadioButton";
 import StyledRadioButtons from "./StyledRadioButtons";
 
 interface IProps {
   className?: string;
   style?: {};
+  theme?: Theme;
+  disabled?: boolean;
   onToggle?: (index: number, radioButton?: RadioButton, component?: RadioButtons, fromProps?: boolean) => void;
 }
 
 export default class RadioButtons extends React.Component<IProps, {}> {
+  public static defaultProps = {
+    disabled: false,
+    theme: Theme.Light,
+  };
+
   private radioButtons = [];
   private latest: RadioButton;
 
@@ -49,6 +57,8 @@ export default class RadioButtons extends React.Component<IProps, {}> {
       className,
       style,
       children,
+      theme,
+      disabled,
     } = this.props;
 
     this.radioButtons = [];
@@ -60,9 +70,13 @@ export default class RadioButtons extends React.Component<IProps, {}> {
       >
         {
           React.Children.map(children, (child?: any) => {
+            const isChildDisabled = child.props.disabled;
+
             return React.cloneElement(child, {
               ref: (r) => { this.radioButtons.push(r); },
               onClick: this.onClick,
+              theme,
+              disabled: disabled ? disabled : isChildDisabled,
             });
           })
         }
