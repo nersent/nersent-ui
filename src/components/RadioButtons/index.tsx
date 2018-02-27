@@ -78,6 +78,7 @@ export default class RadioButtons extends React.Component<IProps, {}> {
               ref: (r) => { this.radioButtons.push(r); },
               onClick: this.onClick,
               theme,
+              color,
               disabled: disabled ? disabled : isChildDisabled,
             });
           })

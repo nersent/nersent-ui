@@ -1,0 +1,89 @@
+import React from "react";
+
+import colors from "../../defaults/colors";
+
+import Theme from "../../enums/theme";
+
+import Container from "./Container";
+import StyledSwitch from "./StyledSwitch";
+import Text from "./Text";
+import Thumb from "./Thumb";
+import ThumbContainer from "./ThumbContainer";
+import Track from "./Track";
+
+interface IProps {
+  className?: string;
+  style?: {};
+  disabled?: boolean;
+  color?: string;
+  theme?: Theme;
+  toggled?: boolean;
+}
+
+interface IState {
+  toggled?: boolean;
+  thumbLeft?: number;
+}
+
+export default class Switch extends React.Component<IProps, IState> {
+  public static defaultProps = {
+    color: colors.blue["500"],
+    theme: Theme.Light,
+  };
+
+  public state: IState = {
+    toggled: false,
+    thumbLeft: -10,
+  };
+
+  private track: HTMLDivElement;
+  private thumb: HTMLDivElement;
+
+  public onClick = (e) => {
+    this.toggle(!this.state.toggled);
+  }
+
+  public toggle(flag: boolean) {
+    this.setState({
+      toggled: flag,
+      thumbLeft: flag ? this.track.offsetWidth - this.thumb.offsetWidth / 2 : -this.thumb.offsetWidth / 2,
+    });
+  }
+
+  public render() {
+    const {
+      className,
+      children,
+      theme,
+      disabled,
+      color,
+    } = this.props;
+
+    const {
+      toggled,
+      thumbLeft,
+    } = this.state;
+
+    return (
+      <Container onClick={this.onClick}>
+        {children != null &&
+          <Text theme={theme} disabled={disabled}>
+            {children}
+          </Text>
+        }
+        <StyledSwitch>
+          <Track
+            innerRef={r => (this.track = r)}
+            toggled={toggled}
+            color={color} />
+          <ThumbContainer toggled={toggled} left={thumbLeft}>
+            <Thumb
+              innerRef={r => (this.thumb = r)}
+              toggled={toggled}
+              color={color} />
+          </ThumbContainer>
+        </StyledSwitch>
+      </Container>
+    );
+  }
+}

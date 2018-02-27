@@ -35,3 +35,4 @@ export { default as Button } from "./components/Button";
 export { default as Checkbox } from "./components/Checkbox";
 export { default as RadioButtons } from "./components/RadioButtons";
 export { default as RadioButton } from "./components/RadioButton";
+export { default as Switch } from "./components/Switch";
