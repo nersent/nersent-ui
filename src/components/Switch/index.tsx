@@ -76,13 +76,15 @@ export default class Switch extends React.Component<IProps, IState> {
             innerRef={r => (this.track = r)}
             toggled={toggled}
             disabled={disabled}
-            color={color} />
+            color={color}
+            theme={theme} />
           <ThumbContainer toggled={toggled} left={thumbLeft}>
             <Thumb
               innerRef={r => (this.thumb = r)}
               toggled={toggled}
               disabled={disabled}
-              color={color} />
+              color={color}
+              theme={theme} />
           </ThumbContainer>
         </StyledSwitch>
       </ComponentContainer>

@@ -1,25 +1,37 @@
 import styled from "styled-components";
 
+import Theme from "../../enums/theme";
 import { withProps } from "../../utils/with-props";
 
 interface IProps {
   toggled: boolean;
   disabled: boolean;
   color: string;
+  theme: Theme;
 }
 
-const getOpacity = (props) => {
+const getBackgroundColor = (props) => {
   const {
-    toggled,
     disabled,
+    toggled,
+    color,
+    theme,
   } = props;
 
   if (disabled) {
-    return 0.12;
+    if (props.theme === Theme.Light) {
+      return "rgba(0,0,0,0.12)";
+    } else {
+      return "rgba(255,255,255,0.10)";
+    }
   } else if (!toggled) {
-    return 0.38;
+    if (props.theme === Theme.Light) {
+      return "rgba(0,0,0,0.38)";
+    } else {
+      return "rgba(255,255,255,0.30)";
+    }
   } else {
-    return 0.50;
+    return color;
   }
 };
 
@@ -28,8 +40,8 @@ const Track = withProps<IProps>()(styled.div)`
   height: 100%;
   border-radius: 15px;
   transition: 0.2s opacity, 0.2s background-color;
-  opacity: ${props => getOpacity(props)};
-  background-color: ${props => !props.toggled ? "#000" : props.color};
+  opacity: ${props => props.toggled ? 0.50 : 1};
+  background-color: ${props => getBackgroundColor(props)};
 `;
 
 export default Track;

@@ -2,12 +2,14 @@ import styled from "styled-components";
 
 import { withProps } from "../../utils/with-props";
 
+import Theme from "../../enums/theme";
 import Shadows from "../../mixins/shadows";
 
 interface IProps {
   toggled: boolean;
   disabled: boolean;
   color: string;
+  theme: Theme;
 }
 
 const getBackgroundColor = (props) => {
@@ -15,12 +17,21 @@ const getBackgroundColor = (props) => {
     disabled,
     toggled,
     color,
+    theme,
   } = props;
 
   if (disabled) {
-    return "#BDBDBD";
+    if (theme === Theme.Light) {
+      return "#BDBDBD";
+    } else {
+      return "#424242";
+    }
   } else if (!toggled) {
-    return "#FAFAFA";
+    if (theme === Theme.Light) {
+      return "#FAFAFA";
+    } else {
+      return "#BDBDBD";
+    }
   } else {
     return color;
   }
