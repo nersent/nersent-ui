@@ -6,11 +6,11 @@ import { componentColor } from "../../utils/component-color";
 
 import Theme from "../../enums/theme";
 
+import ComponentContainer from "../ComponentContainer";
+import ComponentText from "../ComponentText";
 import Border from "./Border";
 import Circle from "./Circle";
-import Container from "./Container";
 import StyledRadioButton from "./StyledRadioButton";
-import Text from "./Text";
 
 interface IProps {
   className?: string;
@@ -128,7 +128,7 @@ export default class RadioButton extends React.Component<IProps, IState> {
     const color = componentColor(this.props.color, toggled, disabled, theme);
 
     return (
-      <Container onClick={this.onClick}>
+      <ComponentContainer onClick={this.onClick}>
         <div style={{position: "relative"}}>
           <StyledRadioButton
             innerRef={r => (this.radioButton = r)}
@@ -144,11 +144,11 @@ export default class RadioButton extends React.Component<IProps, IState> {
           </StyledRadioButton>
         </div>
         {children != null &&
-          <Text theme={theme} disabled={disabled}>
+          <ComponentText theme={theme} disabled={disabled}>
             {children}
-          </Text>
+          </ComponentText>
         }
-      </Container>
+      </ComponentContainer>
     );
   }
 }

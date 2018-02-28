@@ -4,9 +4,9 @@ import colors from "../../defaults/colors";
 
 import Theme from "../../enums/theme";
 
-import Container from "./Container";
+import ComponentContainer from "../ComponentContainer";
+import ComponentText from "../ComponentText";
 import StyledSwitch from "./StyledSwitch";
-import Text from "./Text";
 import Thumb from "./Thumb";
 import ThumbContainer from "./ThumbContainer";
 import Track from "./Track";
@@ -65,11 +65,11 @@ export default class Switch extends React.Component<IProps, IState> {
     } = this.state;
 
     return (
-      <Container onClick={this.onClick}>
+      <ComponentContainer onClick={this.onClick}>
         {children != null &&
-          <Text theme={theme} disabled={disabled}>
+          <ComponentText theme={theme} disabled={disabled}>
             {children}
-          </Text>
+          </ComponentText>
         }
         <StyledSwitch>
           <Track
@@ -85,7 +85,7 @@ export default class Switch extends React.Component<IProps, IState> {
               color={color} />
           </ThumbContainer>
         </StyledSwitch>
-      </Container>
+      </ComponentContainer>
     );
   }
 }

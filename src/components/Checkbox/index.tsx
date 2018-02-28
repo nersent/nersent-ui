@@ -3,12 +3,12 @@ import React from "react";
 import colors from "../../defaults/colors";
 
 import Theme from "../../enums/theme";
+import ComponentContainer from "../ComponentContainer";
+import ComponentText from "../ComponentText";
 import Ripples from "../Ripples";
 import Border from "./Border";
-import Container from "./Container";
 import Icon from "./Icon";
 import StyledCheckbox from "./StyledCheckbox";
-import Text from "./Text";
 
 import { executeEvent, getEvents } from "../../utils/events";
 import { getRippleEvents } from "../../utils/ripple";
@@ -183,7 +183,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
     };
 
     return (
-        <Container className={className} style={style} onClick={this.onClick} {...events}>
+        <ComponentContainer className={className} style={style} onClick={this.onClick} {...events}>
           <div style={{position: "relative"}}>
             <StyledCheckbox
               innerRef={r => (this.checkbox = r)}
@@ -214,11 +214,11 @@ export default class Checkbox extends React.Component<IProps, IState> {
               initialOpacity={0.1} />
           </div>
           {children != null &&
-            <Text disabled={disabled} theme={theme}>
+            <ComponentText disabled={disabled} theme={theme}>
               {children}
-            </Text>
+            </ComponentText>
           }
-        </Container>
+        </ComponentContainer>
     );
   }
 }

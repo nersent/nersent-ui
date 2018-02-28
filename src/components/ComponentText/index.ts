@@ -12,7 +12,7 @@ interface IProps {
   theme: Theme;
 }
 
-const Text = withProps<IProps>()(styled.div)`
+const ComponentText = withProps<IProps>()(styled.div)`
   margin-left: 8px;
   margin-right: 24px;
   font-size: 15px;
@@ -20,4 +20,4 @@ const Text = withProps<IProps>()(styled.div)`
   ${typography.body2()}
 `;
 
-export default Text;
+export default ComponentText;
