@@ -1,19 +1,29 @@
 import styled from "styled-components";
 
 import transparency from "../../defaults/transparency";
+import Theme from "../../enums/theme";
 import { withProps } from "../../utils/with-props";
 
 interface IProps {
+  theme: Theme;
   error: boolean;
   errorColor: string;
 }
 
 const getColor = (props) => {
-  return !props.error ? "#000" : props.errorColor;
+  if (props.error) {
+    return props.errorColor;
+  }
+
+  return props.theme === Theme.Light ? "#000" : "#fff";
 };
 
 const getOpacity = (props) => {
-  return !props.error ? transparency.light.text.secondary : transparency.light.text.primary;
+  if (props.error) {
+    return transparency.light.text.primary;
+  }
+
+  return props.theme === Theme.Light ? transparency.light.text.secondary : transparency.dark.text.secondary;
 };
 
 const HelperText = withProps<IProps>()(styled.div)`
@@ -21,7 +31,7 @@ const HelperText = withProps<IProps>()(styled.div)`
   font-size: 12px;
   color: ${props => getColor(props)};
   opacity: ${props => getOpacity(props)};
-  transition: 0.2;s; opacity, 0.2;s; color;
+  transition: 0.2s opacity, 0.2s color;
 `;
 
 export default HelperText;

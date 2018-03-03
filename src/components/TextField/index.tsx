@@ -53,7 +53,7 @@ export default class TextField extends React.Component<IProps, IState> {
   public onBlur = () => {
     // this.validate();
     this.setState({
-      error: true,
+     // error: true,
       errorReason: "Error message",
     });
 
@@ -97,24 +97,32 @@ export default class TextField extends React.Component<IProps, IState> {
             top={focused || filled}
             focused={focused}
             error={error}
-            errorColor={errorColor}>
+            errorColor={errorColor}
+            theme={theme}>
             {label}
           </Label>
         }
         <Input
           type="text"
+          color={color}
+          theme={theme}
+          error={error}
+          errorColor={errorColor}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           spellCheck={false}
           innerRef={r => (this.input = r)} />
-        <Line />
+        <Line theme={theme} />
         <FocusLine
           color={color}
           focused={focused}
           error={error}
           errorColor={errorColor} />
         {(helperText != null || error) &&
-          <HelperText error={error} errorColor={errorColor}>
+          <HelperText
+            theme={theme}
+            error={error}
+            errorColor={errorColor}>
             {!error ? helperText : errorReason}
           </HelperText>
         }
