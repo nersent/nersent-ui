@@ -68,6 +68,7 @@ export default class TextField extends React.Component<IProps, IState> {
       disabled,
       theme,
       children,
+      color,
       label,
       helperText,
     } = this.props;
@@ -80,9 +81,11 @@ export default class TextField extends React.Component<IProps, IState> {
     } = this.state;
 
     return (
-      <StyledTextField>
+      <StyledTextField className={className} style={style}>
         {label != null &&
-          <Label>
+          <Label
+            color={color}
+            top={focused || filled}>
             {label}
           </Label>
         }
