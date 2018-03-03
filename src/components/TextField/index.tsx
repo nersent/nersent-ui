@@ -85,7 +85,8 @@ export default class TextField extends React.Component<IProps, IState> {
         {label != null &&
           <Label
             color={color}
-            top={focused || filled}>
+            top={focused || filled}
+            focused={focused}>
             {label}
           </Label>
         }
@@ -96,7 +97,9 @@ export default class TextField extends React.Component<IProps, IState> {
           spellCheck={false}
           innerRef={r => (this.input = r)} />
         <Line />
-        <FocusLine />
+        <FocusLine
+          color={color}
+          focused={focused} />
       </StyledTextField>
     );
   }
