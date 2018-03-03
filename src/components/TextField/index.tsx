@@ -5,6 +5,7 @@ import colors from "../../defaults/colors";
 import Theme from "../../enums/theme";
 
 import FocusLine from "./FocusLine";
+import HelperText from "./HelperText";
 import Input from "./Input";
 import Label from "./Label";
 import Line from "./Line";
@@ -18,6 +19,7 @@ interface IProps {
   color?: string;
   label?: string;
   helperText?: string;
+  errorColor?: string;
 }
 
 interface IState {
@@ -32,6 +34,7 @@ export default class TextField extends React.Component<IProps, IState> {
     disabled: false,
     color: colors.blue["500"],
     theme: Theme.Light,
+    errorColor: "#FF1744",
   };
 
   public state: IState = {
@@ -49,6 +52,11 @@ export default class TextField extends React.Component<IProps, IState> {
 
   public onBlur = () => {
     // this.validate();
+    this.setState({
+      error: true,
+      errorReason: "Error message",
+    });
+
     this.toggle(false);
   }
 
@@ -71,6 +79,7 @@ export default class TextField extends React.Component<IProps, IState> {
       color,
       label,
       helperText,
+      errorColor,
     } = this.props;
 
     const {
@@ -86,7 +95,9 @@ export default class TextField extends React.Component<IProps, IState> {
           <Label
             color={color}
             top={focused || filled}
-            focused={focused}>
+            focused={focused}
+            error={error}
+            errorColor={errorColor}>
             {label}
           </Label>
         }
@@ -99,7 +110,14 @@ export default class TextField extends React.Component<IProps, IState> {
         <Line />
         <FocusLine
           color={color}
-          focused={focused} />
+          focused={focused}
+          error={error}
+          errorColor={errorColor} />
+        {(helperText != null || error) &&
+          <HelperText error={error} errorColor={errorColor}>
+            {!error ? helperText : errorReason}
+          </HelperText>
+        }
       </StyledTextField>
     );
   }
