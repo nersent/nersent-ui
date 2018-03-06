@@ -91,9 +91,11 @@ export default class TextField extends React.Component<IProps, IState> {
     } = this.props;
 
     if (typeof validate === "function") {
-      const isCorrect = validate(this.input.value, submit);
+      setTimeout(() => {
+        const isCorrect = validate(this.input.value, submit);
 
-      this.setState({error: !isCorrect});
+        this.setState({error: !isCorrect});
+      });
     }
   }
 
