@@ -21,6 +21,7 @@ interface IProps {
   helperText?: string;
   errorColor?: string;
   value?: string;
+  validate?: (value: string, submit: boolean) => void; // If submit is false then its typing
 }
 
 interface IState {
@@ -42,7 +43,7 @@ export default class TextField extends React.Component<IProps, IState> {
     focused: false,
     filled: false,
     error: false,
-    errorReason: "",
+    errorReason: "XDDD",
   };
 
   private input: HTMLInputElement;
@@ -67,11 +68,7 @@ export default class TextField extends React.Component<IProps, IState> {
 
   public onBlur = () => {
     if (this.props.disabled) { return; }
-    // this.validate();
-    this.setState({
-     // error: true,
-      errorReason: "Error message",
-    });
+    this.validate(true);
 
     this.toggle(false);
   }
@@ -83,6 +80,25 @@ export default class TextField extends React.Component<IProps, IState> {
       filled: !isInputEmpty,
       focused: flag,
     });
+  }
+
+  /**
+   * @param submit - if false then its from typing.
+   */
+  public validate(submit: boolean) {
+    const {
+      validate,
+    } = this.props;
+
+    if (typeof validate === "function") {
+      const isCorrect = validate(this.input.value, submit);
+
+      this.setState({error: !isCorrect});
+    }
+  }
+
+  public onKeyDown = (e) => {
+    this.validate(e.key === "Enter");
   }
 
   public render() {
@@ -128,6 +144,7 @@ export default class TextField extends React.Component<IProps, IState> {
           errorColor={errorColor}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          onKeyDown={this.onKeyDown}
           spellCheck={false}
           isDisabled={disabled}
           innerRef={r => (this.input = r)} />
