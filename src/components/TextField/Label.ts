@@ -12,12 +12,13 @@ interface IProps {
   error: boolean;
   errorColor: string;
   theme: Theme;
+  disabled: boolean;
 }
 
 const getColor = (props) => {
   if (props.error) {
     return props.errorColor;
-  } else if (!props.focused) {
+  } else if (!props.focused || props.disabled) {
     return props.theme === Theme.Light ? "#000" : "#fff";
   }
 
@@ -25,7 +26,9 @@ const getColor = (props) => {
 };
 
 const getOpacity = (props) => {
-  if (props.error || props.focused) {
+  if (props.disabled) {
+    return props.theme === Theme.Light ? transparency.light.text.disabled : transparency.dark.text.disabled;
+  } else if (props.error || props.focused) {
     return transparency.light.text.primary;
   } else if (props.theme === Theme.Dark) {
     return transparency.dark.text.secondary;

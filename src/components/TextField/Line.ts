@@ -5,6 +5,7 @@ import { withProps } from "../../utils/with-props";
 
 interface IProps {
   theme: Theme;
+  disabled: boolean;
 }
 
 const getBackgroundColor = (props) => {
@@ -13,8 +14,9 @@ const getBackgroundColor = (props) => {
 
 const Line = withProps<IProps>()(styled.div)`
   width: 100%;
-  height: 1px;
-  background-color: ${props => getBackgroundColor(props)};
+  height: ${props => !props.disabled ? 1 : 0}px;
+  ${props => !props.disabled && `background-color: ${getBackgroundColor(props)};`}
+  ${props => props.disabled && `border: 1px dashed ${getBackgroundColor(props)};`}
 `;
 
 export default Line;

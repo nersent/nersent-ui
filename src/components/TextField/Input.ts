@@ -10,11 +10,21 @@ interface IProps {
   theme: Theme;
   error: boolean;
   errorColor: string;
+  isDisabled: boolean;
 }
+
+const getOpacity = (props) => {
+  if (props.isDisabled) {
+    return props.theme === Theme.Light ? transparency.light.text.disabled : transparency.dark.text.disabled;
+  }
+
+  return transparency.light.text.primary;
+};
 
 const getTextColor = (props) => {
   const color = props.theme === Theme.Light ? 0 : 255;
-  return `0px 0px 0px rgba(${color},${color},${color},${transparency.light.text.primary})`;
+
+  return `0px 0px 0px rgba(${color},${color},${color},${getOpacity(props)})`;
 };
 
 const getCursorColor = (props) => {

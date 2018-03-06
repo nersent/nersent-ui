@@ -20,6 +20,7 @@ interface IProps {
   label?: string;
   helperText?: string;
   errorColor?: string;
+  value?: string;
 }
 
 interface IState {
@@ -46,11 +47,26 @@ export default class TextField extends React.Component<IProps, IState> {
 
   private input: HTMLInputElement;
 
+  public componentDidMount() {
+    setTimeout(() => {
+      const {
+        value,
+      } = this.props;
+
+      if (this.props.value != null) {
+        this.input.value = value;
+        this.toggle(true);
+      }
+    });
+  }
+
   public onFocus = () => {
+    if (this.props.disabled) { return; }
     this.toggle(true);
   }
 
   public onBlur = () => {
+    if (this.props.disabled) { return; }
     // this.validate();
     this.setState({
      // error: true,
@@ -98,12 +114,14 @@ export default class TextField extends React.Component<IProps, IState> {
             focused={focused}
             error={error}
             errorColor={errorColor}
-            theme={theme}>
+            theme={theme}
+            disabled={disabled}>
             {label}
           </Label>
         }
         <Input
           type="text"
+          disabled={disabled}
           color={color}
           theme={theme}
           error={error}
@@ -111,18 +129,21 @@ export default class TextField extends React.Component<IProps, IState> {
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           spellCheck={false}
+          isDisabled={disabled}
           innerRef={r => (this.input = r)} />
-        <Line theme={theme} />
+        <Line theme={theme} disabled={disabled} />
         <FocusLine
           color={color}
           focused={focused}
           error={error}
-          errorColor={errorColor} />
+          errorColor={errorColor}
+          disabled={disabled} />
         {(helperText != null || error) &&
           <HelperText
             theme={theme}
             error={error}
-            errorColor={errorColor}>
+            errorColor={errorColor}
+            disabled={disabled}>
             {!error ? helperText : errorReason}
           </HelperText>
         }

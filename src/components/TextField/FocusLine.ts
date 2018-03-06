@@ -7,6 +7,7 @@ interface IProps {
   error: boolean;
   errorColor: string;
   color: string;
+  disabled: boolean;
 }
 
 const getBackgroundColor = (props) => {
@@ -14,7 +15,7 @@ const getBackgroundColor = (props) => {
 };
 
 const FocusLine = withProps<IProps>()(styled.div)`
-  width: ${props => !props.focused && !props.error ? 0 : 100}%;
+  width: ${props => !props.focused && !props.error || props.disabled ? 0 : 100}%;
   height: 2px;
   margin-top: -1.5px;
   margin-left: auto;

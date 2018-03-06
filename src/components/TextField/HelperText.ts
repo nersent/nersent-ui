@@ -8,6 +8,7 @@ interface IProps {
   theme: Theme;
   error: boolean;
   errorColor: string;
+  disabled: boolean;
 }
 
 const getColor = (props) => {
@@ -19,7 +20,9 @@ const getColor = (props) => {
 };
 
 const getOpacity = (props) => {
-  if (props.error) {
+  if (props.disabled) {
+    return props.theme === Theme.Light ? transparency.light.text.disabled : transparency.dark.text.disabled;
+  } else if (props.error) {
     return transparency.light.text.primary;
   }
 
