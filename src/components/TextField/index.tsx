@@ -20,15 +20,15 @@ interface IProps {
   label?: string;
   helperText?: string;
   errorColor?: string;
+  errorReason?: string;
   value?: string;
-  validate?: (value: string, submit: boolean) => void; // If submit is false then its typing
+  validate?: (value: string, submit: boolean) => void;
 }
 
 interface IState {
   focused: boolean;
   filled: boolean;
   error: boolean;
-  errorReason: string;
 }
 
 export default class TextField extends React.Component<IProps, IState> {
@@ -43,7 +43,6 @@ export default class TextField extends React.Component<IProps, IState> {
     focused: false,
     filled: false,
     error: false,
-    errorReason: "XDDD",
   };
 
   private input: HTMLInputElement;
@@ -114,13 +113,13 @@ export default class TextField extends React.Component<IProps, IState> {
       label,
       helperText,
       errorColor,
+      errorReason,
     } = this.props;
 
     const {
       focused,
       filled,
       error,
-      errorReason,
     } = this.state;
 
     return (
