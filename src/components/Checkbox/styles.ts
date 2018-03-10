@@ -20,10 +20,12 @@ export const StyledCheckbox = styled.div`
   width: 18px;
   height: 18px;
   position: relative;
-  transform: translate3d(0, 0, 0) translateZ(0) ${(props: IStyledCheckboxProps) => !props.scaleAnimation ? "scale(1)" : "scale(0.92)"};
+  transform: translate3d(0, 0, 0) translateZ(0)
+    ${(props: IStyledCheckboxProps) =>
+      !props.scaleAnimation ? "scale(1)" : "scale(0.92)"};
   transition: 0.4s transform;
   -webkit-font-smoothing: subpixel-antialiased;
-  ${userSelection.noTapHighlight()}
+  ${userSelection.noTapHighlight()};
 `;
 
 export default StyledCheckbox;
@@ -62,11 +64,15 @@ export const Icon = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  clip-path: ${(props: IIconProps) => props.pathAnimation ? `inset(0 0 0 0)` : `inset(100% 50% 0 50%)`};
+  clip-path: ${(props: IIconProps) =>
+    props.pathAnimation ? `inset(0 0 0 0)` : `inset(100% 50% 0 50%)`};
   -webkit-font-smoothing: antialiased;
-  transform: ${props => !props.scaleAnimation ? `scale(1)` : `scale(0)`};
-  transition: ${props => props.transition};
   ${images.center("22px", "auto")}
+
+  clip-path: ${(props: IIconProps) =>
+    props.pathAnimation ? "inset(0 0 0 0)" : "inset(100% 50% 0 50%)"};
+  transform: ${props => (!props.scaleAnimation ? "scale(1)" : "scale(0)")};
+  transition: ${props => props.transition};
   ${props => (props.theme === Theme.Light ? icons.invertColors() : "")}
   background-image: ${`url(${checkIcon})`};
 `;
