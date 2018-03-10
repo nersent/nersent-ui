@@ -7,6 +7,8 @@ import Theme from "../../enums/theme";
 import icons from "../../mixins/icons";
 import images from "../../mixins/images";
 
+const checkIcon = require("../../images/Controls/check.svg");
+
 interface IProps {
   transition: string;
   pathAnimation: boolean;
@@ -20,7 +22,7 @@ const Icon = withProps<IProps>()(styled.div)`
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url(../../images/Controls/check.svg);
+  background-image: url(${checkIcon});
   clip-path: inset(${props =>
     props.pathAnimation ? "0 0 0 0" : "100% 50% 0 50%"});
   -webkit-font-smoothing: antialiased;
