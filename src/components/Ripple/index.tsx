@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import StyledRipple from "./StyledRipple";
+import { StyledRipple } from "./styles";
 
-interface IProps {
+export interface IProps {
   height: number;
   width: number;
   color: string;
@@ -17,11 +17,11 @@ interface IProps {
   isRemoving: boolean;
 }
 
-interface IRipple {
+export interface IRipple {
   color: string;
 }
 
-interface IState {
+export interface IState {
   width: number;
   height: number;
   opacity: number;
