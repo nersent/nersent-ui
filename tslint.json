@@ -1,13 +1,10 @@
 {
-  "extends": ["tslint:latest"],
+  "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-react"],
   "rules": {
-    "import-name": false,
-    "no-increment-decrement": false,
-    "no-implicit-dependencies": false,
-    "no-empty": false,
-    "arrow-parens": false,
     "object-literal-sort-keys": false,
+    "no-unused-expression": false,
+    "jsx-no-multiline-js": false,
     "no-var-requires": false,
-    "no-unused-expression": false
+    "jsx-no-lambda": false
   }
 }

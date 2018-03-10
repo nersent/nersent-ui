@@ -6,7 +6,12 @@ export const center = (width: string, height: string) => {
   `;
 };
 
-export const custom = (width: string, height: string, left: string, top: string) => {
+export const custom = (
+  width: string,
+  height: string,
+  left: string,
+  top: string
+) => {
   return `
     background-size: ${width} ${height};
     background-position: ${left} ${top};
@@ -24,5 +29,5 @@ export const cover = () => {
 export default {
   center,
   custom,
-  cover,
+  cover
 };

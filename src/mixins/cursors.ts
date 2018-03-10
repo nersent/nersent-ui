@@ -14,5 +14,5 @@ export const defaultCursor = () => {
 
 export default {
   pointer,
-  defaultCursor,
+  defaultCursor
 };

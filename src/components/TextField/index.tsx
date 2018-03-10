@@ -1,17 +1,12 @@
-import React from "react";
+import * as React from "react";
 
 import colors from "../../defaults/colors";
 
 import Theme from "../../enums/theme";
 
-import FocusLine from "./FocusLine";
-import HelperText from "./HelperText";
-import Input from "./Input";
-import Label from "./Label";
-import Line from "./Line";
-import StyledTextField from "./StyledTextField";
+import { FocusLine, HelperText, Input, Label, Line, StyledTextField } from "./styles";
 
-interface IProps {
+export interface IProps {
   className?: string;
   style?: {};
   disabled?: boolean;
@@ -25,7 +20,7 @@ interface IProps {
   validate?: (value: string, submit: boolean) => void;
 }
 
-interface IState {
+export interface IState {
   focused: boolean;
   filled: boolean;
   error: boolean;
@@ -36,22 +31,20 @@ export default class TextField extends React.Component<IProps, IState> {
     disabled: false,
     color: colors.blue["500"],
     theme: Theme.Light,
-    errorColor: "#FF1744",
+    errorColor: "#FF1744"
   };
 
   public state: IState = {
     focused: false,
     filled: false,
-    error: false,
+    error: false
   };
 
   private input: HTMLInputElement;
 
   public componentDidMount() {
     setTimeout(() => {
-      const {
-        value,
-      } = this.props;
+      const { value } = this.props;
 
       if (this.props.value != null) {
         this.input.value = value;
@@ -61,46 +54,48 @@ export default class TextField extends React.Component<IProps, IState> {
   }
 
   public onFocus = () => {
-    if (this.props.disabled) { return; }
+    if (this.props.disabled) {
+      return;
+    }
     this.toggle(true);
-  }
+  };
 
   public onBlur = () => {
-    if (this.props.disabled) { return; }
+    if (this.props.disabled) {
+      return;
+    }
     this.validate(true);
 
     this.toggle(false);
-  }
+  };
 
   public toggle = (flag: boolean) => {
     const isInputEmpty = this.input.value.length === 0;
 
     this.setState({
       filled: !isInputEmpty,
-      focused: flag,
+      focused: flag
     });
-  }
+  };
 
   /**
    * @param submit - if false then its from typing.
    */
   public validate(submit: boolean) {
-    const {
-      validate,
-    } = this.props;
+    const { validate } = this.props;
 
     if (typeof validate === "function") {
       setTimeout(() => {
         const isCorrect = validate(this.input.value, submit);
 
-        this.setState({error: !isCorrect});
+        this.setState({ error: !isCorrect });
       });
     }
   }
 
-  public onKeyDown = (e) => {
+  public onKeyDown = e => {
     this.validate(e.key === "Enter");
-  }
+  };
 
   public render() {
     const {
@@ -113,18 +108,14 @@ export default class TextField extends React.Component<IProps, IState> {
       label,
       helperText,
       errorColor,
-      errorReason,
+      errorReason
     } = this.props;
 
-    const {
-      focused,
-      filled,
-      error,
-    } = this.state;
+    const { focused, filled, error } = this.state;
 
     return (
       <StyledTextField className={className} style={style}>
-        {label != null &&
+        {label != null && (
           <Label
             color={color}
             top={focused || filled}
@@ -132,10 +123,11 @@ export default class TextField extends React.Component<IProps, IState> {
             error={error}
             errorColor={errorColor}
             theme={theme}
-            disabled={disabled}>
+            disabled={disabled}
+          >
             {label}
           </Label>
-        }
+        )}
         <Input
           type="text"
           disabled={disabled}
@@ -148,23 +140,26 @@ export default class TextField extends React.Component<IProps, IState> {
           onKeyDown={this.onKeyDown}
           spellCheck={false}
           isDisabled={disabled}
-          innerRef={r => (this.input = r)} />
+          innerRef={r => (this.input = r)}
+        />
         <Line theme={theme} disabled={disabled} />
         <FocusLine
           color={color}
           focused={focused}
           error={error}
           errorColor={errorColor}
-          disabled={disabled} />
-        {(helperText != null || error) &&
+          disabled={disabled}
+        />
+        {(helperText != null || error) && (
           <HelperText
             theme={theme}
             error={error}
             errorColor={errorColor}
-            disabled={disabled}>
+            disabled={disabled}
+          >
             {!error ? helperText : errorReason}
           </HelperText>
-        }
+        )}
       </StyledTextField>
     );
   }

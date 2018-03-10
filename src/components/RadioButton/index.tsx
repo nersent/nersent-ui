@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import colors from "../../defaults/colors";
 
@@ -8,11 +8,10 @@ import Theme from "../../enums/theme";
 
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
-import Border from "./Border";
-import Circle from "./Circle";
-import StyledRadioButton from "./StyledRadioButton";
 
-interface IProps {
+import { Border, Circle, StyledRadioButton } from "./styles";
+
+export interface IProps {
   className?: string;
   style?: {};
   disabled?: boolean;
@@ -22,7 +21,7 @@ interface IProps {
   toggled?: boolean;
 }
 
-interface IState {
+export interface IState {
   toggled: boolean;
   borderAnimations: boolean;
   fullBorderSize: boolean;
@@ -34,7 +33,7 @@ interface IState {
 export default class RadioButton extends React.Component<IProps, IState> {
   public static defaultProps = {
     color: colors.blue["500"],
-    theme: Theme.Light,
+    theme: Theme.Light
   };
 
   public state: IState = {
@@ -43,23 +42,25 @@ export default class RadioButton extends React.Component<IProps, IState> {
     fullBorderSize: false,
     circleVisible: false,
     fullCircleSize: true,
-    animation: false,
+    animation: false
   };
 
   private timeouts = [];
   private radioButton: HTMLDivElement;
 
-  public onClick = (e) => {
+  public onClick = e => {
     const onClick = this.props.onClick;
 
-    if (typeof onClick === "function") { onClick(e, this); }
-  }
+    if (typeof onClick === "function") {
+      onClick(e, this);
+    }
+  };
 
   public toggle = (flag = !this.state.toggled) => {
-    this.setState({toggled: flag, animation: true});
+    this.setState({ toggled: flag, animation: true });
 
     if (flag) {
-      this.setState({fullBorderSize: true});
+      this.setState({ fullBorderSize: true });
 
       for (const timeout of this.timeouts) {
         clearTimeout(timeout);
@@ -67,17 +68,19 @@ export default class RadioButton extends React.Component<IProps, IState> {
 
       this.timeouts = [];
 
-      this.timeouts.push(setTimeout(() => {
-        this.setState({
-          borderAnimations: false,
-          circleVisible: true,
-          fullBorderSize: false,
-          fullCircleSize: false,
-          animation: false,
-        });
-      }, 300));
+      this.timeouts.push(
+        setTimeout(() => {
+          this.setState({
+            borderAnimations: false,
+            circleVisible: true,
+            fullBorderSize: false,
+            fullCircleSize: false,
+            animation: false
+          });
+        }, 300)
+      );
     } else {
-      this.setState({fullCircleSize: true});
+      this.setState({ fullCircleSize: true });
 
       for (const timeout of this.timeouts) {
         clearTimeout(timeout);
@@ -85,33 +88,36 @@ export default class RadioButton extends React.Component<IProps, IState> {
 
       this.timeouts = [];
 
-      this.timeouts.push(setTimeout(() => {
-        this.timeouts.push(this.setState({
-          circleVisible: false,
-          fullBorderSize: true,
-        }));
-
-        this.timeouts.push(setTimeout(() => {
-          this.setState({borderAnimations: true});
-
-          this.timeouts.push(setTimeout(() => {
+      this.timeouts.push(
+        setTimeout(() => {
+          this.timeouts.push(
             this.setState({
-              fullBorderSize: false,
-              animation: false,
-            });
-          }));
-        }));
-      }, 200));
+              circleVisible: false,
+              fullBorderSize: true
+            })
+          );
+
+          this.timeouts.push(
+            setTimeout(() => {
+              this.setState({ borderAnimations: true });
+
+              this.timeouts.push(
+                setTimeout(() => {
+                  this.setState({
+                    fullBorderSize: false,
+                    animation: false
+                  });
+                })
+              );
+            })
+          );
+        }, 200)
+      );
     }
-  }
+  };
 
   public render() {
-    const {
-      className,
-      children,
-      theme,
-      disabled,
-    } = this.props;
+    const { className, children, theme, disabled } = this.props;
 
     const {
       toggled,
@@ -119,7 +125,7 @@ export default class RadioButton extends React.Component<IProps, IState> {
       fullCircleSize,
       animation,
       borderAnimations,
-      circleVisible,
+      circleVisible
     } = this.state;
 
     const borderWidth = fullBorderSize ? this.radioButton.offsetWidth / 2 : 2;
@@ -129,25 +135,24 @@ export default class RadioButton extends React.Component<IProps, IState> {
 
     return (
       <ComponentContainer onClick={this.onClick}>
-        <div style={{position: "relative"}}>
+        <div style={{ position: "relative" }}>
           <StyledRadioButton
             innerRef={r => (this.radioButton = r)}
-            scaleAnimation={animation}>
+            scaleAnimation={animation}
+          >
             <Border
               borderWidth={borderWidth}
               animations={borderAnimations}
-              color={color} />
-            <Circle
-              size={circleSize}
-              visible={circleVisible}
-              color={color} />
+              color={color}
+            />
+            <Circle size={circleSize} visible={circleVisible} color={color} />
           </StyledRadioButton>
         </div>
-        {children != null &&
+        {children != null && (
           <ComponentText theme={theme} disabled={disabled}>
             {children}
           </ComponentText>
-        }
+        )}
       </ComponentContainer>
     );
   }

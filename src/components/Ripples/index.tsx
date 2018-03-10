@@ -1,11 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 import Ripple from "../Ripple";
-import IconRipple from "./IconRipple";
-import StyledRipples from "./StyledRipples";
+import { IconRipple, StyledRipples } from "./styles";
 
-interface IProps {
+export interface IProps {
   className?: string;
   style?: {};
   center?: boolean;
@@ -19,14 +18,14 @@ interface IProps {
   parentWidth?: number;
 }
 
-interface IRipple {
+export interface IRipple {
   x: number;
   y: number;
   id: number;
   isRemoving: boolean;
 }
 
-interface IState {
+export interface IState {
   ripples: IRipple[];
   color: string;
 }
@@ -41,16 +40,17 @@ export default class Ripples extends React.Component<IProps, IState> {
     initialOpacity: 0.2,
     color: "#000",
     rippleTime: 1,
-    icon: false,
+    icon: false
   };
 
   public state: IState = {
     ripples: [],
-    color: this.props.color,
+    color: this.props.color
   };
 
   private ripples: HTMLDivElement;
   private currentRipple: IRipple;
+  private isTouched = false;
 
   public componentDidMount() {
     window.addEventListener("mouseup", () => {
@@ -58,37 +58,41 @@ export default class Ripples extends React.Component<IProps, IState> {
     });
   }
 
-  public makeRipple(mouseX: number, mouseY: number) {
+  public makeRipple(mouseX: number, mouseY: number, isTouch = false) {
+    if (!isTouch && this.isTouched) {
+      return;
+    }
     const { color, initialOpacity } = this.props;
 
     const newRipple: IRipple = {
       ...this.getRipplePosition(0, mouseX, mouseY),
       id: nextRippleId++,
-      isRemoving: false,
+      isRemoving: false
     };
 
     this.currentRipple = newRipple;
 
     this.setState({
-      ripples: [
-        ...this.state.ripples,
-        newRipple,
-      ],
+      ripples: [...this.state.ripples, newRipple]
     });
+
+    if (isTouch && !this.isTouched) {
+      this.isTouched = true;
+    }
   }
 
   public removeRipple = (id: number) => {
     const index = this.state.ripples.indexOf(
-      this.state.ripples.filter(ripple => ripple.id === id)[0],
+      this.state.ripples.filter(ripple => ripple.id === id)[0]
     );
 
     this.setState({
       ripples: [
         ...this.state.ripples.slice(0, index),
-        ...this.state.ripples.slice(index + 1),
-      ],
+        ...this.state.ripples.slice(index + 1)
+      ]
     });
-  }
+  };
 
   public removeRipples = () => {
     this.setState({
@@ -97,19 +101,19 @@ export default class Ripples extends React.Component<IProps, IState> {
           const newRipple: IRipple = { ...ripple };
           newRipple.isRemoving = true;
           return newRipple;
-        }),
-      ],
+        })
+      ]
     });
-  }
+  };
 
   public changeRippleColor = (newColor: string) => {
-    this.setState({color: newColor});
-  }
+    this.setState({ color: newColor });
+  };
 
   public getRipplePosition(offsetX = 0, x = 0, y = 0) {
     return {
       x: x - this.ripples.getBoundingClientRect().left,
-      y: y - this.ripples.getBoundingClientRect().top,
+      y: y - this.ripples.getBoundingClientRect().top
     };
   }
 
@@ -122,7 +126,7 @@ export default class Ripples extends React.Component<IProps, IState> {
       rippleTime,
       icon,
       parentWidth,
-      parentHeight,
+      parentHeight
     } = this.props;
 
     const component = (
@@ -151,12 +155,21 @@ export default class Ripples extends React.Component<IProps, IState> {
       </StyledRipples>
     );
 
-    return icon
-        && <IconRipple width={parentWidth} height={parentHeight} color={color}>{component}</IconRipple>
-        || component;
+    return (
+      (icon && (
+        <IconRipple width={parentWidth} height={parentHeight} color={color}>
+          {component}
+        </IconRipple>
+      )) ||
+      component
+    );
   }
 
-  private changeRippleProperty = (id: number, property: string, newValue: any) => {
+  private changeRippleProperty = (
+    id: number,
+    property: string,
+    newValue: any
+  ) => {
     this.setState({
       ripples: [
         ...this.state.ripples.map((ripple: IRipple) => {
@@ -167,8 +180,8 @@ export default class Ripples extends React.Component<IProps, IState> {
           } else {
             return ripple;
           }
-        }),
-      ],
+        })
+      ]
     });
-  }
+  };
 }

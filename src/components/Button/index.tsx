@@ -1,4 +1,5 @@
-import React, { SyntheticEvent } from "react";
+import * as React from "react";
+import { SyntheticEvent } from "react";
 
 import colors from "../../defaults/colors";
 
@@ -6,14 +7,15 @@ import { getEvents } from "../../utils/events";
 import { getRippleEvents } from "../../utils/ripple";
 
 import Theme from "../../enums/theme";
+
 import Ripples from "../Ripples";
-import OverShade from "./OverShade";
-import StyledButton from "./StyledButton";
-import Text from "./Text";
 
-type ButtonEvent = (e?: SyntheticEvent<HTMLDivElement>) => void;
+import Clear from "../Clear";
+import { OverShade, StyledButton, Text } from "./styles";
 
-interface IProps {
+export type ButtonEvent = (e?: SyntheticEvent<HTMLDivElement>) => void;
+
+export interface IProps {
   className?: string;
   style?: {};
   raised?: boolean;
@@ -42,7 +44,7 @@ export default class Button extends React.Component<IProps, {}> {
     theme: Theme.Light,
     dialog: false,
     customRippleBehavior: false,
-    ripple: true,
+    ripple: true
   };
 
   private ripples: Ripples;
@@ -58,7 +60,7 @@ export default class Button extends React.Component<IProps, {}> {
       backgroundColor,
       theme,
       children,
-      dialog,
+      dialog
     } = this.props;
 
     if (typeof color === "object") {
@@ -67,11 +69,11 @@ export default class Button extends React.Component<IProps, {}> {
 
     const events = {
       ...getEvents(this.props),
-      ...getRippleEvents(this.props, () => this.ripples),
+      ...getRippleEvents(this.props, () => this.ripples)
     };
 
     return (
-      <div>
+      <>
         <StyledButton
           className={className}
           style={style}
@@ -89,8 +91,8 @@ export default class Button extends React.Component<IProps, {}> {
           <OverShade theme={theme} color={color} />
           <Ripples ref={r => (this.ripples = r)} color={color} />
         </StyledButton>
-        <div style={{ clear: "both" }} />
-      </div>
+        <Clear />
+      </>
     );
   }
 }
