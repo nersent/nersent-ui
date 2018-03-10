@@ -1,22 +1,22 @@
-import styled from "styled-components";
+import React from "react";
+import styled, { StyledComponentClass } from "styled-components";
 
 import { componentForeground } from "../../utils/component-color";
-import { withProps } from "../../utils/with-props";
 
 import typography from "../../mixins/typography";
 
 import Theme from "../../enums/theme";
 
-interface IProps {
+export interface IProps {
   disabled: boolean;
   theme: Theme;
 }
 
-const ComponentText = withProps<IProps>()(styled.div)`
+const ComponentText = styled.div`
   margin-left: 8px;
   margin-right: 24px;
   font-size: 15px;
-  color: ${props => componentForeground(props.disabled, props.theme)};
+  color: ${(props: IProps) => componentForeground(props.disabled, props.theme)};
   ${typography.body2()}
 `;
 

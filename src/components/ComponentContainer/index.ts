@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import React from "react";
+import styled, { StyledComponentClass } from "styled-components";
 
 import Cursors from "../../mixins/cursors";
 
