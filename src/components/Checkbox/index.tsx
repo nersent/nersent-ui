@@ -188,7 +188,6 @@ export default class Checkbox extends React.Component<IProps, IState> {
     };
 
     return (
-<<<<<<< Updated upstream
       <ComponentContainer
         className={className}
         style={style}
@@ -231,44 +230,6 @@ export default class Checkbox extends React.Component<IProps, IState> {
           </ComponentText>
         )}
       </ComponentContainer>
-=======
-        <ComponentContainer className={className} style={style} {...events}>
-          <div style={{position: "relative"}}>
-            <StyledCheckbox
-              innerRef={r => (this.checkbox = r)}
-              scaleAnimation={scaleAnimation}
-            >
-              <Border
-                checked={checked}
-                color={color}
-                borderWidth={borderWidth}
-                disabled={disabled}
-                theme={theme}
-                transition={borderTransition}
-              />
-              <Icon
-                pathAnimation={iconPathAnimation}
-                scaleAnimation={iconScaleAnimation}
-                transition={iconTransition}
-                theme={theme}
-              />
-            </StyledCheckbox>
-            <Ripples
-              icon
-              ref={r => (this.ripples = r)}
-              color="#000"
-              parentWidth={18}
-              parentHeight={18}
-              rippleTime={0.7}
-              initialOpacity={0.1} />
-          </div>
-          {children != null &&
-            <ComponentText disabled={disabled} theme={theme}>
-              {children}
-            </ComponentText>
-          }
-        </ComponentContainer>
->>>>>>> Stashed changes
     );
   }
 }
