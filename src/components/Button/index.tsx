@@ -9,6 +9,7 @@ import Theme from "../../enums/theme";
 
 import Ripples from "../Ripples";
 
+import Clear from "../Clear";
 import { OverShade, StyledButton, Text } from "./styles";
 
 export type ButtonEvent = (e?: SyntheticEvent<HTMLDivElement>) => void;
@@ -71,7 +72,7 @@ export default class Button extends React.Component<IProps, {}> {
     };
 
     return (
-      <div>
+      <>
         <StyledButton
           className={className}
           style={style}
@@ -89,8 +90,8 @@ export default class Button extends React.Component<IProps, {}> {
           <OverShade theme={theme} color={color} />
           <Ripples ref={r => (this.ripples = r)} color={color} />
         </StyledButton>
-        <div style={{ clear: "both" }} />
-      </div>
+        <Clear />
+      </>
     );
   }
 }
