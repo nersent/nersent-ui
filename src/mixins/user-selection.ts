@@ -8,5 +8,5 @@ const noTapHighlight = () => `
 
 export default {
   noUserSelect,
-  noTapHighlight,
+  noTapHighlight
 };

@@ -11,7 +11,7 @@ interface IProps {
   disabled: boolean;
 }
 
-const getColor = (props) => {
+const getColor = props => {
   if (props.error) {
     return props.errorColor;
   }
@@ -19,14 +19,18 @@ const getColor = (props) => {
   return props.theme === Theme.Light ? "#000" : "#fff";
 };
 
-const getOpacity = (props) => {
+const getOpacity = props => {
   if (props.disabled) {
-    return props.theme === Theme.Light ? transparency.light.text.disabled : transparency.dark.text.disabled;
+    return props.theme === Theme.Light
+      ? transparency.light.text.disabled
+      : transparency.dark.text.disabled;
   } else if (props.error) {
     return transparency.light.text.primary;
   }
 
-  return props.theme === Theme.Light ? transparency.light.text.secondary : transparency.dark.text.secondary;
+  return props.theme === Theme.Light
+    ? transparency.light.text.secondary
+    : transparency.dark.text.secondary;
 };
 
 const HelperText = withProps<IProps>()(styled.div)`

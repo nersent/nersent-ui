@@ -7,7 +7,7 @@ const ComponentContainer = styled.div`
   display: flex;
   align-items: center;
   -webkit-font-smoothing: antialiased;
-  ${Cursors.pointer()}
+  ${Cursors.pointer()};
 `;
 
 export default ComponentContainer;

@@ -10,7 +10,7 @@ const StyledRadioButton = withProps<IProps>()(styled.div)`
   width: 18px;
   height: 18px;
   position: relative;
-  transform: scale(${props => !props.scaleAnimation ? 1 : 0.9});
+  transform: scale(${props => (!props.scaleAnimation ? 1 : 0.9)});
   transition: 0.2s transform ease-out;
 `;
 

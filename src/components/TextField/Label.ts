@@ -15,7 +15,7 @@ interface IProps {
   disabled: boolean;
 }
 
-const getColor = (props) => {
+const getColor = props => {
   if (props.error) {
     return props.errorColor;
   } else if (!props.focused || props.disabled) {
@@ -25,9 +25,11 @@ const getColor = (props) => {
   return props.color;
 };
 
-const getOpacity = (props) => {
+const getOpacity = props => {
   if (props.disabled) {
-    return props.theme === Theme.Light ? transparency.light.text.disabled : transparency.dark.text.disabled;
+    return props.theme === Theme.Light
+      ? transparency.light.text.disabled
+      : transparency.dark.text.disabled;
   } else if (props.error || props.focused) {
     return transparency.light.text.primary;
   } else if (props.theme === Theme.Dark) {
@@ -38,11 +40,11 @@ const getOpacity = (props) => {
 };
 
 const Label = withProps<IProps>()(styled.div)`
-  font-size: ${props => !props.top ? 16 : 12}px;
+  font-size: ${props => (!props.top ? 16 : 12)}px;
   color: ${props => getColor(props)};
   opacity: ${props => getOpacity(props)};
   position: absolute;
-  top: ${props => !props.top ? 20 : 0}px;
+  top: ${props => (!props.top ? 20 : 0)}px;
   transition: 0.2s top ease-out, 0.2s font-size, 0.2s opacity, 0.2s color;
 `;
 

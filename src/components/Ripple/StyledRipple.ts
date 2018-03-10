@@ -42,7 +42,12 @@ const StyledRipple = withProps<IProps>()(styled.div)`
     }
 
     const width = getSize(x, getHighestSize(props), props.y, props.height);
-    const height = getSize(props.y, getHighestSize(props), props.x, props.width);
+    const height = getSize(
+      props.y,
+      getHighestSize(props),
+      props.x,
+      props.width
+    );
 
     const size = getHighestSize({ height, width });
 

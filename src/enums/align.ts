@@ -1,7 +1,7 @@
 enum Align {
   CenterHorizontal,
   CenterVertical,
-  CenterBoth,
+  CenterBoth
 }
 
 export default Align;

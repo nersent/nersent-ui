@@ -18,7 +18,7 @@ const Border = withProps<IProps>()(styled.div)`
   position: relative;
   border-radius: 100%;
   background-color: ${props => props.color};
-  visibility: ${props => props.visible ? "visible" : "hidden"};
+  visibility: ${props => (props.visible ? "visible" : "hidden")};
   transition: 0.1s background-color, 0.2s width ease-out, 0.2s height ease-out;
   ${Positioning.center(Align.CenterBoth)}
 `;

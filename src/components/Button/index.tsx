@@ -42,7 +42,7 @@ export default class Button extends React.Component<IProps, {}> {
     theme: Theme.Light,
     dialog: false,
     customRippleBehavior: false,
-    ripple: true,
+    ripple: true
   };
 
   private ripples: Ripples;
@@ -58,7 +58,7 @@ export default class Button extends React.Component<IProps, {}> {
       backgroundColor,
       theme,
       children,
-      dialog,
+      dialog
     } = this.props;
 
     if (typeof color === "object") {
@@ -67,7 +67,7 @@ export default class Button extends React.Component<IProps, {}> {
 
     const events = {
       ...getEvents(this.props),
-      ...getRippleEvents(this.props, () => this.ripples),
+      ...getRippleEvents(this.props, () => this.ripples)
     };
 
     return (

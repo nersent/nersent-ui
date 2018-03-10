@@ -26,18 +26,21 @@ export const executeEvent = (e: SyntheticEvent<any>, props: any) => {
   }
 };
 
-export const executeEventCallback = (e: SyntheticEvent<any>, callback: (e: SyntheticEvent<any>) => void) => {
+export const executeEventCallback = (
+  e: SyntheticEvent<any>,
+  callback: (e: SyntheticEvent<any>) => void
+) => {
   if (typeof callback === "function") {
     callback(e);
   }
 };
 
 export const getEvents = (props: any) => ({
-  onMouseDown: (e) => executeEvent(e, props),
-  onMouseUp: (e) => executeEvent(e, props),
-  onMouseEnter: (e) => executeEvent(e, props),
-  onMouseLeave: (e) => executeEvent(e, props),
-  onClick: (e) => executeEvent(e, props),
-  onTouchStart: (e) => executeEvent(e, props),
-  onTouchEnd: (e) => executeEvent(e, props),
+  onMouseDown: e => executeEvent(e, props),
+  onMouseUp: e => executeEvent(e, props),
+  onMouseEnter: e => executeEvent(e, props),
+  onMouseLeave: e => executeEvent(e, props),
+  onClick: e => executeEvent(e, props),
+  onTouchStart: e => executeEvent(e, props),
+  onTouchEnd: e => executeEvent(e, props)
 });

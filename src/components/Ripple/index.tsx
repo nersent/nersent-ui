@@ -31,7 +31,7 @@ export default class Ripple extends React.Component<IProps, IState> {
   public state = {
     width: 0,
     height: 0,
-    opacity: 1,
+    opacity: 1
   };
 
   public timeouts = [];
@@ -40,16 +40,16 @@ export default class Ripple extends React.Component<IProps, IState> {
     const { height, width, initialOpacity } = this.props;
 
     this.setState({
-      opacity: initialOpacity,
+      opacity: initialOpacity
     });
 
     this.timeouts.push(
       setTimeout(() => {
         this.setState({
           width,
-          height,
+          height
         });
-      }),
+      })
     );
   }
 
@@ -59,14 +59,14 @@ export default class Ripple extends React.Component<IProps, IState> {
     this.timeouts.push(
       setTimeout(() => {
         this.setState({
-          opacity: 0,
+          opacity: 0
         });
         this.timeouts.push(
           setTimeout(() => {
             removeRipple(id);
-          }, fadeOutTime * 1000),
+          }, fadeOutTime * 1000)
         );
-      }, 100),
+      }, 100)
     );
   }
 

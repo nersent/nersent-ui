@@ -12,13 +12,8 @@ interface IProps {
   theme: Theme;
 }
 
-const getBackgroundColor = (props) => {
-  const {
-    disabled,
-    toggled,
-    color,
-    theme,
-  } = props;
+const getBackgroundColor = props => {
+  const { disabled, toggled, color, theme } = props;
 
   if (disabled) {
     if (theme === Theme.Light) {

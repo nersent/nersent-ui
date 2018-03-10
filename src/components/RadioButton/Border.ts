@@ -19,7 +19,8 @@ const Border = withProps<IProps>()(styled.div)`
   border-style: solid;
   border-color: ${props => props.color};
   box-sizing: border-box;
-  transition: ${props => props.animations ? "0.1s border-color, 0.3s border-width ease-out" : ""};
+  transition: ${props =>
+    props.animations ? "0.1s border-color, 0.3s border-width ease-out" : ""};
 `;
 
 export default Border;

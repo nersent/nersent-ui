@@ -10,11 +10,11 @@ interface IProps {
   disabled: boolean;
 }
 
-const getWidth = (props) => {
-  return !props.focused && !props.error || props.disabled ? 0 : 100;
+const getWidth = props => {
+  return (!props.focused && !props.error) || props.disabled ? 0 : 100;
 };
 
-const getBackgroundColor = (props) => {
+const getBackgroundColor = props => {
   return props.error ? props.errorColor : props.color;
 };
 

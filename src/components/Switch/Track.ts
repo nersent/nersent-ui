@@ -10,13 +10,8 @@ interface IProps {
   theme: Theme;
 }
 
-const getBackgroundColor = (props) => {
-  const {
-    disabled,
-    toggled,
-    color,
-    theme,
-  } = props;
+const getBackgroundColor = props => {
+  const { disabled, toggled, color, theme } = props;
 
   if (disabled) {
     if (props.theme === Theme.Light) {
@@ -40,7 +35,7 @@ const Track = withProps<IProps>()(styled.div)`
   height: 100%;
   border-radius: 15px;
   transition: 0.2s opacity, 0.2s background-color;
-  opacity: ${props => props.toggled ? 0.50 : 1};
+  opacity: ${props => (props.toggled ? 0.5 : 1)};
   background-color: ${props => getBackgroundColor(props)};
 `;
 

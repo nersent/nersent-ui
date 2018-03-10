@@ -34,7 +34,8 @@ export const StyledButton = styled.div`
   padding: 0 16px 0 16px;
   text-transform: uppercase;
   float: left;
-  cursor: ${(props: IStyledButtonProps) => (props.disabled ? "default" : "pointer")};
+  cursor: ${(props: IStyledButtonProps) =>
+    props.disabled ? "default" : "pointer"};
   background-color: ${props => getBackgroundColor(props)};
   pointer-events: ${props => (props.disabled ? "none" : "auto")};
   color: ${props => (props.disabled ? "#000" : props.color)};
@@ -43,17 +44,18 @@ export const StyledButton = styled.div`
   border-radius: ${buttons.cornerRadius}px;
   min-width: ${props => (props.dialog ? 0 : buttons.minWidth)}px;
   height: ${buttons.height}px;
-  ${userSelection.noUserSelect()}
-  ${userSelection.noTapHighlight()}
+  ${userSelection.noUserSelect()} ${userSelection.noTapHighlight()}
   overflow: hidden;
   transition: 0.3s box-shadow;
 
   &:hover {
-    box-shadow: ${props => (props.raised ? shadows[buttons.hoveredElevation] : "none")};
+    box-shadow: ${props =>
+      props.raised ? shadows[buttons.hoveredElevation] : "none"};
   }
 
   &:active {
-    box-shadow: ${props => (props.raised ? shadows[buttons.pressedElevation] : "none")};
+    box-shadow: ${props =>
+      props.raised ? shadows[buttons.pressedElevation] : "none"};
   }
 `;
 
@@ -79,12 +81,12 @@ export interface ITextProps {
 }
 
 export const Text = styled.div`
-position: relative;
-z-index: 2;
-opacity: ${(props: ITextProps) =>
-  props.disabled
-    ? transparency[props.theme].button.text.disabled
-    : transparency[props.theme].text.primary};
-${typography.button()};
-${positioning.center(Align.CenterBoth)}
+  position: relative;
+  z-index: 2;
+  opacity: ${(props: ITextProps) =>
+    props.disabled
+      ? transparency[props.theme].button.text.disabled
+      : transparency[props.theme].text.primary};
+  ${typography.button()};
+  ${positioning.center(Align.CenterBoth)};
 `;

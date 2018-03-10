@@ -5,7 +5,7 @@ import { executeEvent } from "./events";
 export const handleRipple = (
   { type, pageX, pageY },
   ripplesComponent: Ripples,
-  props,
+  props
 ) => {
   const { ripple, customRippleBehavior } = props;
 
@@ -27,6 +27,6 @@ const defaultRippleEvent = (e, getRipples: () => Ripples, props) => {
 };
 
 export const getRippleEvents = (props, getRipples: () => Ripples) => ({
-  onMouseDown: (e) => defaultRippleEvent(e, getRipples, props),
-  onMouseLeave: (e) => defaultRippleEvent(e, getRipples, props),
+  onMouseDown: e => defaultRippleEvent(e, getRipples, props),
+  onMouseLeave: e => defaultRippleEvent(e, getRipples, props)
 });

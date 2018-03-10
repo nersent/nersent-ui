@@ -19,7 +19,8 @@ const Border = withProps<IProps>()(styled.div)`
   width: 100%;
   height: 100%;
   border-width: ${props => props.borderWidth}px;
-  border-color: ${props => componentColor(props.color, props.checked, props.disabled, props.theme)};
+  border-color: ${props =>
+    componentColor(props.color, props.checked, props.disabled, props.theme)};
   border-style: solid;
   border-radius: 3px;
   box-sizing: border-box;
