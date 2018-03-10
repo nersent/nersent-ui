@@ -9,7 +9,11 @@
     "watch": "webpack-cli --mode development --watch",
     "build-production": "cross-env NODE_ENV=production webpack-cli --mode production",
     "prepublishOnly": "npm run build-production",
-    "lint": "prettier --write src/**/*.ts* && tslint --config tslint.json src/**/*.ts* --fix"
+    "lint": "npm run prettier && npm run tslint-fix",
+    "prettier": "prettier --write src/**/*.ts*",
+    "tslint-fix": "tslint --config tslint.json src/**/*.ts* --fix",
+    "tslint": "tslint --config tslint.json src/**/*.ts*",
+    "test": "npm run build-production && npm run lint"
   },
   "author": "Nersent",
   "license": "MIT",
