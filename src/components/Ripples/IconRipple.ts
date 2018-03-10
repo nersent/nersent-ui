@@ -8,7 +8,7 @@ interface IProps {
   color: string;
 }
 
-const getBackgroundColor = (color) => {
+const getBackgroundColor = color => {
   const opacityHex = 14; // 0.8
 
   if (color.startsWith("#")) {
