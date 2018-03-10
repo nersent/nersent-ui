@@ -6,14 +6,14 @@ import { getEvents } from "../../utils/events";
 import { getRippleEvents } from "../../utils/ripple";
 
 import Theme from "../../enums/theme";
+
 import Ripples from "../Ripples";
-import OverShade from "./OverShade";
-import StyledButton from "./StyledButton";
-import Text from "./Text";
 
-type ButtonEvent = (e?: SyntheticEvent<HTMLDivElement>) => void;
+import { OverShade, StyledButton, Text } from "./styles";
 
-interface IProps {
+export type ButtonEvent = (e?: SyntheticEvent<HTMLDivElement>) => void;
+
+export interface IProps {
   className?: string;
   style?: {};
   raised?: boolean;

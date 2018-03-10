@@ -13,7 +13,7 @@ import StyledCheckbox from "./StyledCheckbox";
 import { executeEvent, getEvents } from "../../utils/events";
 import { getRippleEvents } from "../../utils/ripple";
 
-interface IProps {
+export interface IProps {
   className?: string;
   style?: {};
   disabled?: boolean;
@@ -24,7 +24,7 @@ interface IProps {
   customRippleBehavior?: boolean;
 }
 
-interface IState {
+export interface IState {
   checked: boolean;
   borderWidth: number;
   borderTransition: string;
