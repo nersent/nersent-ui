@@ -66,5 +66,3 @@ export const StyledRipple = styled.div.attrs({
   overflow: hidden;
   pointer-events: none;
 `;
-
-export default StyledRipple;
