@@ -51,6 +51,7 @@ export default class Ripples extends React.Component<IProps, IState> {
 
   private ripples: HTMLDivElement;
   private currentRipple: IRipple;
+  private isTouched = false;
 
   public componentDidMount() {
     window.addEventListener("mouseup", () => {
@@ -58,7 +59,8 @@ export default class Ripples extends React.Component<IProps, IState> {
     });
   }
 
-  public makeRipple(mouseX: number, mouseY: number) {
+  public makeRipple(mouseX: number, mouseY: number, isTouch = false) {
+    if (!isTouch && this.isTouched) { return; }
     const { color, initialOpacity } = this.props;
 
     const newRipple: IRipple = {
@@ -72,6 +74,8 @@ export default class Ripples extends React.Component<IProps, IState> {
     this.setState({
       ripples: [...this.state.ripples, newRipple]
     });
+
+    if (isTouch && !this.isTouched) { this.isTouched = true; }
   }
 
   public removeRipple = (id: number) => {

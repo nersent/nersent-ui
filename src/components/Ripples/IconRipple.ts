@@ -2,13 +2,25 @@ import styled from "styled-components";
 
 import { withProps } from "../../utils/with-props";
 
-import { hexToRgb } from "../../utils/colors";
-
 interface IProps {
   width: number;
   height: number;
   color: string;
 }
+
+const getBackgroundColor = (color) => {
+  const opacityHex = 14; // 0.8
+
+  if (color.startsWith("#")) {
+    if (color.length >= 7) {
+      return `${color}${opacityHex}`;
+    } else if (color.length === 4) {
+      return `${color}${color.substring(1)}${opacityHex}`;
+    }
+  }
+
+  return color;
+};
 
 const IconRipple = withProps<IProps>()(styled.div)`
   position: absolute;
@@ -23,9 +35,8 @@ const IconRipple = withProps<IProps>()(styled.div)`
 
   &:hover {
     ${props => {
-      const rgb = hexToRgb(props.color);
       return `
-        background-color: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.08);
+        background-color: ${getBackgroundColor(props.color)};
       `;
     }}
   }
