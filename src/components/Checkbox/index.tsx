@@ -6,9 +6,8 @@ import Theme from "../../enums/theme";
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
 import Ripples from "../Ripples";
-import Border from "./Border";
-import Icon from "./Icon";
-import StyledCheckbox from "./StyledCheckbox";
+
+import { Border, Icon, StyledCheckbox } from "./styles";
 
 import { executeEvent, getEvents } from "../../utils/events";
 import { getRippleEvents } from "../../utils/ripple";
