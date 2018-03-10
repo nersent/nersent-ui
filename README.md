@@ -1,7 +1,9 @@
 <div align="center">
   <h1>nersent-ui</h1>
 
-  Nersent-ui is a beautiful [`Material Design`](https://nodejs.org/en/) framework which is on `React` for building interface using components and `styled-components` for styling. We try to reproduce components from Android as much as we can.
+  [![Travis](https://img.shields.io/travis/nersent/nersent-ui.svg?style=flat-square)](https://travis-ci.org/nersent/nersent-ui)
+
+  Nersent-ui is a beautiful material design framework which is on `React` for building interface using components and `styled-components` for styling. We try to reproduce components from Android as much as we can.
 </div>
 
 ## Installing
