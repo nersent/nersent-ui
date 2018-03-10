@@ -39,17 +39,19 @@ export interface IIconProps {
   theme: Theme;
 }
 
-const Icon = styled.div`
+export const Icon = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url(${checkIcon});
-  clip-path: ${(props: IIconProps) => props.pathAnimation ? `inset(0 0 0 0)` : `inset(100% 50% 0 50%)`};
   -webkit-font-smoothing: antialiased;
-  transform: ${props => !props.scaleAnimation ? `scale(1)` : `scale(0)`};
-  transition: ${props => props.transition};
   ${images.center("22px", "auto")}
+
+  clip-path: ${(props: IIconProps) =>
+    props.pathAnimation ? "inset(0 0 0 0)" : "inset(100% 50% 0 50%)"};
+  transform: ${props => (!props.scaleAnimation ? "scale(1)" : "scale(0)")};
+  transition: ${props => props.transition};
   ${props => (props.theme === Theme.Light ? icons.invertColors() : "")}
+  background-image: ${`url(${checkIcon})`};
 `;
