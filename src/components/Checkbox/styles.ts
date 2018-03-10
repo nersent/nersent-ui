@@ -8,8 +8,25 @@ import Theme from "../../enums/theme";
 
 import icons from "../../mixins/icons";
 import images from "../../mixins/images";
+import userSelection from "../../mixins/user-selection";
 
 const checkIcon = require("../../images/Controls/check.svg");
+
+export interface IStyledCheckboxProps {
+  scaleAnimation: boolean;
+}
+
+export const StyledCheckbox = styled.div`
+  width: 18px;
+  height: 18px;
+  position: relative;
+  transform: translate3d(0, 0, 0) translateZ(0) ${(props: IStyledCheckboxProps) => !props.scaleAnimation ? "scale(1)" : "scale(0.92)"};
+  transition: 0.4s transform;
+  -webkit-font-smoothing: subpixel-antialiased;
+  ${userSelection.noTapHighlight()}
+`;
+
+export default StyledCheckbox;
 
 export interface IBorderProps {
   checked: boolean;
@@ -39,17 +56,17 @@ export interface IIconProps {
   theme: Theme;
 }
 
-const Icon = styled.div`
+export const Icon = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url(${checkIcon});
   clip-path: ${(props: IIconProps) => props.pathAnimation ? `inset(0 0 0 0)` : `inset(100% 50% 0 50%)`};
   -webkit-font-smoothing: antialiased;
   transform: ${props => !props.scaleAnimation ? `scale(1)` : `scale(0)`};
   transition: ${props => props.transition};
   ${images.center("22px", "auto")}
   ${props => (props.theme === Theme.Light ? icons.invertColors() : "")}
+  background-image: ${`url(${checkIcon})`};
 `;
