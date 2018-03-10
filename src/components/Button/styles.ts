@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
 import buttons from "../../defaults/buttons";

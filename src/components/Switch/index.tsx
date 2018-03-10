@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import colors from "../../defaults/colors";
 
@@ -6,12 +6,9 @@ import Theme from "../../enums/theme";
 
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
-import StyledSwitch from "./StyledSwitch";
-import Thumb from "./Thumb";
-import ThumbContainer from "./ThumbContainer";
-import Track from "./Track";
+import { StyledSwitch, Thumb, ThumbContainer, Track } from "./styles";
 
-interface IProps {
+export interface IProps {
   className?: string;
   style?: {};
   disabled?: boolean;
@@ -20,7 +17,7 @@ interface IProps {
   toggled?: boolean;
 }
 
-interface IState {
+export interface IState {
   toggled?: boolean;
   thumbLeft?: number;
 }

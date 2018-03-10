@@ -1,19 +1,21 @@
-const { join } = require("path");
-const webpack = require("webpack");
-const UglifyJSWebpackPlugin = require("uglifyjs-webpack-plugin");
+const webpack = require('webpack');
+const path = require("path");
+const { spawn } = require("child_process");
+const DtsBundleWebpack = require('dts-bundle-webpack');
+const fs = require("fs");
 
 const productionDevtool = "source-map";
 const developmentDevtool = "eval-source-map";
 
-const include = [join(__dirname, "src")];
-const exclude = /node_modules/;
+const INCLUDE = [path.resolve(__dirname, "src")];
+const EXCLUDE = [/node_modules/];
+
+const PORT = 8080;
+
+const OUTPUT_DIR = path.resolve(__dirname, "build");
 
 const config = {
   target: "web",
-
-  entry: {
-    index: "./src/index"
-  },
 
   devtool:
     process.env.NODE_ENV === "production"
@@ -21,59 +23,125 @@ const config = {
       : developmentDevtool,
 
   output: {
-    path: join(__dirname, "build"),
+    path: OUTPUT_DIR,
     filename: "[name].js",
-    libraryTarget: "commonjs2"
+    libraryTarget: "umd"
+  },
+
+  entry: {
+    index: "./src"
   },
 
   module: {
     rules: [
       {
         test: /\.(png|gif|jpg|woff2|tff|svg)$/,
-        include,
-        exclude,
+        include: INCLUDE,
+        exclude: EXCLUDE,
         use: [
           {
-            loader: "url-loader"
-          }
-        ]
+            loader: "url-loader",
+          },
+        ],
       },
       {
-        test: /\.(tsx|ts)$/,
-        include,
-        exclude,
+        test: /\.(tsx|ts|jsx|js)$/,
+        include: INCLUDE,
+        exclude: EXCLUDE,
         use: [
           {
-            loader: "ts-loader"
-          }
-        ]
-      }
-    ]
+            loader: "ts-loader",
+          },
+        ],
+      },
+    ],
   },
 
-  plugins: [],
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
 
   resolve: {
     modules: ["node_modules"],
-    extensions: [".js", ".tsx", ".ts"]
-  }
-};
+    extensions: [".js", ".tsx", ".ts"],
+  },
 
-if (process.env.NODE_ENV === "production") {
-  config.plugins.push(
-    new UglifyJSWebpackPlugin({
-      uglifyOptions: {
-        output: {
-          comments: false
-        }
-      }
+  plugins: [
+    new DtsBundleWebpack({
+      name: 'nersent-ui',
+      main: './build/build/index.d.ts',
+      baseDir: './build',
+      out: './index.d.ts',
     }),
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
+    new WebpackShellPlugin({
+      onBuildEnd: () => {
+        /*setTimeout(() => {
+          cleanEmptyFoldersRecursively('./build/build');
+        }, 1000);*/
       }
     })
-  );
+  ],
+
+  externals: {
+    'styled-components': {
+      commonjs: 'styled-components',
+      commonjs2: 'styled-components',
+      amd: 'styled-components'
+    },
+  },
+};
+
+function cleanEmptyFoldersRecursively(folder) {
+  const isDir = fs.statSync(folder).isDirectory();
+  if (!isDir) {
+    return;
+  }
+  let files = fs.readdirSync(folder);
+  if (files.length > 0) {
+    files.forEach(function(file) {
+      var fullPath = path.join(folder, file);
+      cleanEmptyFoldersRecursively(fullPath);
+    });
+
+    files = fs.readdirSync(folder);
+  }
+
+  if (files.length == 0) {
+    fs.rmdirSync(folder);
+    return;
+  }
+}
+
+var exec = require('child_process').exec;
+
+function WebpackShellPlugin(options) {
+  this.options = options;
+}
+
+WebpackShellPlugin.prototype.apply = function(compiler) {
+  const options = this.options;
+
+  compiler.plugin("compilation", compilation => {
+    if (options.onBuildStart != null) {
+      options.onBuildStart()
+    }
+  });
+
+  compiler.plugin("after-emit", (compilation, callback) => {
+    if (options.onBuildEnd != null) {
+      options.onBuildEnd();
+    }
+    callback();
+  });
+};
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    })
+  )
 }
 
 module.exports = [config];

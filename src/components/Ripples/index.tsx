@@ -1,11 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 import Ripple from "../Ripple";
-import IconRipple from "./IconRipple";
-import StyledRipples from "./StyledRipples";
+import { IconRipple, StyledRipples } from "./styles";
 
-interface IProps {
+export interface IProps {
   className?: string;
   style?: {};
   center?: boolean;
@@ -19,14 +18,14 @@ interface IProps {
   parentWidth?: number;
 }
 
-interface IRipple {
+export interface IRipple {
   x: number;
   y: number;
   id: number;
   isRemoving: boolean;
 }
 
-interface IState {
+export interface IState {
   ripples: IRipple[];
   color: string;
 }

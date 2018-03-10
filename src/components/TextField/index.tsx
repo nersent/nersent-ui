@@ -1,17 +1,12 @@
-import React from "react";
+import * as React from "react";
 
 import colors from "../../defaults/colors";
 
 import Theme from "../../enums/theme";
 
-import FocusLine from "./FocusLine";
-import HelperText from "./HelperText";
-import Input from "./Input";
-import Label from "./Label";
-import Line from "./Line";
-import StyledTextField from "./StyledTextField";
+import { FocusLine, HelperText, Input, Label, Line, StyledTextField } from "./styles";
 
-interface IProps {
+export interface IProps {
   className?: string;
   style?: {};
   disabled?: boolean;
@@ -25,7 +20,7 @@ interface IProps {
   validate?: (value: string, submit: boolean) => void;
 }
 
-interface IState {
+export interface IState {
   focused: boolean;
   filled: boolean;
   error: boolean;

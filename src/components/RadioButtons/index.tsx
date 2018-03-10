@@ -1,12 +1,14 @@
-import React from "react";
+import * as React from "react";
 
 import colors from "../../defaults/colors";
 
 import Theme from "../../enums/theme";
-import RadioButton from "../RadioButton";
-import StyledRadioButtons from "./StyledRadioButtons";
 
-interface IProps {
+import RadioButton from "../RadioButton";
+
+import { StyledRadioButtons } from "./styles";
+
+export interface IProps {
   className?: string;
   style?: {};
   theme?: Theme;

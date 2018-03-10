@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import colors from "../../defaults/colors";
 
@@ -8,11 +8,10 @@ import Theme from "../../enums/theme";
 
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
-import Border from "./Border";
-import Circle from "./Circle";
-import StyledRadioButton from "./StyledRadioButton";
 
-interface IProps {
+import { Border, Circle, StyledRadioButton } from "./styles";
+
+export interface IProps {
   className?: string;
   style?: {};
   disabled?: boolean;
@@ -22,7 +21,7 @@ interface IProps {
   toggled?: boolean;
 }
 
-interface IState {
+export interface IState {
   toggled: boolean;
   borderAnimations: boolean;
   fullBorderSize: boolean;

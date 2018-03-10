@@ -4,6 +4,17 @@ const robotoLight = require("./fonts/Roboto-Light.woff2");
 const robotoMedium = require("./fonts/Roboto-Medium.woff2");
 const robotoRegular = require("./fonts/Roboto-Regular.woff2");
 
+import colors from "./defaults/colors";
+
+import Theme from "./enums/theme";
+
+import Button from "./components/Button";
+import Checkbox from "./components/Checkbox";
+import RadioButton from "./components/RadioButton";
+import RadioButtons from "./components/RadioButtons";
+import Switch from "./components/Switch";
+import TextField from "./components/TextField";
+
 injectGlobal`
   @font-face {
     font-family: 'Roboto';
@@ -27,16 +38,13 @@ injectGlobal`
   }
 `;
 
-// Defaults
-export { default as colors } from "./defaults/colors";
-
-// Enums
-export { default as Theme } from "./enums/theme";
-
-// Components
-export { default as Button } from "./components/Button";
-export { default as Checkbox } from "./components/Checkbox";
-export { default as RadioButtons } from "./components/RadioButtons";
-export { default as RadioButton } from "./components/RadioButton";
-export { default as Switch } from "./components/Switch";
-export { default as TextField } from "./components/TextField";
+export {
+  colors,
+  Theme,
+  Button,
+  Checkbox,
+  RadioButtons,
+  RadioButton,
+  Switch,
+  TextField
+}
