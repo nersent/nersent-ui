@@ -1,0 +1,26 @@
+language: node_js
+node_js: '9'
+sudo: enabled
+dist: trusty
+os:
+  - linux
+  - osx
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libc6-dev-i386
+      - gcc-4.8-multilib
+      - g++-4.8-multilib
+      - ninja-build
+      - linux-libc-dev:i386
+      - linux-libc-dev
+      - icnsutils
+      - graphicsmagick
+
+script:
+  - yarn run build-production
+before_install: yarn global add greenkeeper-lockfile@1
+before_script: greenkeeper-lockfile-update
+after_script: greenkeeper-lockfile-upload
