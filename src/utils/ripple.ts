@@ -33,13 +33,8 @@ const defaultRippleEvent = (e, getRipples: () => Ripples, props) => {
 };
 
 export const getRippleEvents = (props, getRipples: () => Ripples) => ({
-<<<<<<< Updated upstream
+  onTouchStart: e => defaultRippleEvent(e, getRipples, props),
+  onTouchEnd: e => defaultRippleEvent(e, getRipples, props),
   onMouseDown: e => defaultRippleEvent(e, getRipples, props),
   onMouseLeave: e => defaultRippleEvent(e, getRipples, props)
-=======
-  onTouchStart: (e) => defaultRippleEvent(e, getRipples, props),
-  onTouchEnd: (e) => defaultRippleEvent(e, getRipples, props),
-  onMouseDown: (e) => defaultRippleEvent(e, getRipples, props),
-  onMouseLeave: (e) => defaultRippleEvent(e, getRipples, props),
->>>>>>> Stashed changes
 });
