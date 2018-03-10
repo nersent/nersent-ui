@@ -53,7 +53,7 @@ export const StyledRipple = styled.div.attrs({
       height: size,
       width: size,
       opacity: props.opacity
-    }
+    };
   }
 })`
   position: absolute;
@@ -62,8 +62,7 @@ export const StyledRipple = styled.div.attrs({
   transform: translate3d(-50.1%, -50.1%, 0);
   transition: ${(props: IProps) => props.rippleTime}s width ${easing},
     ${props => props.rippleTime}s height ${easing},
-    ${props => props.fadeOutTime}s opacity,
-    0.3s background-color;
+    ${props => props.fadeOutTime}s opacity, 0.3s background-color;
   overflow: hidden;
   pointer-events: none;
 `;

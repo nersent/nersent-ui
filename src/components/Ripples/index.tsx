@@ -60,7 +60,9 @@ export default class Ripples extends React.Component<IProps, IState> {
   }
 
   public makeRipple(mouseX: number, mouseY: number, isTouch = false) {
-    if (!isTouch && this.isTouched) { return; }
+    if (!isTouch && this.isTouched) {
+      return;
+    }
     const { color, initialOpacity } = this.props;
 
     const newRipple: IRipple = {
@@ -75,7 +77,9 @@ export default class Ripples extends React.Component<IProps, IState> {
       ripples: [...this.state.ripples, newRipple]
     });
 
-    if (isTouch && !this.isTouched) { this.isTouched = true; }
+    if (isTouch && !this.isTouched) {
+      this.isTouched = true;
+    }
   }
 
   public removeRipple = (id: number) => {
