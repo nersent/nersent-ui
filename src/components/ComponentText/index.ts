@@ -17,7 +17,7 @@ const ComponentText = styled.div`
   margin-right: 24px;
   font-size: 15px;
   color: ${(props: IProps) => componentForeground(props.disabled, props.theme)};
-  ${typography.body2()}
+  ${typography.body2()};
 `;
 
 export default ComponentText;
