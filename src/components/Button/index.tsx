@@ -1,17 +1,22 @@
 import * as React from "react";
 import { SyntheticEvent } from "react";
 
-import colors from "../../defaults/colors";
-
+// Utils
 import { getEvents } from "../../utils/events";
 import { getRippleEvents } from "../../utils/ripple";
 
+// Defaults
+import colors from "../../defaults/colors";
+
+// Enums
 import Theme from "../../enums/theme";
 
-import Ripples from "../Ripples";
-
-import Clear from "../Clear";
+// Styles
 import { OverShade, StyledButton, Text } from "./styles";
+
+// Components
+import Clear from "../Clear";
+import Ripples from "../Ripples";
 
 export type ButtonEvent = (e?: SyntheticEvent<HTMLDivElement>) => void;
 

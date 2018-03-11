@@ -1,12 +1,15 @@
 import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
+// Defaults
 import buttons from "../../defaults/buttons";
 import transparency from "../../defaults/transparency";
 
+// Enumms
 import Align from "../../enums/align";
 import Theme from "../../enums/theme";
 
+// Mixins
 import positioning from "../../mixins/positioning";
 import shadows from "../../mixins/shadows";
 import typography from "../../mixins/typography";
