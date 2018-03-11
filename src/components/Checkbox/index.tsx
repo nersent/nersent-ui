@@ -67,6 +67,14 @@ export default class Checkbox extends React.Component<IProps, IState> {
   private easing = "cubic-bezier(0.19, 1, 0.22, 1)";
   private ripples: Ripples;
 
+  public getRippleLeft = () => {
+    return -this.checkbox.offsetWidth;
+  };
+
+  public getRippleTop = () => {
+    return -this.checkbox.offsetHeight;
+  };
+
   public onClick = e => {
     if (this.props.disabled) {
       return;
@@ -75,14 +83,6 @@ export default class Checkbox extends React.Component<IProps, IState> {
     this.check(!this.state.checked);
 
     executeEvent(e, this.props);
-  };
-
-  public getRippleLeft = () => {
-    return -this.checkbox.offsetWidth;
-  };
-
-  public getRippleTop = () => {
-    return -this.checkbox.offsetHeight;
   };
 
   public check(flag: boolean, fromProps = false) {
