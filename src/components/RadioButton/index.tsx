@@ -1,15 +1,20 @@
 import * as React from "react";
 
-import colors from "../../defaults/colors";
-
+// Utils
 import { componentColor } from "../../utils/component-color";
 
+// Defaults
+import colors from "../../defaults/colors";
+
+// Enums
 import Theme from "../../enums/theme";
 
+// Styles
+import { Border, Circle, StyledRadioButton } from "./styles";
+
+// Components
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
-
-import { Border, Circle, StyledRadioButton } from "./styles";
 
 export interface IProps {
   className?: string;

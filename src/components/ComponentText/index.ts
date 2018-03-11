@@ -1,9 +1,13 @@
 import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
+// Utils
 import { componentForeground } from "../../utils/component-color";
 
+// Enums
 import Theme from "../../enums/theme";
+
+// Mixins
 import typography from "../../mixins/typography";
 
 export interface IProps {
