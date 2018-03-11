@@ -2,6 +2,7 @@ import * as React from "react";
 import { SyntheticEvent } from "react";
 
 // Utils
+import { getForegroundColor } from "../../utils/colors";
 import { getEvents } from "../../utils/events";
 import { getRippleEvents } from "../../utils/ripple";
 
@@ -29,10 +30,11 @@ export interface IProps {
   style?: {};
   raised?: boolean;
   disabled?: boolean;
-  backgroundColor?: string;
   theme?: Theme;
   color?: string;
   dialog?: boolean;
+  ripple?: boolean;
+  customRippleBehavior?: boolean;
   onClick?: ButtonEvent;
   onMouseDown?: ButtonEvent;
   onMouseUp?: ButtonEvent;
@@ -40,23 +42,42 @@ export interface IProps {
   onMouseEnter?: ButtonEvent;
   onTouchStart?: ButtonEvent;
   onTouchEnd?: ButtonEvent;
-  ripple?: boolean;
-  customRippleBehavior?: boolean;
 }
 
-export default class Button extends React.Component<IProps, {}> {
+export interface IState {
+  foreground: string;
+}
+
+export default class Button extends React.Component<IProps, IState> {
   public static defaultProps = {
-    raised: false,
+    raised: true,
     disabled: false,
-    color: colors.black,
-    backgroundColor: "transparent",
+    color: colors.blue["500"],
     theme: Theme.Light,
     dialog: false,
     customRippleBehavior: false,
     ripple: true
   };
 
+  public state: IState = {
+    foreground: "black"
+  };
+
   private ripples: Ripples;
+
+  public componentDidMount () {
+    this.setState({
+      foreground: getForegroundColor(this.props.color)
+    })
+  }
+
+  public componentWillReceiveProps (nextProps) {
+    if (this.props.color !== nextProps.color) {
+      this.setState({
+        foreground: getForegroundColor(nextProps.color)
+      })
+    }
+  }
 
   public render() {
     let { color } = this.props;
@@ -66,11 +87,14 @@ export default class Button extends React.Component<IProps, {}> {
       style,
       raised,
       disabled,
-      backgroundColor,
       theme,
       children,
       dialog
     } = this.props;
+
+    const {
+      foreground
+    } = this.state;
 
     if (typeof color === "object") {
       color = color["500"];
@@ -86,19 +110,22 @@ export default class Button extends React.Component<IProps, {}> {
         <StyledButton
           className={className}
           style={style}
-          raised={raised}
           color={color}
-          disabled={disabled}
-          backgroundColor={backgroundColor}
+          raised={raised}
           theme={theme}
+          disabled={disabled}
           dialog={dialog}
           {...events}
         >
-          <Text disabled={disabled} theme={theme}>
+          <Text
+            foreground={foreground}
+            disabled={disabled}
+            theme={theme}
+          >
             {children}
           </Text>
-          <OverShade theme={theme} color={color} />
-          <Ripples ref={r => (this.ripples = r)} color={color} />
+          <OverShade className="over-shade" />
+          <Ripples ref={r => (this.ripples = r)} color={foreground} />
         </StyledButton>
         <Clear />
       </>

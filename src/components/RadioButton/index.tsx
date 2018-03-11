@@ -1,7 +1,7 @@
 import * as React from "react";
 
 // Utils
-import { componentColor } from "../../utils/component-color";
+// import { componentColor } from "../../utils/component-color";
 import { getRippleEvents } from "../../utils/ripple";
 
 // Defaults
@@ -152,7 +152,7 @@ export default class RadioButton extends React.Component<IProps, IState> {
     const borderWidth = fullBorderSize ? this.radioButton.offsetWidth / 2 : 2;
     const circleSize = fullCircleSize ? 14 : 9;
 
-    const color = componentColor(this.props.color, toggled, disabled, theme);
+    const color = "red"; // componentColor(this.props.color, toggled, disabled, theme);
 
     const events = {
       ...getRippleEvents(this.props, () => this.ripples),

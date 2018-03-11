@@ -64,6 +64,14 @@ export default class Ripples extends React.Component<IProps, IState> {
     });
   }
 
+  public componentWillReceiveProps (nextProps) {
+    if (nextProps.color !== this.state.color) {
+      this.setState({
+        color: nextProps.color
+      })
+    }
+  }
+
   public makeRipple(mouseX: number, mouseY: number, isTouch = false) {
     if (!isTouch && this.isTouched) {
       return;
