@@ -73,6 +73,7 @@ const config = {
       main: './build/build/index.d.ts',
       baseDir: './build',
       out: './index.d.ts',
+      removeSource: true
     }),
     new WebpackShellPlugin({
       onBuildEnd: () => {

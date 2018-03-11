@@ -4,7 +4,7 @@
   "description": "Material design framework for React",
   "repository": "Nersent/nersent-ui",
   "main": "build/index",
-  "types": "build/build/index.d.ts",
+  "types": "build/index.d.ts",
   "scripts": {
     "watch": "webpack-cli --mode development --watch",
     "build-production": "cross-env NODE_ENV=production webpack-cli --mode production",
@@ -14,6 +14,9 @@
     "tslint-fix": "tslint --config tslint.json src/**/*.ts* --fix",
     "tslint": "tslint --config tslint.json src/**/*.ts*",
     "test": "npm run build-production && npm run lint"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Nersent",
   "license": "MIT",
