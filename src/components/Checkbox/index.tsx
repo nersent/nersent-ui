@@ -9,13 +9,17 @@ import colors from "../../defaults/colors";
 // Enums
 import Theme from "../../enums/theme";
 
-// Styles
-import { Border, Icon, StyledCheckbox } from "./styles";
-
 // Components
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
 import Ripples from "../Ripples";
+
+// Styles
+import {
+  Border,
+  Icon,
+  StyledCheckbox
+} from "./styles";
 
 export interface IProps {
   className?: string;

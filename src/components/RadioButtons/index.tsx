@@ -6,11 +6,11 @@ import colors from "../../defaults/colors";
 // Enums
 import Theme from "../../enums/theme";
 
-// Styles
-import { StyledRadioButtons } from "./styles";
-
 // Components
 import RadioButton from "../RadioButton";
+
+// Styles
+import { StyledRadioButtons } from "./styles";
 
 export interface IProps {
   className?: string;

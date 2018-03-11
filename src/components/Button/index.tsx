@@ -11,12 +11,16 @@ import colors from "../../defaults/colors";
 // Enums
 import Theme from "../../enums/theme";
 
-// Styles
-import { OverShade, StyledButton, Text } from "./styles";
-
 // Components
 import Clear from "../Clear";
 import Ripples from "../Ripples";
+
+// Styles
+import {
+  OverShade,
+  StyledButton,
+  Text
+} from "./styles";
 
 export type ButtonEvent = (e?: SyntheticEvent<HTMLDivElement>) => void;
 

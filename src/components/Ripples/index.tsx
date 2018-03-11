@@ -1,8 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+// Styles
+import {
+  IconRipple,
+  StyledRipples
+} from "./styles";
+
+// Components
 import Ripple from "../Ripple";
-import { IconRipple, StyledRipples } from "./styles";
 
 export interface IProps {
   className?: string;

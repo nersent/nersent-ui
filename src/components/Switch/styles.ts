@@ -1,9 +1,11 @@
 import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
+// Enums
 import Align from "../../enums/align";
 import Theme from "../../enums/theme";
 
+// Mixins
 import Positioning from "../../mixins/positioning";
 import Shadows from "../../mixins/shadows";
 

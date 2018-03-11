@@ -1,12 +1,22 @@
 import * as React from "react";
 
+// Defaults
 import colors from "../../defaults/colors";
 
+// Enums
 import Theme from "../../enums/theme";
 
+// Components
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
-import { StyledSwitch, Thumb, ThumbContainer, Track } from "./styles";
+
+// Styles
+import {
+  StyledSwitch,
+  Thumb,
+  ThumbContainer,
+  Track
+} from "./styles";
 
 export interface IProps {
   className?: string;

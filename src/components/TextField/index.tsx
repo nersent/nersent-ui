@@ -1,10 +1,20 @@
 import * as React from "react";
 
+// Defaults
 import colors from "../../defaults/colors";
 
+/// Enums
 import Theme from "../../enums/theme";
 
-import { FocusLine, HelperText, Input, Label, Line, StyledTextField } from "./styles";
+// Styles
+import {
+  FocusLine,
+  HelperText,
+  Input,
+  Label,
+  Line,
+  StyledTextField
+} from "./styles";
 
 export interface IProps {
   className?: string;

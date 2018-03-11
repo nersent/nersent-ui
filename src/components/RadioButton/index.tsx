@@ -9,12 +9,16 @@ import colors from "../../defaults/colors";
 // Enums
 import Theme from "../../enums/theme";
 
-// Styles
-import { Border, Circle, StyledRadioButton } from "./styles";
-
 // Components
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
+
+// Styles
+import {
+  Border,
+  Circle,
+  StyledRadioButton
+} from "./styles";
 
 export interface IProps {
   className?: string;
