@@ -4,7 +4,6 @@ sudo: enabled
 dist: trusty
 os:
 - linux
-- osx
 script:
 - yarn test
 deploy:
