@@ -1,11 +1,16 @@
 import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
+// Utils
 import { componentColor } from "../../utils/component-color";
 
+// Defaults
 import transparency from "../../defaults/transparency";
+
+// Enums
 import Theme from "../../enums/theme";
 
+// Mixins
 import icons from "../../mixins/icons";
 import images from "../../mixins/images";
 import userSelection from "../../mixins/user-selection";

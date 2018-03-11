@@ -1,16 +1,21 @@
 import * as React from "react";
 
-import colors from "../../defaults/colors";
+// Utils
+import { executeEvent, getEvents } from "../../utils/events";
+import { getRippleEvents } from "../../utils/ripple";
 
+// Defaults
+import colors from "../../defaults/colors";
+// Enums
 import Theme from "../../enums/theme";
+
+// Styles
+import { Border, Icon, StyledCheckbox } from "./styles";
+
+// Components
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
 import Ripples from "../Ripples";
-
-import { Border, Icon, StyledCheckbox } from "./styles";
-
-import { executeEvent, getEvents } from "../../utils/events";
-import { getRippleEvents } from "../../utils/ripple";
 
 export interface IProps {
   className?: string;
