@@ -21,4 +21,6 @@ export default styled.div`
   margin-right: 24px;
   font-size: 15px;
   ${typography.body2()}
+
+  ${(props: IProps) => ``}
 `;

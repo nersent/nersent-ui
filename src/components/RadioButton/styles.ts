@@ -1,9 +1,6 @@
 import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
-// Utils
-import { componentColor } from "../../utils/component-color";
-
 // Defaults
 import transparency from "../../defaults/transparency";
 
