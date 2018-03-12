@@ -19,6 +19,7 @@ export interface IProps {
   icon?: boolean;
   parentHeight?: number;
   parentWidth?: number;
+  hoverOverShade?: boolean;
 }
 
 export interface IRipple {
@@ -43,7 +44,8 @@ export default class Ripples extends React.Component<IProps, IState> {
     initialOpacity: 0.2,
     color: "#000",
     rippleTime: 1,
-    icon: false
+    icon: false,
+    hoverOverShade: true
   };
 
   public state: IState = {
@@ -126,7 +128,8 @@ export default class Ripples extends React.Component<IProps, IState> {
       rippleTime,
       icon,
       parentWidth,
-      parentHeight
+      parentHeight,
+      hoverOverShade
     } = this.props;
 
     const component = (
@@ -157,7 +160,12 @@ export default class Ripples extends React.Component<IProps, IState> {
 
     return (
       (icon && (
-        <IconRipple width={parentWidth} height={parentHeight} color={color}>
+        <IconRipple
+          width={parentWidth}
+          height={parentHeight}
+          color={color}
+          hoverOverShade={hoverOverShade}
+        >
           {component}
         </IconRipple>
       )) ||

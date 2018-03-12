@@ -29,6 +29,7 @@ export interface IIconRippleProps {
   width: number;
   height: number;
   color: string;
+  hoverOverShade: boolean;
 }
 
 export const IconRipple = styled.div`
@@ -41,8 +42,5 @@ export const IconRipple = styled.div`
   transform: translate(-50%, -50%);
   overflow: hidden;
   transition: 0.2s background-color;
-
-  &:hover {
-    background-color: ${props => getBackgroundColor(props.color)};
-  }
+  ${props => props.hoverOverShade && ("&:hover { background-color:" + getBackgroundColor(props.color) + "}")}
 `;

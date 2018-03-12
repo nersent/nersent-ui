@@ -1,7 +1,6 @@
 import * as React from "react";
 
 // Utils
-import { getComponentBackground } from "../../utils/component-color";
 import { getRippleEvents } from "../../utils/ripple";
 
 // Defaults

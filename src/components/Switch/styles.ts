@@ -78,6 +78,8 @@ export const Thumb = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  position: relative;
+  z-index: 2;
   transition: 0.2s transform, 0.2s background-color;
   background-color: ${(props: IThumbProps) => getThumbBackgroundColor(props)};
   box-shadow: ${Shadows[2]};
