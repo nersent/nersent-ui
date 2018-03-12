@@ -6,6 +6,7 @@ import { getRippleEvents } from "../../utils/ripple";
 
 // Defaults
 import colors from "../../defaults/colors";
+
 // Enums
 import Theme from "../../enums/theme";
 
@@ -36,6 +37,7 @@ export interface IState {
   iconPathAnimation: boolean;
   iconTransition: string;
   scaleAnimation: boolean;
+  rippleColor: string;
 }
 
 export default class Checkbox extends React.Component<IProps, IState> {
@@ -54,7 +56,8 @@ export default class Checkbox extends React.Component<IProps, IState> {
     iconScaleAnimation: false,
     iconPathAnimation: false,
     iconTransition: "none",
-    scaleAnimation: false
+    scaleAnimation: false,
+    rippleColor: "#000"
   };
 
   private isAnimating = false;
@@ -91,7 +94,10 @@ export default class Checkbox extends React.Component<IProps, IState> {
       onCheck(flag, this, fromProps);
     }
 
-    this.setState({ checked: flag });
+    this.setState({
+      checked: flag,
+      rippleColor: flag ? this.props.color : "#000"
+    });
 
     if (flag) {
       this.setState({
@@ -107,8 +113,6 @@ export default class Checkbox extends React.Component<IProps, IState> {
       }
 
       this.timeouts = [];
-
-      this.ripples.changeRippleColor(color);
 
       setTimeout(() => {
         this.setState({
@@ -137,8 +141,6 @@ export default class Checkbox extends React.Component<IProps, IState> {
         iconScaleAnimation: false,
         scaleAnimation: true
       });
-
-      this.ripples.changeRippleColor("#000");
 
       setTimeout(() => {
         this.setState({ iconScaleAnimation: true });
@@ -182,7 +184,8 @@ export default class Checkbox extends React.Component<IProps, IState> {
       scaleAnimation,
       iconScaleAnimation,
       iconPathAnimation,
-      iconTransition
+      iconTransition,
+      rippleColor
     } = this.state;
 
     const events = {
@@ -221,7 +224,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
           <Ripples
             icon={true}
             ref={r => (this.ripples = r)}
-            color="#000"
+            color={rippleColor}
             parentWidth={18}
             parentHeight={18}
             rippleTime={0.7}

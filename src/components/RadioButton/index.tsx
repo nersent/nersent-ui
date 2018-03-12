@@ -1,7 +1,7 @@
 import * as React from "react";
 
 // Utils
-// import { componentColor } from "../../utils/component-color";
+import { getComponentBackground } from "../../utils/component-color";
 import { getRippleEvents } from "../../utils/ripple";
 
 // Defaults
@@ -35,6 +35,7 @@ export interface IState {
   circleVisible: boolean;
   fullCircleSize: boolean;
   animation: boolean;
+  rippleColor: string;
 }
 
 export default class RadioButton extends React.Component<IProps, IState> {
@@ -50,7 +51,8 @@ export default class RadioButton extends React.Component<IProps, IState> {
     fullBorderSize: false,
     circleVisible: false,
     fullCircleSize: true,
-    animation: false
+    animation: false,
+    rippleColor: "#000"
   };
 
   private timeouts = [];
@@ -74,7 +76,11 @@ export default class RadioButton extends React.Component<IProps, IState> {
   };
 
   public toggle = (flag = !this.state.toggled) => {
-    this.setState({ toggled: flag, animation: true });
+    this.setState({
+      toggled: flag,
+      animation: true,
+      rippleColor: flag ? this.props.color : "#000"
+    });
 
     if (flag) {
       this.setState({ fullBorderSize: true });
@@ -134,7 +140,13 @@ export default class RadioButton extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { className, children, theme, disabled } = this.props;
+    const {
+      className,
+      children,
+      theme,
+      disabled,
+      color
+    } = this.props;
 
     const {
       toggled,
@@ -142,13 +154,12 @@ export default class RadioButton extends React.Component<IProps, IState> {
       fullCircleSize,
       animation,
       borderAnimations,
-      circleVisible
+      circleVisible,
+      rippleColor
     } = this.state;
 
     const borderWidth = fullBorderSize ? this.radioButton.offsetWidth / 2 : 2;
     const circleSize = fullCircleSize ? 14 : 9;
-
-    const color = "red"; // componentColor(this.props.color, toggled, disabled, theme);
 
     const events = {
       ...getRippleEvents(this.props, () => this.ripples),
@@ -166,13 +177,23 @@ export default class RadioButton extends React.Component<IProps, IState> {
               borderWidth={borderWidth}
               animations={borderAnimations}
               color={color}
+              toggled={toggled}
+              disabled={disabled}
+              theme={theme}
             />
-            <Circle size={circleSize} visible={circleVisible} color={color} />
+            <Circle
+              size={circleSize}
+              visible={circleVisible}
+              color={color}
+              toggled={toggled}
+              disabled={disabled}
+              theme={theme}
+            />
           </StyledRadioButton>
           <Ripples
             icon={true}
             ref={r => (this.ripples = r)}
-            color="#000"
+            color={rippleColor}
             parentWidth={18}
             parentHeight={18}
             rippleTime={0.7}

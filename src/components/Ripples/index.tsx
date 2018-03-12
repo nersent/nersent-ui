@@ -61,14 +61,6 @@ export default class Ripples extends React.Component<IProps, IState> {
     });
   }
 
-  public componentWillReceiveProps(nextProps) {
-    if (nextProps.color !== this.state.color) {
-      this.setState({
-        color: nextProps.color
-      });
-    }
-  }
-
   public makeRipple(mouseX: number, mouseY: number, isTouch = false) {
     if (!isTouch && this.isTouched) {
       return;
@@ -117,10 +109,6 @@ export default class Ripples extends React.Component<IProps, IState> {
     });
   };
 
-  public changeRippleColor = (newColor: string) => {
-    this.setState({ color: newColor });
-  };
-
   public getRipplePosition(offsetX = 0, x = 0, y = 0) {
     return {
       x: x - this.ripples.getBoundingClientRect().left,
@@ -129,7 +117,8 @@ export default class Ripples extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const { ripples, color } = this.state;
+    const { color } = this.props;
+    const { ripples } = this.state;
 
     const {
       fadeOutTime,

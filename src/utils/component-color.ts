@@ -44,8 +44,8 @@ export const getComponentForeground = (
       dark: transparency.dark.text.disabled
     },
     enabled: {
-      light: transparency.light.text.primary,
-      dark: transparency.dark.text.primary
+      light: transparency.light.text.secondary,
+      dark: transparency.dark.text.secondary
     }
   }
 ) => {
