@@ -1,11 +1,16 @@
 import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
-import { componentColor } from "../../utils/component-color";
+// Utils
+//import { componentColor } from "../../utils/component-color";
 
+// Defaults
 import transparency from "../../defaults/transparency";
+
+// Enums
 import Theme from "../../enums/theme";
 
+// Mixins
 import icons from "../../mixins/icons";
 import images from "../../mixins/images";
 import userSelection from "../../mixins/user-selection";
@@ -39,12 +44,14 @@ export interface IBorderProps {
   transition: string;
 }
 
+/*
+  border-color: ${(props: IBorderProps) =>
+    componentColor(props.color, props.checked, props.disabled, props.theme)};
+    */
 export const Border = styled.div`
   width: 100%;
   height: 100%;
   border-width: ${(props: IBorderProps) => props.borderWidth}px;
-  border-color: ${(props: IBorderProps) =>
-    componentColor(props.color, props.checked, props.disabled, props.theme)};
   border-style: solid;
   border-radius: 3px;
   box-sizing: border-box;

@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+// Styles
 import { StyledRipple } from "./styles";
 
 export interface IProps {

@@ -1,56 +1,83 @@
 import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
+// Utils
+import { getComponentBackground, getComponentForeground } from "../../utils/component-color"
+
+// Defaults
 import buttons from "../../defaults/buttons";
 import transparency from "../../defaults/transparency";
 
+// Enumms
 import Align from "../../enums/align";
 import Theme from "../../enums/theme";
 
+// Mixins
 import positioning from "../../mixins/positioning";
 import shadows from "../../mixins/shadows";
 import typography from "../../mixins/typography";
 import userSelection from "../../mixins/user-selection";
 
-const getBackgroundColor = (props: IStyledButtonProps) => {
-  if (props.disabled) {
-    if (props.raised) {
-      return `rgba(0, 0, 0, ${transparency[props.theme].button.disabled})`;
-    }
-  }
-  return props.backgroundColor;
-};
-
 export interface IStyledButtonProps {
-  disabled: boolean;
+  color: string;
   raised: boolean;
-  dialog: boolean;
   theme: Theme;
-  backgroundColor: string;
+  disabled: boolean;
+  dialog: boolean;
+}
+
+const getBackground = (color: string, disabled: boolean, theme: Theme) => {
+  return getComponentBackground(color, null, disabled, theme, {
+    disabled: {
+      light: transparency.light.button.disabled,
+      dark: transparency.dark.button.disabled
+    },
+    toggledOff: null
+  });
+}
+
+const getForeground = (disabled: boolean, theme: Theme, foreground: string) => {
+  if (!disabled) { return foreground; }
+
+  return getComponentForeground(disabled, theme,{
+    disabled: {
+      light: transparency.light.text.disabled,
+      dark: transparency.dark.text.disabled
+    },
+    enabled: {
+      light: 1,
+      dark: 1
+    }
+  });
 }
 
 export const StyledButton = styled.div`
+  min-width: ${(props: IStyledButtonProps) => (props.dialog ? 0 : buttons.minWidth)}px;
+  height: ${buttons.height}px;
   position: relative;
   padding: 0 16px 0 16px;
+  text-align: center;
   text-transform: uppercase;
-  float: left;
-  cursor: ${(props: IStyledButtonProps) =>
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  cursor: ${props =>
     props.disabled ? "default" : "pointer"};
-  background-color: ${props => getBackgroundColor(props)};
-  pointer-events: ${props => (props.disabled ? "none" : "auto")};
-  color: ${props => (props.disabled ? "#000" : props.color)};
-  box-shadow: ${props =>
-    props.raised && !props.disabled ? shadows[buttons.elevation] : "none"};
+  background-color: ${props => getBackground(props.color, props.disabled, props.theme)};
+  box-shadow: ${props => props.raised && !props.disabled ? shadows[buttons.elevation] : "none"};
+  pointer-events: ${props => props.disabled ? "none" : "auto"};
   border-radius: ${buttons.cornerRadius}px;
-  min-width: ${props => (props.dialog ? 0 : buttons.minWidth)}px;
-  height: ${buttons.height}px;
-  ${userSelection.noUserSelect()} ${userSelection.noTapHighlight()}
   overflow: hidden;
-  transition: 0.3s box-shadow;
+  transition: 0.3s box-shadow, 0.2s background-color;
+  ${userSelection.noUserSelect()} ${userSelection.noTapHighlight()}
 
   &:hover {
     box-shadow: ${props =>
       props.raised ? shadows[buttons.hoveredElevation] : "none"};
+
+    & .over-shade {
+      opacity: 0.12;
+    }
   }
 
   &:active {
@@ -65,28 +92,23 @@ export const OverShade = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: ${props => props.color};
+  background-color: #000;
   opacity: 0;
   transition: 0.25s opacity;
   z-index: 2;
-
-  &:hover {
-    opacity: ${props => transparency[props.theme].button.focused};
-  }
 `;
 
 export interface ITextProps {
+  foreground: string;
   disabled: boolean;
   theme: Theme;
 }
 
 export const Text = styled.div`
   position: relative;
-  z-index: 2;
-  opacity: ${(props: ITextProps) =>
-    props.disabled
-      ? transparency[props.theme].button.text.disabled
-      : transparency[props.theme].text.primary};
+  z-index: 3;
+  white-space: nowrap;
+  color: ${(props: ITextProps) => getForeground(props.disabled, props.theme, props.foreground)};
   ${typography.button()};
-  ${positioning.center(Align.CenterBoth)};
+  transition: 0.2s color;
 `;

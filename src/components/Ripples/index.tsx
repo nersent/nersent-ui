@@ -1,8 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+// Styles
+import {
+  IconRipple,
+  StyledRipples
+} from "./styles";
+
+// Components
 import Ripple from "../Ripple";
-import { IconRipple, StyledRipples } from "./styles";
 
 export interface IProps {
   className?: string;
@@ -56,6 +62,14 @@ export default class Ripples extends React.Component<IProps, IState> {
     window.addEventListener("mouseup", () => {
       this.removeRipples();
     });
+  }
+
+  public componentWillReceiveProps (nextProps) {
+    if (nextProps.color !== this.state.color) {
+      this.setState({
+        color: nextProps.color
+      })
+    }
   }
 
   public makeRipple(mouseX: number, mouseY: number, isTouch = false) {

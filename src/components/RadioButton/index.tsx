@@ -1,15 +1,26 @@
 import * as React from "react";
 
+// Utils
+// import { componentColor } from "../../utils/component-color";
+import { getRippleEvents } from "../../utils/ripple";
+
+// Defaults
 import colors from "../../defaults/colors";
 
-import { componentColor } from "../../utils/component-color";
-
+// Enums
 import Theme from "../../enums/theme";
 
+// Components
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
+import Ripples from "../Ripples";
 
-import { Border, Circle, StyledRadioButton } from "./styles";
+// Styles
+import {
+  Border,
+  Circle,
+  StyledRadioButton
+} from "./styles";
 
 export interface IProps {
   className?: string;
@@ -33,7 +44,8 @@ export interface IState {
 export default class RadioButton extends React.Component<IProps, IState> {
   public static defaultProps = {
     color: colors.blue["500"],
-    theme: Theme.Light
+    theme: Theme.Light,
+    ripple: true
   };
 
   public state: IState = {
@@ -47,6 +59,15 @@ export default class RadioButton extends React.Component<IProps, IState> {
 
   private timeouts = [];
   private radioButton: HTMLDivElement;
+  private ripples: Ripples;
+
+  public getRippleLeft = () => {
+    return -this.radioButton.offsetWidth;
+  };
+
+  public getRippleTop = () => {
+    return -this.radioButton.offsetHeight;
+  };
 
   public onClick = e => {
     const onClick = this.props.onClick;
@@ -131,10 +152,15 @@ export default class RadioButton extends React.Component<IProps, IState> {
     const borderWidth = fullBorderSize ? this.radioButton.offsetWidth / 2 : 2;
     const circleSize = fullCircleSize ? 14 : 9;
 
-    const color = componentColor(this.props.color, toggled, disabled, theme);
+    const color = "red"; // componentColor(this.props.color, toggled, disabled, theme);
+
+    const events = {
+      ...getRippleEvents(this.props, () => this.ripples),
+      onClick: this.onClick
+    };
 
     return (
-      <ComponentContainer onClick={this.onClick}>
+      <ComponentContainer {...events}>
         <div style={{ position: "relative" }}>
           <StyledRadioButton
             innerRef={r => (this.radioButton = r)}
@@ -147,6 +173,15 @@ export default class RadioButton extends React.Component<IProps, IState> {
             />
             <Circle size={circleSize} visible={circleVisible} color={color} />
           </StyledRadioButton>
+          <Ripples
+            icon={true}
+            ref={r => (this.ripples = r)}
+            color="#000"
+            parentWidth={18}
+            parentHeight={18}
+            rippleTime={0.7}
+            initialOpacity={0.1}
+          />
         </div>
         {children != null && (
           <ComponentText theme={theme} disabled={disabled}>

@@ -1,16 +1,25 @@
 import * as React from "react";
 
-import colors from "../../defaults/colors";
+// Utils
+import { executeEvent, getEvents } from "../../utils/events";
+import { getRippleEvents } from "../../utils/ripple";
 
+// Defaults
+import colors from "../../defaults/colors";
+// Enums
 import Theme from "../../enums/theme";
+
+// Components
 import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
 import Ripples from "../Ripples";
 
-import { Border, Icon, StyledCheckbox } from "./styles";
-
-import { executeEvent, getEvents } from "../../utils/events";
-import { getRippleEvents } from "../../utils/ripple";
+// Styles
+import {
+  Border,
+  Icon,
+  StyledCheckbox
+} from "./styles";
 
 export interface IProps {
   className?: string;
@@ -58,6 +67,14 @@ export default class Checkbox extends React.Component<IProps, IState> {
   private easing = "cubic-bezier(0.19, 1, 0.22, 1)";
   private ripples: Ripples;
 
+  public getRippleLeft = () => {
+    return -this.checkbox.offsetWidth;
+  };
+
+  public getRippleTop = () => {
+    return -this.checkbox.offsetHeight;
+  };
+
   public onClick = e => {
     if (this.props.disabled) {
       return;
@@ -66,14 +83,6 @@ export default class Checkbox extends React.Component<IProps, IState> {
     this.check(!this.state.checked);
 
     executeEvent(e, this.props);
-  };
-
-  public getRippleLeft = () => {
-    return -this.checkbox.offsetWidth;
-  };
-
-  public getRippleTop = () => {
-    return -this.checkbox.offsetHeight;
   };
 
   public check(flag: boolean, fromProps = false) {
