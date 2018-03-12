@@ -15,11 +15,7 @@ import ComponentText from "../ComponentText";
 import Ripples from "../Ripples";
 
 // Styles
-import {
-  Border,
-  Icon,
-  StyledCheckbox
-} from "./styles";
+import { Border, Icon, StyledCheckbox } from "./styles";
 
 export interface IProps {
   className?: string;

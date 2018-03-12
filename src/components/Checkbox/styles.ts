@@ -2,7 +2,7 @@ import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
 // Utils
-//import { componentColor } from "../../utils/component-color";
+// import { componentColor } from "../../utils/component-color";
 
 // Defaults
 import transparency from "../../defaults/transparency";
@@ -25,9 +25,9 @@ export const StyledCheckbox = styled.div`
   width: 18px;
   height: 18px;
   position: relative;
-  transform: translate3d(0, 0, 0) translateZ(0)
-    ${(props: IStyledCheckboxProps) =>
-      !props.scaleAnimation ? "scale(1)" : "scale(0.92)"};
+  transform: translate3d(0, 0, 0) translateZ(0);
+  ${(props: IStyledCheckboxProps) =>
+    !props.scaleAnimation ? "scale(1)" : "scale(0.92)"};
   transition: 0.4s transform;
   -webkit-font-smoothing: subpixel-antialiased;
   ${userSelection.noTapHighlight()};

@@ -20,7 +20,6 @@ export default styled.div`
   margin-left: 8px;
   margin-right: 24px;
   font-size: 15px;
-  ${typography.body2()}
-
-  ${(props: IProps) => ``}
+  ${typography.body2()};
+  opacity: ${(props: IProps) => 1};
 `;

@@ -2,7 +2,10 @@ import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
 // Utils
-import { getComponentBackground, getComponentForeground } from "../../utils/component-color"
+import {
+  getComponentBackground,
+  getComponentForeground
+} from "../../utils/component-color";
 
 // Defaults
 import buttons from "../../defaults/buttons";
@@ -34,12 +37,14 @@ const getBackground = (color: string, disabled: boolean, theme: Theme) => {
     },
     toggledOff: null
   });
-}
+};
 
 const getForeground = (disabled: boolean, theme: Theme, foreground: string) => {
-  if (!disabled) { return foreground; }
+  if (!disabled) {
+    return foreground;
+  }
 
-  return getComponentForeground(disabled, theme,{
+  return getComponentForeground(disabled, theme, {
     disabled: {
       light: transparency.light.text.disabled,
       dark: transparency.dark.text.disabled
@@ -49,10 +54,11 @@ const getForeground = (disabled: boolean, theme: Theme, foreground: string) => {
       dark: 1
     }
   });
-}
+};
 
 export const StyledButton = styled.div`
-  min-width: ${(props: IStyledButtonProps) => (props.dialog ? 0 : buttons.minWidth)}px;
+  min-width: ${(props: IStyledButtonProps) =>
+    props.dialog ? 0 : buttons.minWidth}px;
   height: ${buttons.height}px;
   position: relative;
   padding: 0 16px 0 16px;
@@ -61,11 +67,12 @@ export const StyledButton = styled.div`
   display: inline-flex;
   justify-content: center;
   flex-direction: column;
-  cursor: ${props =>
-    props.disabled ? "default" : "pointer"};
-  background-color: ${props => getBackground(props.color, props.disabled, props.theme)};
-  box-shadow: ${props => props.raised && !props.disabled ? shadows[buttons.elevation] : "none"};
-  pointer-events: ${props => props.disabled ? "none" : "auto"};
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  background-color: ${props =>
+    getBackground(props.color, props.disabled, props.theme)};
+  box-shadow: ${props =>
+    props.raised && !props.disabled ? shadows[buttons.elevation] : "none"};
+  pointer-events: ${props => (props.disabled ? "none" : "auto")};
   border-radius: ${buttons.cornerRadius}px;
   overflow: hidden;
   transition: 0.3s box-shadow, 0.2s background-color;
@@ -108,7 +115,8 @@ export const Text = styled.div`
   position: relative;
   z-index: 3;
   white-space: nowrap;
-  color: ${(props: ITextProps) => getForeground(props.disabled, props.theme, props.foreground)};
+  color: ${(props: ITextProps) =>
+    getForeground(props.disabled, props.theme, props.foreground)};
   ${typography.button()};
   transition: 0.2s color;
 `;

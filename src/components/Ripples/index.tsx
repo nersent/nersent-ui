@@ -2,10 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 // Styles
-import {
-  IconRipple,
-  StyledRipples
-} from "./styles";
+import { IconRipple, StyledRipples } from "./styles";
 
 // Components
 import Ripple from "../Ripple";
@@ -64,11 +61,11 @@ export default class Ripples extends React.Component<IProps, IState> {
     });
   }
 
-  public componentWillReceiveProps (nextProps) {
+  public componentWillReceiveProps(nextProps) {
     if (nextProps.color !== this.state.color) {
       this.setState({
         color: nextProps.color
-      })
+      });
     }
   }
 

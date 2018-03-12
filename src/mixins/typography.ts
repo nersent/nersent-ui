@@ -22,7 +22,7 @@ const robotoRegular = () => `
 `;
 
 const robotoMedium = () => `
-font-family: Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
   font-weight: 500;
 `;
 

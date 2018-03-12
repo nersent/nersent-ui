@@ -11,12 +11,7 @@ import ComponentContainer from "../ComponentContainer";
 import ComponentText from "../ComponentText";
 
 // Styles
-import {
-  StyledSwitch,
-  Thumb,
-  ThumbContainer,
-  Track
-} from "./styles";
+import { StyledSwitch, Thumb, ThumbContainer, Track } from "./styles";
 
 export interface IProps {
   className?: string;

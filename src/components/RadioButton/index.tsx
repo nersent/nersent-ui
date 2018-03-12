@@ -16,11 +16,7 @@ import ComponentText from "../ComponentText";
 import Ripples from "../Ripples";
 
 // Styles
-import {
-  Border,
-  Circle,
-  StyledRadioButton
-} from "./styles";
+import { Border, Circle, StyledRadioButton } from "./styles";
 
 export interface IProps {
   className?: string;

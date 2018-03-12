@@ -64,7 +64,7 @@ export const ThumbContainer = styled.div`
   position: absolute;
   left: ${(props: IThumbContainerProps) => props.left}px;
   transition: 0.25s left ease-out;
-  ${Positioning.center(Align.CenterVertical)}
+  ${Positioning.center(Align.CenterVertical)};
 `;
 
 export interface IThumbProps {

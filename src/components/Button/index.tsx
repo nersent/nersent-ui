@@ -17,11 +17,7 @@ import Clear from "../Clear";
 import Ripples from "../Ripples";
 
 // Styles
-import {
-  OverShade,
-  StyledButton,
-  Text
-} from "./styles";
+import { OverShade, StyledButton, Text } from "./styles";
 
 export type ButtonEvent = (e?: SyntheticEvent<HTMLDivElement>) => void;
 
@@ -65,17 +61,17 @@ export default class Button extends React.Component<IProps, IState> {
 
   private ripples: Ripples;
 
-  public componentDidMount () {
+  public componentDidMount() {
     this.setState({
       foreground: getForegroundColor(this.props.color)
-    })
+    });
   }
 
-  public componentWillReceiveProps (nextProps) {
+  public componentWillReceiveProps(nextProps) {
     if (this.props.color !== nextProps.color) {
       this.setState({
         foreground: getForegroundColor(nextProps.color)
-      })
+      });
     }
   }
 
@@ -92,9 +88,7 @@ export default class Button extends React.Component<IProps, IState> {
       dialog
     } = this.props;
 
-    const {
-      foreground
-    } = this.state;
+    const { foreground } = this.state;
 
     if (typeof color === "object") {
       color = color["500"];
@@ -117,11 +111,7 @@ export default class Button extends React.Component<IProps, IState> {
           dialog={dialog}
           {...events}
         >
-          <Text
-            foreground={foreground}
-            disabled={disabled}
-            theme={theme}
-          >
+          <Text foreground={foreground} disabled={disabled} theme={theme}>
             {children}
           </Text>
           <OverShade className="over-shade" />

@@ -18,14 +18,16 @@ export const getForegroundColor = color => {
   const brightness = colorBrightness(color);
 
   if (brightness < 130) {
-    return 'white';
+    return "white";
   } else {
-    return 'black';
+    return "black";
   }
-}
+};
 
 export const colorBrightness = color => {
-  if (color == null) { return null; }
+  if (color == null) {
+    return null;
+  }
 
   let r;
   let g;
@@ -40,11 +42,11 @@ export const colorBrightness = color => {
     r = colour[0];
     g = colour[1];
     b = colour[2];
-  } else if (colour[0] === '#' && colour.length === 7) {
+  } else if (colour[0] === "#" && colour.length === 7) {
     r = parseInt(colour.slice(1, 3), 16);
     g = parseInt(colour.slice(3, 5), 16);
     b = parseInt(colour.slice(5, 7), 16);
-  } else if (colour[0] === '#' && colour.length === 4) {
+  } else if (colour[0] === "#" && colour.length === 4) {
     r = parseInt(colour[1] + colour[1], 16);
     g = parseInt(colour[2] + colour[2], 16);
     b = parseInt(colour[3] + colour[3], 16);
@@ -53,4 +55,4 @@ export const colorBrightness = color => {
   brightness = (r * 299 + g * 587 + b * 114) / 1000;
 
   return brightness;
-}
+};

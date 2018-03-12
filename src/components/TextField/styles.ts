@@ -50,7 +50,9 @@ const getInputOpacity = (props: IInputProps) => {
 const getInputTextColor = (props: IInputProps) => {
   const color = props.theme === Theme.Light ? 0 : 255;
 
-  return `0px 0px 0px rgba(${color},${color},${color},${getInputOpacity(props)})`;
+  return `0px 0px 0px rgba(${color},${color},${color},${getInputOpacity(
+    props
+  )})`;
 };
 
 const getInputCursorColor = (props: IInputProps) => {
@@ -96,7 +98,7 @@ export interface IFocusLineProps {
 }
 
 export const FocusLine = styled.div`
-  width: ${(props: IFocusLineProps) => getFocusLineWidth(props) + '%'};
+  width: ${(props: IFocusLineProps) => getFocusLineWidth(props) + "%"};
   height: 2px;
   margin-top: -1.5px;
   margin-left: auto;
@@ -173,9 +175,9 @@ export const Line = styled.div`
   width: 100%;
   height: ${(props: ILineProps) => (!props.disabled ? 1 : 0)}px;
   ${props =>
-    !props.disabled && `background-color: ${getLineBackgroundColor(props)};`}
-  ${props =>
-    props.disabled && `border: 1px dashed ${getLineBackgroundColor(props)};`}
+    !props.disabled &&
+    `background-color: ${getLineBackgroundColor(props)};`} ${props =>
+    props.disabled && `border: 1px dashed ${getLineBackgroundColor(props)};`};
 `;
 
 export const StyledTextField = styled.div`

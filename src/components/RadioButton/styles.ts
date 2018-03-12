@@ -19,7 +19,8 @@ export const StyledRadioButton = styled.div`
   width: 18px;
   height: 18px;
   position: relative;
-  transform: ${(props: IStyledRadioButtonProps) => !props.scaleAnimation ? "scale(1)" : "scale(0.9)"};
+  transform: ${(props: IStyledRadioButtonProps) =>
+    !props.scaleAnimation ? "scale(1)" : "scale(0.9)"};
   transition: 0.2s transform ease-out;
 `;
 
@@ -38,7 +39,7 @@ export const Circle = styled.div`
   background-color: ${props => props.color};
   visibility: ${props => (props.visible ? "visible" : "hidden")};
   transition: 0.1s background-color, 0.2s width ease-out, 0.2s height ease-out;
-  ${Positioning.center(Align.CenterBoth)}
+  ${Positioning.center(Align.CenterBoth)};
 `;
 
 export interface IBorderProps {

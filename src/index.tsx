@@ -14,6 +14,10 @@ import RadioButton from "./components/RadioButton";
 import RadioButtons from "./components/RadioButtons";
 import Switch from "./components/Switch";
 import TextField from "./components/TextField";
+import buttons from "./defaults/buttons";
+import transparency from "./defaults/transparency";
+import shadows from "./mixins/shadows";
+import typography from "./mixins/typography";
 
 injectGlobal`
   @font-face {
@@ -40,6 +44,10 @@ injectGlobal`
 
 export {
   colors,
+  transparency,
+  shadows,
+  typography,
+  buttons,
   Theme,
   Button,
   Checkbox,
@@ -47,4 +55,4 @@ export {
   RadioButton,
   Switch,
   TextField
-}
+};
