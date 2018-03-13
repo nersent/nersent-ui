@@ -19,6 +19,7 @@ export interface IProps {
   icon?: boolean;
   parentHeight?: number;
   parentWidth?: number;
+  hoverOverShade?: boolean;
 }
 
 export interface IRipple {
@@ -43,7 +44,8 @@ export default class Ripples extends React.Component<IProps, IState> {
     initialOpacity: 0.2,
     color: "#000",
     rippleTime: 1,
-    icon: false
+    icon: false,
+    hoverOverShade: true
   };
 
   public state: IState = {
@@ -59,14 +61,6 @@ export default class Ripples extends React.Component<IProps, IState> {
     window.addEventListener("mouseup", () => {
       this.removeRipples();
     });
-  }
-
-  public componentWillReceiveProps(nextProps) {
-    if (nextProps.color !== this.state.color) {
-      this.setState({
-        color: nextProps.color
-      });
-    }
   }
 
   public makeRipple(mouseX: number, mouseY: number, isTouch = false) {
@@ -117,10 +111,6 @@ export default class Ripples extends React.Component<IProps, IState> {
     });
   };
 
-  public changeRippleColor = (newColor: string) => {
-    this.setState({ color: newColor });
-  };
-
   public getRipplePosition(offsetX = 0, x = 0, y = 0) {
     return {
       x: x - this.ripples.getBoundingClientRect().left,
@@ -129,7 +119,8 @@ export default class Ripples extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const { ripples, color } = this.state;
+    const { color } = this.props;
+    const { ripples } = this.state;
 
     const {
       fadeOutTime,
@@ -137,7 +128,8 @@ export default class Ripples extends React.Component<IProps, IState> {
       rippleTime,
       icon,
       parentWidth,
-      parentHeight
+      parentHeight,
+      hoverOverShade
     } = this.props;
 
     const component = (
@@ -168,7 +160,12 @@ export default class Ripples extends React.Component<IProps, IState> {
 
     return (
       (icon && (
-        <IconRipple width={parentWidth} height={parentHeight} color={color}>
+        <IconRipple
+          width={parentWidth}
+          height={parentHeight}
+          color={color}
+          hoverOverShade={hoverOverShade}
+        >
           {component}
         </IconRipple>
       )) ||

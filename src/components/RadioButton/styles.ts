@@ -1,6 +1,9 @@
 import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
+// Utils
+import { getComponentBackground } from "../../utils/component-color";
+
 // Defaults
 import transparency from "../../defaults/transparency";
 
@@ -10,6 +13,10 @@ import Theme from "../../enums/theme";
 
 // Mixins
 import Positioning from "../../mixins/positioning";
+
+const getBackground = (color: string, toggled: boolean, disabled: boolean, theme: Theme) => {
+  return getComponentBackground(color, toggled, disabled, theme);
+};
 
 export interface IStyledRadioButtonProps {
   scaleAnimation: boolean;
@@ -24,28 +31,13 @@ export const StyledRadioButton = styled.div`
   transition: 0.2s transform ease-out;
 `;
 
-export interface ICircleProps {
-  size: number;
-  visible: boolean;
-  color: string;
-}
-
-export const Circle = styled.div`
-  width: ${(props: ICircleProps) => props.size}px;
-  height: ${props => props.size}px;
-  position: absolute;
-  position: relative;
-  border-radius: 100%;
-  background-color: ${props => props.color};
-  visibility: ${props => (props.visible ? "visible" : "hidden")};
-  transition: 0.1s background-color, 0.2s width ease-out, 0.2s height ease-out;
-  ${Positioning.center(Align.CenterBoth)};
-`;
-
 export interface IBorderProps {
   borderWidth: number;
   animations: boolean;
   color: string;
+  toggled: boolean;
+  disabled: boolean;
+  theme: Theme;
 }
 
 export const Border = styled.div`
@@ -57,8 +49,31 @@ export const Border = styled.div`
   border-radius: 50%;
   border-width: ${(props: IBorderProps) => props.borderWidth}px;
   border-style: solid;
-  border-color: ${props => props.color};
+  border-color: ${props =>
+    getBackground(props.color, props.toggled, props.disabled, props.theme)};
   box-sizing: border-box;
   transition: ${props =>
     props.animations ? "0.1s border-color, 0.3s border-width ease-out" : ""};
+`;
+
+export interface ICircleProps {
+  size: number;
+  visible: boolean;
+  color: string;
+  toggled: boolean;
+  disabled: boolean;
+  theme: Theme;
+}
+
+export const Circle = styled.div`
+  width: ${(props: ICircleProps) => props.size}px;
+  height: ${props => props.size}px;
+  position: absolute;
+  position: relative;
+  border-radius: 100%;
+  background-color: ${props =>
+    getBackground(props.color, props.toggled, props.disabled, props.theme)};
+  visibility: ${props => (props.visible ? "visible" : "hidden")};
+  transition: 0.1s background-color, 0.2s width ease-out, 0.2s height ease-out;
+  ${Positioning.center(Align.CenterBoth)};
 `;

@@ -2,10 +2,7 @@ import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
 // Utils
-import {
-  getComponentBackground,
-  getComponentForeground
-} from "../../utils/component-color";
+import { getComponentBackground, getComponentForeground } from "../../utils/component-color";
 
 // Defaults
 import buttons from "../../defaults/buttons";
@@ -20,14 +17,6 @@ import positioning from "../../mixins/positioning";
 import shadows from "../../mixins/shadows";
 import typography from "../../mixins/typography";
 import userSelection from "../../mixins/user-selection";
-
-export interface IStyledButtonProps {
-  color: string;
-  raised: boolean;
-  theme: Theme;
-  disabled: boolean;
-  dialog: boolean;
-}
 
 const getBackground = (color: string, disabled: boolean, theme: Theme) => {
   return getComponentBackground(color, null, disabled, theme, {
@@ -55,6 +44,14 @@ const getForeground = (disabled: boolean, theme: Theme, foreground: string) => {
     }
   });
 };
+
+export interface IStyledButtonProps {
+  color: string;
+  raised: boolean;
+  theme: Theme;
+  disabled: boolean;
+  dialog: boolean;
+}
 
 export const StyledButton = styled.div`
   min-width: ${(props: IStyledButtonProps) =>
