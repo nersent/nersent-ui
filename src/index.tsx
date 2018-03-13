@@ -20,6 +20,7 @@ import buttons from "./defaults/buttons";
 import transparency from "./defaults/transparency";
 import shadows from "./mixins/shadows";
 import typography from "./mixins/typography";
+import { getRippleEvents } from "./utils/ripple";
 
 injectGlobal`
   @font-face {
@@ -58,5 +59,6 @@ export {
   Switch,
   TextField,
   Ripple,
-  Ripples
+  Ripples,
+  getRippleEvents
 };
