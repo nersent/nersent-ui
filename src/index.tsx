@@ -12,6 +12,8 @@ import Button from "./components/Button";
 import Checkbox from "./components/Checkbox";
 import RadioButton from "./components/RadioButton";
 import RadioButtons from "./components/RadioButtons";
+import Ripple from "./components/Ripple";
+import Ripples from "./components/Ripples";
 import Switch from "./components/Switch";
 import TextField from "./components/TextField";
 import buttons from "./defaults/buttons";
@@ -54,5 +56,7 @@ export {
   RadioButtons,
   RadioButton,
   Switch,
-  TextField
+  TextField,
+  Ripple,
+  Ripples
 };
