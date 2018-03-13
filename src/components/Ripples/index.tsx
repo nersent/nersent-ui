@@ -126,6 +126,7 @@ export default class Ripples extends React.Component<IProps, IState> {
     const { ripples } = this.state;
 
     const {
+      className,
       fadeOutTime,
       initialOpacity,
       rippleTime,
