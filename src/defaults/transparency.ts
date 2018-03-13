@@ -3,7 +3,7 @@ export default {
     text: {
       primary: 0.87,
       secondary: 0.54,
-      disabled: 0.38
+      disabled: 0.26
     },
     button: {
       pressed: 0.4,
@@ -28,7 +28,7 @@ export default {
     text: {
       primary: 1,
       secondary: 0.7,
-      disabled: 0.5
+      disabled: 0.3
     },
     button: {
       pressed: 0.25,

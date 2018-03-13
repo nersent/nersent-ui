@@ -72,6 +72,7 @@ export interface IThumbProps {
   disabled: boolean;
   color: string;
   theme: Theme;
+  thumbScaleAnimation: boolean;
 }
 
 export const Thumb = styled.div`
@@ -80,9 +81,10 @@ export const Thumb = styled.div`
   border-radius: 50%;
   position: relative;
   z-index: 2;
-  transition: 0.2s transform, 0.2s background-color;
   background-color: ${(props: IThumbProps) => getThumbBackgroundColor(props)};
+  transform: ${props => !props.thumbScaleAnimation ? "scale(1)" : "scale(0.9)"};
   box-shadow: ${Shadows[2]};
+  transition: 0.2s transform, 0.2s background-color;
 `;
 
 export interface ITrackProps {

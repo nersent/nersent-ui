@@ -20,6 +20,7 @@ export interface IProps {
   parentHeight?: number;
   parentWidth?: number;
   hoverOverShade?: boolean;
+  disabled?: boolean;
 }
 
 export interface IRipple {
@@ -45,7 +46,8 @@ export default class Ripples extends React.Component<IProps, IState> {
     color: "#000",
     rippleTime: 1,
     icon: false,
-    hoverOverShade: true
+    hoverOverShade: true,
+    disabled: false
   };
 
   public state: IState = {
@@ -66,10 +68,11 @@ export default class Ripples extends React.Component<IProps, IState> {
   }
 
   public makeRipple(mouseX: number, mouseY: number, isTouch = false) {
-    if (!isTouch && this.isTouched) {
+    const { color, initialOpacity, disabled } = this.props;
+
+    if (!isTouch && this.isTouched || disabled) {
       return;
     }
-    const { color, initialOpacity } = this.props;
 
     const newRipple: IRipple = {
       ...this.getRipplePosition(0, mouseX, mouseY),
@@ -121,10 +124,11 @@ export default class Ripples extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const { color } = this.props;
+    const { color, disabled } = this.props;
     const { ripples } = this.state;
 
     const {
+      className,
       fadeOutTime,
       initialOpacity,
       rippleTime,
@@ -167,6 +171,7 @@ export default class Ripples extends React.Component<IProps, IState> {
           height={parentHeight}
           color={color}
           hoverOverShade={hoverOverShade}
+          disabled={disabled}
         >
           {component}
         </IconRipple>

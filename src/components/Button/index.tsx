@@ -30,6 +30,7 @@ export interface IProps {
   color?: string;
   dialog?: boolean;
   ripple?: boolean;
+  inline?: boolean;
   customRippleBehavior?: boolean;
   onClick?: ButtonEvent;
   onMouseDown?: ButtonEvent;
@@ -46,13 +47,14 @@ export interface IState {
 
 export default class Button extends React.Component<IProps, IState> {
   public static defaultProps = {
-    raised: true,
+    raised: false,
     disabled: false,
     color: colors.blue["500"],
     theme: Theme.Light,
     dialog: false,
     customRippleBehavior: false,
-    ripple: true
+    ripple: true,
+    inline: false
   };
 
   public state: IState = {
@@ -76,8 +78,6 @@ export default class Button extends React.Component<IProps, IState> {
   }
 
   public render() {
-    let { color } = this.props;
-
     const {
       className,
       style,
@@ -85,14 +85,15 @@ export default class Button extends React.Component<IProps, IState> {
       disabled,
       theme,
       children,
-      dialog
+      dialog,
+      inline,
+      color
     } = this.props;
 
     const { foreground } = this.state;
 
-    if (typeof color === "object") {
-      color = color["500"];
-    }
+    const rippleColor = raised ? foreground : color;
+    const overShadeColor = (raised || theme === Theme.Light) ? "#000" : "#fff";
 
     const events = {
       ...getEvents(this.props),
@@ -111,13 +112,22 @@ export default class Button extends React.Component<IProps, IState> {
           dialog={dialog}
           {...events}
         >
-          <Text foreground={foreground} disabled={disabled} theme={theme}>
+          <Text
+            color={color}
+            foreground={foreground}
+            disabled={disabled}
+            theme={theme}
+            raised={raised}
+          >
             {children}
           </Text>
-          <OverShade className="over-shade" />
-          <Ripples ref={r => (this.ripples = r)} color={foreground} />
+          <OverShade
+            className="over-shade"
+            color={overShadeColor}
+          />
+          <Ripples ref={r => (this.ripples = r)} color={rippleColor} />
         </StyledButton>
-        <Clear />
+        {!inline && <Clear />}
       </>
     );
   }

@@ -18,7 +18,9 @@ import shadows from "../../mixins/shadows";
 import typography from "../../mixins/typography";
 import userSelection from "../../mixins/user-selection";
 
-const getBackground = (color: string, disabled: boolean, theme: Theme) => {
+const getBackground = (color: string, disabled: boolean, theme: Theme, raised: boolean) => {
+  if (!raised) { return "transparent"; }
+  
   return getComponentBackground(color, null, disabled, theme, {
     disabled: {
       light: transparency.light.button.disabled,
@@ -28,10 +30,9 @@ const getBackground = (color: string, disabled: boolean, theme: Theme) => {
   });
 };
 
-const getForeground = (disabled: boolean, theme: Theme, foreground: string) => {
-  if (!disabled) {
-    return foreground;
-  }
+const getForeground = (color: string, disabled: boolean, theme: Theme, raised: boolean, foreground: string) => { 
+  if (raised && !disabled) { return foreground; }
+  else if (!raised && !disabled) { return color; }
 
   return getComponentForeground(disabled, theme, {
     disabled: {
@@ -66,7 +67,7 @@ export const StyledButton = styled.div`
   flex-direction: column;
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   background-color: ${props =>
-    getBackground(props.color, props.disabled, props.theme)};
+    getBackground(props.color, props.disabled, props.theme, props.raised)};
   box-shadow: ${props =>
     props.raised && !props.disabled ? shadows[buttons.elevation] : "none"};
   pointer-events: ${props => (props.disabled ? "none" : "auto")};
@@ -90,22 +91,28 @@ export const StyledButton = styled.div`
   }
 `;
 
+export interface IOverShadeProps {
+  color: string;
+}
+
 export const OverShade = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #000;
+  background-color: ${(props: IOverShadeProps) => props.color};
   opacity: 0;
   transition: 0.25s opacity;
   z-index: 2;
 `;
 
 export interface ITextProps {
+  color: string;
   foreground: string;
   disabled: boolean;
   theme: Theme;
+  raised: boolean;
 }
 
 export const Text = styled.div`
@@ -113,7 +120,7 @@ export const Text = styled.div`
   z-index: 3;
   white-space: nowrap;
   color: ${(props: ITextProps) =>
-    getForeground(props.disabled, props.theme, props.foreground)};
+    getForeground(props.color, props.disabled, props.theme, props.raised, props.foreground)};
   ${typography.button()};
   transition: 0.2s color;
 `;
