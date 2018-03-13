@@ -31,6 +31,7 @@ export interface IState {
   toggled: boolean;
   thumbLeft: number;
   rippleColor: string;
+  thumbScaleAnimation: boolean;
 }
 
 export default class Switch extends React.Component<IProps, IState> {
@@ -43,7 +44,8 @@ export default class Switch extends React.Component<IProps, IState> {
   public state: IState = {
     toggled: false,
     thumbLeft: -10,
-    rippleColor: "#000"
+    rippleColor: "#000",
+    thumbScaleAnimation: false
   };
 
   private track: HTMLDivElement;
@@ -70,8 +72,13 @@ export default class Switch extends React.Component<IProps, IState> {
       thumbLeft: flag
         ? this.track.offsetWidth - this.thumb.offsetWidth / 2
         : -this.thumb.offsetWidth / 2,
-      rippleColor: flag ? this.props.color : "#000"
+      rippleColor: flag ? this.props.color : "#000",
+      thumbScaleAnimation: true
     });
+
+    setTimeout(() => {
+      this.setState({thumbScaleAnimation: false})
+    }, 100)
   }
 
   public render() {
@@ -86,7 +93,8 @@ export default class Switch extends React.Component<IProps, IState> {
     const {
       toggled,
       thumbLeft,
-      rippleColor
+      rippleColor,
+      thumbScaleAnimation
     } = this.state;
 
     const events = {
@@ -116,6 +124,7 @@ export default class Switch extends React.Component<IProps, IState> {
               disabled={disabled}
               color={color}
               theme={theme}
+              thumbScaleAnimation={thumbScaleAnimation}
             />
             <Ripples
               icon={true}
@@ -126,6 +135,7 @@ export default class Switch extends React.Component<IProps, IState> {
               rippleTime={0.7}
               initialOpacity={0.1}
               hoverOverShade={false}
+              disabled={disabled}
             />
           </ThumbContainer>
         </StyledSwitch>
