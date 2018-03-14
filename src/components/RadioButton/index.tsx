@@ -1,6 +1,7 @@
 import * as React from "react";
 
 // Utils
+import { getComponentRippleColor } from "../../utils/component-color";
 import { getRippleEvents } from "../../utils/ripple";
 
 // Defaults
@@ -34,7 +35,6 @@ export interface IState {
   circleVisible: boolean;
   fullCircleSize: boolean;
   animation: boolean;
-  rippleColor: string;
 }
 
 export default class RadioButton extends React.Component<IProps, IState> {
@@ -50,8 +50,7 @@ export default class RadioButton extends React.Component<IProps, IState> {
     fullBorderSize: false,
     circleVisible: false,
     fullCircleSize: true,
-    animation: false,
-    rippleColor: "#000"
+    animation: false
   };
 
   private timeouts = [];
@@ -77,8 +76,7 @@ export default class RadioButton extends React.Component<IProps, IState> {
   public toggle = (flag = !this.state.toggled) => {
     this.setState({
       toggled: flag,
-      animation: true,
-      rippleColor: flag ? this.props.color : "#000"
+      animation: true
     });
 
     if (flag) {
@@ -153,12 +151,12 @@ export default class RadioButton extends React.Component<IProps, IState> {
       fullCircleSize,
       animation,
       borderAnimations,
-      circleVisible,
-      rippleColor
+      circleVisible
     } = this.state;
 
     const borderWidth = fullBorderSize ? this.radioButton.offsetWidth / 2 : 2;
     const circleSize = fullCircleSize ? 14 : 9;
+    const rippleColor = getComponentRippleColor(toggled, color, theme);
 
     const events = {
       ...getRippleEvents(this.props, () => this.ripples),
@@ -166,7 +164,7 @@ export default class RadioButton extends React.Component<IProps, IState> {
     };
 
     return (
-      <ComponentContainer {...events}>
+      <ComponentContainer disabled={disabled} {...events}>
         <div style={{ position: "relative" }}>
           <StyledRadioButton
             innerRef={r => (this.radioButton = r)}
@@ -197,7 +195,6 @@ export default class RadioButton extends React.Component<IProps, IState> {
             parentHeight={18}
             rippleTime={0.7}
             initialOpacity={0.1}
-            disabled={disabled}
           />
         </div>
         {children != null && (

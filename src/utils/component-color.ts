@@ -63,3 +63,7 @@ export const getComponentForeground = (
     }
   }
 };
+
+export const getComponentRippleColor = (flag, color, theme) => {
+  return flag ? color : (theme === Theme.Light ? "#000" : "#fff")
+}

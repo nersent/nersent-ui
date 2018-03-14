@@ -1,6 +1,7 @@
 import * as React from "react";
 
 // Utils
+import { getComponentRippleColor } from "../../utils/component-color";
 import { executeEvent, getEvents } from "../../utils/events";
 import { getRippleEvents } from "../../utils/ripple";
 
@@ -37,7 +38,6 @@ export interface IState {
   iconPathAnimation: boolean;
   iconTransition: string;
   scaleAnimation: boolean;
-  rippleColor: string;
 }
 
 export default class Checkbox extends React.Component<IProps, IState> {
@@ -56,8 +56,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
     iconScaleAnimation: false,
     iconPathAnimation: false,
     iconTransition: "none",
-    scaleAnimation: false,
-    rippleColor: "#000"
+    scaleAnimation: false
   };
 
   private isAnimating = false;
@@ -75,12 +74,9 @@ export default class Checkbox extends React.Component<IProps, IState> {
   };
 
   public onClick = e => {
-    if (this.props.disabled) {
-      return;
-    }
+    if (this.props.disabled) { return; }
 
     this.check(!this.state.checked);
-
     executeEvent(e, this.props);
   };
 
@@ -94,10 +90,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
       onCheck(flag, this, fromProps);
     }
 
-    this.setState({
-      checked: flag,
-      rippleColor: flag ? this.props.color : "#000"
-    });
+    this.setState({checked: flag});
 
     if (flag) {
       this.setState({
@@ -184,9 +177,10 @@ export default class Checkbox extends React.Component<IProps, IState> {
       scaleAnimation,
       iconScaleAnimation,
       iconPathAnimation,
-      iconTransition,
-      rippleColor
+      iconTransition      
     } = this.state;
+
+    const rippleColor = getComponentRippleColor(checked, color, theme);
 
     const events = {
       ...getEvents(this.props),
@@ -199,6 +193,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
         className={className}
         style={style}
         onClick={this.onClick}
+        disabled={disabled}
         {...events}
       >
         <div style={{ position: "relative" }}>
@@ -229,7 +224,6 @@ export default class Checkbox extends React.Component<IProps, IState> {
             parentHeight={18}
             rippleTime={0.7}
             initialOpacity={0.1}
-            disabled={disabled}
           />
         </div>
         {children != null && (

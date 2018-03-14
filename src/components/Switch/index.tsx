@@ -1,6 +1,7 @@
 import * as React from "react";
 
 // Utils
+import { getComponentRippleColor } from "../../utils/component-color";
 import { getRippleEvents } from "../../utils/ripple";
 
 // Defaults
@@ -30,7 +31,6 @@ export interface IProps {
 export interface IState {
   toggled: boolean;
   thumbLeft: number;
-  rippleColor: string;
   thumbScaleAnimation: boolean;
 }
 
@@ -44,7 +44,6 @@ export default class Switch extends React.Component<IProps, IState> {
   public state: IState = {
     toggled: false,
     thumbLeft: -10,
-    rippleColor: "#000",
     thumbScaleAnimation: false
   };
 
@@ -72,7 +71,6 @@ export default class Switch extends React.Component<IProps, IState> {
       thumbLeft: flag
         ? this.track.offsetWidth - this.thumb.offsetWidth / 2
         : -this.thumb.offsetWidth / 2,
-      rippleColor: flag ? this.props.color : "#000",
       thumbScaleAnimation: true
     });
 
@@ -93,9 +91,10 @@ export default class Switch extends React.Component<IProps, IState> {
     const {
       toggled,
       thumbLeft,
-      rippleColor,
       thumbScaleAnimation
     } = this.state;
+
+    const rippleColor = getComponentRippleColor(toggled, color, theme);
 
     const events = {
       ...getRippleEvents(this.props, () => this.ripples),
@@ -103,7 +102,7 @@ export default class Switch extends React.Component<IProps, IState> {
     };
 
     return (
-      <ComponentContainer {...events}>
+      <ComponentContainer disabled={disabled} {...events}>
         {children != null && (
           <ComponentText theme={theme} disabled={disabled}>
             {children}
@@ -135,7 +134,6 @@ export default class Switch extends React.Component<IProps, IState> {
               rippleTime={0.7}
               initialOpacity={0.1}
               hoverOverShade={false}
-              disabled={disabled}
             />
           </ThumbContainer>
         </StyledSwitch>
