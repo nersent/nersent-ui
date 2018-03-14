@@ -60,9 +60,11 @@ export default class Ripples extends React.Component<IProps, IState> {
   private isTouched = false;
 
   public componentDidMount() {
-    window.addEventListener("mouseup", () => {
-      this.removeRipples();
-    });
+    window.addEventListener("mouseup", this.removeRipples);
+  }
+
+  public componentWillUnmount() {
+    window.removeEventListener("mouseup", this.removeRipples);
   }
 
   public makeRipple(mouseX: number, mouseY: number, isTouch = false) {
