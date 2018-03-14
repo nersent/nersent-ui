@@ -36,7 +36,7 @@
     "uglifyjs-webpack-plugin": "1.2.3",
     "url-loader": "1.0.1",
     "webpack": "4.1.1",
-    "webpack-cli": "2.0.11",
+    "webpack-cli": "2.0.12",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "styled-components": "3.2.1"
