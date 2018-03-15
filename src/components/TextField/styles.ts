@@ -75,7 +75,9 @@ const getLabelOpacity = (props: ILabelProps) => {
       ? transparency.light.text.disabled
       : transparency.dark.text.disabled;
   } else if (props.error || props.focused) {
-    return transparency.light.text.primary;
+    return props.theme === Theme.Light
+      ? transparency.light.text.primary
+      : 1;
   } else if (props.theme === Theme.Dark) {
     return transparency.dark.text.secondary;
   }
@@ -88,6 +90,14 @@ const getLineBackgroundColor = (props: ILineProps) => {
     ? "rgba(0,0,0,0.42)"
     : "rgba(255,255,255,0.70)";
 };
+
+export const StyledTextField = styled.div`
+  position: relative;
+  width: 196px;
+  padding-top: 12px;
+  user-select: none;
+  ${typography.robotoRegular()};
+`;
 
 export interface IFocusLineProps {
   focused: boolean;
@@ -179,12 +189,4 @@ export const Line = styled.div`
     !props.disabled &&
     `background-color: ${getLineBackgroundColor(props)};`} ${props =>
     props.disabled && `border: 1px dashed ${getLineBackgroundColor(props)};`};
-`;
-
-export const StyledTextField = styled.div`
-  position: relative;
-  width: 196px;
-  padding-top: 12px;
-  user-select: none;
-  ${typography.robotoRegular()};
 `;
