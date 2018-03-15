@@ -10,6 +10,7 @@ import Theme from "./enums/theme";
 
 import Button from "./components/Button";
 import Checkbox from "./components/Checkbox";
+import ProgressBar from "./components/ProgressBar";
 import RadioButton from "./components/RadioButton";
 import RadioButtons from "./components/RadioButtons";
 import Ripple from "./components/Ripple";
@@ -60,5 +61,6 @@ export {
   TextField,
   Ripple,
   Ripples,
-  getRippleEvents
+  getRippleEvents,
+  ProgressBar
 };
