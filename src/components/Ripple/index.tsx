@@ -16,6 +16,7 @@ export interface IProps {
   removeRipple: (ripple) => void;
   id: number;
   isRemoving: boolean;
+  icon: boolean;
 }
 
 export interface IRipple {
@@ -77,7 +78,7 @@ export default class Ripple extends React.Component<IProps, IState> {
 
   public render() {
     const { height, width, opacity } = this.state;
-    const { color, x, y, isRemoving, rippleTime, fadeOutTime } = this.props;
+    const { color, x, y, isRemoving, rippleTime, fadeOutTime, icon } = this.props;
 
     if (isRemoving) {
       this.remove();
@@ -91,6 +92,7 @@ export default class Ripple extends React.Component<IProps, IState> {
         opacity={opacity}
         rippleTime={rippleTime}
         fadeOutTime={fadeOutTime}
+        icon={icon ? 1 : 0}
         x={x}
         y={y}
       />

@@ -1,20 +1,16 @@
 import * as React from "react";
 import styled, { keyframes, StyledComponentClass } from "styled-components";
 
-const getHighestSize = ({ height, width }) => {
-  return Math.max(width, height);
-};
-
-const getSize = (x, size, y = 0, height = 0) => {
-  if (size === 0) {
+const getSize = (x: number, y: number, width: number, height: number, icon: number) => {
+  if (width === 0 || height === 0) { 
     return 0;
   }
 
-  if (x > size / 2) {
-    return 2 * x + Math.abs(y - height / 2);
-  }
+  // Calculate points relative to the center of a component.
+  const newX = x - (width / 2);
+  const newY = y - (height / 2);
 
-  return 2 * size - 2 * x + Math.abs(y - height / 2);
+  return Math.max(width + 2 * Math.abs(newX), height + 2 * Math.abs(newY)) + (icon === 1 ? 0 : 10);
 };
 
 const easing = "cubic-bezier(0.215, 0.61, 0.355, 1)";
@@ -28,24 +24,13 @@ export interface IProps {
   opacity: number;
   rippleTime: number;
   fadeOutTime: number;
+  icon: number;
 }
 
 export const StyledRipple = styled.div.attrs({
-  style: props => {
-    let x = props.x;
-    if (props.x > props.width) {
-      x = props.width;
-    }
-
-    const width = getSize(x, getHighestSize(props), props.y, props.height);
-    const height = getSize(
-      props.y,
-      getHighestSize(props),
-      x,
-      props.width
-    );
-
-    const size = getHighestSize({ height, width });
+  style: (props: IProps) => {
+    const x = Math.min(props.x, props.width);
+    const size = getSize(x, props.y, props.width, props.height, props.icon);
 
     return {
       left: x,

@@ -44,7 +44,7 @@ export default class Ripples extends React.Component<IProps, IState> {
     fadeOutTime: 0.6,
     initialOpacity: 0.2,
     color: "#000",
-    rippleTime: 1,
+    rippleTime: 0.6,
     icon: false,
     hoverOverShade: true,
     disabled: false
@@ -154,6 +154,7 @@ export default class Ripples extends React.Component<IProps, IState> {
               initialOpacity={initialOpacity}
               color={color}
               isRemoving={isRemoving}
+              icon={icon}
               x={x}
               y={y}
               id={id}
