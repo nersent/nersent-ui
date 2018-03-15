@@ -61,7 +61,7 @@ export default class TextField extends React.Component<IProps, IState> {
         this.toggle(true);
       }
     });
-  }
+  };
 
   public onFocus = () => {
     if (this.props.disabled) {
@@ -77,6 +77,17 @@ export default class TextField extends React.Component<IProps, IState> {
     this.validate(true);
 
     this.toggle(false);
+  };
+
+  public onLabelClick = () => {
+    const {
+      focused,
+      filled
+    } = this.state;
+
+    if (!focused && !filled) {
+      this.input.focus();
+    }
   };
 
   public toggle = (flag: boolean) => {
@@ -101,7 +112,7 @@ export default class TextField extends React.Component<IProps, IState> {
         this.setState({ error: !isCorrect });
       });
     }
-  }
+  };
 
   public onKeyDown = e => {
     this.validate(e.key === "Enter");
@@ -134,6 +145,7 @@ export default class TextField extends React.Component<IProps, IState> {
             errorColor={errorColor}
             theme={theme}
             disabled={disabled}
+            onClick={this.onLabelClick}
           >
             {label}
           </Label>

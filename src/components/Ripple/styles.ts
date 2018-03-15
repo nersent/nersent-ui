@@ -41,7 +41,7 @@ export const StyledRipple = styled.div.attrs({
     const height = getSize(
       props.y,
       getHighestSize(props),
-      props.x,
+      x,
       props.width
     );
 

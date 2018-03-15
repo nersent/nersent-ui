@@ -163,6 +163,7 @@ export const Label = styled.div`
   opacity: ${props => getLabelOpacity(props)};
   position: absolute;
   top: ${props => (!props.top ? 20 : 0)}px;
+  cursor: text;
   transition: 0.2s top ease-out, 0.2s font-size, 0.2s opacity, 0.2s color;
 `;
 
@@ -185,6 +186,5 @@ export const StyledTextField = styled.div`
   width: 196px;
   padding-top: 12px;
   user-select: none;
-  cursor: text;
   ${typography.robotoRegular()};
 `;
