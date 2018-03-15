@@ -10,7 +10,13 @@ const getSize = (x: number, y: number, width: number, height: number, icon: numb
   const newX = x - (width / 2);
   const newY = y - (height / 2);
 
-  return Math.max(width + 2 * Math.abs(newX), height + 2 * Math.abs(newY)) + (icon === 1 ? 0 : 10);
+  let result = 2 * Math.abs(newY) + Math.abs(newX);
+
+  if (Math.abs(newX) > Math.abs(newY)) {
+    result = 2 * Math.abs(newX) + Math.abs(newY);
+  }
+
+  return Math.max(width, height) + result + (icon === 1 ? 0 : 10);
 };
 
 const easing = "cubic-bezier(0.215, 0.61, 0.355, 1)";
