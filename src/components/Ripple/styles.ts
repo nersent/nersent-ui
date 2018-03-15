@@ -34,7 +34,7 @@ export interface IProps {
 }
 
 export const StyledRipple = styled.div.attrs({
-  style: (props: IProps) => {
+  style: props => {
     const x = Math.min(props.x, props.width);
     const size = getSize(x, props.y, props.width, props.height, props.icon);
 
