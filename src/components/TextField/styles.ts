@@ -91,12 +91,17 @@ const getLineBackgroundColor = (props: ILineProps) => {
     : "rgba(255,255,255,0.70)";
 };
 
+export interface IStyledTextFieldProps {
+  hint: boolean;
+}
+
 export const StyledTextField = styled.div`
   position: relative;
   width: 196px;
-  padding-top: 12px;
   user-select: none;
   ${typography.robotoRegular()};
+
+  padding-top: ${(props: IStyledTextFieldProps) => props.hint ? 12 : 0}px;
 `;
 
 export interface IFocusLineProps {

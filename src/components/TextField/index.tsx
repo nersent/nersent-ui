@@ -29,6 +29,7 @@ export interface IProps {
   value?: string;
   validate?: (value: string, submit: boolean) => void;
   type?: string;
+  fontSize?: number;
 }
 
 export interface IState {
@@ -43,7 +44,8 @@ export default class TextField extends React.Component<IProps, IState> {
     color: colors.blue["500"],
     theme: Theme.Light,
     errorColor: "#FF1744",
-    type: "text"
+    type: "text",
+    fontSize: 16
   };
 
   public state: IState = {
@@ -132,13 +134,14 @@ export default class TextField extends React.Component<IProps, IState> {
       helperText,
       errorColor,
       errorReason,
-      type
+      type,
+      fontSize
     } = this.props;
 
     const { focused, filled, error } = this.state;
 
     return (
-      <StyledTextField className={className} style={style}>
+      <StyledTextField hint={helperText === ""} className={className} style={style}>
         {label != null && (
           <Label
             color={color}
@@ -165,6 +168,7 @@ export default class TextField extends React.Component<IProps, IState> {
           onKeyDown={this.onKeyDown}
           spellCheck={false}
           isDisabled={disabled}
+          style={{ fontSize }}
           innerRef={r => (this.input = r)}
         />
         <Line theme={theme} disabled={disabled} />
