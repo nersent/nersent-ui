@@ -1,8 +1,8 @@
 import { injectGlobal } from "styled-components";
 
-const robotoLight = require("./fonts/Roboto-Light.woff2");
-const robotoMedium = require("./fonts/Roboto-Medium.woff2");
-const robotoRegular = require("./fonts/Roboto-Regular.woff2");
+const robotoLight = require("./fonts/roboto-light.ttf");
+const robotoMedium = require("./fonts/roboto-medium.ttf");
+const robotoRegular = require("./fonts/roboto-regular.ttf");
 
 import colors from "./defaults/colors";
 
@@ -28,21 +28,21 @@ injectGlobal`
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    src: local('Roboto'), local('Roboto-Regular'), url(${robotoRegular}) format('woff2');
+    src: url(${robotoRegular}) format('truetype');
   }
 
   @font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
-    src: local('Roboto Medium'), local('Roboto-Medium'), url(${robotoMedium}) format('woff2');
+    src: url(${robotoMedium}) format('truetype');
   }
 
   @font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
-    src: local('Roboto Light'), local('Roboto-Light'), url(${robotoLight}) format('woff2');
+    src: url(${robotoLight}) format('truetype');
   }
 `;
 
