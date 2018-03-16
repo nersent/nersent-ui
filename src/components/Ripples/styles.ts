@@ -1,19 +1,8 @@
 import * as React from "react";
 import styled, { StyledComponentClass } from "styled-components";
 
-const getBackgroundColor = color => {
-  const opacityHex = 14; // 0.8
-
-  if (color.startsWith("#")) {
-    if (color.length >= 7) {
-      return `${color}${opacityHex}`;
-    } else if (color.length === 4) {
-      return `${color}${color.substring(1)}${opacityHex}`;
-    }
-  }
-
-  return color;
-};
+// Utils
+import { hexToRgb } from "../../utils/colors";
 
 export const StyledRipples = styled.div`
   position: absolute;
@@ -43,5 +32,14 @@ export const IconRipple = styled.div`
   transform: translate(-50%, -50%);
   overflow: hidden;
   transition: 0.2s background-color;
-  ${props => props.hoverOverShade && !props.disabled && ("&:hover { background-color:" + getBackgroundColor(props.color) + "}")}
+
+  &:hover {
+    ${props => {
+      const rgb = hexToRgb(props.color);
+
+      if (props.hoverOverShade && !props.disabled) {
+        return `background-color: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.08);`
+      }
+    }}
+  }
 `;
