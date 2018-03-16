@@ -20,15 +20,16 @@ export interface IIconRippleProps {
   color: string;
   hoverOverShade: boolean;
   disabled: boolean;
+  size: number;
 }
 
 export const IconRipple = styled.div`
   position: absolute;
   border-radius: 50%;
-  width: 42px;
-  height: 42px;
   left: ${(props: IIconRippleProps) => props.width / 2}px;
   top: ${props => props.height / 2}px;
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
   transform: translate(-50%, -50%);
   overflow: hidden;
   transition: 0.2s background-color;
