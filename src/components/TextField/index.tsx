@@ -141,7 +141,7 @@ export default class TextField extends React.Component<IProps, IState> {
     const { focused, filled, error } = this.state;
 
     return (
-      <StyledTextField hint={helperText === ""} className={className} style={style}>
+      <StyledTextField hint={label.length > 0} className={className} style={style}>
         {label != null && (
           <Label
             color={color}

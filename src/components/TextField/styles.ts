@@ -60,7 +60,7 @@ const getInputCursorColor = (props: IInputProps) => {
 };
 
 const getLabelColor = (props: ILabelProps) => {
-  if (props.error) {
+  if (props.top && props.error) {
     return props.errorColor;
   } else if (!props.focused || props.disabled) {
     return props.theme === Theme.Light ? "#000" : "#fff";
@@ -74,7 +74,7 @@ const getLabelOpacity = (props: ILabelProps) => {
     return props.theme === Theme.Light
       ? transparency.light.text.disabled
       : transparency.dark.text.disabled;
-  } else if (props.error || props.focused) {
+  } else if (props.error && props.top || props.focused) {
     return props.theme === Theme.Light
       ? transparency.light.text.primary
       : 1;
@@ -100,7 +100,6 @@ export const StyledTextField = styled.div`
   width: 196px;
   user-select: none;
   ${typography.robotoRegular()};
-
   padding-top: ${(props: IStyledTextFieldProps) => props.hint ? 12 : 0}px;
 `;
 
