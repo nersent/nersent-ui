@@ -62,8 +62,9 @@ export interface IThumbContainerProps {
 
 export const ThumbContainer = styled.div`
   position: absolute;
-  left: ${(props: IThumbContainerProps) => props.left}px;
   transition: 0.25s left ease-out;
+
+  left: ${(props: IThumbContainerProps) => props.left}px;
   ${Positioning.center(Align.CenterVertical)};
 `;
 
@@ -81,10 +82,12 @@ export const Thumb = styled.div`
   border-radius: 50%;
   position: relative;
   z-index: 2;
-  background-color: ${(props: IThumbProps) => getThumbBackgroundColor(props)};
-  transform: ${props => !props.thumbScaleAnimation ? "scale(1)" : "scale(0.9)"};
-  box-shadow: ${Shadows[2]};
   transition: 0.2s transform, 0.2s background-color;
+
+  background-color: ${(props: IThumbProps) => getThumbBackgroundColor(props)};
+  transform: ${props =>
+    !props.thumbScaleAnimation ? "scale(1)" : "scale(0.9)"};
+  box-shadow: ${Shadows[2]};
 `;
 
 export interface ITrackProps {
@@ -99,6 +102,7 @@ export const Track = styled.div`
   height: 100%;
   border-radius: 15px;
   transition: 0.2s opacity, 0.2s background-color;
+
   opacity: ${(props: ITrackProps) => (props.toggled ? 0.5 : 1)};
   background-color: ${props => getTrackBackgroundColor(props)};
 `;

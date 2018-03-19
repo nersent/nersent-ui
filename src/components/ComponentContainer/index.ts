@@ -13,6 +13,7 @@ export default styled.div`
   display: flex;
   align-items: center;
   -webkit-font-smoothing: antialiased;
+
   ${(props: IContainerProps) => props.disabled && "pointer-events: none;"};
   ${Cursors.pointer()};
 `;

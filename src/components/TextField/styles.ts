@@ -99,8 +99,9 @@ export const StyledTextField = styled.div`
   position: relative;
   width: 196px;
   user-select: none;
-  ${typography.robotoRegular()};
+
   padding-top: ${(props: IStyledTextFieldProps) => props.hint ? 12 : 0}px;
+  ${typography.robotoRegular()};
 `;
 
 export interface IFocusLineProps {
@@ -112,13 +113,14 @@ export interface IFocusLineProps {
 }
 
 export const FocusLine = styled.div`
-  width: ${(props: IFocusLineProps) => getFocusLineWidth(props) + "%"};
   height: 2px;
   margin-top: -1.5px;
   margin-left: auto;
   margin-right: auto;
-  background-color: ${props => getFocusLineBackgroundColor(props)};
   transition: 0.2s width ease-out, 0.2s background-color;
+
+  width: ${(props: IFocusLineProps) => getFocusLineWidth(props) + "%"};
+  background-color: ${props => getFocusLineBackgroundColor(props)};
 `;
 
 export interface IHelperTextProps {
@@ -131,9 +133,10 @@ export interface IHelperTextProps {
 export const HelperText = styled.div`
   margin-top: 8px;
   font-size: 12px;
+  transition: 0.2s opacity, 0.2s color;
+
   color: ${(props: IHelperTextProps) => getHelperTextColor(props)};
   opacity: ${props => getHelperTextOpacity(props)};
-  transition: 0.2s opacity, 0.2s color;
 `;
 
 export interface IInputProps {
@@ -151,9 +154,10 @@ export const Input = styled.input`
   outline: none;
   -webkit-text-fill-color: transparent;
   background-color: transparent;
-  text-shadow: ${(props: IInputProps) => getInputTextColor(props)};
   padding-top: 8px;
   padding-bottom: 8px;
+
+  text-shadow: ${(props: IInputProps) => getInputTextColor(props)};
   color: ${props => getInputCursorColor(props)};
 
   &:focus {
@@ -172,13 +176,14 @@ export interface ILabelProps {
 }
 
 export const Label = styled.div`
+  position: absolute;
+  cursor: text;
+  transition: 0.2s top ease-out, 0.2s font-size, 0.2s opacity, 0.2s color;
+
   font-size: ${(props: ILabelProps) => (!props.top ? 16 : 12)}px;
   color: ${props => getLabelColor(props)};
   opacity: ${props => getLabelOpacity(props)};
-  position: absolute;
   top: ${props => (!props.top ? 20 : 0)}px;
-  cursor: text;
-  transition: 0.2s top ease-out, 0.2s font-size, 0.2s opacity, 0.2s color;
 `;
 
 export interface ILineProps {
@@ -188,6 +193,7 @@ export interface ILineProps {
 
 export const Line = styled.div`
   width: 100%;
+
   height: ${(props: ILineProps) => (!props.disabled ? 1 : 0)}px;
   ${props =>
     !props.disabled &&

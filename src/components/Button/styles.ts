@@ -55,9 +55,6 @@ export interface IStyledButtonProps {
 }
 
 export const StyledButton = styled.div`
-  min-width: ${(props: IStyledButtonProps) =>
-    props.dialog ? 0 : buttons.minWidth}px;
-  height: ${buttons.height}px;
   position: relative;
   padding: 0 16px 0 16px;
   text-align: center;
@@ -65,15 +62,21 @@ export const StyledButton = styled.div`
   display: inline-flex;
   justify-content: center;
   flex-direction: column;
-  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  overflow: hidden;
+  transition: 0.3s box-shadow, 0.2s background-color;
+
+  min-width: ${(props: IStyledButtonProps) =>
+    props.dialog ? 0 : buttons.minWidth}px;
+  cursor: ${props =>
+    props.disabled ? "default" : "pointer"};
   background-color: ${props =>
     getBackground(props.color, props.disabled, props.theme, props.raised)};
   box-shadow: ${props =>
     props.raised && !props.disabled ? shadows[buttons.elevation] : "none"};
-  pointer-events: ${props => (props.disabled ? "none" : "auto")};
+  pointer-events: ${props =>
+    props.disabled ? "none" : "auto"};
   border-radius: ${buttons.cornerRadius}px;
-  overflow: hidden;
-  transition: 0.3s box-shadow, 0.2s background-color;
+  height: ${buttons.height}px;
   ${userSelection.noUserSelect()} ${userSelection.noTapHighlight()}
 
   &:hover {
@@ -101,10 +104,11 @@ export const OverShade = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: ${(props: IOverShadeProps) => props.color};
   opacity: 0;
   transition: 0.25s opacity;
   z-index: 2;
+
+  background-color: ${(props: IOverShadeProps) => props.color};
 `;
 
 export interface ITextProps {
@@ -119,8 +123,9 @@ export const Text = styled.div`
   position: relative;
   z-index: 3;
   white-space: nowrap;
+  transition: 0.2s color;
+
   color: ${(props: ITextProps) =>
     getForeground(props.color, props.disabled, props.theme, props.raised, props.foreground)};
   ${typography.button()};
-  transition: 0.2s color;
 `;

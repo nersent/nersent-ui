@@ -22,8 +22,9 @@ export const Background = styled.div`
   position: absolute;
   left: 0;
   top: 0;
-  background-color ${(props: IBackground) => props.color};
   opacity: 0.38;
+
+  background-color ${(props: IBackground) => props.color};
 `;
 
 export interface ILine {
@@ -36,14 +37,15 @@ export interface ILine {
 };
 
 export const Line = styled.div`
-  width: ${(props: ILine) => props.progress}%;
   height: 100%;
   position: absolute;
   left: 0;
   top: 0;
+  transition-timing-function: ease;
+
+  width: ${(props: ILine) => props.progress}%;
   background-color: ${props => props.color};
   margin-left: ${props => props.margin}%;
   transition-property: ${props => (props.type === ProgressBarType.Indeterminate && props.linesAnimation) ? "margin-left" : ""};
   transition-duration: ${props => !props.fast ? "2s" : "1s"};
-  transition-timing-function: ease;
 `;
