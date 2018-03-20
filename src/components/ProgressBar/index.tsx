@@ -13,9 +13,9 @@ import { Background, Line, StyledProgressBar } from "./styles";
 export interface IProps {
   className?: string;
   style?: {};
-  color: string;
-  type: ProgressBarType;
-  progress: number;
+  color?: string;
+  type?: ProgressBarType;
+  progress?: number;
 }
 
 export interface IState {
