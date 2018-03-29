@@ -15,6 +15,7 @@ export interface IProps {
   style?: {};
   color?: string;
   type?: PreloaderType;
+  thickness?: number;
 }
 
 export interface IState {
@@ -24,6 +25,7 @@ export interface IState {
 export default class Preloader extends React.Component<IProps, IState> {
   public static defaultProps = {
     type: PreloaderType.Indeterminate,
+    thickness: 4
   };
 
   public state: IState = {
@@ -37,11 +39,11 @@ export default class Preloader extends React.Component<IProps, IState> {
     colors.red["500"],
     colors.yellow["500"],
     colors.green["500"],
-    colors.cyan["500"]
+    colors.lightBlue["500"]
   ];
 
   public componentDidMount () {
-    if (this.props.color == null) {
+    if (this.props.color == null && this.props.type === PreloaderType.Indeterminate) {
       this.colorChange = setInterval(this.changeColor, 1500)
     }
   }
@@ -49,9 +51,9 @@ export default class Preloader extends React.Component<IProps, IState> {
   public componentWillReceiveProps (nextProps) {
     const colorChanged = this.props.color !== nextProps.color;
 
-    if (colorChanged && nextProps.color != null) {
+    if (colorChanged && nextProps.color != null && this.colorChange != null) {
       clearInterval(this.colorChange);
-    } else if (colorChanged && nextProps.color == null) {
+    } else if (colorChanged && nextProps.color == null && this.props.type === PreloaderType.Indeterminate) {
       this.colorChange = setInterval(this.changeColor, 1500)
     }
   }
@@ -73,7 +75,8 @@ export default class Preloader extends React.Component<IProps, IState> {
       className,
       style,
       color,
-      type
+      type,
+      thickness
     } = this.props;
 
     const pathColor = color == null ? this.state.color : color;
@@ -88,6 +91,7 @@ export default class Preloader extends React.Component<IProps, IState> {
             fill='none'
             strokeMiterlimit='10'
             color={pathColor}
+            thickness={thickness}
           />
         </svg>
       </StyledPreloader>

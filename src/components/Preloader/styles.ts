@@ -10,6 +10,7 @@ export const StyledPreloader = styled.div`
 
 export interface IPathProps {
   color: string;
+  thickness: number;
 };
 
 export const Path = styled.circle.attrs({
@@ -23,6 +24,6 @@ export const Path = styled.circle.attrs({
   stroke-dashoffset: 0;
   animation: nersent-ui-preloader-dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
   stroke-linecap: square;
-  stroke-width: 4;
+  stroke-width: ${(props: IPathProps) => props.thickness};
   transition: 0.3s stroke;
 `;
