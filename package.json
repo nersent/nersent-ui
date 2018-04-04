@@ -20,7 +20,7 @@
   "author": "Nersent",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "9.6.1",
+    "@types/node": "9.6.2",
     "@types/react": "16.3.2",
     "@types/react-dom": "16.0.4",
     "cross-env": "5.1.4",
