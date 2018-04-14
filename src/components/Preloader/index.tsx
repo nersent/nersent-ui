@@ -16,6 +16,7 @@ export interface IProps {
   color?: string;
   type?: PreloaderType;
   thickness?: number;
+  size?: number;
 }
 
 export interface IState {
@@ -25,12 +26,13 @@ export interface IState {
 export default class Preloader extends React.Component<IProps, IState> {
   public static defaultProps = {
     type: PreloaderType.Indeterminate,
-    thickness: 4
+    thickness: 4,
+    size: 32
   };
 
   public state: IState = {
     color: colors.red["500"]
-  }
+  };
 
   private colorChange: any;
   private actualColor = 0;
@@ -42,19 +44,26 @@ export default class Preloader extends React.Component<IProps, IState> {
     colors.lightBlue["500"]
   ];
 
-  public componentDidMount () {
-    if (this.props.color == null && this.props.type === PreloaderType.Indeterminate) {
-      this.colorChange = setInterval(this.changeColor, 1500)
+  public componentDidMount() {
+    if (
+      this.props.color == null &&
+      this.props.type === PreloaderType.Indeterminate
+    ) {
+      this.colorChange = setInterval(this.changeColor, 1500);
     }
   }
 
-  public componentWillReceiveProps (nextProps) {
+  public componentWillReceiveProps(nextProps) {
     const colorChanged = this.props.color !== nextProps.color;
 
     if (colorChanged && nextProps.color != null && this.colorChange != null) {
       clearInterval(this.colorChange);
-    } else if (colorChanged && nextProps.color == null && this.props.type === PreloaderType.Indeterminate) {
-      this.colorChange = setInterval(this.changeColor, 1500)
+    } else if (
+      colorChanged &&
+      nextProps.color == null &&
+      this.props.type === PreloaderType.Indeterminate
+    ) {
+      this.colorChange = setInterval(this.changeColor, 1500);
     }
   }
 
@@ -67,29 +76,23 @@ export default class Preloader extends React.Component<IProps, IState> {
 
     this.setState({
       color: this.defaultColors[this.actualColor]
-    })
-  }
+    });
+  };
 
   public render() {
-    const {
-      className,
-      style,
-      color,
-      type,
-      thickness
-    } = this.props;
+    const { className, style, color, type, thickness, size } = this.props;
 
     const pathColor = color == null ? this.state.color : color;
 
     return (
-      <StyledPreloader className={className} style={style}>
-        <svg viewBox='25 25 50 50'>
+      <StyledPreloader size={size} className={className} style={style}>
+        <svg viewBox="25 25 50 50">
           <Path
-            cx='50'
-            cy='50'
-            r='20'
-            fill='none'
-            strokeMiterlimit='10'
+            cx="50"
+            cy="50"
+            r="20"
+            fill="none"
+            strokeMiterlimit="10"
             color={pathColor}
             thickness={thickness}
           />
