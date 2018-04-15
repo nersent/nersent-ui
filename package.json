@@ -1,13 +1,14 @@
 {
   "name": "nersent-ui",
-  "version": "3.2.8",
+  "version": "3.3.0",
   "description": "Material design framework for React",
   "repository": "Nersent/nersent-ui",
   "main": "build/index",
   "types": "build/index.d.ts",
   "scripts": {
     "watch": "webpack-cli --mode development --watch",
-    "build-production": "cross-env NODE_ENV=production webpack-cli --mode production",
+    "build-production":
+      "cross-env NODE_ENV=production webpack-cli --mode production",
     "lint": "npm run prettier && npm run tslint-fix",
     "prettier": "prettier --write src/**/*.ts*",
     "tslint-fix": "tslint --config tslint.json src/**/*.ts* --fix",
