@@ -19,6 +19,9 @@ import Ripple from "./components/Ripple";
 import Ripples from "./components/Ripples";
 import Switch from "./components/Switch";
 import TextField from "./components/TextField";
+import Menu from "./components/Menu";
+import MenuItem from "./components/MenuItem";
+import MenuSeparator from "./components/MenuSeparator";
 import buttons from "./defaults/buttons";
 import transparency from "./defaults/transparency";
 import shadows from "./mixins/shadows";
@@ -88,5 +91,8 @@ export {
   getRippleEvents,
   ProgressBar,
   PreloaderType,
-  Preloader
+  Preloader,
+  Menu,
+  MenuItem,
+  MenuSeparator
 };
