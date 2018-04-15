@@ -1,6 +1,6 @@
 enum PreloaderType {
   Determinate,
-  Indeterminate
+  Indeterminate,
 }
 
 export default PreloaderType;

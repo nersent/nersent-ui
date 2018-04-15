@@ -1,21 +1,22 @@
-import * as React from "react";
-import styled, { StyledComponentClass } from "styled-components";
+import * as React from 'react';
 
 // Utils
-import { getComponentBackground, getComponentForeground } from "../../utils/component-color";
+import { getComponentBackground, getComponentForeground } from '../../utils/component-color';
 
 // Defaults
-import transparency from "../../defaults/transparency";
+import transparency from '../../defaults/transparency';
 
 // Enums
-import Theme from "../../enums/theme";
+import Theme from '../../enums/theme';
 
 // Mixins
-import icons from "../../mixins/icons";
-import images from "../../mixins/images";
-import userSelection from "../../mixins/user-selection";
+import icons from '../../mixins/icons';
+import images from '../../mixins/images';
+import userSelection from '../../mixins/user-selection';
 
-const checkIcon = require("../../images/Controls/check.svg");
+const styled = require('styled-components').default;
+
+const checkIcon = require('../../images/Controls/check.svg');
 
 export interface IStyledCheckboxProps {
   scaleAnimation: boolean;
@@ -29,8 +30,7 @@ export const StyledCheckbox = styled.div`
   transition: 0.4s transform;
   -webkit-font-smoothing: subpixel-antialiased;
 
-  ${(props: IStyledCheckboxProps) =>
-    !props.scaleAnimation ? "scale(1)" : "scale(0.92)"};
+  ${(props: IStyledCheckboxProps) => (!props.scaleAnimation ? 'scale(1)' : 'scale(0.92)')};
   ${userSelection.noTapHighlight()};
 `;
 
@@ -74,12 +74,10 @@ export const Icon = styled.div`
   -webkit-font-smoothing: antialiased;
 
   clip-path: ${(props: IIconProps) =>
-    props.pathAnimation ? `inset(0 0 0 0)` : `inset(100% 50% 0 50%)`};
-  transform: ${props =>
-    !props.scaleAnimation ? "scale(1)" : "scale(0)"};
-  ${props =>
-    props.theme === Theme.Light ? icons.invertColors() : ""}
+    (props.pathAnimation ? 'inset(0 0 0 0)' : 'inset(100% 50% 0 50%)')};
+  transform: ${props => (!props.scaleAnimation ? 'scale(1)' : 'scale(0)')};
+  ${props => (props.theme === Theme.Light ? icons.invertColors() : '')}
   transition: ${props => props.transition};
   background-image: ${`url(${checkIcon})`};
-  ${images.center("22px", "auto")}
+  ${images.center('22px', 'auto')}
 `;

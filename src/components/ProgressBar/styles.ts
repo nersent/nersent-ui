@@ -1,8 +1,9 @@
-import * as React from "react";
-import styled, { StyledComponentClass } from "styled-components";
+import * as React from 'react';
 
 // Enums
-import ProgressBarType from "../../enums/progressBar";
+import ProgressBarType from '../../enums/progressBar';
+
+const styled = require('styled-components').default;
 
 export const StyledProgressBar = styled.div`
   width: 400px;
@@ -14,7 +15,7 @@ export const StyledProgressBar = styled.div`
 
 export interface IBackground {
   color: string;
-};
+}
 
 export const Background = styled.div`
   width: 100%;
@@ -34,7 +35,7 @@ export interface ILine {
   margin: number;
   fast: boolean;
   linesAnimation: boolean;
-};
+}
 
 export const Line = styled.div`
   height: 100%;
@@ -46,6 +47,7 @@ export const Line = styled.div`
   width: ${(props: ILine) => props.progress}%;
   background-color: ${props => props.color};
   margin-left: ${props => props.margin}%;
-  transition-property: ${props => (props.type === ProgressBarType.Indeterminate && props.linesAnimation) ? "margin-left" : ""};
-  transition-duration: ${props => !props.fast ? "2s" : "1s"};
+  transition-property: ${props =>
+    (props.type === ProgressBarType.Indeterminate && props.linesAnimation ? 'margin-left' : '')};
+  transition-duration: ${props => (!props.fast ? '2s' : '1s')};
 `;

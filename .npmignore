@@ -1,3 +1,9 @@
 .babelrc
 src
 yarn.lock
+.travis.yml
+README.md
+LICENSE
+tsconfig.json
+.gitignore
+.npmignore

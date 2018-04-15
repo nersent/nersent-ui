@@ -1,16 +1,16 @@
-import * as React from "react";
+import * as React from 'react';
 
 // Defaults
-import colors from "../../defaults/colors";
+import colors from '../../defaults/colors';
 
 // Enums
-import Theme from "../../enums/theme";
+import Theme from '../../enums/theme';
 
 // Components
-import RadioButton from "../RadioButton";
+import RadioButton from '../RadioButton';
 
 // Styles
-import { StyledRadioButtons } from "./styles";
+import { StyledRadioButtons } from './styles';
 
 export interface IProps {
   className?: string;
@@ -22,14 +22,14 @@ export interface IProps {
     index: number,
     radioButton?: RadioButton,
     component?: RadioButtons,
-    fromProps?: boolean
+    fromProps?: boolean,
   ) => void;
 }
 
 export default class RadioButtons extends React.Component<IProps, {}> {
   public static defaultProps = {
     disabled: false,
-    theme: Theme.Light
+    theme: Theme.Light,
   };
 
   private radioButtons = [];
@@ -50,10 +50,7 @@ export default class RadioButtons extends React.Component<IProps, {}> {
   };
 
   public toggle(radiobutton: RadioButton, fromProps = false) {
-    if (
-      this.latest === radiobutton ||
-      (radiobutton.props.disabled && !fromProps)
-    ) {
+    if (this.latest === radiobutton || (radiobutton.props.disabled && !fromProps)) {
       return;
     }
 
@@ -66,18 +63,15 @@ export default class RadioButtons extends React.Component<IProps, {}> {
 
     const onToggle = this.props.onToggle;
 
-    if (typeof onToggle === "function") {
-      onToggle(
-        this.radioButtons.indexOf(radiobutton),
-        radiobutton,
-        this,
-        fromProps
-      );
+    if (typeof onToggle === 'function') {
+      onToggle(this.radioButtons.indexOf(radiobutton), radiobutton, this, fromProps);
     }
   }
 
   public render() {
-    const { className, style, children, theme, color, disabled } = this.props;
+    const {
+      className, style, children, theme, color, disabled,
+    } = this.props;
 
     this.radioButtons = [];
 
@@ -93,7 +87,7 @@ export default class RadioButtons extends React.Component<IProps, {}> {
             onClick: this.onClick,
             theme,
             color,
-            disabled: disabled ? disabled : isChildDisabled
+            disabled: disabled || isChildDisabled,
           });
         })}
       </StyledRadioButtons>

@@ -1,14 +1,13 @@
-import * as React from "react";
-import { SyntheticEvent } from "react";
+import * as React from 'react';
 
 // Defaults
-import colors from "../../defaults/colors";
+import colors from '../../defaults/colors';
 
 // Enums
-import ProgressBarType from "../../enums/progressBar";
+import ProgressBarType from '../../enums/progressBar';
 
 // Styles
-import { Background, Line, StyledProgressBar } from "./styles";
+import { Background, Line, StyledProgressBar } from './styles';
 
 export interface IProps {
   className?: string;
@@ -28,74 +27,66 @@ export default class ProgressBar extends React.Component<IProps, IState> {
   public static defaultProps = {
     raised: false,
     disabled: false,
-    color: colors.blue["500"],
+    color: colors.blue['500'],
     type: ProgressBarType.Indeterminate,
-    progress: 50
+    progress: 50,
   };
 
   public state: IState = {
     firstLineMargin: 0,
     secondLineMargin: 0,
-    linesAnimation: false
+    linesAnimation: false,
   };
 
-  public componentDidMount () {
+  public componentDidMount() {
     if (this.props.type === ProgressBarType.Indeterminate) {
       this.setState({
         firstLineMargin: -50,
         secondLineMargin: -50,
-        linesAnimation: true
-      })
+        linesAnimation: true,
+      });
 
       setTimeout(() => {
-        this.animate()
-      })
+        this.animate();
+      });
     }
   }
 
-  public animate () {
+  public animate() {
     this.setState({
-      firstLineMargin: 125
-    })
+      firstLineMargin: 125,
+    });
 
     setTimeout(() => {
       this.setState({
-        secondLineMargin: 100
-      })
+        secondLineMargin: 100,
+      });
 
       setTimeout(() => {
         this.setState({
-          linesAnimation: false
-        })
+          linesAnimation: false,
+        });
 
         setTimeout(() => {
           this.setState({
             firstLineMargin: -50,
-            secondLineMargin: -50
-          })
-        }, 1000)
+            secondLineMargin: -50,
+          });
+        }, 1000);
       }, 1000);
-    }, 850)
-  };
+    }, 850);
+  }
 
   public render() {
     const {
-      className,
-      style,
-      color,
-      progress,
-      type
+      className, style, color, progress, type,
     } = this.props;
 
-    const {
-      firstLineMargin,
-      secondLineMargin,
-      linesAnimation
-    } = this.state;
+    const { firstLineMargin, secondLineMargin, linesAnimation } = this.state;
 
     const firstLineProgress =
-      type === ProgressBarType.Determinate && progress ||
-      type === ProgressBarType.Indeterminate && 50;
+      (type === ProgressBarType.Determinate && progress) ||
+      (type === ProgressBarType.Indeterminate && 50);
 
     return (
       <StyledProgressBar>
@@ -108,16 +99,16 @@ export default class ProgressBar extends React.Component<IProps, IState> {
           fast={false}
           linesAnimation={linesAnimation}
         />
-        {type === ProgressBarType.Indeterminate &&
+        {type === ProgressBarType.Indeterminate && (
           <Line
             color={color}
             progress={progress}
             type={type}
             margin={secondLineMargin}
-            fast={true}
+            fast
             linesAnimation={linesAnimation}
           />
-        }
+        )}
       </StyledProgressBar>
     );
   }

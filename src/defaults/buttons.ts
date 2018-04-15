@@ -4,5 +4,5 @@ export default {
   height: 36,
   hoveredElevation: 4,
   minWidth: 88,
-  pressedElevation: 8
+  pressedElevation: 8,
 };

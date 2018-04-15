@@ -1,25 +1,24 @@
-import * as React from "react";
-import { SyntheticEvent } from "react";
+import * as React from 'react';
 
 // Utils
-import { getForegroundColor } from "../../utils/colors";
-import { getEvents } from "../../utils/events";
-import { getRippleEvents } from "../../utils/ripple";
+import { getForegroundColor } from '../../utils/colors';
+import { getEvents } from '../../utils/events';
+import { getRippleEvents } from '../../utils/ripple';
 
 // Defaults
-import colors from "../../defaults/colors";
+import colors from '../../defaults/colors';
 
 // Enums
-import Theme from "../../enums/theme";
+import Theme from '../../enums/theme';
 
 // Components
-import Clear from "../Clear";
-import Ripples from "../Ripples";
+import Clear from '../Clear';
+import Ripples from '../Ripples';
 
 // Styles
-import { OverShade, StyledButton, Text } from "./styles";
+import { OverShade, StyledButton, Text } from './styles';
 
-export type ButtonEvent = (e?: SyntheticEvent<HTMLDivElement>) => void;
+export type ButtonEvent = (e?: React.SyntheticEvent<HTMLDivElement>) => void;
 
 export interface IProps {
   className?: string;
@@ -49,30 +48,30 @@ export default class Button extends React.Component<IProps, IState> {
   public static defaultProps = {
     raised: false,
     disabled: false,
-    color: colors.blue["500"],
+    color: colors.blue['500'],
     theme: Theme.Light,
     dialog: false,
     customRippleBehavior: false,
     ripple: true,
-    inline: false
+    inline: false,
   };
 
   public state: IState = {
-    foreground: "black"
+    foreground: 'black',
   };
 
   private ripples: Ripples;
 
   public componentDidMount() {
     this.setState({
-      foreground: getForegroundColor(this.props.color)
+      foreground: getForegroundColor(this.props.color),
     });
   }
 
   public componentWillReceiveProps(nextProps) {
     if (this.props.color !== nextProps.color) {
       this.setState({
-        foreground: getForegroundColor(nextProps.color)
+        foreground: getForegroundColor(nextProps.color),
       });
     }
   }
@@ -87,21 +86,21 @@ export default class Button extends React.Component<IProps, IState> {
       children,
       dialog,
       inline,
-      color
+      color,
     } = this.props;
 
     const { foreground } = this.state;
 
     const rippleColor = raised ? foreground : color;
-    const overShadeColor = (raised || theme === Theme.Light) ? "#000" : "#fff";
+    const overShadeColor = raised || theme === Theme.Light ? '#000' : '#fff';
 
     const events = {
       ...getEvents(this.props),
-      ...getRippleEvents(this.props, () => this.ripples)
+      ...getRippleEvents(this.props, () => this.ripples),
     };
 
     return (
-      <>
+      <React.Fragment>
         <StyledButton
           className={className}
           style={style}
@@ -121,14 +120,11 @@ export default class Button extends React.Component<IProps, IState> {
           >
             {children}
           </Text>
-          <OverShade
-            className="over-shade"
-            color={overShadeColor}
-          />
+          <OverShade className="over-shade" color={overShadeColor} />
           <Ripples ref={r => (this.ripples = r)} color={rippleColor} />
         </StyledButton>
         {!inline && <Clear />}
-      </>
+      </React.Fragment>
     );
   }
 }

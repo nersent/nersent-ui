@@ -1,52 +1,51 @@
-import * as React from "react";
-import styled, { StyledComponentClass } from "styled-components";
+import * as React from 'react';
 
 // Enums
-import Align from "../../enums/align";
-import Theme from "../../enums/theme";
+import Align from '../../enums/align';
+import Theme from '../../enums/theme';
 
 // Mixins
-import Positioning from "../../mixins/positioning";
-import Shadows from "../../mixins/shadows";
+import Positioning from '../../mixins/positioning';
+import Shadows from '../../mixins/shadows';
+
+const styled = require('styled-components').default;
 
 const getThumbBackgroundColor = (props: IThumbProps) => {
-  const { disabled, toggled, color, theme } = props;
+  const {
+    disabled, toggled, color, theme,
+  } = props;
 
   if (disabled) {
     if (theme === Theme.Light) {
-      return "#BDBDBD";
-    } else {
-      return "#424242";
+      return '#BDBDBD';
     }
+    return '#424242';
   } else if (!toggled) {
     if (theme === Theme.Light) {
-      return "#FAFAFA";
-    } else {
-      return "#BDBDBD";
+      return '#FAFAFA';
     }
-  } else {
-    return color;
+    return '#BDBDBD';
   }
+  return color;
 };
 
 const getTrackBackgroundColor = (props: ITrackProps) => {
-  const { disabled, toggled, color, theme } = props;
+  const {
+    disabled, toggled, color, theme,
+  } = props;
 
   if (disabled) {
     if (props.theme === Theme.Light) {
-      return "rgba(0,0,0,0.12)";
-    } else {
-      return "rgba(255,255,255,0.10)";
+      return 'rgba(0,0,0,0.12)';
     }
+    return 'rgba(255,255,255,0.10)';
   } else if (!toggled) {
     if (props.theme === Theme.Light) {
-      return "rgba(0,0,0,0.38)";
-    } else {
-      return "rgba(255,255,255,0.30)";
+      return 'rgba(0,0,0,0.38)';
     }
-  } else {
-    return color;
+    return 'rgba(255,255,255,0.30)';
   }
+  return color;
 };
 
 export const StyledSwitch = styled.div`
@@ -85,8 +84,7 @@ export const Thumb = styled.div`
   transition: 0.2s transform, 0.2s background-color;
 
   background-color: ${(props: IThumbProps) => getThumbBackgroundColor(props)};
-  transform: ${props =>
-    !props.thumbScaleAnimation ? "scale(1)" : "scale(0.9)"};
+  transform: ${props => (!props.thumbScaleAnimation ? 'scale(1)' : 'scale(0.9)')};
   box-shadow: ${Shadows[2]};
 `;
 

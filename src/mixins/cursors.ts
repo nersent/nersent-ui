@@ -1,18 +1,14 @@
-export const pointer = () => {
-  return `
+export const pointer = () => `
     user-select: none;
     cursor: pointer;
   `;
-};
 
-export const defaultCursor = () => {
-  return `
+export const defaultCursor = () => `
     user-select: none;
     cursor: default;
   `;
-};
 
 export default {
   pointer,
-  defaultCursor
+  defaultCursor,
 };

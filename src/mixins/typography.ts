@@ -31,5 +31,5 @@ export default {
   body2,
   button,
   robotoRegular,
-  robotoMedium
+  robotoMedium,
 };

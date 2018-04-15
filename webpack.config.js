@@ -1,35 +1,29 @@
 const webpack = require('webpack');
-const path = require("path");
-const { spawn } = require("child_process");
-const DtsBundleWebpack = require('dts-bundle-webpack');
-const fs = require("fs");
+const path = require('path');
 
-const productionDevtool = "source-map";
-const developmentDevtool = "eval-source-map";
+const productionDevtool = 'source-map';
+const developmentDevtool = 'eval-source-map';
 
-const INCLUDE = [path.resolve(__dirname, "src")];
+const INCLUDE = [path.resolve(__dirname, 'src')];
 const EXCLUDE = [/node_modules/];
 
 const PORT = 8080;
 
-const OUTPUT_DIR = path.resolve(__dirname, "build");
+const OUTPUT_DIR = path.resolve(__dirname, 'build');
 
 const config = {
-  target: "web",
+  target: 'web',
 
-  devtool:
-    process.env.NODE_ENV === "production"
-      ? productionDevtool
-      : developmentDevtool,
+  devtool: process.env.NODE_ENV === 'production' ? productionDevtool : developmentDevtool,
 
   output: {
     path: OUTPUT_DIR,
-    filename: "[name].js",
-    libraryTarget: "umd"
+    filename: '[name].js',
+    libraryTarget: 'commonjs',
   },
 
   entry: {
-    index: "./src"
+    index: './src',
   },
 
   module: {
@@ -40,7 +34,7 @@ const config = {
         exclude: EXCLUDE,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
           },
         ],
       },
@@ -50,7 +44,7 @@ const config = {
         exclude: EXCLUDE,
         use: [
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
           },
         ],
       },
@@ -63,78 +57,22 @@ const config = {
   },
 
   resolve: {
-    modules: ["node_modules"],
-    extensions: [".js", ".tsx", ".ts"],
+    modules: ['node_modules'],
+    extensions: ['.js', '.tsx', '.ts', '.json'],
   },
 
-  plugins: [
-    new DtsBundleWebpack({
-      name: 'nersent-ui',
-      main: './build/build/index.d.ts',
-      baseDir: './build',
-      out: './index.d.ts',
-      removeSource: true
-    }),
-    new WebpackShellPlugin({
-      onBuildEnd: () => {
-        /*setTimeout(() => {
-          cleanEmptyFoldersRecursively('./build/build');
-        }, 1000);*/
-      }
-    })
-  ],
-};
+  externals: {
+    react: 'react',
+    'styled-components': 'styled-components',
+  },
 
-function cleanEmptyFoldersRecursively(folder) {
-  const isDir = fs.statSync(folder).isDirectory();
-  if (!isDir) {
-    return;
-  }
-  let files = fs.readdirSync(folder);
-  if (files.length > 0) {
-    files.forEach(function(file) {
-      var fullPath = path.join(folder, file);
-      cleanEmptyFoldersRecursively(fullPath);
-    });
-
-    files = fs.readdirSync(folder);
-  }
-
-  if (files.length == 0) {
-    fs.rmdirSync(folder);
-    return;
-  }
-}
-
-var exec = require('child_process').exec;
-
-function WebpackShellPlugin(options) {
-  this.options = options;
-}
-
-WebpackShellPlugin.prototype.apply = function(compiler) {
-  const options = this.options;
-
-  compiler.plugin("compilation", compilation => {
-    if (options.onBuildStart != null) {
-      options.onBuildStart()
-    }
-  });
-
-  compiler.plugin("after-emit", (compilation, callback) => {
-    if (options.onBuildEnd != null) {
-      options.onBuildEnd();
-    }
-    callback();
-  });
+  plugins: [],
 };
 
 if (process.env.NODE_ENV === 'production') {
-  config.plugins.push(
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    })
-  )
+  config.plugins.push(new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify('production'),
+  }));
 }
 
 module.exports = [config];

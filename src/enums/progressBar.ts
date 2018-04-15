@@ -1,7 +1,7 @@
 enum ProgressBarType {
   Determinate,
   Indeterminate,
-  Buffer
+  Buffer,
 }
 
 export default ProgressBarType;

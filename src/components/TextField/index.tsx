@@ -1,20 +1,13 @@
-import * as React from "react";
+import * as React from 'react';
 
 // Defaults
-import colors from "../../defaults/colors";
+import colors from '../../defaults/colors';
 
-/// Enums
-import Theme from "../../enums/theme";
+// / Enums
+import Theme from '../../enums/theme';
 
 // Styles
-import {
-  FocusLine,
-  HelperText,
-  Input,
-  Label,
-  Line,
-  StyledTextField
-} from "./styles";
+import { FocusLine, HelperText, Input, Label, Line, StyledTextField } from './styles';
 
 export interface IProps {
   className?: string;
@@ -41,17 +34,17 @@ export interface IState {
 export default class TextField extends React.Component<IProps, IState> {
   public static defaultProps = {
     disabled: false,
-    color: colors.blue["500"],
+    color: colors.blue['500'],
     theme: Theme.Light,
-    errorColor: "#FF1744",
-    type: "text",
-    fontSize: 16
+    errorColor: '#FF1744',
+    type: 'text',
+    fontSize: 16,
   };
 
   public state: IState = {
     focused: false,
     filled: false,
-    error: false
+    error: false,
   };
 
   private input: HTMLInputElement;
@@ -65,7 +58,7 @@ export default class TextField extends React.Component<IProps, IState> {
         this.toggle(true);
       }
     });
-  };
+  }
 
   public onFocus = () => {
     if (this.props.disabled) {
@@ -84,10 +77,7 @@ export default class TextField extends React.Component<IProps, IState> {
   };
 
   public onLabelClick = () => {
-    const {
-      focused,
-      filled
-    } = this.state;
+    const { focused, filled } = this.state;
 
     if (!focused && !filled) {
       this.input.focus();
@@ -99,7 +89,7 @@ export default class TextField extends React.Component<IProps, IState> {
 
     this.setState({
       filled: !isInputEmpty,
-      focused: flag
+      focused: flag,
     });
   };
 
@@ -109,17 +99,17 @@ export default class TextField extends React.Component<IProps, IState> {
   public validate(submit: boolean) {
     const { validate } = this.props;
 
-    if (typeof validate === "function") {
+    if (typeof validate === 'function') {
       setTimeout(() => {
         const isCorrect = validate(this.input.value, submit);
 
         this.setState({ error: !isCorrect });
       });
     }
-  };
+  }
 
   public onKeyDown = e => {
-    this.validate(e.key === "Enter");
+    this.validate(e.key === 'Enter');
   };
 
   public render() {
@@ -135,7 +125,7 @@ export default class TextField extends React.Component<IProps, IState> {
       errorColor,
       errorReason,
       type,
-      fontSize
+      fontSize,
     } = this.props;
 
     const { focused, filled, error } = this.state;
@@ -179,16 +169,12 @@ export default class TextField extends React.Component<IProps, IState> {
           errorColor={errorColor}
           disabled={disabled}
         />
-        {((helperText != null || error) && !disabled) && (
-          <HelperText
-            theme={theme}
-            error={error}
-            errorColor={errorColor}
-            disabled={disabled}
-          >
-            {!error ? helperText : errorReason}
-          </HelperText>
-        )}
+        {(helperText != null || error) &&
+          !disabled && (
+            <HelperText theme={theme} error={error} errorColor={errorColor} disabled={disabled}>
+              {!error ? helperText : errorReason}
+            </HelperText>
+          )}
       </StyledTextField>
     );
   }

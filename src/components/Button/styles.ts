@@ -1,48 +1,60 @@
-import * as React from "react";
-import styled, { StyledComponentClass } from "styled-components";
+import * as React from 'react';
 
 // Utils
-import { getComponentBackground, getComponentForeground } from "../../utils/component-color";
+import { getComponentBackground, getComponentForeground } from '../../utils/component-color';
 
 // Defaults
-import buttons from "../../defaults/buttons";
-import transparency from "../../defaults/transparency";
+import buttons from '../../defaults/buttons';
+import transparency from '../../defaults/transparency';
 
 // Enumms
-import Align from "../../enums/align";
-import Theme from "../../enums/theme";
+import Align from '../../enums/align';
+import Theme from '../../enums/theme';
 
 // Mixins
-import positioning from "../../mixins/positioning";
-import shadows from "../../mixins/shadows";
-import typography from "../../mixins/typography";
-import userSelection from "../../mixins/user-selection";
+import positioning from '../../mixins/positioning';
+import shadows from '../../mixins/shadows';
+import typography from '../../mixins/typography';
+import userSelection from '../../mixins/user-selection';
+
+const styled = require('styled-components').default;
 
 const getBackground = (color: string, disabled: boolean, theme: Theme, raised: boolean) => {
-  if (!raised) { return "transparent"; }
-  
+  if (!raised) {
+    return 'transparent';
+  }
+
   return getComponentBackground(color, null, disabled, theme, {
     disabled: {
       light: transparency.light.button.disabled,
-      dark: transparency.dark.button.disabled
+      dark: transparency.dark.button.disabled,
     },
-    toggledOff: null
+    toggledOff: null,
   });
 };
 
-const getForeground = (color: string, disabled: boolean, theme: Theme, raised: boolean, foreground: string) => { 
-  if (raised && !disabled) { return foreground; }
-  else if (!raised && !disabled) { return color; }
+const getForeground = (
+  color: string,
+  disabled: boolean,
+  theme: Theme,
+  raised: boolean,
+  foreground: string,
+) => {
+  if (raised && !disabled) {
+    return foreground;
+  } else if (!raised && !disabled) {
+    return color;
+  }
 
   return getComponentForeground(disabled, theme, {
     disabled: {
       light: transparency.light.text.disabled,
-      dark: transparency.dark.text.disabled
+      dark: transparency.dark.text.disabled,
     },
     enabled: {
       light: 1,
-      dark: 1
-    }
+      dark: 1,
+    },
   });
 };
 
@@ -65,23 +77,16 @@ export const StyledButton = styled.div`
   overflow: hidden;
   transition: 0.3s box-shadow, 0.2s background-color;
 
-  min-width: ${(props: IStyledButtonProps) =>
-    props.dialog ? 0 : buttons.minWidth}px;
-  cursor: ${props =>
-    props.disabled ? "default" : "pointer"};
+  min-width: ${(props: IStyledButtonProps) => (props.dialog ? 0 : buttons.minWidth)}px;
+  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   background-color: ${props =>
     getBackground(props.color, props.disabled, props.theme, props.raised)};
-  box-shadow: ${props =>
-    props.raised && !props.disabled ? shadows[buttons.elevation] : "none"};
-  pointer-events: ${props =>
-    props.disabled ? "none" : "auto"};
+  box-shadow: ${props => (props.raised && !props.disabled ? shadows[buttons.elevation] : 'none')};
+  pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
   border-radius: ${buttons.cornerRadius}px;
   height: ${buttons.height}px;
-  ${userSelection.noUserSelect()} ${userSelection.noTapHighlight()}
-
-  &:hover {
-    box-shadow: ${props =>
-      props.raised ? shadows[buttons.hoveredElevation] : "none"};
+  ${userSelection.noUserSelect()} ${userSelection.noTapHighlight()} {
+    box-shadow: ${props => (props.raised ? shadows[buttons.hoveredElevation] : 'none')};
 
     & .over-shade {
       opacity: 0.12;
@@ -89,8 +94,7 @@ export const StyledButton = styled.div`
   }
 
   &:active {
-    box-shadow: ${props =>
-      props.raised ? shadows[buttons.pressedElevation] : "none"};
+    box-shadow: ${props => (props.raised ? shadows[buttons.pressedElevation] : 'none')};
   }
 `;
 

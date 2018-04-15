@@ -1,14 +1,15 @@
-import * as React from "react";
-import styled, { keyframes, StyledComponentClass } from "styled-components";
+import * as React from 'react';
+
+const styled = require('styled-components').default;
 
 const getSize = (x: number, y: number, width: number, height: number, icon: number) => {
-  if (width === 0 || height === 0) { 
+  if (width === 0 || height === 0) {
     return 0;
   }
 
   // Calculate points relative to the center of a component.
-  const newX = x - (width / 2);
-  const newY = y - (height / 2);
+  const newX = x - width / 2;
+  const newY = y - height / 2;
 
   let result = 2 * Math.abs(newY) + Math.abs(newX);
 
@@ -19,7 +20,7 @@ const getSize = (x: number, y: number, width: number, height: number, icon: numb
   return Math.max(width, height) + result + (icon === 1 ? 0 : 10);
 };
 
-const easing = "cubic-bezier(0.215, 0.61, 0.355, 1)";
+const easing = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
 
 export interface IProps {
   height: number;
@@ -43,9 +44,9 @@ export const StyledRipple = styled.div.attrs({
       top: props.y,
       height: size,
       width: size,
-      opacity: props.opacity
+      opacity: props.opacity,
     };
-  }
+  },
 })`
   position: absolute;
   border-radius: 50%;
@@ -54,7 +55,7 @@ export const StyledRipple = styled.div.attrs({
   pointer-events: none;
 
   transition: ${(props: IProps) => props.rippleTime}s width ${easing},
-    ${props => props.rippleTime}s height ${easing},
-    ${props => props.fadeOutTime}s opacity, 0.3s background-color;
+    ${props => props.rippleTime}s height ${easing}, ${props => props.fadeOutTime}s opacity,
+    0.3s background-color;
   background-color: ${props => props.color};
 `;

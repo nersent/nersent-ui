@@ -1,32 +1,32 @@
-import { injectGlobal } from "styled-components";
+import colors from './defaults/colors';
 
-const robotoLight = require("./fonts/roboto-light.ttf");
-const robotoMedium = require("./fonts/roboto-medium.ttf");
-const robotoRegular = require("./fonts/roboto-regular.ttf");
+import PreloaderType from './enums/preloader';
+import Theme from './enums/theme';
 
-import colors from "./defaults/colors";
+import Button from './components/Button';
+import Checkbox from './components/Checkbox';
+import Preloader from './components/Preloader';
+import ProgressBar from './components/ProgressBar';
+import RadioButton from './components/RadioButton';
+import RadioButtons from './components/RadioButtons';
+import Ripple from './components/Ripple';
+import Ripples from './components/Ripples';
+import Switch from './components/Switch';
+import TextField from './components/TextField';
+import Menu from './components/Menu';
+import MenuItem from './components/MenuItem';
+import MenuSeparator from './components/MenuSeparator';
+import buttons from './defaults/buttons';
+import transparency from './defaults/transparency';
+import shadows from './mixins/shadows';
+import typography from './mixins/typography';
+import { getRippleEvents } from './utils/ripple';
 
-import PreloaderType from "./enums/preloader";
-import Theme from "./enums/theme";
+const { injectGlobal } = require('styled-components');
 
-import Button from "./components/Button";
-import Checkbox from "./components/Checkbox";
-import Preloader from "./components/Preloader";
-import ProgressBar from "./components/ProgressBar";
-import RadioButton from "./components/RadioButton";
-import RadioButtons from "./components/RadioButtons";
-import Ripple from "./components/Ripple";
-import Ripples from "./components/Ripples";
-import Switch from "./components/Switch";
-import TextField from "./components/TextField";
-import Menu from "./components/Menu";
-import MenuItem from "./components/MenuItem";
-import MenuSeparator from "./components/MenuSeparator";
-import buttons from "./defaults/buttons";
-import transparency from "./defaults/transparency";
-import shadows from "./mixins/shadows";
-import typography from "./mixins/typography";
-import { getRippleEvents } from "./utils/ripple";
+const robotoLight = require('./fonts/roboto-light.ttf');
+const robotoMedium = require('./fonts/roboto-medium.ttf');
+const robotoRegular = require('./fonts/roboto-regular.ttf');
 
 injectGlobal`
   @font-face {
@@ -94,5 +94,5 @@ export {
   Preloader,
   Menu,
   MenuItem,
-  MenuSeparator
+  MenuSeparator,
 };

@@ -1,11 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { StyledMenuItem, Title } from "./styles";
-import Ripples from "../Ripples";
-import colors from "../../defaults/colors";
-import { getEvents } from "../../utils/events";
-import { getRippleEvents } from "../../utils/ripple";
-import Menu from "../Menu";
+import { StyledMenuItem, Title } from './styles';
+import Ripples from '../Ripples';
+import colors from '../../defaults/colors';
+import { getEvents } from '../../utils/events';
+import { getRippleEvents } from '../../utils/ripple';
+import Menu from '../Menu';
 
 export type ButtonEvent = (e?: React.SyntheticEvent<HTMLDivElement>) => void;
 
@@ -36,11 +36,11 @@ export default class MenuItem extends React.Component<IProps, IState> {
   static defaultProps: IProps = {
     rippleColor: colors.black,
     ripple: true,
-    hideMenuOnClick: true
+    hideMenuOnClick: true,
   };
 
   public state: IState = {
-    visible: false
+    visible: false,
   };
 
   private ripples: Ripples;
@@ -64,7 +64,7 @@ export default class MenuItem extends React.Component<IProps, IState> {
       menu.toggle(false);
     }
 
-    if (typeof onClick === "function") {
+    if (typeof onClick === 'function') {
       onClick(e);
     }
   };
@@ -76,17 +76,13 @@ export default class MenuItem extends React.Component<IProps, IState> {
     const events = {
       ...getEvents(this.props),
       ...getRippleEvents(this.props, () => this.ripples),
-      onClick: this.onClick
+      onClick: this.onClick,
     };
 
     return (
       <StyledMenuItem hide={hide} visible={visible} {...events}>
         <Title disabled={disabled}>{this.props.children}</Title>
-        <Ripples
-          ref={r => (this.ripples = r)}
-          initialOpacity={0.1}
-          color={rippleColor}
-        />
+        <Ripples ref={r => (this.ripples = r)} initialOpacity={0.1} color={rippleColor} />
       </StyledMenuItem>
     );
   }

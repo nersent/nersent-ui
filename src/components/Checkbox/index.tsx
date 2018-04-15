@@ -1,23 +1,23 @@
-import * as React from "react";
+import * as React from 'react';
 
 // Utils
-import { getComponentRippleColor } from "../../utils/component-color";
-import { executeEvent, getEvents } from "../../utils/events";
-import { getRippleEvents } from "../../utils/ripple";
+import { getComponentRippleColor } from '../../utils/component-color';
+import { executeEvent, getEvents } from '../../utils/events';
+import { getRippleEvents } from '../../utils/ripple';
 
 // Defaults
-import colors from "../../defaults/colors";
+import colors from '../../defaults/colors';
 
 // Enums
-import Theme from "../../enums/theme";
+import Theme from '../../enums/theme';
 
 // Components
-import ComponentContainer from "../ComponentContainer";
-import ComponentText from "../ComponentText";
-import Ripples from "../Ripples";
+import ComponentContainer from '../ComponentContainer';
+import ComponentText from '../ComponentText';
+import Ripples from '../Ripples';
 
 // Styles
-import { Border, Icon, StyledCheckbox } from "./styles";
+import { Border, Icon, StyledCheckbox } from './styles';
 
 export interface IProps {
   className?: string;
@@ -42,39 +42,37 @@ export interface IState {
 
 export default class Checkbox extends React.Component<IProps, IState> {
   public static defaultProps = {
-    color: colors.blue["500"],
-    backgroundColor: "transparent",
+    color: colors.blue['500'],
+    backgroundColor: 'transparent',
     theme: Theme.Light,
     ripple: true,
-    customRippleBehavior: false
+    customRippleBehavior: false,
   };
 
   public state: IState = {
     checked: false,
     borderWidth: 2,
-    borderTransition: "none",
+    borderTransition: 'none',
     iconScaleAnimation: false,
     iconPathAnimation: false,
-    iconTransition: "none",
-    scaleAnimation: false
+    iconTransition: 'none',
+    scaleAnimation: false,
   };
 
   private isAnimating = false;
   private checkbox: HTMLDivElement;
   private timeouts = [];
-  private easing = "cubic-bezier(0.19, 1, 0.22, 1)";
+  private easing = 'cubic-bezier(0.19, 1, 0.22, 1)';
   private ripples: Ripples;
 
-  public getRippleLeft = () => {
-    return -this.checkbox.offsetWidth;
-  };
+  public getRippleLeft = () => -this.checkbox.offsetWidth;
 
-  public getRippleTop = () => {
-    return -this.checkbox.offsetHeight;
-  };
+  public getRippleTop = () => -this.checkbox.offsetHeight;
 
   public onClick = e => {
-    if (this.props.disabled) { return; }
+    if (this.props.disabled) {
+      return;
+    }
 
     this.check(!this.state.checked);
     executeEvent(e, this.props);
@@ -86,19 +84,19 @@ export default class Checkbox extends React.Component<IProps, IState> {
     }
 
     const { onCheck, color } = this.props;
-    if (typeof onCheck === "function") {
+    if (typeof onCheck === 'function') {
       onCheck(flag, this, fromProps);
     }
 
-    this.setState({checked: flag});
+    this.setState({ checked: flag });
 
     if (flag) {
       this.setState({
         borderWidth: this.checkbox.offsetWidth / 2,
-        borderTransition: "0.1s border-color, 0.3s border-width " + this.easing,
+        borderTransition: `0.1s border-color, 0.3s border-width ${this.easing}`,
         scaleAnimation: true,
-        iconTransition: "none",
-        iconPathAnimation: false
+        iconTransition: 'none',
+        iconPathAnimation: false,
       });
 
       for (const timeout of this.timeouts) {
@@ -109,30 +107,26 @@ export default class Checkbox extends React.Component<IProps, IState> {
 
       setTimeout(() => {
         this.setState({
-          iconTransition: "1s clip-path " + this.easing,
-          iconScaleAnimation: false
+          iconTransition: `1s clip-path ${this.easing}`,
+          iconScaleAnimation: false,
         });
 
-        this.timeouts.push(
-          setTimeout(() => {
-            this.setState({
-              iconPathAnimation: true
-            });
-          }, 150)
-        );
+        this.timeouts.push(setTimeout(() => {
+          this.setState({
+            iconPathAnimation: true,
+          });
+        }, 150));
 
-        this.timeouts.push(
-          setTimeout(() => {
-            this.setState({ scaleAnimation: false });
-          }, 200)
-        );
+        this.timeouts.push(setTimeout(() => {
+          this.setState({ scaleAnimation: false });
+        }, 200));
       }, 100);
     } else {
       this.setState({
-        borderTransition: "0.1s border-color, 0.4s border-width " + this.easing,
-        iconTransition: "1s transform " + this.easing,
+        borderTransition: `0.1s border-color, 0.4s border-width ${this.easing}`,
+        iconTransition: `1s transform ${this.easing}`,
         iconScaleAnimation: false,
-        scaleAnimation: true
+        scaleAnimation: true,
       });
 
       setTimeout(() => {
@@ -144,21 +138,17 @@ export default class Checkbox extends React.Component<IProps, IState> {
 
         this.timeouts = [];
 
-        this.timeouts.push(
-          setTimeout(() => {
-            this.setState({
-              borderWidth: this.checkbox.offsetWidth / 2 - 1
-            });
-          }, 150)
-        );
+        this.timeouts.push(setTimeout(() => {
+          this.setState({
+            borderWidth: this.checkbox.offsetWidth / 2 - 1,
+          });
+        }, 150));
 
-        this.timeouts.push(
-          setTimeout(() => {
-            this.setState({
-              borderWidth: 2
-            });
-          }, 300)
-        );
+        this.timeouts.push(setTimeout(() => {
+          this.setState({
+            borderWidth: 2,
+          });
+        }, 300));
 
         setTimeout(() => {
           this.setState({ scaleAnimation: false });
@@ -168,7 +158,9 @@ export default class Checkbox extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const { className, style, disabled, theme, children, color } = this.props;
+    const {
+      className, style, disabled, theme, children, color,
+    } = this.props;
 
     const {
       checked,
@@ -177,7 +169,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
       scaleAnimation,
       iconScaleAnimation,
       iconPathAnimation,
-      iconTransition      
+      iconTransition,
     } = this.state;
 
     const rippleColor = getComponentRippleColor(checked, color, theme);
@@ -185,7 +177,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
     const events = {
       ...getEvents(this.props),
       ...getRippleEvents(this.props, () => this.ripples),
-      onClick: this.onClick
+      onClick: this.onClick,
     };
 
     return (
@@ -196,11 +188,8 @@ export default class Checkbox extends React.Component<IProps, IState> {
         disabled={disabled}
         {...events}
       >
-        <div style={{ position: "relative" }}>
-          <StyledCheckbox
-            innerRef={r => (this.checkbox = r)}
-            scaleAnimation={scaleAnimation}
-          >
+        <div style={{ position: 'relative' }}>
+          <StyledCheckbox innerRef={r => (this.checkbox = r)} scaleAnimation={scaleAnimation}>
             <Border
               checked={checked}
               color={color}
@@ -217,7 +206,7 @@ export default class Checkbox extends React.Component<IProps, IState> {
             />
           </StyledCheckbox>
           <Ripples
-            icon={true}
+            icon
             ref={r => (this.ripples = r)}
             color={rippleColor}
             parentWidth={18}

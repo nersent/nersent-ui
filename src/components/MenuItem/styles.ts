@@ -1,8 +1,9 @@
-import * as React from "react";
-import styled, { StyledComponentClass } from "styled-components";
-import typography from "../../mixins/typography";
-import userSelection from "../../mixins/user-selection";
-import transparency from "../../defaults/transparency";
+import * as React from 'react';
+import typography from '../../mixins/typography';
+import userSelection from '../../mixins/user-selection';
+import transparency from '../../defaults/transparency';
+
+const styled = require('styled-components').default;
 
 export interface IMenuItemProps {
   visible: boolean;
@@ -17,7 +18,7 @@ export const StyledMenuItem = styled.div`
   transition: 0.2s opacity;
 
   opacity: ${(props: IMenuItemProps) => (props.visible ? 1 : 0)};
-  display: ${props => (props.hide ? "none" : "flex")};
+  display: ${props => (props.hide ? 'none' : 'flex')};
 
   &:hover {
     background-color: #eee;
@@ -44,7 +45,5 @@ export const Title = styled.div`
   ${typography.robotoRegular()};
   ${userSelection.noUserSelect()};
   opacity: ${(props: ITitleProps) =>
-    props.disabled
-      ? transparency.light.text.disabled
-      : transparency.light.text.primary};
+    (props.disabled ? transparency.light.text.disabled : transparency.light.text.primary)};
 `;

@@ -1,6 +1,6 @@
-import Theme from "../enums/theme";
+import Theme from '../enums/theme';
 
-import transparency from "../defaults/transparency";
+import transparency from '../defaults/transparency';
 
 export const getComponentBackground = (
   color: string,
@@ -10,29 +10,26 @@ export const getComponentBackground = (
   opacity = {
     disabled: {
       light: transparency.light.selectionControls.disabled,
-      dark: transparency.dark.selectionControls.disabled
+      dark: transparency.dark.selectionControls.disabled,
     },
     toggledOff: {
       light: transparency.light.selectionControls.off,
-      dark: transparency.dark.selectionControls.off
-    }
-  }
+      dark: transparency.dark.selectionControls.off,
+    },
+  },
 ) => {
   if (disabled) {
     if (theme === Theme.Light) {
       return `rgba(0,0,0,${opacity.disabled.light})`;
-    } else {
-      return `rgba(255,255,255,${opacity.disabled.dark})`;
     }
+    return `rgba(255,255,255,${opacity.disabled.dark})`;
   } else if (toggled != null && !toggled) {
     if (theme === Theme.Light) {
       return `rgba(0,0,0,${opacity.toggledOff.light})`;
-    } else {
-      return `rgba(255,255,255,${opacity.toggledOff.dark})`;
     }
-  } else {
-    return color;
+    return `rgba(255,255,255,${opacity.toggledOff.dark})`;
   }
+  return color;
 };
 
 export const getComponentForeground = (
@@ -41,29 +38,31 @@ export const getComponentForeground = (
   opacity = {
     disabled: {
       light: transparency.light.text.disabled,
-      dark: transparency.dark.text.disabled
+      dark: transparency.dark.text.disabled,
     },
     enabled: {
       light: transparency.light.text.secondary,
-      dark: transparency.dark.text.secondary
-    }
-  }
+      dark: transparency.dark.text.secondary,
+    },
+  },
 ) => {
   if (disabled) {
     if (theme === Theme.Light) {
       return `rgba(0,0,0,${opacity.disabled.light})`;
-    } else {
-      return `rgba(255,255,255,${opacity.disabled.dark})`;
     }
-  } else {
-    if (theme === Theme.Light) {
-      return `rgba(0,0,0,${opacity.enabled.light})`;
-    } else {
-      return `rgba(255,255,255,${opacity.enabled.dark})`;
-    }
+    return `rgba(255,255,255,${opacity.disabled.dark})`;
   }
+  if (theme === Theme.Light) {
+    return `rgba(0,0,0,${opacity.enabled.light})`;
+  }
+  return `rgba(255,255,255,${opacity.enabled.dark})`;
 };
 
 export const getComponentRippleColor = (flag, color, theme) => {
-  return flag ? color : (theme === Theme.Light ? "#000" : "#fff")
-}
+  if (flag) {
+    return color;
+  } else if (theme === Theme.Light) {
+    return '#000';
+  }
+  return '#fff';
+};

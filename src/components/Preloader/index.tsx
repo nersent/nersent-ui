@@ -1,14 +1,13 @@
-import * as React from "react";
-import { SyntheticEvent } from "react";
+import * as React from 'react';
 
 // Defaults
-import colors from "../../defaults/colors";
+import colors from '../../defaults/colors';
 
 // Enums
-import PreloaderType from "../../enums/preloader";
+import PreloaderType from '../../enums/preloader';
 
 // Styles
-import { Path, StyledPreloader } from "./styles";
+import { Path, StyledPreloader } from './styles';
 
 export interface IProps {
   className?: string;
@@ -27,28 +26,25 @@ export default class Preloader extends React.Component<IProps, IState> {
   public static defaultProps = {
     type: PreloaderType.Indeterminate,
     thickness: 4,
-    size: 32
+    size: 32,
   };
 
   public state: IState = {
-    color: colors.red["500"]
+    color: colors.red['500'],
   };
 
   private colorChange: any;
   private actualColor = 0;
 
   private defaultColors = [
-    colors.red["500"],
-    colors.yellow["500"],
-    colors.green["500"],
-    colors.lightBlue["500"]
+    colors.red['500'],
+    colors.yellow['500'],
+    colors.green['500'],
+    colors.lightBlue['500'],
   ];
 
   public componentDidMount() {
-    if (
-      this.props.color == null &&
-      this.props.type === PreloaderType.Indeterminate
-    ) {
+    if (this.props.color == null && this.props.type === PreloaderType.Indeterminate) {
       this.colorChange = setInterval(this.changeColor, 1500);
     }
   }
@@ -75,12 +71,14 @@ export default class Preloader extends React.Component<IProps, IState> {
     }
 
     this.setState({
-      color: this.defaultColors[this.actualColor]
+      color: this.defaultColors[this.actualColor],
     });
   };
 
   public render() {
-    const { className, style, color, type, thickness, size } = this.props;
+    const {
+      className, style, color, type, thickness, size,
+    } = this.props;
 
     const pathColor = color == null ? this.state.color : color;
 

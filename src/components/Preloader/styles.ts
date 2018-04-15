@@ -1,5 +1,6 @@
-import * as React from "react";
-import styled, { StyledComponentClass } from "styled-components";
+import * as React from 'react';
+
+const styled = require('styled-components').default;
 
 export interface IPreloaderProps {
   size: number;
@@ -18,16 +19,13 @@ export interface IPathProps {
 }
 
 export const Path = styled.circle.attrs({
-  style: props => {
-    return {
-      stroke: props.color
-    };
-  }
+  style: props => ({
+    stroke: props.color,
+  }),
 })`
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
-  animation: nersent-ui-preloader-dash 1.5s ease-in-out infinite,
-    color 6s ease-in-out infinite;
+  animation: nersent-ui-preloader-dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
   stroke-linecap: square;
   stroke-width: ${(props: IPathProps) => props.thickness};
   transition: 0.3s stroke;

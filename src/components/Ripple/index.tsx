@@ -1,8 +1,8 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
 // Styles
-import { StyledRipple } from "./styles";
+import { StyledRipple } from './styles';
 
 export interface IProps {
   height: number;
@@ -33,7 +33,7 @@ export default class Ripple extends React.Component<IProps, IState> {
   public state = {
     width: 0,
     height: 0,
-    opacity: 1
+    opacity: 1,
   };
 
   public timeouts = [];
@@ -42,34 +42,28 @@ export default class Ripple extends React.Component<IProps, IState> {
     const { height, width, initialOpacity } = this.props;
 
     this.setState({
-      opacity: initialOpacity
+      opacity: initialOpacity,
     });
 
-    this.timeouts.push(
-      setTimeout(() => {
-        this.setState({
-          width,
-          height
-        });
-      })
-    );
+    this.timeouts.push(setTimeout(() => {
+      this.setState({
+        width,
+        height,
+      });
+    }));
   }
 
   public remove() {
     const { removeRipple, id, fadeOutTime } = this.props;
 
-    this.timeouts.push(
-      setTimeout(() => {
-        this.setState({
-          opacity: 0
-        });
-        this.timeouts.push(
-          setTimeout(() => {
-            removeRipple(id);
-          }, fadeOutTime * 1000)
-        );
-      }, 100)
-    );
+    this.timeouts.push(setTimeout(() => {
+      this.setState({
+        opacity: 0,
+      });
+      this.timeouts.push(setTimeout(() => {
+        removeRipple(id);
+      }, fadeOutTime * 1000));
+    }, 100));
   }
 
   public componentWillUnmount() {
@@ -78,7 +72,9 @@ export default class Ripple extends React.Component<IProps, IState> {
 
   public render() {
     const { height, width, opacity } = this.state;
-    const { color, x, y, isRemoving, rippleTime, fadeOutTime, icon } = this.props;
+    const {
+      color, x, y, isRemoving, rippleTime, fadeOutTime, icon,
+    } = this.props;
 
     if (isRemoving) {
       this.remove();

@@ -2,9 +2,7 @@
   "compilerOptions": {
     "outDir": "./build/",
     "baseUrl": "./src",
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["./node_modules/@types"],
     "noImplicitAny": false,
     "module": "commonjs",
     "target": "es5",
@@ -14,11 +12,6 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true
   },
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules/**/*",
-  ]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "exclude": ["node_modules/**/*"]
 }

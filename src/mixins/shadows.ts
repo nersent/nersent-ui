@@ -4,20 +4,14 @@ const shadowAmbientShadowOpacity = 0.12;
 
 function createShadow(...px) {
   return [
-    `${px[0]}px ${px[1]}px ${px[2]}px ${
-      px[3]
-    }px rgba(0, 0, 0, ${shadowKeyUmbraOpacity})`,
-    `${px[4]}px ${px[5]}px ${px[6]}px ${
-      px[7]
-    }px rgba(0, 0, 0, ${shadowKeyPenumbraOpacity})`,
-    `${px[8]}px ${px[9]}px ${px[10]}px ${
-      px[11]
-    }px rgba(0, 0, 0, ${shadowAmbientShadowOpacity})`
-  ].join(",");
+    `${px[0]}px ${px[1]}px ${px[2]}px ${px[3]}px rgba(0, 0, 0, ${shadowKeyUmbraOpacity})`,
+    `${px[4]}px ${px[5]}px ${px[6]}px ${px[7]}px rgba(0, 0, 0, ${shadowKeyPenumbraOpacity})`,
+    `${px[8]}px ${px[9]}px ${px[10]}px ${px[11]}px rgba(0, 0, 0, ${shadowAmbientShadowOpacity})`,
+  ].join(',');
 }
 
 const shadows = [
-  "none",
+  'none',
   createShadow(0, 1, 3, 0, 0, 1, 1, 0, 0, 2, 1, -1),
   createShadow(0, 1, 5, 0, 0, 2, 2, 0, 0, 3, 1, -2),
   createShadow(0, 1, 8, 0, 0, 3, 4, 0, 0, 3, 3, -2),
@@ -41,7 +35,7 @@ const shadows = [
   createShadow(0, 10, 13, -6, 0, 21, 33, 3, 0, 8, 40, 7),
   createShadow(0, 10, 14, -6, 0, 22, 35, 3, 0, 8, 42, 7),
   createShadow(0, 11, 14, -7, 0, 23, 36, 3, 0, 9, 44, 8),
-  createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8)
+  createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8),
 ];
 
 export default shadows;

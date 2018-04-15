@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { StyledMenu } from "./styles";
-import { getEvents } from "../../utils/events";
-import MenuItem from "../MenuItem";
-import MenuSeparator from "../MenuSeparator";
+import { StyledMenu } from './styles';
+import { getEvents } from '../../utils/events';
+import MenuItem from '../MenuItem';
+import MenuSeparator from '../MenuSeparator';
 
 export type ButtonEvent = (e?: React.SyntheticEvent<HTMLDivElement>) => void;
 
@@ -21,6 +21,8 @@ export interface IProps {
 
 export interface IState {
   visible: boolean;
+  height: number;
+  heightTransition: boolean;
 }
 
 export default class Menu extends React.Component<IProps, IState> {
@@ -28,7 +30,9 @@ export default class Menu extends React.Component<IProps, IState> {
   public static Separator = MenuSeparator;
 
   public state: IState = {
-    visible: false
+    visible: false,
+    heightTransition: false,
+    height: 0,
   };
 
   private menu: HTMLDivElement;
@@ -39,30 +43,25 @@ export default class Menu extends React.Component<IProps, IState> {
   }
 
   public toggle(flag: boolean) {
+    if (flag === this.state.visible) return;
+    this.setState({ visible: flag });
+
     if (flag) {
-      this.menu.style.transition = "0.2s opacity, 0.2s margin-top";
+      this.setState({ heightTransition: false });
       requestAnimationFrame(() => {
-        this.menu.style.height = `0px`;
-        requestAnimationFrame(() => {
-          this.menu.style.transition =
-            "0.2s opacity, 0.2s height, 0.2s margin-top";
-          this.height = this.menu.scrollHeight;
-          this.menu.style.height = `${this.height}px`;
-        });
+        this.setState({ height: 0 });
+        this.updateHeight();
       });
     } else {
-      this.menu.style.transition = "0.2s opacity, 0.2s margin-top";
+      this.setState({ heightTransition: false });
     }
-    this.setState({ visible: flag });
   }
 
   public updateHeight() {
     if (this.state.visible) {
       requestAnimationFrame(() => {
-        this.menu.style.transition =
-          "0.2s opacity, 0.2s height, 0.2s margin-top";
         this.height = this.menu.scrollHeight;
-        this.menu.style.height = `${this.height}px`;
+        this.setState({ heightTransition: true, height: this.height });
       });
     }
   }
@@ -72,13 +71,13 @@ export default class Menu extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const { visible } = this.state;
+    const { visible, height, heightTransition } = this.state;
     const { large, style, className } = this.props;
 
     let i = 1;
 
     const events = {
-      ...getEvents(this.props)
+      ...getEvents(this.props),
     };
 
     return (
@@ -86,17 +85,20 @@ export default class Menu extends React.Component<IProps, IState> {
         innerRef={r => (this.menu = r)}
         large={large}
         visible={visible}
-        style={{ ...style }}
         className={className}
+        style={{
+          ...style,
+          height,
+          transition: `0.2s opacity, 0.2s margin-top ${heightTransition ? ', 0.2s height' : ''}`,
+        }}
         {...events}
       >
         {React.Children.map(this.props.children, child =>
           React.cloneElement(child as React.ReactElement<any>, {
             menu: this,
             i: i++,
-            visible
-          })
-        )}
+            visible,
+          }))}
       </StyledMenu>
     );
   }

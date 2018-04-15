@@ -1,26 +1,25 @@
-import * as React from "react";
-import styled, { StyledComponentClass } from "styled-components";
+import * as React from 'react';
 
-import transparency from "../../defaults/transparency";
+import transparency from '../../defaults/transparency';
 
-import typography from "../../mixins/typography";
+import typography from '../../mixins/typography';
 
-import Theme from "../../enums/theme";
+import Theme from '../../enums/theme';
 
-const getFocusLineWidth = (props: IFocusLineProps) => {
-  return (!props.focused && !props.error) || props.disabled ? 0 : 100;
-};
+const styled = require('styled-components').default;
 
-const getFocusLineBackgroundColor = (props: IFocusLineProps) => {
-  return props.error ? props.errorColor : props.color;
-};
+const getFocusLineWidth = (props: IFocusLineProps) =>
+  ((!props.focused && !props.error) || props.disabled ? 0 : 100);
+
+const getFocusLineBackgroundColor = (props: IFocusLineProps) =>
+  (props.error ? props.errorColor : props.color);
 
 const getHelperTextColor = (props: IHelperTextProps) => {
   if (props.error) {
     return props.errorColor;
   }
 
-  return props.theme === Theme.Light ? "#000" : "#fff";
+  return props.theme === Theme.Light ? '#000' : '#fff';
 };
 
 const getHelperTextOpacity = (props: IHelperTextProps) => {
@@ -50,20 +49,16 @@ const getInputOpacity = (props: IInputProps) => {
 const getInputTextColor = (props: IInputProps) => {
   const color = props.theme === Theme.Light ? 0 : 255;
 
-  return `0px 0px 0px rgba(${color},${color},${color},${getInputOpacity(
-    props
-  )})`;
+  return `0px 0px 0px rgba(${color},${color},${color},${getInputOpacity(props)})`;
 };
 
-const getInputCursorColor = (props: IInputProps) => {
-  return !props.error ? props.color : props.errorColor;
-};
+const getInputCursorColor = (props: IInputProps) => (!props.error ? props.color : props.errorColor);
 
 const getLabelColor = (props: ILabelProps) => {
   if (props.top && props.error) {
     return props.errorColor;
   } else if (!props.focused || props.disabled) {
-    return props.theme === Theme.Light ? "#000" : "#fff";
+    return props.theme === Theme.Light ? '#000' : '#fff';
   }
 
   return props.color;
@@ -74,10 +69,8 @@ const getLabelOpacity = (props: ILabelProps) => {
     return props.theme === Theme.Light
       ? transparency.light.text.disabled
       : transparency.dark.text.disabled;
-  } else if (props.error && props.top || props.focused) {
-    return props.theme === Theme.Light
-      ? transparency.light.text.primary
-      : 1;
+  } else if ((props.error && props.top) || props.focused) {
+    return props.theme === Theme.Light ? transparency.light.text.primary : 1;
   } else if (props.theme === Theme.Dark) {
     return transparency.dark.text.secondary;
   }
@@ -85,11 +78,8 @@ const getLabelOpacity = (props: ILabelProps) => {
   return transparency.light.text.secondary;
 };
 
-const getLineBackgroundColor = (props: ILineProps) => {
-  return props.theme === Theme.Light
-    ? "rgba(0,0,0,0.42)"
-    : "rgba(255,255,255,0.70)";
-};
+const getLineBackgroundColor = (props: ILineProps) =>
+  (props.theme === Theme.Light ? 'rgba(0,0,0,0.42)' : 'rgba(255,255,255,0.70)');
 
 export interface IStyledTextFieldProps {
   hint: boolean;
@@ -100,7 +90,7 @@ export const StyledTextField = styled.div`
   width: 196px;
   user-select: none;
 
-  padding-top: ${(props: IStyledTextFieldProps) => props.hint ? 12 : 0}px;
+  padding-top: ${(props: IStyledTextFieldProps) => (props.hint ? 12 : 0)}px;
   ${typography.robotoRegular()};
 `;
 
@@ -119,7 +109,7 @@ export const FocusLine = styled.div`
   margin-right: auto;
   transition: 0.2s width ease-out, 0.2s background-color;
 
-  width: ${(props: IFocusLineProps) => getFocusLineWidth(props) + "%"};
+  width: ${(props: IFocusLineProps) => `${getFocusLineWidth(props)}%`};
   background-color: ${props => getFocusLineBackgroundColor(props)};
 `;
 
@@ -195,8 +185,6 @@ export const Line = styled.div`
   width: 100%;
 
   height: ${(props: ILineProps) => (!props.disabled ? 1 : 0)}px;
-  ${props =>
-    !props.disabled &&
-    `background-color: ${getLineBackgroundColor(props)};`} ${props =>
-    props.disabled && `border: 1px dashed ${getLineBackgroundColor(props)};`};
+  ${props => !props.disabled && `background-color: ${getLineBackgroundColor(props)};`} ${props =>
+  props.disabled && `border: 1px dashed ${getLineBackgroundColor(props)};`};
 `;

@@ -1,8 +1,9 @@
-import * as React from "react";
-import styled, { StyledComponentClass } from "styled-components";
+import * as React from 'react';
 
 // Utils
-import { hexToRgb } from "../../utils/colors";
+import { hexToRgb } from '../../utils/colors';
+
+const styled = require('styled-components').default;
 
 export const StyledRipples = styled.div`
   position: absolute;
@@ -37,11 +38,12 @@ export const IconRipple = styled.div`
 
   &:hover {
     ${props => {
-      const rgb = hexToRgb(props.color);
+    const rgb = hexToRgb(props.color);
 
-      if (props.hoverOverShade && !props.disabled) {
-        return `background-color: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.08);`
-      }
-    }}
+    if (props.hoverOverShade && !props.disabled) {
+      return `background-color: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.08);`;
+    }
+    return '';
+  }};
   }
 `;

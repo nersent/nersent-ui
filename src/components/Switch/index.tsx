@@ -1,22 +1,22 @@
-import * as React from "react";
+import * as React from 'react';
 
 // Utils
-import { getComponentRippleColor } from "../../utils/component-color";
-import { getRippleEvents } from "../../utils/ripple";
+import { getComponentRippleColor } from '../../utils/component-color';
+import { getRippleEvents } from '../../utils/ripple';
 
 // Defaults
-import colors from "../../defaults/colors";
+import colors from '../../defaults/colors';
 
 // Enums
-import Theme from "../../enums/theme";
+import Theme from '../../enums/theme';
 
 // Components
-import ComponentContainer from "../ComponentContainer";
-import ComponentText from "../ComponentText";
-import Ripples from "../Ripples";
+import ComponentContainer from '../ComponentContainer';
+import ComponentText from '../ComponentText';
+import Ripples from '../Ripples';
 
 // Styles
-import { StyledSwitch, Thumb, ThumbContainer, Track } from "./styles";
+import { StyledSwitch, Thumb, ThumbContainer, Track } from './styles';
 
 export interface IProps {
   className?: string;
@@ -36,28 +36,24 @@ export interface IState {
 
 export default class Switch extends React.Component<IProps, IState> {
   public static defaultProps = {
-    color: colors.blue["500"],
+    color: colors.blue['500'],
     theme: Theme.Light,
-    ripple: true
+    ripple: true,
   };
 
   public state: IState = {
     toggled: false,
     thumbLeft: -10,
-    thumbScaleAnimation: false
+    thumbScaleAnimation: false,
   };
 
   private track: HTMLDivElement;
   private thumb: HTMLDivElement;
   private ripples: Ripples;
 
-  public getRippleLeft = () => {
-    return -this.thumb.offsetWidth;
-  };
+  public getRippleLeft = () => -this.thumb.offsetWidth;
 
-  public getRippleTop = () => {
-    return -this.thumb.offsetHeight;
-  };
+  public getRippleTop = () => -this.thumb.offsetHeight;
 
   public onClick = e => {
     if (!this.props.disabled) {
@@ -71,34 +67,26 @@ export default class Switch extends React.Component<IProps, IState> {
       thumbLeft: flag
         ? this.track.offsetWidth - this.thumb.offsetWidth / 2
         : -this.thumb.offsetWidth / 2,
-      thumbScaleAnimation: true
+      thumbScaleAnimation: true,
     });
 
     setTimeout(() => {
-      this.setState({thumbScaleAnimation: false})
-    }, 100)
+      this.setState({ thumbScaleAnimation: false });
+    }, 100);
   }
 
   public render() {
     const {
-      className,
-      children,
-      theme,
-      disabled,
-      color
+      className, children, theme, disabled, color,
     } = this.props;
 
-    const {
-      toggled,
-      thumbLeft,
-      thumbScaleAnimation
-    } = this.state;
+    const { toggled, thumbLeft, thumbScaleAnimation } = this.state;
 
     const rippleColor = getComponentRippleColor(toggled, color, theme);
 
     const events = {
       ...getRippleEvents(this.props, () => this.ripples),
-      onClick: this.onClick
+      onClick: this.onClick,
     };
 
     return (
@@ -126,7 +114,7 @@ export default class Switch extends React.Component<IProps, IState> {
               thumbScaleAnimation={thumbScaleAnimation}
             />
             <Ripples
-              icon={true}
+              icon
               ref={r => (this.ripples = r)}
               color={rippleColor}
               parentWidth={20}
