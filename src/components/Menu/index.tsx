@@ -13,6 +13,7 @@ export interface IProps {
   onMouseUp?: ButtonEvent;
   onMouseLeave?: ButtonEvent;
   onMouseEnter?: ButtonEvent;
+  style?: any;
 }
 
 export default class Menu extends React.Component<IProps, IProps> {
@@ -59,7 +60,7 @@ export default class Menu extends React.Component<IProps, IProps> {
 
   public render() {
     const { visible } = this.state;
-    const { large } = this.props;
+    const { large, style } = this.props;
 
     let i = 1;
 
@@ -72,6 +73,7 @@ export default class Menu extends React.Component<IProps, IProps> {
         innerRef={r => (this.menu = r)}
         large={large}
         visible={visible}
+        style={{...style}}
         {...events}
       >
         {React.Children.map(this.props.children, child =>
