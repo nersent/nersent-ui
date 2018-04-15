@@ -23,6 +23,9 @@ export interface IProps {
   menu?: Menu;
   i?: number;
   visible?: boolean;
+  hide?: boolean;
+  disabled?: boolean;
+  hideMenuOnClick?: boolean;
 }
 
 export interface IState {
@@ -30,12 +33,13 @@ export interface IState {
 }
 
 export default class MenuItem extends React.Component<IProps, IState> {
-  static defaultProps = {
+  static defaultProps: IProps = {
     rippleColor: colors.black,
-    ripple: true
+    ripple: true,
+    hideMenuOnClick: true
   };
 
-  public state = {
+  public state: IState = {
     visible: false
   };
 
@@ -55,15 +59,18 @@ export default class MenuItem extends React.Component<IProps, IState> {
   }
 
   public onClick = (e: React.SyntheticEvent<HTMLDivElement>) => {
-    this.props.menu.toggle(false);
+    const { menu, onClick, hideMenuOnClick } = this.props;
+    if (hideMenuOnClick) {
+      menu.toggle(false);
+    }
 
-    if (typeof this.props.onClick === "function") {
-      this.props.onClick(e);
+    if (typeof onClick === "function") {
+      onClick(e);
     }
   };
 
   public render() {
-    const { rippleColor } = this.props;
+    const { rippleColor, hide, disabled } = this.props;
     const { visible } = this.state;
 
     const events = {
@@ -73,8 +80,8 @@ export default class MenuItem extends React.Component<IProps, IState> {
     };
 
     return (
-      <StyledMenuItem visible={visible} {...events}>
-        <Title>{this.props.children}</Title>
+      <StyledMenuItem hide={hide} visible={visible} {...events}>
+        <Title disabled={disabled}>{this.props.children}</Title>
         <Ripples
           ref={r => (this.ripples = r)}
           initialOpacity={0.1}

@@ -6,17 +6,18 @@ import transparency from "../../defaults/transparency";
 
 export interface IMenuItemProps {
   visible: boolean;
+  hide: boolean;
 }
 
 export const StyledMenuItem = styled.div`
   height: 32px;
-  display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
   transition: 0.2s opacity;
 
   opacity: ${(props: IMenuItemProps) => (props.visible ? 1 : 0)};
+  display: ${props => (props.hide ? "none" : "flex")};
 
   &:hover {
     background-color: #eee;
@@ -31,11 +32,19 @@ export const StyledMenuItem = styled.div`
   }
 `;
 
+export interface ITitleProps {
+  disabled: boolean;
+}
+
 export const Title = styled.div`
   position: relative;
   left: 24px;
-  ${typography.body1()};
-  ${userSelection.noUserSelect()};
   font-size: 15px;
-  opacity: ${transparency.light.text.primary};
+
+  ${typography.robotoRegular()};
+  ${userSelection.noUserSelect()};
+  opacity: ${(props: ITitleProps) =>
+    props.disabled
+      ? transparency.light.text.disabled
+      : transparency.light.text.primary};
 `;
