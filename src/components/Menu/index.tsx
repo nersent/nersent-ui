@@ -2,6 +2,8 @@ import * as React from "react";
 
 import { StyledMenu } from "./styles";
 import { getEvents } from "../../utils/events";
+import MenuItem from "../MenuItem";
+import MenuSeparator from "../MenuSeparator";
 
 export type ButtonEvent = (e?: React.SyntheticEvent<HTMLDivElement>) => void;
 
@@ -14,18 +16,23 @@ export interface IProps {
   onMouseLeave?: ButtonEvent;
   onMouseEnter?: ButtonEvent;
   style?: any;
+  className?: string;
 }
 
-export default class Menu extends React.Component<IProps, IProps> {
-  static defaultProps = {
-    visible: false
-  };
+export interface IState {
+  visible: boolean;
+}
 
-  public state = {
+export default class Menu extends React.Component<IProps, IState> {
+  public static Item = MenuItem;
+  public static Separator = MenuSeparator;
+
+  public state: IState = {
     visible: false
   };
 
   private menu: HTMLDivElement;
+  private height: number;
 
   public componentWillReceiveProps(nextProps: IProps) {
     this.toggle(nextProps.visible);
@@ -39,7 +46,8 @@ export default class Menu extends React.Component<IProps, IProps> {
         requestAnimationFrame(() => {
           this.menu.style.transition =
             "0.2s opacity, 0.2s height, 0.2s margin-top";
-          this.menu.style.height = `${this.menu.scrollHeight}px`;
+          this.height = this.menu.scrollHeight;
+          this.menu.style.height = `${this.height}px`;
         });
       });
     } else {
@@ -53,14 +61,19 @@ export default class Menu extends React.Component<IProps, IProps> {
       requestAnimationFrame(() => {
         this.menu.style.transition =
           "0.2s opacity, 0.2s height, 0.2s margin-top";
-        this.menu.style.height = `${this.menu.scrollHeight}px`;
+        this.height = this.menu.scrollHeight;
+        this.menu.style.height = `${this.height}px`;
       });
     }
   }
 
+  public getHeight() {
+    return this.height;
+  }
+
   public render() {
     const { visible } = this.state;
-    const { large, style } = this.props;
+    const { large, style, className } = this.props;
 
     let i = 1;
 
@@ -73,7 +86,8 @@ export default class Menu extends React.Component<IProps, IProps> {
         innerRef={r => (this.menu = r)}
         large={large}
         visible={visible}
-        style={{...style}}
+        style={{ ...style }}
+        className={className}
         {...events}
       >
         {React.Children.map(this.props.children, child =>
