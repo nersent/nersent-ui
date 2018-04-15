@@ -62,7 +62,6 @@ const config = {
   },
 
   externals: {
-    react: 'react',
     'styled-components': 'styled-components',
   },
 
