@@ -1,12 +1,8 @@
 import * as React from 'react';
-
+import styled, { StyledComponentClass } from 'styled-components';
 import transparency from '../../defaults/transparency';
-
-import typography from '../../mixins/typography';
-
 import Theme from '../../enums/theme';
-
-const styled = require('styled-components').default;
+import typography from '../../mixins/typography';
 
 const getFocusLineWidth = (props: IFocusLineProps) =>
   ((!props.focused && !props.error) || props.disabled ? 0 : 100);

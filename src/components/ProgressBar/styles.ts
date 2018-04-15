@@ -1,9 +1,6 @@
 import * as React from 'react';
-
-// Enums
+import styled, { StyledComponentClass } from 'styled-components';
 import ProgressBarType from '../../enums/progressBar';
-
-const styled = require('styled-components').default;
 
 export const StyledProgressBar = styled.div`
   width: 400px;
@@ -44,9 +41,9 @@ export const Line = styled.div`
   top: 0;
   transition-timing-function: ease;
 
-  width: ${(props: ILine) => props.progress}%;
-  background-color: ${props => props.color};
-  margin-left: ${props => props.margin}%;
+  width: ${(props: ILine) => `${props.progress}%`};
+  background-color: ${props => `${props.color}%`};
+  margin-left: ${props => `${props.margin}%`};
   transition-property: ${props =>
     (props.type === ProgressBarType.Indeterminate && props.linesAnimation ? 'margin-left' : '')};
   transition-duration: ${props => (!props.fast ? '2s' : '1s')};

@@ -1,23 +1,14 @@
 import * as React from 'react';
-
-// Utils
-import { getComponentBackground, getComponentForeground } from '../../utils/component-color';
-
-// Defaults
+import styled, { StyledComponentClass } from 'styled-components';
 import buttons from '../../defaults/buttons';
 import transparency from '../../defaults/transparency';
-
-// Enumms
 import Align from '../../enums/align';
 import Theme from '../../enums/theme';
-
-// Mixins
 import positioning from '../../mixins/positioning';
 import shadows from '../../mixins/shadows';
 import typography from '../../mixins/typography';
 import userSelection from '../../mixins/user-selection';
-
-const styled = require('styled-components').default;
+import { getComponentBackground, getComponentForeground } from '../../utils/component-color';
 
 const getBackground = (color: string, disabled: boolean, theme: Theme, raised: boolean) => {
   if (!raised) {
@@ -85,12 +76,12 @@ export const StyledButton = styled.div`
   pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
   border-radius: ${buttons.cornerRadius}px;
   height: ${buttons.height}px;
-  ${userSelection.noUserSelect()} ${userSelection.noTapHighlight()} {
-    box-shadow: ${props => (props.raised ? shadows[buttons.hoveredElevation] : 'none')};
+  ${userSelection.noUserSelect()};
+  ${userSelection.noTapHighlight()};
+  box-shadow: ${props => (props.raised ? shadows[buttons.hoveredElevation] : 'none')};
 
-    & .over-shade {
-      opacity: 0.12;
-    }
+  & .over-shade {
+    opacity: 0.12;
   }
 
   &:active {

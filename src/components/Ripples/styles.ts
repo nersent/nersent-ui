@@ -1,9 +1,6 @@
 import * as React from 'react';
-
-// Utils
+import styled, { StyledComponentClass } from 'styled-components';
 import { hexToRgb } from '../../utils/colors';
-
-const styled = require('styled-components').default;
 
 export const StyledRipples = styled.div`
   position: absolute;

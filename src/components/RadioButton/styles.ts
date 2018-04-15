@@ -1,19 +1,10 @@
 import * as React from 'react';
-
-// Utils
-import { getComponentBackground } from '../../utils/component-color';
-
-// Defaults
+import styled, { StyledComponentClass } from 'styled-components';
 import transparency from '../../defaults/transparency';
-
-// Enums
 import Align from '../../enums/align';
 import Theme from '../../enums/theme';
-
-// Mixins
 import Positioning from '../../mixins/positioning';
-
-const styled = require('styled-components').default;
+import { getComponentBackground } from '../../utils/component-color';
 
 const getBackground = (color: string, toggled: boolean, disabled: boolean, theme: Theme) =>
   getComponentBackground(color, toggled, disabled, theme);

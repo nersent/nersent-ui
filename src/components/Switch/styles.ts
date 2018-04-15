@@ -1,14 +1,9 @@
 import * as React from 'react';
-
-// Enums
+import styled, { StyledComponentClass } from 'styled-components';
 import Align from '../../enums/align';
 import Theme from '../../enums/theme';
-
-// Mixins
 import Positioning from '../../mixins/positioning';
 import Shadows from '../../mixins/shadows';
-
-const styled = require('styled-components').default;
 
 const getThumbBackgroundColor = (props: IThumbProps) => {
   const {

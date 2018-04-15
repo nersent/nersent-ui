@@ -1,7 +1,6 @@
 import * as React from 'react';
+import styled, { StyledComponentClass } from 'styled-components';
 import transparency from '../../defaults/transparency';
-
-const styled = require('styled-components').default;
 
 export interface ISeparatorProps {
   hide: boolean;

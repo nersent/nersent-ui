@@ -61,10 +61,6 @@ const config = {
     extensions: ['.js', '.tsx', '.ts', '.json'],
   },
 
-  externals: {
-    'styled-components': 'styled-components',
-  },
-
   plugins: [],
 };
 

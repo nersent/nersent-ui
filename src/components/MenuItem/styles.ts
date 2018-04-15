@@ -1,9 +1,8 @@
 import * as React from 'react';
+import styled, { StyledComponentClass } from 'styled-components';
+import transparency from '../../defaults/transparency';
 import typography from '../../mixins/typography';
 import userSelection from '../../mixins/user-selection';
-import transparency from '../../defaults/transparency';
-
-const styled = require('styled-components').default;
 
 export interface IMenuItemProps {
   visible: boolean;

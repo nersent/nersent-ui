@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const styled = require('styled-components').default;
+import styled, { StyledComponentClass } from 'styled-components';
 
 const getSize = (x: number, y: number, width: number, height: number, icon: number) => {
   if (width === 0 || height === 0) {

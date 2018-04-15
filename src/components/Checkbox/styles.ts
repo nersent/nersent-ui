@@ -1,20 +1,11 @@
 import * as React from 'react';
-
-// Utils
-import { getComponentBackground, getComponentForeground } from '../../utils/component-color';
-
-// Defaults
+import styled, { StyledComponentClass } from 'styled-components';
 import transparency from '../../defaults/transparency';
-
-// Enums
 import Theme from '../../enums/theme';
-
-// Mixins
 import icons from '../../mixins/icons';
 import images from '../../mixins/images';
 import userSelection from '../../mixins/user-selection';
-
-const styled = require('styled-components').default;
+import { getComponentBackground, getComponentForeground } from '../../utils/component-color';
 
 const checkIcon = require('../../images/Controls/check.svg');
 

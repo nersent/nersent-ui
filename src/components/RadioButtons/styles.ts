@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const styled = require('styled-components').default;
+import styled, { StyledComponentClass } from 'styled-components';
 
 export const StyledRadioButtons = styled.div`
   position: relative;

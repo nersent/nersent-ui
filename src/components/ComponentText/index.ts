@@ -1,16 +1,9 @@
 import * as React from 'react';
-
-// Utils
-import { getComponentForeground } from '../../utils/component-color';
-
-// Enums
+import styled, { StyledComponentClass } from 'styled-components';
 import Theme from '../../enums/theme';
-
-// Mixins
-import { getForegroundColor } from '../../utils/colors';
 import typography from '../../mixins/typography';
-
-const styled = require('styled-components').default;
+import { getForegroundColor } from '../../utils/colors';
+import { getComponentForeground } from '../../utils/component-color';
 
 export interface IProps {
   disabled: boolean;

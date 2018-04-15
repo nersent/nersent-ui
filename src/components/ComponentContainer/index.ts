@@ -1,9 +1,6 @@
 import * as React from 'react';
-
-// Mixins
+import styled, { StyledComponentClass } from 'styled-components';
 import Cursors from '../../mixins/cursors';
-
-const styled = require('styled-components').default;
 
 export interface IContainerProps {
   disabled?: boolean;

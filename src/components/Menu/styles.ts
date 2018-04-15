@@ -1,7 +1,6 @@
 import * as React from 'react';
+import styled, { StyledComponentClass } from 'styled-components';
 import shadows from '../../mixins/shadows';
-
-const styled = require('styled-components').default;
 
 const x = 64;
 const easing = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
