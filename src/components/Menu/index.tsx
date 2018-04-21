@@ -18,6 +18,7 @@ export interface IProps {
   style?: any;
   className?: string;
   dense?: boolean;
+  hideMenuOnMouseDown?: boolean;
 }
 
 export interface IState {
@@ -29,6 +30,10 @@ export interface IState {
 export default class Menu extends React.Component<IProps, IState> {
   public static Item = MenuItem;
   public static Separator = MenuSeparator;
+
+  static defaultProps = {
+    hideMenuOnMouseDown: true,
+  };
 
   public state: IState = {
     visible: false,
@@ -71,16 +76,27 @@ export default class Menu extends React.Component<IProps, IState> {
     return this.height;
   }
 
+  public onMouseDown = (e: React.SyntheticEvent<HTMLDivElement>) => {
+    const { hideMenuOnMouseDown, onMouseDown } = this.props;
+
+    if (hideMenuOnMouseDown) this.toggle(false);
+
+    if (typeof onMouseDown === 'function') {
+      onMouseDown(e);
+    }
+  };
+
   public render() {
     const { visible, height, heightTransition } = this.state;
     const {
-      large, style, className, dense,
+      large, style, className, dense, hideMenuOnMouseDown,
     } = this.props;
 
     let i = 1;
 
     const events = {
       ...getEvents(this.props),
+      onMouseDown: this.onMouseDown,
     };
 
     return (
@@ -103,6 +119,7 @@ export default class Menu extends React.Component<IProps, IState> {
             dense,
             i: i++,
             visible,
+            hideMenuOnClick: hideMenuOnMouseDown,
           }))}
       </StyledMenu>
     );

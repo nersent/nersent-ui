@@ -70,6 +70,16 @@ export default class MenuItem extends React.Component<IProps, IState> {
     }
   };
 
+  public onMouseDown = (e: React.SyntheticEvent<HTMLDivElement>) => {
+    const { onMouseDown } = this.props;
+
+    e.stopPropagation();
+
+    if (typeof onMouseDown === 'function') {
+      onMouseDown(e);
+    }
+  };
+
   public render() {
     const {
       rippleColor, hide, disabled, dense,
@@ -80,6 +90,7 @@ export default class MenuItem extends React.Component<IProps, IState> {
       ...getEvents(this.props),
       ...getRippleEvents(this.props, () => this.ripples),
       onClick: this.onClick,
+      onMouseDown: this.onMouseDown,
     };
 
     return (
