@@ -7,10 +7,10 @@ import userSelection from '../../mixins/user-selection';
 export interface IMenuItemProps {
   visible: boolean;
   hide: boolean;
+  dense: boolean;
 }
 
 export const StyledMenuItem = styled.div`
-  height: 32px;
   align-items: center;
   position: relative;
   overflow: hidden;
@@ -18,31 +18,33 @@ export const StyledMenuItem = styled.div`
 
   opacity: ${(props: IMenuItemProps) => (props.visible ? 1 : 0)};
   display: ${props => (props.hide ? 'none' : 'flex')};
+  height: ${props => (props.dense ? 24 : 32)}px;
 
   &:hover {
     background-color: #eee;
   }
 
   &:first-child {
-    margin-top: 8px;
+    margin-top: ${props => (props.dense ? 4 : 8)}px;
   }
 
   &:last-child {
-    margin-bottom: 8px;
+    margin-bottom: ${props => (props.dense ? 4 : 8)}px;
   }
 `;
 
 export interface ITitleProps {
   disabled: boolean;
+  dense: boolean;
 }
 
 export const Title = styled.div`
   position: relative;
   left: 24px;
-  font-size: 15px;
 
   ${typography.robotoRegular()};
   ${userSelection.noUserSelect()};
   opacity: ${(props: ITitleProps) =>
     (props.disabled ? transparency.light.text.disabled : transparency.light.text.primary)};
+  font-size: ${props => (props.dense ? 13 : 15)}px;
 `;

@@ -8,6 +8,7 @@ const easing = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
 export interface IStyledMenuProps {
   visible: boolean;
   large: boolean;
+  dense: boolean;
 }
 
 export const StyledMenu = styled.div`

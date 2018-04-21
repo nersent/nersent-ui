@@ -17,6 +17,7 @@ export interface IProps {
   onMouseEnter?: ButtonEvent;
   style?: any;
   className?: string;
+  dense?: boolean;
 }
 
 export interface IState {
@@ -72,7 +73,9 @@ export default class Menu extends React.Component<IProps, IState> {
 
   public render() {
     const { visible, height, heightTransition } = this.state;
-    const { large, style, className } = this.props;
+    const {
+      large, style, className, dense,
+    } = this.props;
 
     let i = 1;
 
@@ -85,6 +88,7 @@ export default class Menu extends React.Component<IProps, IState> {
         innerRef={r => (this.menu = r)}
         large={large}
         visible={visible}
+        dense={dense}
         className={className}
         style={{
           ...style,
@@ -96,6 +100,7 @@ export default class Menu extends React.Component<IProps, IState> {
         {React.Children.map(this.props.children, child =>
           React.cloneElement(child as React.ReactElement<any>, {
             menu: this,
+            dense,
             i: i++,
             visible,
           }))}
