@@ -7,6 +7,9 @@
   Nersent-ui is a beautiful material design framework which is on `React` for building interface using components and `styled-components` for styling. We try to reproduce components from Android as much as we can.
 </div>
 
+# Warning
+Due to new version of `Material Design`, we will rewrite `nersent-ui` in few months.
+
 ## Installing
 To install our framework just run in terminal:
 ```
@@ -14,4 +17,4 @@ npm install nersent-ui
 ```
 
 ## Documentation
-Guides how to use our components are located in [`docs`](docs).
+Currently, there is no documentation.
