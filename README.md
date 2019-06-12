@@ -8,13 +8,10 @@
 </div>
 
 # Warning
-Due to new version of `Material Design`, we will rewrite `nersent-ui` in few months.
+__This project is abandoned. Checkout [Wexond UI](https://www.github.com/wexond/wexond-ui).__
 
 ## Installing
 To install our framework just run in terminal:
 ```
 npm install nersent-ui
 ```
-
-## Documentation
-Currently, there is no documentation.
