@@ -8,7 +8,7 @@
 </div>
 
 # Warning
-__This project is abandoned. Checkout [Wexond UI](https://www.github.com/wexond/wexond-ui).__
+__This project is abandoned. Check out [Wexond UI](https://www.github.com/wexond/wexond-ui).__
 
 ## Installing
 To install our framework just run in terminal:
